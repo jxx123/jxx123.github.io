@@ -37,6 +37,10 @@ key: page-pub
   2015.
   
 ### Journal
+- Jinyu Xie, and Qian Wang. “A Data-Driven Personalized Model of Glucose Dynamics Taking Account of
+the Effects of Physical Activity for Type 1 Diabetes: An In Silico Study.” Journal of biomechanical
+engineering 141.1 (2019): 011006.
+
 - Esmaili, Ali, Jianyi Li, Jinyu Xie, and Joshua D. Isom. "Closed-loop
   identification for plants under model predictive control." Control Engineering
   Practice 72 (2018): 206-218.
