@@ -3,6 +3,8 @@ layout: article
 title: Algorithm Notes
 key: algorithm-notes
 tags: algorithm data_structure
+excerpt_separator: <!--more-->
+excerpt_type: html
 ---
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
@@ -258,128 +260,6 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<div id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#orgfc627ee">1. Introduction</a></li>
-<li><a href="#org39d37b6">2. Algorithms</a>
-<ul>
-<li><a href="#orgbd28e5f">2.1. Loop invariant</a></li>
-<li><a href="#org2ab8bfb">2.2. Asymptotic notation</a></li>
-<li><a href="#orge3efe3d">2.3. Master Theorem</a></li>
-<li><a href="#org0b57de9">2.4. Sort</a>
-<ul>
-<li><a href="#org2367989">2.4.1. Insertion Sort</a></li>
-<li><a href="#org9a150ec">2.4.2. Merge Sort</a></li>
-<li><a href="#org34ed30d">2.4.3. Quick Sort</a></li>
-<li><a href="#org62fc3a6">2.4.4. Heap Sort</a></li>
-<li><a href="#org13d26fe">2.4.5. Counting Sort</a></li>
-<li><a href="#org00675ea">2.4.6. <span class="todo TODO">TODO</span> Radix sort</a></li>
-<li><a href="#org2171879">2.4.7. Bucket Sort</a></li>
-<li><a href="#orgcdfbc74">2.4.8. Patience Sort</a></li>
-</ul>
-</li>
-<li><a href="#org998c777">2.5. Maximum-subarray problem</a></li>
-<li><a href="#org02fe3fe">2.6. Stack</a></li>
-<li><a href="#orgebc021f">2.7. Queue</a></li>
-<li><a href="#orge495d59">2.8. Binary Search</a></li>
-<li><a href="#org420dd0f">2.9. Linked List</a>
-<ul>
-<li><a href="#orgd8db648">2.9.1. Singly linked list</a></li>
-<li><a href="#orge595321">2.9.2. Doubly linked list</a></li>
-<li><a href="#org522ec14">2.9.3. Reverse linked list</a></li>
-</ul>
-</li>
-<li><a href="#org4b621d4">2.10. Hash table</a></li>
-<li><a href="#orga78b174">2.11. <span class="todo TODO">TODO</span> Segment Tree</a></li>
-<li><a href="#org99c2113">2.12. Types of binary tree</a></li>
-<li><a href="#orgd3b3eff">2.13. BFS</a></li>
-<li><a href="#orgba5a7e5">2.14. DFS</a></li>
-<li><a href="#org80fbb24">2.15. Topological Sort</a></li>
-<li><a href="#org17bac4a">2.16. Strongly connected components</a></li>
-<li><a href="#orge2e58d5">2.17. Binary Search Tree</a></li>
-<li><a href="#org91369cb">2.18. Red-Black Tree</a></li>
-<li><a href="#orgaffc073">2.19. Trie Tree</a></li>
-<li><a href="#org2043a32">2.20. (Binary) Heap</a></li>
-<li><a href="#org6b59825">2.21. Dynamic Programming</a>
-<ul>
-<li><a href="#orgd9bfb76">2.21.1. Rod cutting</a></li>
-<li><a href="#org3603f4e">2.21.2. Matrix-chain multiplication</a></li>
-<li><a href="#org8a10c7d">2.21.3. 0/1 Knapsack</a></li>
-<li><a href="#org9b7eb22">2.21.4. Edit Distance</a></li>
-</ul>
-</li>
-<li><a href="#org3d66b55">2.22. Greedy Algorithms</a>
-<ul>
-<li><a href="#orgcf51138">2.22.1. Interval-graph coloring problem</a></li>
-</ul>
-</li>
-<li><a href="#org8972728">2.23. Union Find</a></li>
-<li><a href="#org3885f95">2.24. Single-source shortest path</a>
-<ul>
-<li><a href="#org341f51d">2.24.1. Bellman-Ford</a></li>
-</ul>
-</li>
-<li><a href="#org5f6b7ab">2.25. Quick Select</a></li>
-<li><a href="#org6e9b21c">2.26. Graph Coloring Problem</a></li>
-<li><a href="#org0261ae1">2.27. Tree in the context of graph</a></li>
-<li><a href="#org9460108">2.28. Bellman-Ford Algorithm</a></li>
-<li><a href="#orgad94372">2.29. Dijkstra's Algorithm</a></li>
-<li><a href="#org9abbc0f">2.30. Sliding window technique</a></li>
-<li><a href="#org7174c04">2.31. Greatest Common Divisor</a></li>
-<li><a href="#orgc7c56e3">2.32. Find prime numbers less than n</a>
-<ul>
-<li><a href="#org1285ce7">2.32.1. Method 1 - brute force</a></li>
-<li><a href="#org5f19eb4">2.32.2. Method 2 - better brute force</a></li>
-<li><a href="#org137106a">2.32.3. Method 3 - Sieve of Eratothenes</a></li>
-</ul>
-</li>
-<li><a href="#org0cc0e0b">2.33. Bit Manipulation</a>
-<ul>
-<li><a href="#orgeac8ced">2.33.1. XOR</a></li>
-<li><a href="#org52583ae">2.33.2. int</a></li>
-</ul>
-</li>
-<li><a href="#orga937968">2.34. Knuth Shuffling (Fisher-Yates shuffle)</a></li>
-<li><a href="#org8024772">2.35. Reservoir Sampling</a></li>
-<li><a href="#orgfc77204">2.36. Random pick number with weight</a></li>
-<li><a href="#org00b51c7">2.37. Monotonic Queue/Stack</a></li>
-<li><a href="#org79120e7">2.38. Producer Consumer Pattern</a></li>
-<li><a href="#org7145315">2.39. Dutch national flag problem (three-way-partition problem)</a></li>
-<li><a href="#org9c23e25">2.40. Hamiltonian path and hamiltonian cycle</a></li>
-<li><a href="#orgbf74893">2.41. Least Recently Used (LRU) cache</a></li>
-<li><a href="#orgd91a584">2.42. Interval problems</a>
-<ul>
-<li><a href="#org0a36c48">2.42.1. Count number of events happening concurrently at certain time point</a></li>
-<li><a href="#org341f2f9">2.42.2. Meeting room problem</a></li>
-<li><a href="#org35f25be">2.42.3. Merge intervals</a></li>
-<li><a href="#orgdfa5842">2.42.4. add/delete intervals</a></li>
-</ul>
-</li>
-<li><a href="#orgc7ee628">2.43. API Limiter</a></li>
-<li><a href="#org9789a13">2.44. Minimax</a></li>
-</ul>
-</li>
-<li><a href="#orgfa13969">3. Learning Resources</a>
-<ul>
-<li><a href="#orgaed8ddf">3.1. Structure and Interpretation of Computer Programs (SICP)</a>
-<ul>
-<li><a href="#orga46a5b0">3.1.1. Video link</a></li>
-<li><a href="#orge50e8d8">3.1.2. SICP in python</a></li>
-<li><a href="#org34668fe">3.1.3. SICP in scheme</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#org61d6892">4. P, NP, NP-complete, NP-hard</a></li>
-<li><a href="#org78a83fb">5. Catalan Number</a></li>
-<li><a href="#orgd3cbb7c">6. ASCII</a></li>
-<li><a href="#org606962d">7. Convert int to byte string</a></li>
-<li><a href="#org333b3b1">8. Rotation Matrix</a></li>
-</ul>
-</div>
-</div>
 <div id="outline-container-orgfc627ee" class="outline-2">
 <h2 id="orgfc627ee"><span class="section-number-2">1</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
@@ -390,6 +270,7 @@ Algorithms</a>. End up getting offers from Amazon Alexa (Applied Scientist), Ube
 (Software Engineer), Google (Software Engineer), Microsoft (Software
 Engineer) with a Mechanical Engineering background.
 </p>
+<!--more-->
 </div>
 </div>
 <div id="outline-container-org39d37b6" class="outline-2">
