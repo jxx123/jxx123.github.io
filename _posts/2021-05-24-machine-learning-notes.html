@@ -1,0 +1,1837 @@
+---
+title: Machine Learning Notes
+tags: machine_learning
+date: 2021-05-24
+categories: [Notes, MachineLearning]
+---
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <!-- 2021-05-24 Mon 10:30 -->
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>&lrm;</title>
+    <meta name="generator" content="Org mode" />
+    <meta name="author" content="Jinyu Xie" />
+    <style type="text/css">
+      <!--/*--><![CDATA[/*><!--*/
+       .title  { text-align: center;
+                  margin-bottom: .2em; }
+       .subtitle { text-align: center;
+                   font-size: medium;
+                   font-weight: bold;
+                   margin-top:0; }
+       .todo   { font-family: monospace; color: red; }
+       .done   { font-family: monospace; color: green; }
+       .priority { font-family: monospace; color: orange; }
+       .tag    { background-color: #eee; font-family: monospace;
+                 padding: 2px; font-size: 80%; font-weight: normal; }
+       .timestamp { color: #bebebe; }
+       .timestamp-kwd { color: #5f9ea0; }
+       .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+       .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+       .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+       .underline { text-decoration: underline; }
+       #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+       p.verse { margin-left: 3%; }
+       pre {
+         border: 1px solid #ccc;
+         box-shadow: 3px 3px 3px #eee;
+         padding: 8pt;
+         font-family: monospace;
+         overflow: auto;
+         margin: 1.2em;
+       }
+       pre.src {
+         position: relative;
+         overflow: auto;
+         padding-top: 1.2em;
+       }
+       pre.src:before {
+         display: none;
+         position: absolute;
+         background-color: white;
+         top: -10px;
+         right: 10px;
+         padding: 3px;
+         border: 1px solid black;
+       }
+       pre.src:hover:before { display: inline;}
+       /* Languages per Org manual */
+       pre.src-asymptote:before { content: 'Asymptote'; }
+       pre.src-awk:before { content: 'Awk'; }
+       pre.src-C:before { content: 'C'; }
+       /* pre.src-C++ doesn't work in CSS */
+       pre.src-clojure:before { content: 'Clojure'; }
+       pre.src-css:before { content: 'CSS'; }
+       pre.src-D:before { content: 'D'; }
+       pre.src-ditaa:before { content: 'ditaa'; }
+       pre.src-dot:before { content: 'Graphviz'; }
+       pre.src-calc:before { content: 'Emacs Calc'; }
+       pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+       pre.src-fortran:before { content: 'Fortran'; }
+       pre.src-gnuplot:before { content: 'gnuplot'; }
+       pre.src-haskell:before { content: 'Haskell'; }
+       pre.src-hledger:before { content: 'hledger'; }
+       pre.src-java:before { content: 'Java'; }
+       pre.src-js:before { content: 'Javascript'; }
+       pre.src-latex:before { content: 'LaTeX'; }
+       pre.src-ledger:before { content: 'Ledger'; }
+       pre.src-lisp:before { content: 'Lisp'; }
+       pre.src-lilypond:before { content: 'Lilypond'; }
+       pre.src-lua:before { content: 'Lua'; }
+       pre.src-matlab:before { content: 'MATLAB'; }
+       pre.src-mscgen:before { content: 'Mscgen'; }
+       pre.src-ocaml:before { content: 'Objective Caml'; }
+       pre.src-octave:before { content: 'Octave'; }
+       pre.src-org:before { content: 'Org mode'; }
+       pre.src-oz:before { content: 'OZ'; }
+       pre.src-plantuml:before { content: 'Plantuml'; }
+       pre.src-processing:before { content: 'Processing.js'; }
+       pre.src-python:before { content: 'Python'; }
+       pre.src-R:before { content: 'R'; }
+       pre.src-ruby:before { content: 'Ruby'; }
+       pre.src-sass:before { content: 'Sass'; }
+       pre.src-scheme:before { content: 'Scheme'; }
+       pre.src-screen:before { content: 'Gnu Screen'; }
+       pre.src-sed:before { content: 'Sed'; }
+       pre.src-sh:before { content: 'shell'; }
+       pre.src-sql:before { content: 'SQL'; }
+       pre.src-sqlite:before { content: 'SQLite'; }
+       /* additional languages in org.el's org-babel-load-languages alist */
+       pre.src-forth:before { content: 'Forth'; }
+       pre.src-io:before { content: 'IO'; }
+       pre.src-J:before { content: 'J'; }
+       pre.src-makefile:before { content: 'Makefile'; }
+       pre.src-maxima:before { content: 'Maxima'; }
+       pre.src-perl:before { content: 'Perl'; }
+       pre.src-picolisp:before { content: 'Pico Lisp'; }
+       pre.src-scala:before { content: 'Scala'; }
+       pre.src-shell:before { content: 'Shell Script'; }
+       pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+       /* additional language identifiers per "defun org-babel-execute"
+            in ob-*.el */
+       pre.src-cpp:before  { content: 'C++'; }
+       pre.src-abc:before  { content: 'ABC'; }
+       pre.src-coq:before  { content: 'Coq'; }
+       pre.src-groovy:before  { content: 'Groovy'; }
+       /* additional language identifiers from org-babel-shell-names in
+          ob-shell.el: ob-shell is the only babel language using a lambda to put
+          the execution function name together. */
+       pre.src-bash:before  { content: 'bash'; }
+       pre.src-csh:before  { content: 'csh'; }
+       pre.src-ash:before  { content: 'ash'; }
+       pre.src-dash:before  { content: 'dash'; }
+       pre.src-ksh:before  { content: 'ksh'; }
+       pre.src-mksh:before  { content: 'mksh'; }
+       pre.src-posh:before  { content: 'posh'; }
+       /* Additional Emacs modes also supported by the LaTeX listings package */
+       pre.src-ada:before { content: 'Ada'; }
+       pre.src-asm:before { content: 'Assembler'; }
+       pre.src-caml:before { content: 'Caml'; }
+       pre.src-delphi:before { content: 'Delphi'; }
+       pre.src-html:before { content: 'HTML'; }
+       pre.src-idl:before { content: 'IDL'; }
+       pre.src-mercury:before { content: 'Mercury'; }
+       pre.src-metapost:before { content: 'MetaPost'; }
+       pre.src-modula-2:before { content: 'Modula-2'; }
+       pre.src-pascal:before { content: 'Pascal'; }
+       pre.src-ps:before { content: 'PostScript'; }
+       pre.src-prolog:before { content: 'Prolog'; }
+       pre.src-simula:before { content: 'Simula'; }
+       pre.src-tcl:before { content: 'tcl'; }
+       pre.src-tex:before { content: 'TeX'; }
+       pre.src-plain-tex:before { content: 'Plain TeX'; }
+       pre.src-verilog:before { content: 'Verilog'; }
+       pre.src-vhdl:before { content: 'VHDL'; }
+       pre.src-xml:before { content: 'XML'; }
+       pre.src-nxml:before { content: 'XML'; }
+       /* add a generic configuration mode; LaTeX export needs an additional
+          (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+       pre.src-conf:before { content: 'Configuration File'; }
+
+       table { border-collapse:collapse; }
+       caption.t-above { caption-side: top; }
+       caption.t-bottom { caption-side: bottom; }
+       td, th { vertical-align:top;  }
+       th.org-right  { text-align: center;  }
+       th.org-left   { text-align: center;   }
+       th.org-center { text-align: center; }
+       td.org-right  { text-align: right;  }
+       td.org-left   { text-align: left;   }
+       td.org-center { text-align: center; }
+       dt { font-weight: bold; }
+       .footpara { display: inline; }
+       .footdef  { margin-bottom: 1em; }
+       .figure { padding: 1em; }
+       .figure p { text-align: center; }
+       .equation-container {
+         display: table;
+         text-align: center;
+         width: 100%;
+       }
+       .equation {
+         vertical-align: middle;
+       }
+       .equation-label {
+         display: table-cell;
+         text-align: right;
+         vertical-align: middle;
+       }
+       .inlinetask {
+         padding: 10px;
+         border: 2px solid gray;
+         margin: 10px;
+         background: #ffffcc;
+       }
+       #org-div-home-and-up
+        { text-align: right; font-size: 70%; white-space: nowrap; }
+       textarea { overflow-x: auto; }
+       .linenr { font-size: smaller }
+       .code-highlighted { background-color: #ffff00; }
+       .org-info-js_info-navigation { border-style: none; }
+       #org-info-js_console-label
+         { font-size: 10px; font-weight: bold; white-space: nowrap; }
+       .org-info-js_search-highlight
+         { background-color: #ffff00; color: #000000; font-weight: bold; }
+       .org-svg { width: 90%; }
+       /*]]>*/-->
+    </style>
+    <style>
+      pre.src {
+        background: #343131;
+        color: white;
+      }
+    </style>
+    <script type="text/javascript">
+      // @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+      <!--/*--><![CDATA[/*><!--*/
+      function CodeHighlightOn(elem, id) {
+        var target = document.getElementById(id);
+        if (null != target) {
+          elem.classList.add("code-highlighted");
+          target.classList.add("code-highlighted");
+        }
+      }
+      function CodeHighlightOff(elem, id) {
+        var target = document.getElementById(id);
+        if (null != target) {
+          elem.classList.remove("code-highlighted");
+          target.classList.remove("code-highlighted");
+        }
+      }
+      /*]]>*/ //-->
+      // @license-end
+    </script>
+    <script type="text/x-mathjax-config">
+          MathJax.Hub.Config({
+              displayAlign: "center",
+              displayIndent: "0em",
+
+              "HTML-CSS": { scale: 100,
+                              linebreaks: { automatic: "false" },
+                              webFont: "TeX"
+                             },
+              SVG: {scale: 100,
+                    linebreaks: { automatic: "false" },
+                    font: "TeX"},
+              NativeMML: {scale: 100},
+              TeX: { equationNumbers: {autoNumber: "AMS"},
+                     MultLineWidth: "85%",
+                     TagSide: "right",
+                     TagIndent: ".8em"
+                   }
+      });
+    </script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"
+    ></script>
+  </head>
+  <body>
+    <div id="content">
+      <div id="outline-container-orge845cff" class="outline-2">
+        <h2 id="orge845cff">
+          <span class="section-number-2">1</span> Statistical Decision Theory
+        </h2>
+        <div class="outline-text-2" id="text-1">
+          <p>
+            Let \(X \in R^p\) denote a real valued random input vector, and \(Y
+            \in R\) a real valued random output variable, with joint
+            distribution \(Pr(X, Y)\). We seek a function \(f(X)\) for
+            predicting \(Y\) given values of \(X\). We can define a loss
+            function \(L(Y, f(X))\), and the most common loss function is
+            <b><b>squared error loss</b></b
+            >.
+          </p>
+
+          <p>\[L(Y, f(X)) = (Y - f(X))^2\]</p>
+
+          <p>Expected (squared) Prediction Error \[EPE(f) = E(Y - f(X))^2\]</p>
+
+          <p>
+            By conditioning on \(X\), \[EPE(f) = E_X E_{Y|X}([Y - f(X)]^2|X)\]
+          </p>
+
+          <p>
+            We can minimize EPE pointwise at each \(x\). \[f(x) = argmin_c
+            E_{Y|X} ([Y-c]^2|X = x)\]
+          </p>
+
+          <p>The solution is \[f(x) = E(Y|X=x)\]</p>
+
+          <!--more-->
+          <ul class="org-ul">
+            <li>
+              K nearest neighbors is trying to approximate this function
+              directly. It assumes \(f(x)\) is well approximated by a locally
+              constant function.
+              <ul class="org-ul">
+                <li>
+                  If the training sample N -&gt; &infin;, and the neighbor
+                  number k -&gt; &infin;, and N/k -&gt; &infin;, the k nearest
+                  neighbor approximates the conditional mean well.
+                </li>
+              </ul>
+            </li>
+            <li>
+              Linear regression assumes f(x) is linear, and then find the
+              optimal parameters. It is model based approach. It assumes
+              \(f(x)\) is well approximated by a globally linear function.
+            </li>
+          </ul>
+
+          <p>
+            We can also replace the \(L_2\) loss to \(L_1\): \(E|Y - f(X)|\).
+            The solution in this case is the conditional median \[\hat{f}(x) =
+            median(Y|X=x)\]
+          </p>
+
+          <p>
+            It can be more robust to outliers that conditional mean. However,
+            \(L_1\) loss is discontinuous in its derivatives.
+          </p>
+
+          <p>
+            Similarly, for classification problem, the expected prediction error
+            is \[EPE = E[L(G, \hat{G}(X))]\]
+          </p>
+
+          <p>
+            where the loss function can be represented as a \(K \times K\)
+            matrix \(\mathbf{L}\), where \(L(k,l)\) is the price paid for
+            classifying an observation belonging to class \(k\) as \(l\). Most
+            often we use the <i>zero-one</i> loss function, where all the
+            misclassifications are charged 1 unit.
+          </p>
+
+          <p>
+            Given the joint distribution \(Pr(G, X)\), we can write EPE as \[EPE
+            = E_X \sum_{k=1}^{K}L[G_k, \hat{G}(X)]Pr(G_k|X)\]
+          </p>
+
+          <p>
+            The solution is \[\hat{G}(x) = argmin_{g \in G} \sum_{k=1}^{K}L(G_k,
+            g)Pr(G_k|X=x)\]
+          </p>
+
+          <p>
+            With 0-1 loss, \[\hat{G}(x) = argmin_{g \in G} [1 - Pr(g|X=x)]\]
+          </p>
+
+          <p>
+            This solution is known as the <i>Bayes classifier</i>. The error
+            rate of the Bayes classifier is called the <i>Bayes Rate</i>.
+          </p>
+        </div>
+      </div>
+      <div id="outline-container-org0717e4d" class="outline-2">
+        <h2 id="org0717e4d">
+          <span class="section-number-2">2</span> Evaluation Metrics
+        </h2>
+        <div class="outline-text-2" id="text-2"></div>
+        <div id="outline-container-org84befba" class="outline-3">
+          <h3 id="org84befba">
+            <span class="section-number-3">2.1</span> Precision and Recall
+          </h3>
+          <div class="outline-text-3" id="text-2-1">
+            <ul class="org-ul">
+              <li>Precision (the first row of the table):</li>
+            </ul>
+            <p>
+              \[precision = \frac{\texttt{# of true positives}}{\texttt{# of
+              predicted positives}}\]
+            </p>
+            <ul class="org-ul">
+              <li>Recall (the first column of the table):</li>
+            </ul>
+            <p>
+              \[recall = \frac{\texttt{# of true positives}}{\texttt{# of
+              condition positives}}\]
+            </p>
+
+            <div id="orgdaad249" class="figure">
+              <p>
+                <img
+                  src="confusion_matrix_table.png"
+                  alt="confusion_matrix_table.png"
+                />
+              </p>
+            </div>
+          </div>
+        </div>
+        <div id="outline-container-orgc5f8b67" class="outline-3">
+          <h3 id="orgc5f8b67">
+            <span class="section-number-3">2.2</span> ROC and AUC
+          </h3>
+        </div>
+      </div>
+      <div id="outline-container-orgee744c8" class="outline-2">
+        <h2 id="orgee744c8"><span class="section-number-2">3</span> Entropy</h2>
+        <div class="outline-text-2" id="text-3">
+          <p>
+            Very good visual explanation of information entropy, cross entropy,
+            and mutual information.
+            <a href="https://colah.github.io/posts/2015-09-Visual-Information/"
+              >https://colah.github.io/posts/2015-09-Visual-Information/</a
+            >
+          </p>
+        </div>
+        <div id="outline-container-org6099200" class="outline-3">
+          <h3 id="org6099200">
+            <span class="section-number-3">3.1</span> Information Entropy
+          </h3>
+          <div class="outline-text-3" id="text-3-1">
+            <p>\[H(p) = \sum_{x}p(x)log_2(\frac{1}{p(x)})\]</p>
+
+            <ul class="org-ul">
+              <li>
+                Information entropy can be interpreted as a lower bound of the
+                average message length that is necessary to communicate events
+                from a certain probability distribution, \(p\).
+                <ul class="org-ul">
+                  <li>
+                    Consider we are trying to use a varying length of bits to
+                    encode the events in the probability distribution.
+                  </li>
+                  <li>
+                    To avoid ambiguity, once we chose a code, e.g. 01 to encode
+                    event 1, then other codes should not use 01 as its prefix,
+                    otherwise there will be ambiguity to decode it. That is
+                    called prefix property. The codes generated in this way is
+                    called prefix codes.
+                  </li>
+                  <li>
+                    The cost of choosing a code of length \(L(x)\) for event x
+                    is \(\frac{1}{2^{L(x)}}\), because we cannot use the rest of
+                    \(\frac{1}{2^{L(x)}}\) fraction of codes anymore.
+                  </li>
+                  <li>
+                    The optimal strategy is to make the encoding cost of event x
+                    proportional to its probability. The more frequently
+                    happened event uses shorter code. That is
+                    \(\frac{1}{2^{L(x)}} = p(x)\), i.e. \(L(x) =
+                    log_2(\frac{1}{p(x)})\).
+                  </li>
+                  <li>
+                    Therefore, the average length of the code under this optimal
+                    strategy is \(\sum_{x}p(x)log_2(\frac{1}{p(x)})\), which is
+                    the information entropy.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                It also quantifies how uncertain I am.
+                <ul class="org-ul">
+                  <li>
+                    If I know something is definitely going to happen, then its
+                    entropy is 0 (I don&rsquo;t even need to send out a
+                    message).
+                  </li>
+                  <li>
+                    The more uncertain the outcome, the more information you
+                    will get once you know what happened.
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orgcaa77eb" class="outline-3">
+          <h3 id="orgcaa77eb">
+            <span class="section-number-3">3.2</span> Cross Entropy
+          </h3>
+          <div class="outline-text-3" id="text-3-2">
+            <p>
+              \[H_p(q) = \sum_{x}q(x)log_2(\frac{1}{p(x)})\] Using the code that
+              is optimized for \(p\) to communicate \(q\).
+            </p>
+
+            <ul class="org-ul">
+              <li>
+                The more different between the distribution \(p\) and \(q\), the
+                higher cross entropy.
+              </li>
+              <li>
+                The cross entropy is not symmetric. \(H_p(q) \neq H_q(p)\).
+              </li>
+              <li>
+                This is a common loss function in Machine Learning. We would
+                like to have the predicted distribution as close as possible to
+                the ground truth distribution.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div id="outline-container-org8fb058d" class="outline-3">
+          <h3 id="org8fb058d">
+            <span class="section-number-3">3.3</span> Kullback-Leibler
+            Divergence
+          </h3>
+          <div class="outline-text-3" id="text-3-3">
+            <p>
+              \[D_q(q) = H_q(p) - H(p)\] It is a distance measure between
+              distribution \(p\) and \(q\). It is not symmetric as well.
+            </p>
+          </div>
+        </div>
+
+        <div id="outline-container-org4be3e27" class="outline-3">
+          <h3 id="org4be3e27">
+            <span class="section-number-3">3.4</span> Mutual Information
+          </h3>
+          <div class="outline-text-3" id="text-3-4">
+            <p>
+              Before dive into the mutual information, let&rsquo;s take a look
+              at the entropy of a joint distribution. The formula is still the
+              same: \[H(X, Y) = \sum_{x, y}p(x, y)log(\frac{1}{p(x, y)})\]
+            </p>
+
+            <p>
+              What is the averaged extra information you need to communicate on
+              event x given that the listener already knows y?
+            </p>
+
+            <p>
+              The answer is the conditional entropy: \[H(X|Y) = \sum_{y}p(y)
+              \sum_{x} p(x|y) log(\frac{1}{p(x|y)}) = \sum_{x, y} p(x, y)
+              log(\frac{1}{p(x|y)})\]
+            </p>
+
+            <p>
+              There is part of the information that is shared by X and Y, which
+              is quantified by the mutual information \(I(X, Y)\). \[I(X, Y) =
+              H(X) - H(X|Y) = H(Y) - H(Y|X)\]
+            </p>
+
+            <p>
+              The joint information entropy: \[H(X, Y) = H(X) + H(Y) - I(X, Y) =
+              H(X) + H(Y|X) = H(Y) + H(X|Y)\]
+            </p>
+
+            <ul class="org-ul">
+              <li>
+                NOTE: difference between cross entropy and mutual information.
+                <ul class="org-ul">
+                  <li>
+                    Cross entropy is for the same random variable, but different
+                    distribution. How much more entropy do I need if I use the
+                    coding strategy that is optimized for \(p\) to communicate
+                    on \(q\)?
+                  </li>
+                  <li>
+                    Mutual information is for different random variables. How
+                    much information is shared between X and Y?
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-orgf4a8bc6" class="outline-2">
+        <h2 id="orgf4a8bc6">
+          <span class="section-number-2">4</span> Cost functions
+        </h2>
+        <div class="outline-text-2" id="text-4"></div>
+        <div id="outline-container-org973e3c2" class="outline-3">
+          <h3 id="org973e3c2">
+            <span class="section-number-3">4.1</span> Classification
+          </h3>
+          <div class="outline-text-3" id="text-4-1">
+            <ul class="org-ul">
+              <li>Misclassification rate</li>
+              <li>Cross Entropy</li>
+              <li>Exponential Loss</li>
+              <li>
+                SVM hinge loss
+                <img
+                  src="Classification%20Cost%20Functions.png"
+                  alt="Classification%20Cost%20Functions.png"
+                />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org83c7dfe" class="outline-3">
+          <h3 id="org83c7dfe">
+            <span class="section-number-3">4.2</span> Regression
+          </h3>
+          <div class="outline-text-3" id="text-4-2">
+            <ul class="org-ul">
+              <li>
+                L2 loss (squared error loss)
+                <ul class="org-ul">
+                  <li>Less robust to outliers</li>
+                  <li>
+                    More robust to data points when the prediction and the
+                    target are close.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                L1 loss (absolute loss)
+                <ul class="org-ul">
+                  <li>More robust to outliers</li>
+                  <li>
+                    Overfits the data when the prediction and target are close.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Huber loss
+                <ul class="org-ul">
+                  <li>
+                    Combines L1 and L2, when the prediction and the target are
+                    close, use L2, when the prediction and the target are far
+                    away, use L1.
+                  </li>
+                </ul>
+              </li>
+            </ul>
+
+            <div id="org2afab97" class="figure">
+              <p>
+                <img
+                  src="Regression%20Cost%20Functions.png"
+                  alt="Regression%20Cost%20Functions.png"
+                />
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-org0845f81" class="outline-2">
+        <h2 id="org0845f81">
+          <span class="section-number-2">5</span> Linear Regression
+        </h2>
+        <div class="outline-text-2" id="text-5"></div>
+        <div id="outline-container-orgba37d01" class="outline-3">
+          <h3 id="orgba37d01">
+            <span class="section-number-3">5.1</span> Least Squares
+          </h3>
+          <div class="outline-text-3" id="text-5-1">
+            <p>
+              The prediction function \[f(X) = \beta_0 + \sum_{j = 1}^{p} X_j
+              \beta_j\] It can be vectorized to \[f(X) = \mathbf{X\beta}\] where
+              \(\mathbf{X}\) contains a column with all elements equal to 1 for
+              the bias term.
+            </p>
+
+            <p>
+              Least square tries to minimize the residual sum of squares (RSS)
+              \[RSS(\beta) = (\mathbf{y} - \mathbf{X}\beta)^T(\mathbf{y} -
+              \mathbf{X}\beta)\]
+            </p>
+
+            <p>
+              \[\frac{\partial RSS}{\partial \beta} = -2\mathbf{X}^T(y -
+              \mathbf{X}\beta)\] \[\frac{\partial^2 RSS}{\partial \beta \partial
+              \beta^T} = 2\mathbf{X}^T\mathbf{X}\]
+            </p>
+
+            <p>
+              If \(\mathbf{X}\) has <b><b>full column rank</b></b
+              >, then \(\mathbf{X^TX}\) is positive definite. Then the solution
+              is \[\hat{\beta} = (\mathbf{X^TX})^{-1}\mathbf{X^Ty}\]
+            </p>
+
+            <p>
+              Proof of the above estimator \(\hat{\beta}\) is an unbiased
+              estimator, and calculate the variance of the estimator.
+            </p>
+
+            <p>
+              \[Y = \beta\mathbf{X} + \epsilon\] where \(\epsilon \sim N(0,
+              \sigma^2)\).
+            </p>
+
+            <p>
+              Assuming \(\mathbf{X}\) is fixed (conditioning on \(\mathbf{X}\)),
+            </p>
+
+            <p>
+              \[E[\hat{\beta}|X] =
+              (\mathbf{X^TX})^{-1}\mathbf{X^T}E[\mathbf{y}|X] =
+              (\mathbf{X^TX})^{-1}\mathbf{X^T}\mathbf{X}\beta = \beta\]
+              \[Var[\hat{\beta} | X] = Var[(\mathbf{X^TX})^{-1}\mathbf{X^Ty}|X]
+              = (\mathbf{X^TX})^{-1}\mathbf{X^TX}(\mathbf{X^TX})^{-1}Var[y|X] =
+              (\mathbf{X^TX})^{-1} \sigma^2\]
+            </p>
+
+            <ul class="org-ul">
+              <li>
+                NOTE: the least square estimator has the smallest variance among
+                all the linear unbiased estimators. To be noted that, it might
+                not be wise to choose only among unbiased estimators.
+              </li>
+              <li>
+                We can use t-test to check whether certain coefficient is
+                significant or not.
+              </li>
+              <li>
+                We can do forward- or backward- stepwise predictor selection.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org39d9447" class="outline-3">
+          <h3 id="org39d9447">
+            <span class="section-number-3">5.2</span> Ridge Regression
+          </h3>
+          <div class="outline-text-3" id="text-5-2">
+            <p>
+              \[\hat{\beta}^{ridge} = argmin_{\beta} ||\mathbf{y} -
+              \mathbf{X}\beta||_2^2 + \lambda ||\beta||_2^2\]
+              \[\hat{\beta}^{ridge} = (\mathbf{X^TX + \lambda
+              I})^{-1}\mathbf{X^Ty}\]
+            </p>
+
+            <p>Given the SVD of matrix \(\mathbf{X}\), \[X = UDV^T\]</p>
+
+            <p>
+              Then \[\mathbf{X}\hat{\beta}^{ridge} = \mathbf{UD(D^2 + \lambda
+              I)^{-1}DU^Ty} = \sum_{j=1}^{p}\mathbf{u_j} \frac{d_j^2}{d_j^2 +
+              \lambda} \mathbf{u_j}^T y\]
+            </p>
+
+            <p>
+              The algorithm tries to shrink the coefficient more on the
+              principal component with less variance.
+            </p>
+            <ul class="org-ul">
+              <li>NOTE: Ridge shrinks the coefficients continuously.</li>
+              <li>
+                Consider its feasible region is a sphere, and the optimal
+                solution on the sphere will contain nonzero values in all the
+                dimensions.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org035df31" class="outline-3">
+          <h3 id="org035df31">
+            <span class="section-number-3">5.3</span> Lasso
+          </h3>
+          <div class="outline-text-3" id="text-5-3">
+            <p>
+              \[\hat{\beta}^{lasso} = argmin_{\beta} ||\mathbf{y} -
+              \mathbf{X}\beta||_2^2 + \lambda ||\beta||_1\]
+            </p>
+
+            <ul class="org-ul">
+              <li>
+                Lasso will select the features automatically. It tends to make
+                the features used in prediction more sparse.
+              </li>
+              <li>
+                Consider its feasible region is a diamond, and the optimal
+                solution is at the vertices of the diamond, where some of the
+                coefficients are zero.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org212a0b9" class="outline-3">
+          <h3 id="org212a0b9">
+            <span class="section-number-3">5.4</span> ElasticNet
+          </h3>
+          <div class="outline-text-3" id="text-5-4">
+            <p>
+              Between L1 and L2 norm. It uses the following penalty \[\lambda
+              \sum_{j=1}^{p}(\alpha \beta_j^2 + (1 - \alpha)|\beta_j|)\]
+            </p>
+          </div>
+        </div>
+        <div id="outline-container-org6aa0b01" class="outline-3">
+          <h3 id="org6aa0b01">
+            <span class="section-number-3">5.5</span> Principal Components
+            Regression
+          </h3>
+          <div class="outline-text-3" id="text-5-5">
+            <p>
+              Regression on the direction of principal components. It seeks
+              directions that have high variance.
+            </p>
+          </div>
+        </div>
+        <div id="outline-container-org20f85fc" class="outline-3">
+          <h3 id="org20f85fc">
+            <span class="section-number-3">5.6</span> Partial Least Squares
+          </h3>
+          <div class="outline-text-3" id="text-5-6">
+            <p>
+              Partial Least Squares seeks directions that have high variance and
+              have high correlation with the response \(\mathbf{y}\).
+            </p>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-orgfd4c415" class="outline-2">
+        <h2 id="orgfd4c415">
+          <span class="section-number-2">6</span> Linear Methods for
+          Classification
+        </h2>
+        <div class="outline-text-2" id="text-6"></div>
+        <div id="outline-container-orgb32f064" class="outline-3">
+          <h3 id="orgb32f064">
+            <span class="section-number-3">6.1</span> Discriminant Analysis
+          </h3>
+          <div class="outline-text-3" id="text-6-1">
+            <p>
+              Bayes rule: \[Pr(G=k|X = x) = \frac{Pr(X=x|G=k)
+              P(G=k)}{\sum_{l=1}^{K} Pr(X=x|G=l) Pr(G=l)} = \frac{f_k(x)
+              \pi_k}{\sum_{l=1}^{K} f_l(x) \pi_l}\]
+            </p>
+
+            <p>
+              Assuming the distribution of x in each class is a Gaussian
+              distribution, \[f_k(x) = \frac{1}{(2\pi)^{p/2} |\Sigma_k|^{1/2}}
+              e^{-\frac{1}{2} (x - \mu_k)^T \Sigma_k^{-1} (x - \mu_k)}\]
+            </p>
+          </div>
+          <div id="outline-container-orgd3b54a9" class="outline-4">
+            <h4 id="orgd3b54a9">
+              <span class="section-number-4">6.1.1</span> Linear Discriminant
+              Analysis
+            </h4>
+            <div class="outline-text-4" id="text-6-1-1">
+              <p>
+                Assume all the variance across the classes are the same
+                \(\Sigma_k = \Sigma\).
+              </p>
+            </div>
+          </div>
+        </div>
+        <div id="outline-container-orge292d8d" class="outline-3">
+          <h3 id="orge292d8d">
+            <span class="section-number-3">6.2</span> Logistic Regression
+          </h3>
+          <div class="outline-text-3" id="text-6-2">
+            <ul class="org-ul">
+              <li>Sigmoid Function</li>
+            </ul>
+            <p>\[f(x) = \frac{1}{1 + e^{-x}}\]</p>
+            <ul class="org-ul">
+              <li>Cross Entropy</li>
+            </ul>
+            <p>
+              \[H(p, q) = -\sum_{i=1}^{K}p_{i}log(q_i)\] where \(p_i\) is the
+              true distribution, \(q_i\) is the predicted distribution.
+            </p>
+
+            <p>
+              Assume the condition probability yields to a sigmoid function.
+              \[Pr(Y=0|X = x) = \frac{1}{1 + e^{-\beta^T x}}\]
+            </p>
+
+            <p>
+              Then we try to maximize the log likelihood, or minimize the cross
+              entropy. \[l(\theta) = \sum_{i=1}^N \{\}\]
+            </p>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-orgfe80b02" class="outline-2">
+        <h2 id="orgfe80b02">
+          <span class="section-number-2">7</span> Bayesian Model
+        </h2>
+        <div class="outline-text-2" id="text-7"></div>
+        <div id="outline-container-org7ae6978" class="outline-3">
+          <h3 id="org7ae6978">
+            <span class="section-number-3">7.1</span> Naive Bayes
+          </h3>
+          <div class="outline-text-3" id="text-7-1">
+            <ul class="org-ul">
+              <li>Conditional independence (between features) assumption</li>
+            </ul>
+            <p>
+              \[P(Y = k|X) = \frac{P(X|Y=k) P(Y=k)}{P(X)} =
+              \frac{\prod_{i=1}^{p}P(X_i|Y=k) P(Y=k)}{P(X)}\]
+            </p>
+            <ul class="org-ul">
+              <li>
+                For discrete feature \(X_i\), directly use the sampled mass
+                probability.
+              </li>
+              <li>
+                For continuous feature, fit a Gaussian distribution to the data.
+                This makes the decision boundary linear.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-org941770b" class="outline-2">
+        <h2 id="org941770b">
+          <span class="section-number-2">8</span> Nearest Neighbors
+        </h2>
+        <div class="outline-text-2" id="text-8">
+          <p>
+            Find k nearest neighbors under certain distance metric, and output
+            the prediction based on the majority vote.
+          </p>
+          <ul class="org-ul">
+            <li>
+              NOTE: as the dimension of feature space becomes higher, the
+              nearest neighbors of a point can be very far away, which causes
+              bias.
+              <ul class="org-ul">
+                <li>So we need to consider adapting the distance metric.</li>
+                <li>
+                  The neighborhood could stretch out in directions for which the
+                  class probabilities don&rsquo;t change much.
+                </li>
+                <li>
+                  In high-dimension space, the class probabilities might change
+                  only a low-dimensional subspace. Hence adapting the distance
+                  metric could benefit.
+                </li>
+                <li>
+                  Discriminant Adaptive Nearest Neighbor. Make the neighborhood
+                  into adaptive ellipsoid, which stretches along the decision
+                  boundary.
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div id="outline-container-org572ade5" class="outline-2">
+        <h2 id="org572ade5">
+          <span class="section-number-2">9</span> KKT Condition
+        </h2>
+        <div class="outline-text-2" id="text-9">
+          <p>Primal problem: \[\min_{x} f(x)\] \[\text{s.t. } g_i(x) \le 0\]</p>
+
+          <p>Lagrangian: \[L(x, \mu) = f(x) + \sum_{i} \mu_i g_i(x)\]</p>
+
+          <p>KKT Condition:</p>
+          <ul class="org-ul">
+            <li>Stationarity</li>
+          </ul>
+          <p>
+            \[\nabla_x L(x^*, \mu) = 0\] i.e. \[\nabla_x f(x^*) + \sum_{i} \mu_i
+            \nabla_x g_i(x^*) = 0\]
+          </p>
+          <ul class="org-ul">
+            <li>Primal Feasibility \[g_i(x^*) \le 0\]</li>
+            <li>Dual Feasibility \[\mu_i \ge 0\]</li>
+            <li>Complementary Slackness \[\mu_i g_i(x^*) = 0\]</li>
+          </ul>
+        </div>
+      </div>
+      <div id="outline-container-org23d47e1" class="outline-2">
+        <h2 id="org23d47e1">
+          <span class="section-number-2">10</span> Support Vector Machine
+        </h2>
+        <div class="outline-text-2" id="text-10"></div>
+        <div id="outline-container-orgf6d7434" class="outline-3">
+          <h3 id="orgf6d7434">
+            <span class="section-number-3">10.1</span> Support Vector Regression
+          </h3>
+        </div>
+      </div>
+
+      <div id="outline-container-orgdd8ae4f" class="outline-2">
+        <h2 id="orgdd8ae4f">
+          <span class="section-number-2">11</span> Regression and Decision Tree
+        </h2>
+        <div class="outline-text-2" id="text-11">
+          <p>
+            For N observations \((x_i, y_i)\) for \(i = 1,2,...,N\), with \(x_i
+            = (x_{i1}, x_{i2}, ..., x_{ip})\), that is we have \(p\) features
+            for each observation.
+          </p>
+
+          <p>
+            Suppose we split the whole input space into \(M\) regions
+            R<sub>1</sub>, R2, &#x2026;, R<sub>M</sub>, and we model the
+            response as a constant at each region. \[f(x) = \sum_{m=1}^M c_m I(x
+            \in R_m)\]
+          </p>
+
+          <p>
+            For regression case, we can minimize the sum of squares \[\min
+            \sum(y_i - f(x_i))^2\]
+          </p>
+
+          <p>
+            It is generally computationally infeasible to find the global
+            optimal binary partition. So we proceed with a
+            <b><b>greedy</b></b> algorithm. Consider a splitting variable \(j\)
+            and splitting point \(s\), we split the plane into two pieces
+            \[R_1(j, s) = \{X|X_j \leq s\}, R_2(j, s) = \{X|X_j > s\}\]
+          </p>
+
+          <p>
+            We seek the splitting variable \(j\) and split point \(s\) that
+            \[\min_{j, s} [\min_{c_1} \sum_{x_i \in R_1(j, s)} (y_i - c_1)^2 +
+            \min_{c_2} \sum_{x_i \in R_2(j,s)} (y_i - c_2)^2]\]
+          </p>
+
+          <p>
+            Once found the best split variable \(j\) and split point \(s\), we
+            partition the data into two regions, and repeat the process on each
+            of the two regions.
+          </p>
+
+          <ul class="org-ul">
+            <li>
+              Tree size is a tuning parameter. Large tree could overfit the
+              data, while small tree might not capture the structure. It governs
+              the model complexity.
+            </li>
+            <li>
+              A good strategy is to prune the tree using
+              <i>cost-complexity pruning</i> techniques. Let \(|T|\) denote the
+              number of terminal nodes (leaf nodes) in \(T\). Regularize the
+              tree size (terminal nodes). Here is the cost-complexity criterion.
+              \[\min \sum_{m=1}^{|T|} \sum_{x_i \in R_m} (y_i - \hat{c}_m)^2 +
+              \alpha |T|\]
+            </li>
+          </ul>
+
+          <p>
+            For <b><b>classification</b></b> problem, different cost function is
+            used for deciding the split variable \(j\) and split point \(s\).
+            Consider within a node \(m\), there is \(N_m\) observations in the
+            region \(R_m\), the proportion of class \(k\) in the region is
+            \[\hat{p}_{mk} = \frac{1}{N_m} \sum_{x_i \in R_m} I(y_i = k)\] We
+            classify the observations in node \(m\) to class \(k(m) = \arg
+            \max_k \hat{p}_{mk}\). There are different cost functions (measure
+            of impurity of a node):
+          </p>
+          <ul class="org-ul">
+            <li>Misclassification error</li>
+          </ul>
+          <p>
+            \[\frac{1}{N_m} \sum_{i \in R_m} I(y_i \neq k(m)) = 1 -
+            \hat{p}_{mk(m)}\]
+          </p>
+          <ul class="org-ul">
+            <li>
+              Gini index: how often a randomly chosen point in the set is
+              incorrectly labeled if we randomly label that point according to
+              the distribution of labels in the set.
+            </li>
+          </ul>
+          <p>\[\sum_{k=1}^K \hat{p}_{mk}(1 - \hat{p}_{mk})\]</p>
+          <ul class="org-ul">
+            <li>
+              Mutual information (or information gain): conditioning on the
+              region \(R_m\), how much information on the label \(Y\) I can get.
+              Recall the mutual information \(I(X, Y) = H(Y) - H(Y|X)\). To
+              <b><b>maximize</b></b> the information gain, we need to
+              <b><b>minimize</b></b> the conditional entropy \(H(Y|X)\), i.e.
+              minimize the following
+            </li>
+          </ul>
+          <p>\[-\sum_{k=1}^K \hat{p}_{mk} \log \hat{p}_{mk}\]</p>
+        </div>
+      </div>
+      <div id="outline-container-org7a273f6" class="outline-2">
+        <h2 id="org7a273f6">
+          <span class="section-number-2">12</span> Bootstrap
+        </h2>
+        <div class="outline-text-2" id="text-12">
+          <p>Sampling with replacement.</p>
+        </div>
+      </div>
+      <div id="outline-container-orge1d16cb" class="outline-2">
+        <h2 id="orge1d16cb">
+          <span class="section-number-2">13</span> Bagging
+        </h2>
+        <div class="outline-text-2" id="text-13">
+          <p>
+            Bootstrap aggregation: averages the prediction over a collection of
+            bootstrap samples, thereby reduce its variance.
+          </p>
+
+          <p>
+            For each bootstrap sample \(Z^{*b}, b = 1, 2, ..., B\), we fit our
+            model, giving the prediction \(\hat{f}^{*b}(x)\). The bagging
+            estimate is defined by \[\hat{f}_{bag} (x) =
+            \frac{1}{B}\sum_{b=1}^B\hat{f}^{*b}(x)\]
+          </p>
+
+          <p>
+            For classification problem, we can do a majority vote instead, or
+            average the probability of each class (this could be more robust).
+          </p>
+
+          <ul class="org-ul">
+            <li>
+              Why bagging works?
+              <ul class="org-ul">
+                <li>
+                  It helps reducing the variance and keeps the bias unchanged.
+                </li>
+              </ul>
+            </li>
+            <li>Bagging lost the interpretability.</li>
+          </ul>
+        </div>
+      </div>
+      <div id="outline-container-org47272aa" class="outline-2">
+        <h2 id="org47272aa">
+          <span class="section-number-2">14</span> Stacking
+        </h2>
+        <div class="outline-text-2" id="text-14">
+          <p>
+            Let \(\hat{f}_m^{-i}(x)\) be the prediction at \(x\), using model
+            \(m\), applied to the dataset with the $i$th training observation
+            removed (leave-one-out). In fact, we could also leave one partition
+            out in the cross-validation setup. Then we find the stacking weights
+            by minimizing certain cost function, for example least squares.
+            \[\hat{w}^{st} = argmin_w \sum_{i=1}^N \{ y_i - \sum_{m=1}^M w_m
+            \hat{f}_m^{-i}(x_i) \}^2\]
+          </p>
+
+          <p>
+            The final prediction is \(\sum_m \hat{w}_m^{st} \hat{f}_m(x)\). In
+            fact, you can use other models for the final stacking instead of
+            least squares. That&rsquo;s how you <b><b>stack</b></b> models
+            together.
+          </p>
+        </div>
+      </div>
+      <div id="outline-container-org345442f" class="outline-2">
+        <h2 id="org345442f">
+          <span class="section-number-2">15</span> Boosting
+        </h2>
+        <div class="outline-text-2" id="text-15"></div>
+        <div id="outline-container-org6259a69" class="outline-3">
+          <h3 id="org6259a69">
+            <span class="section-number-3">15.1</span> AdaBoost
+          </h3>
+          <div class="outline-text-3" id="text-15-1">
+            <ul class="org-ul">
+              <li>
+                Combines the outputs of many &ldquo;weak&rdquo; classifiers to
+                produce a powerful &ldquo;committee&rdquo;.
+              </li>
+              <li>
+                Sequentially apply the weak classification algorithm to
+                repeatedly <b><b>modified</b></b> versions of the data, thereby
+                producing a sequence of weak classifiers \(G_m(x), m=1,2,...M\)
+              </li>
+              <li>
+                For a two-class problem, combine the predictions from all the
+                weak classifiers through a weighted majority vote to produce the
+                final prediction:
+              </li>
+            </ul>
+            <p>
+              \[G(x) = sign(\sum_{m=1}^M \alpha_m G_m(x))\] The weights
+              \(\alpha_1, ..., \alpha_M\) are computed by the boosting
+              algorithm. They try to give higher influence to the more accurate
+              classifiers in the sequence.
+            </p>
+            <ul class="org-ul">
+              <li>
+                The data modification step consist of applying weights \(w_1,
+                ..., w_N\) to each of the training observations \((x_i, y_i),
+                i=1,2,...,N\).
+                <ul class="org-ul">
+                  <li>Initially, the weights are equal \(1/N\).</li>
+                  <li>
+                    At each step, those observations that were misclassified by
+                    the previous classifier will have their weights increased,
+                    while the weights are decreased for those that were
+                    classified correctly.
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org02f8e76" class="outline-3">
+          <h3 id="org02f8e76">
+            <span class="section-number-3">15.2</span> General Boosting Idea and
+            Additive Model
+          </h3>
+          <div class="outline-text-3" id="text-15-2">
+            <ul class="org-ul">
+              <li>
+                Boosting is a way of fitting an additive expansion in a set of
+                elementary &ldquo;basis&rdquo; functions. Here the basis
+                functions are the individual classifiers \(G_m(x) \in \{1,
+                -1\}\). More generally, basis function expansions take the form
+              </li>
+            </ul>
+            <p>\[f(x) = \sum_{m=1}^M \beta_m b(x; \gamma_m)\]</p>
+            <ul class="org-ul">
+              <li>
+                In single-hidden-layer neural networks, \(b(x; \gamma) =
+                \sigma(\gamma_0 + \gamma_1^Tx)\)
+              </li>
+              <li>
+                In signal processing, wavelets with \(\gamma\) parameterizing
+                the location and scale shift of a &ldquo;mother&rdquo; wavelet.
+              </li>
+              <li>
+                For trees, \(\gamma\) parameterizes the split variables and
+                split points at the internal nodes, and the predictions at the
+                terminal nodes.
+              </li>
+            </ul>
+
+            <p>
+              Generally, we want to minimize a loss function averaged over the
+              training data. \[\min_{\beta_1, \gamma_1, ..., \beta_M, \gamma_M}
+              \sum_{i=1}^{N} L(y_i, \sum_{m=1}^M \beta_m b(x_i; \gamma_m))\]
+            </p>
+
+            <p>
+              It is usually computationally untrackable to minimize the loss
+              globally. We can do that <b><b>Forward Stagewise</b></b> in a
+              greedy way to approximate the solution.
+            </p>
+            <ul class="org-ul">
+              <li>
+                For \(m=1\) to \(M\), \[\beta_m, \gamma_m = \arg \min_{\beta,
+                \gamma} \sum_{i=1}^{N} L(y_i, f_{m-1} + \beta b(x_i; \gamma))\]
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org8dc238c" class="outline-3">
+          <h3 id="org8dc238c">
+            <span class="section-number-3">15.3</span> AdaBoost revisit
+          </h3>
+          <div class="outline-text-3" id="text-15-3">
+            <ul class="org-ul">
+              <li>
+                AdaBoost is in fact a forward stagewise additive modeling with
+                exponential loss. \[L(y, f(x)) = exp(-yf(x))\]
+              </li>
+              <li>
+                Consider two-class problem, \(G_m(x) \in \{1, -1\}\). \[\beta_m,
+                G_m = \arg \min_{\beta, G} \sum_{i=1}^N \exp [-y_i(f_{m-1}(x_i)
+                + \beta G(x_i))]\] \[\beta_m, G_m = \arg \min_{\beta, G}
+                \sum_{i=1}^N w_i^{(m)}\exp [-y_i\beta G(x_i)]\] where
+                \(w_i^{(m)} = \exp (-y_i f_{m-1}(x_i))\) are the weights applied
+                to each observation at each iteration, since the weights depends
+                on \(f_{m-1}(x_i)\). For \(\beta > 0\), \[G_m = \arg \min_{G}
+                \sum_{i=1}^{N} w_i^{(m)} I(y_i \neq G(x_i))\] Then plugging in
+                \(G_m\), we can solve \(\beta\), \[\beta_m = \frac{1}{2} \log
+                \frac{1 - err_m}{err_m}\] \[err_m = \frac{\sum_{i = 1}^{N}
+                w_i^{(m)} I(y_i \neq G_m(x_i))}{\sum_{i=1}^{N} w_i^{(m)}}\]
+                Update the weights \[w_i^{(m+1)} = w_i^{(m)} e^{-\beta_m y_i
+                G_m(x_i)}\] Note that \[-y_i G_m(x_i) = 2 I(y_i \neq G_m(x_i)) -
+                1\] Hence \[w_i^{(m+1)} = w_i^{(m)} \cdot e^{\alpha_m I(y_i \neq
+                G_m(x_i))} \cdot e^{-\beta_m}\] where \[\alpha_m = 2\beta_m =
+                \log \frac{1 - err_m}{err_m}\]
+              </li>
+              <li>The classification rule is \[G(x) = sign[f_m(x)]\]</li>
+              <li>
+                <b><b>Disadvantages</b></b> of AdaBoost
+                <ul class="org-ul">
+                  <li>
+                    Exponential Loss is not robust to noise. It is not robust to
+                    overlapping class distribution and mislabeling of the
+                    training data.
+                    <ul class="org-ul">
+                      <li>
+                        It penalizes exponentially for misclassified data as the
+                        data&rsquo;s negative margin increases (margin is
+                        represented as \(yf(x)\), where \(y\) is the label,
+                        \(f(x)\) is the prediction, \(sign(f(x))\) is the class
+                        prediction).
+                      </li>
+                      <li>
+                        Hence it is not robust to noise. For classification
+                        problem with large Bayes error rate, or for data with
+                        misspecification of class labels. AdaBoost dramatically
+                        degrades under this situation. AdaBoost dramatically
+                        degrades under this situation.
+                      </li>
+                      <li>
+                        For classification problem, cross-entropy and SVM hinge
+                        loss are more robust loss functions. They penalizes
+                        negative margin linearly, and there is little loss for
+                        correct classifications.
+                      </li>
+                      <li>
+                        Directly using the misclassification rate as cost is not
+                        robust. The prediction is unstable. We are more
+                        interested in the probability than the actual predicted
+                        class label.
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-orgd879d84" class="outline-3">
+          <h3 id="orgd879d84">
+            <span class="section-number-3">15.4</span> Gradient Boosting Trees
+          </h3>
+          <div class="outline-text-3" id="text-15-4"></div>
+          <div id="outline-container-orgd4b5756" class="outline-4">
+            <h4 id="orgd4b5756">
+              <span class="section-number-4">15.4.1</span> General Idea
+            </h4>
+            <div class="outline-text-4" id="text-15-4-1">
+              <p>
+                Gradient Boosting Trees are able to incorporate any cost
+                functions, which overcomes the disadvantages of AdaBoost.
+              </p>
+              <ul class="org-ul">
+                <li>
+                  Consider optimizing the loss in a space of functions
+                  (represented by decision trees). \[L(f) = \sum_{i=1}^N L(y_i,
+                  f(x_i))\]
+                </li>
+                <li>
+                  We can approach the optimal \(f\) by gradient descent. In
+                  fact, here we are approaching the optimum in a
+                  <b><b>Steepest Descent</b></b> fashion. \[f_m = f_{m - 1} -
+                  \rho_m g_m\] where the step size \(\rho_m\) satisfies \[\rho_m
+                  = \arg \min_{\rho} L(f_{m - 1} - \rho g_m)\] \(g_m\) is the
+                  gradient of \(L(f)\) evaluated at \(f_{m-1}\) \[g_{im} =
+                  [\frac{\partial L(y_i, f(x_i))}{\partial
+                  f(x_i)}]_{f(x_i)=f_{m-1}(x_i)}\]
+                </li>
+                <li>
+                  Note that we can only evaluate the values of the gradient at
+                  the given training data points \(x_i\). However, for the
+                  prediction, we need the values in the whole feature space.
+                  Hence, we can fit a tree on the negative gradient to make the
+                  prediction.
+                </li>
+                <li>
+                  Then we can figure out the optimal step size that minimizes
+                  the loss.
+                </li>
+                <li>Then we repeat the process.</li>
+              </ul>
+            </div>
+          </div>
+          <div id="outline-container-orga74f099" class="outline-4">
+            <h4 id="orga74f099">
+              <span class="section-number-4">15.4.2</span> Algorithm
+            </h4>
+            <div class="outline-text-4" id="text-15-4-2">
+              <p>The overall algorithm is as follows:</p>
+              <ul class="org-ul">
+                <li>
+                  Initialize \(f_0(x) = \arg \min_{\gamma} \sum_{i=1}^{N} L(y_i,
+                  \gamma)\).
+                </li>
+                <li>
+                  For \(m\) = 1 to \(M\)
+                  <ul class="org-ul">
+                    <li>
+                      For \(i=1,2,...,N\) compute the negative gradient (pseudo
+                      residuals). \[r_{im} = - [\frac{\partial L(y_i,
+                      f(x_i))}{\partial f(x_i)}]_{f(x_i)=f_{m-1}(x_i)}\]
+                    </li>
+                    <li>
+                      Fit a regression tree to the targets \(r_{im}\). The
+                      regression tree gives terminal regions \(R_{jm},
+                      j=1,2,...,J_m\)
+                    </li>
+                    <li>
+                      For \(j=1,2,...,J_m\) compute the following (steepest
+                      descent): \[\gamma_{jm} = \arg \min_{\gamma} \sum_{x_i \in
+                      R_{jm}} L(y_i, f_{m-1}(x_i) + \gamma\]
+                    </li>
+                    <li>
+                      Update \(f_m(x) = f_{m-1}(x) + \sum_{j=1}^{J_m}
+                      \gamma_{jm} I(x\in R_{jm})\)
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div id="outline-container-org3372ad4" class="outline-4">
+            <h4 id="org3372ad4">
+              <span class="section-number-4">15.4.3</span> Tuning Parameters
+            </h4>
+            <div class="outline-text-4" id="text-15-4-3">
+              <ul class="org-ul">
+                <li>
+                  Tree Size (number of leaf nodes) \(J\)
+                  <ul class="org-ul">
+                    <li>
+                      Restrict the tree size to be the same size across all the
+                      trees.
+                    </li>
+                    <li>
+                      If the tree size is set to \(J\), there can be only at
+                      most \(J-1\) interaction effects among the features.
+                    </li>
+                    <li>
+                      Most of the case, tree size of 4 to 8 works well.
+                      Shouldn&rsquo;t be larger than 10 in most of the cases.
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  Boosting Iteration \(M\)
+                  <ul class="org-ul">
+                    <li>Could use an early stopping strategy.</li>
+                  </ul>
+                </li>
+                <li>
+                  Learning rate \(\nu\) \[f_m(x) = f_{m-1}(x) + \nu \cdot
+                  \sum_{j=1}^{J_m} \gamma_{jm} I(x\in R_{jm})\]
+                  <ul class="org-ul">
+                    <li>
+                      A good strategy will be set \(\nu\) to be very small (&nu;
+                      &lt; 0.1), and choose \(M\) using early stopping.
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  Subsampling, sampling portion \(\eta\)
+                  <ul class="org-ul">
+                    <li>
+                      Stochastic gradient boosting: sample the training data to
+                      fit the tree.
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div id="outline-container-org3c0d613" class="outline-4">
+            <h4 id="org3c0d613">
+              <span class="section-number-4">15.4.4</span> Relative Importance
+              of Features
+            </h4>
+            <div class="outline-text-4" id="text-15-4-4">
+              <ul class="org-ul">
+                <li>Feature Importance for a single decision tree</li>
+              </ul>
+              <p>
+                The feature importance of feature \(X_l\) in a decision tree
+                \(T\) \[Z_l^2(T) = \sum_{t=1}^{J-1} z_t^2 I(v(t)=l)\] The sum of
+                \(J - 1\) internal nodes (consider there are \(J\) leaf nodes).
+                At each internal node, the feature \(X_{v(t)}\) is used as the
+                split variable. \[z_t^2 = SquaredErrorAfterSplit -
+                SquaredErrorBeforeSplit\]
+              </p>
+
+              <ul class="org-ul">
+                <li>
+                  For additive trees
+                  <ul class="org-ul">
+                    <li>Just average the score over all the trees.</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-org5986087" class="outline-2">
+        <h2 id="org5986087">
+          <span class="section-number-2">16</span> Random Forest
+        </h2>
+        <div class="outline-text-2" id="text-16">
+          <p>The major two improvements made upon the basic decision tree:</p>
+          <ul class="org-ul">
+            <li>Bootstrap sample (bagging)</li>
+            <li>
+              When training a tree, randomly select \(m\) features from the
+              total \(p\) features to make the split. This is the major
+              difference between Random Forest and bag of trees.
+            </li>
+          </ul>
+        </div>
+        <div id="outline-container-org718e3c9" class="outline-4">
+          <h4 id="org718e3c9">
+            <span class="section-number-4">16.0.1</span> How these two
+            improvements help?
+          </h4>
+          <div class="outline-text-4" id="text-16-0-1">
+            <p>
+              Consider the following bagging procedure \[\hat{f}(x) =
+              \frac{1}{B} \sum_{i=1}^B T_b(x)\] Notice that the bias is not
+              changed. The bagging tries to <b><b>reduce the variance</b></b
+              >.
+            </p>
+
+            <ul class="org-ul">
+              <li>
+                NOTE that the trees generated from bagging are
+                <i>identically distributed</i> (i.d.).
+                <ul class="org-ul">
+                  <li>
+                    If the trees are
+                    <i>independently identically distributed</i> (i.i.d.), and
+                    assumes the variance of each tree is \(\sigma^2\), then the
+                    variance can be computed as \[Var(\hat{f}(x)) = \frac{1}{B}
+                    \sigma^2\]
+                  </li>
+                  <li>
+                    However, the trees are not independent in fact. Assuming the
+                    correlation between any of the two trees is \(\rho\), the
+                    variance of the bagged trees is \[Var(\hat{f}(x)) =
+                    \frac{1}{B^2} Var(\sum_{i=1}^B T_i) = \frac{1}{B^2}
+                    (B\sigma^2 + B(B-1) Cov(T_i, T_j)) = \frac{1}{B^2}
+                    (B\sigma^2 + B(B-1) \rho \sigma^2) \] \[=\rho \sigma^2 +
+                    \frac{1 - \rho}{B} \sigma^2\]
+                    <ul class="org-ul">
+                      <li>
+                        When \(B\) is large enough, the variance is dominated by
+                        the correlation \(\rho\). We need to think about ways to
+                        reduce the correlation between trees.
+                      </li>
+                      <li>
+                        That is achieved by random selection of features when
+                        growing the trees.
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org205ffc6" class="outline-4">
+          <h4 id="org205ffc6">
+            <span class="section-number-4">16.0.2</span> Out of Bag Error
+          </h4>
+          <div class="outline-text-4" id="text-16-0-2">
+            <p>
+              For each observation \((x_i, y_i)\), construct its predictor by
+              averaging those trees corresponding to bootstrap samples which do
+              not contain the observation \((x_i, y_i)\).
+            </p>
+
+            <p>
+              OOB error is almost identical to \(N\) fold Cross Validation.
+              Hence Random Forest can do the training and cross-validation at
+              the same time. Once OOB error stabilizes (as the algorithm
+              increases the number of trees), the training can be terminated.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div id="outline-container-orgb8a76fd" class="outline-2">
+        <h2 id="orgb8a76fd">
+          <span class="section-number-2">17</span> Clustering
+        </h2>
+        <div class="outline-text-2" id="text-17"></div>
+        <div id="outline-container-orgb2d2ca5" class="outline-3">
+          <h3 id="orgb2d2ca5">
+            <span class="section-number-3">17.1</span> K means
+          </h3>
+          <div class="outline-text-3" id="text-17-1">
+            <ul class="org-ul">
+              <li>Pick initial centroids.</li>
+              <li>Assign each observation to the closest centroids.</li>
+              <li>
+                Compute the means of each cluster, and treat them as the new
+                centroids for each cluster.
+              </li>
+              <li>
+                <p>Repeat step 2 and step 3 until the cost converges.</p>
+
+                <p>
+                  The cost is the sum of distance of each observation to its
+                  cluster mean.
+                </p>
+              </li>
+              <li>K means could yield to local minimum.</li>
+              <li>
+                Try random initial points several times and choose the clusters
+                with the lowest cost.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org2a6d670" class="outline-3">
+          <h3 id="org2a6d670">
+            <span class="section-number-3">17.2</span> Gaussian Mixture
+          </h3>
+          <div class="outline-text-3" id="text-17-2"></div>
+          <div id="outline-container-org945f97c" class="outline-4">
+            <h4 id="org945f97c">
+              <span class="section-number-4">17.2.1</span> EM algorithm
+            </h4>
+            <div class="outline-text-4" id="text-17-2-1">
+              <p>
+                Consider a training dataset \({x_1, x_2, ..., x_N}\), there is a
+                latent random variable \(z_i\) associated with each training
+                example \(x_i\) indicating which cluster it belongs to. Note
+                that \(z_i\) is unobservable. We can try to maximize the log
+                likelihood \[l(\theta) = \sum_{i=1}^N log(p(x_i|\theta))=
+                \sum_{i=1}^N log(\sum_z p(x, z | \theta))\]
+              </p>
+
+              <p>
+                Directly optimizing a log of sum is difficult, let&rsquo;s
+                approach it by maximizing its lower bound! The lower bound can
+                be found by Jensen&rsquo;s Inequality. \[E(f(X)) \geq f(E(X))\]
+                where \(f\) is strictly convex, \(X\) is a random variable. The
+                equality holds true if and only if \(X = E(X)\) with probability
+                of 1.
+              </p>
+
+              <p>
+                Now we can derive a lower bound for the maximum likelihood
+                \[l(\theta) = \sum_{i=1}^N log(\sum_z p(x^{(i)}, z^{(i)} |
+                \theta)) = \sum_{i=1}^N log(\sum_z q(z^{(i)}) \frac{p(x^{(i)},
+                z^{(i)} | \theta)}{q(z^{(i)})})\] \[\geq \sum_{i=1}^N \sum_z
+                q(z^{(i)}) log(\frac{p(x^{(i)}, z^{(i)} |
+                \theta)}{q(z^{(i)})})\] for any given distribution \(q(z)\).
+              </p>
+
+              <p>
+                If \(\theta\) is known (we can make some initial guess of
+                \(\theta\)), we want to make sure the lower bound equals to the
+                original log likelihood \(l(\theta)\) at the guessed point
+                \(\theta\). Then we let \(\frac{p(x^{(i)}, z^{(i)} |
+                \theta)}{q(z^{(i)})}\) to be constant for all \(z\). Then we
+                have \[q(z^{(i)}) = \frac{p(x^{(i)}, z^{(i)}|\theta)}{\sum_{z}
+                p(x^{(i)}, z)} = p(z^{(i)}|x^{(i)}, \theta)\] This is known as
+                the E-step.
+              </p>
+
+              <p>
+                M-step is just to maximize the lower bound assuming \(\theta\)
+                is unknown, but you know \(q\). \[\theta = argmax_\theta
+                \sum_{i=1}^N \sum_z q(z^{(i)}) log(\frac{p(x^{(i)}, z^{(i)} |
+                \theta)}{q(z^{(i)})})\]
+              </p>
+
+              <p>The overall algorithm:</p>
+              <ul class="org-ul">
+                <li>Make a initial guess of \(\theta\).</li>
+                <li>
+                  E-step, compute the distribution \(q\) based on the guess
+                  \(\theta\)
+                </li>
+              </ul>
+              <p>
+                \[q(z^{(i)}) = \frac{p(x^{(i)}, z^{(i)}|\theta)}{\sum_{z}
+                p(x^{(i)}, z)} = p(z^{(i)}|x^{(i)}, \theta)\]
+              </p>
+              <ul class="org-ul">
+                <li>
+                  M-step, assuming \(\theta\) is unknown, maximize the sum of
+                  log likelihood based on the computed distribution \(q\).
+                </li>
+              </ul>
+              <p>
+                \[\theta = argmax_\theta \sum_{i=1}^N \sum_z q(z^{(i)})
+                log(\frac{p(x^{(i)}, z^{(i)} | \theta)}{q(z^{(i)})})\]
+              </p>
+              <ul class="org-ul">
+                <li>Iterate step 2 and step 3 until convergence.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div id="outline-container-org776843c" class="outline-3">
+          <h3 id="org776843c">
+            <span class="section-number-3">17.3</span> Principal Component
+            Analysis
+          </h3>
+          <div class="outline-text-3" id="text-17-3">
+            <ul class="org-ul">
+              <li>
+                NOTE: remember to center and scale the data (z-score) before
+                performing PCA.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="outline-container-org12c1b03" class="outline-3">
+          <h3 id="org12c1b03">
+            <span class="section-number-3">17.4</span> Spectral Clustering
+          </h3>
+          <div class="outline-text-3" id="text-17-4">
+            <p>Graph Laplacian matrix</p>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-orgc4bfcc4" class="outline-2">
+        <h2 id="orgc4bfcc4">
+          <span class="section-number-2">18</span> Recommender System
+        </h2>
+        <div class="outline-text-2" id="text-18"></div>
+        <div id="outline-container-orgfc7b1aa" class="outline-3">
+          <h3 id="orgfc7b1aa">
+            <span class="section-number-3">18.1</span> Collaborative Filtering
+          </h3>
+          <div class="outline-text-3" id="text-18-1"></div>
+          <div id="outline-container-orgc1b0824" class="outline-4">
+            <h4 id="orgc1b0824">
+              <span class="section-number-4">18.1.1</span> User-based
+              collaborative filtering
+            </h4>
+            <div class="outline-text-4" id="text-18-1-1">
+              <p>
+                Find the similar users based on certain similar score. Your
+                predicted rating is the average rating weighted on similarity
+                scores.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="outline-container-org9ebec51" class="outline-2">
+        <h2 id="org9ebec51">
+          <span class="section-number-2">19</span> Deep Learning
+        </h2>
+        <div class="outline-text-2" id="text-19"></div>
+        <div id="outline-container-orgc36f7e2" class="outline-3">
+          <h3 id="orgc36f7e2">
+            <span class="section-number-3">19.1</span> Gradient Descent
+          </h3>
+          <div class="outline-text-3" id="text-19-1">
+            <p>
+              \[\theta_{n + 1} = \theta_n - \eta \frac{\partial L}{\partial
+              \theta}\]
+            </p>
+          </div>
+        </div>
+        <div id="outline-container-org70b80ff" class="outline-3">
+          <h3 id="org70b80ff">
+            <span class="section-number-3">19.2</span> Stochastic Gradient
+            Descent (mini-batch)
+          </h3>
+          <div class="outline-text-3" id="text-19-2">
+            <p>
+              The gradient is computed by the whole training data. Instead of
+              computing the gradient from the whole training dataset, we shuffle
+              the training dataset and get k samples (mini-batch) to approximate
+              the true gradient. \[\theta_{n + 1} = \theta_n - \eta
+              \hat{G}_k(\theta)\]
+            </p>
+          </div>
+        </div>
+        <div id="outline-container-org79e33a1" class="outline-3">
+          <h3 id="org79e33a1">
+            <span class="section-number-3">19.3</span> Momentum Stochastic
+            Gradient Descent
+          </h3>
+          <div class="outline-text-3" id="text-19-3">
+            <p>
+              Keep a portion of the previous speed (step difference), and adjust
+              the speed with the latest gradient. \[v_{n + 1} = \gamma v_{n} -
+              \eta \nabla_\theta J(\theta)\] \[\theta_{n+1} = \theta_n + v_{n +
+              1}\]
+            </p>
+          </div>
+        </div>
+
+        <div id="outline-container-org005e6de" class="outline-3">
+          <h3 id="org005e6de">
+            <span class="section-number-3">19.4</span> Why Rectified Linear Unit
+            (ReLU)?
+          </h3>
+          <div class="outline-text-3" id="text-19-4">
+            <ul class="org-ul">
+              <li>
+                Advantages:
+                <ul class="org-ul">
+                  <li>No gradient vanishing issue as with sigmoid and tanh</li>
+                  <li>
+                    Promotes sparse representation (0 for negative input),
+                    induced regularization
+                  </li>
+                  <li>Efficient in computation</li>
+                </ul>
+              </li>
+              <li>
+                Disadvantages:
+                <ul class="org-ul">
+                  <li>Asymmetric</li>
+                  <li>
+                    Unbounded, this can be overcome by batch normalization
+                  </li>
+                  <li>Nondifferentiable at 0</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div id="outline-container-orge4f910b" class="outline-2">
+        <h2 id="orge4f910b">
+          <span class="section-number-2">20</span> Feature Selection
+        </h2>
+        <div class="outline-text-2" id="text-20"></div>
+        <div id="outline-container-org6a6b335" class="outline-3">
+          <h3 id="org6a6b335">
+            <span class="section-number-3">20.1</span> Filter
+          </h3>
+        </div>
+
+        <div id="outline-container-org86ab61b" class="outline-3">
+          <h3 id="org86ab61b">
+            <span class="section-number-3">20.2</span> Wrapper
+          </h3>
+        </div>
+
+        <div id="outline-container-org2081893" class="outline-3">
+          <h3 id="org2081893">
+            <span class="section-number-3">20.3</span> Embedded
+          </h3>
+        </div>
+      </div>
+
+      <div id="outline-container-org1d51c72" class="outline-2">
+        <h2 id="org1d51c72">
+          <span class="section-number-2">21</span>
+          <span class="todo TODO">TODO</span> Hypothesis Test
+        </h2>
+        <div class="outline-text-2" id="text-21"></div>
+        <div id="outline-container-orge533647" class="outline-3">
+          <h3 id="orge533647">
+            <span class="section-number-3">21.1</span> T test
+          </h3>
+        </div>
+        <div id="outline-container-orgd2a3abb" class="outline-3">
+          <h3 id="orgd2a3abb">
+            <span class="section-number-3">21.2</span> F test
+          </h3>
+        </div>
+        <div id="outline-container-org4620732" class="outline-3">
+          <h3 id="org4620732">
+            <span class="section-number-3">21.3</span> Z test
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div id="postamble" class="status">
+      <p class="author">Author: Jinyu Xie</p>
+      <p class="date">Created: 2021-05-24 Mon 10:30</p>
+    </div>
+  </body>
+</html>
