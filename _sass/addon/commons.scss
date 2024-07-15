@@ -3,22 +3,22 @@
 html {
   @media (prefers-color-scheme: light) {
     &:not([data-mode]),
-    &[data-mode='light'] {
+    &[data-mode="light"] {
       @include light-scheme;
     }
 
-    &[data-mode='dark'] {
+    &[data-mode="dark"] {
       @include dark-scheme;
     }
   }
 
   @media (prefers-color-scheme: dark) {
     &:not([data-mode]),
-    &[data-mode='dark'] {
+    &[data-mode="dark"] {
       @include dark-scheme;
     }
 
-    &[data-mode='light'] {
+    &[data-mode="light"] {
       @include light-scheme;
     }
   }
@@ -88,7 +88,7 @@ blockquote {
     margin-bottom: 0;
   }
 
-  &[class^='prompt-'] {
+  &[class^="prompt-"] {
     border-left: 0;
     position: relative;
     padding: 1rem 1rem 1rem 3rem;
@@ -107,10 +107,10 @@ blockquote {
     }
   }
 
-  @include prompt('tip', '\f0eb', 'regular');
-  @include prompt('info', '\f06a');
-  @include prompt('warning', '\f06a');
-  @include prompt('danger', '\f071');
+  @include prompt("tip", "\f0eb", "regular");
+  @include prompt("info", "\f06a");
+  @include prompt("warning", "\f06a");
+  @include prompt("danger", "\f071");
 }
 
 kbd {
@@ -343,7 +343,7 @@ sup {
   &::before {
     @extend %rounded;
 
-    content: '';
+    content: "";
     width: 100%;
     height: 100%;
     position: absolute;
@@ -467,7 +467,7 @@ main {
       }
     }
 
-    input[type='checkbox'] {
+    input[type="checkbox"] {
       margin: 0 0.5rem 0.2rem -1.3rem;
       vertical-align: middle;
     }
@@ -516,13 +516,13 @@ main {
   background: var(--img-bg);
 
   &::before {
-    content: '';
-    position: absolute;
-    background: var(--shimmer-bg);
-    height: 100%;
-    width: 100%;
-    -webkit-animation: shimmer 1.3s infinite;
-    animation: shimmer 1.3s infinite;
+    content: "";
+    // position: absolute;
+    // background: var(--shimmer-bg);
+    // height: 100%;
+    // width: 100%;
+    // -webkit-animation: shimmer 1.3s infinite;
+    // animation: shimmer 1.3s infinite;
   }
 
   @-webkit-keyframes shimmer {
@@ -678,7 +678,7 @@ mjx-container {
 
 /* --- sidebar layout --- */
 
-$sidebar-display: 'sidebar-display';
+$sidebar-display: "sidebar-display";
 $btn-border-width: 3px;
 $btn-mb: 0.5rem;
 
@@ -871,7 +871,7 @@ $btn-mb: 0.5rem;
       @include ml-mr(calc(($sb-btn-gap - $btn-border-width) / 2));
 
       background-color: var(--sidebar-btn-color);
-      content: '';
+      content: "";
       width: $btn-border-width;
       height: $btn-border-width;
       border-radius: 50%;
@@ -929,7 +929,7 @@ $btn-mb: 0.5rem;
     span {
       &:not(:last-child) {
         &::after {
-          content: '›';
+          content: "›";
           padding: 0 0.3rem;
         }
       }
@@ -1036,7 +1036,7 @@ search {
     margin: 0 1.25rem 1rem 0;
 
     &::before {
-      content: '#';
+      content: "#";
       color: var(--text-muted-color);
       padding-right: 0.2rem;
     }
@@ -1229,7 +1229,7 @@ search {
 @media all and (max-width: 576px) {
   main {
     .content {
-      > blockquote[class^='prompt-'] {
+      > blockquote[class^="prompt-"] {
         @include ml-mr(-1rem);
 
         border-radius: 0;
