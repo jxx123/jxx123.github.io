@@ -1,6 +1,6 @@
 ---
 title: Register Buffer 
-tags: Pytorch, Machine Learning
+tags: Pytorch
 date: 2024-07-21
 categories: [Notes]
 math: true
