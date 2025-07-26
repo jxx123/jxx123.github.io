@@ -4,12 +4,23 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-My name is Jinyu Xie. I am a senior software engineer working on Google Search ranking algorithms, and a Ph.D. in Control Systems and Artificial Intelligence.
+My name is Jinyu Xie. I am a senior research engineer in Google DeepMind Robotics Team, and a Ph.D. in Control Systems and Artificial Intelligence. Before Google DeepMind, I was a Ranking Engineer in Google Search.
 
 This is my blog site to keep my learning notes.
 
 <!-- [My Google Scholar](https://scholar.google.com/citations?user=m-vkma0AAAAJ&hl=en&oi=ao). -->
 
+Some of the works done by me in Google:
+
+- Few shot adaptation finetuning experiments (Fig. 26) in [Gemini Robotics Technical Report](https://arxiv.org/pdf/2503.20020):
+
+![few_shot_adapt](/assets/img/about/gemini_robotics_tech_report_fig26.png)
+
+- [Gemini Robotics On-Device](https://deepmind.google/discover/blog/gemini-robotics-on-device-brings-ai-to-local-robotic-devices/) finetuning service and sdk ([github.com/google-deepmind/gemini-robotics-sdk](https://github.com/google-deepmind/gemini-robotics-sdk)) for Trusted Testers. Demo videos (edited by myself): 
+  - <iframe width="560" height="315" src="https://www.youtube.com/embed/93jUeBHkBO4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  - <iframe width="560" height="315" src="https://www.youtube.com/embed/nVMY3-kWhOc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  - <iframe width="560" height="315" src="https://www.youtube.com/embed/p13niftoaQE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+- [Topic-Authority](https://developers.google.com/search/blog/2023/05/understanding-news-topic-authority)-based Ranking algorithm for Google Search.
 
 I love building tools. Whenever I found there are no tools that fit my use case nicely, I will start building my own. Here are some of the tools I built:
 
