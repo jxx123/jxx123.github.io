@@ -3,6 +3,7 @@
 icon: fas fa-info-circle
 order: 4
 ---
+![jinyu_profile](/assets/img/about/jinyu_profile.jpg)
 
 My name is Jinyu Xie. I am a senior research engineer in Google DeepMind Robotics Team, and a Ph.D. in Control Systems and Artificial Intelligence. Before Google DeepMind, I was a Ranking Engineer in Google Search.
 
