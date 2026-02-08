@@ -46,7 +46,7 @@ I love building tools. Whenever I find there are no tools that fit my use case n
 <div class="tool-card">
   <div class="tool-icon">🔄</div>
   <div class="tool-info">
-    <div class="tool-name"><a href="https://www.loopquest.ai/" target="_blank">loopquest.ai</a></div>
+    <div class="tool-name"><a href="https://github.com/LoopMind-AI/loopquest" target="_blank">loopquest</a></div>
     <div class="tool-desc">A MLOps Web App for Embodied AI evaluation. I use it heavily for my offline reinforcement learning workflows, and I host it on the cloud for others to use as well.</div>
     <span class="tool-tag">Web App</span>
   </div>
