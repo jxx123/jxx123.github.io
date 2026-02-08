@@ -1,87 +1,307 @@
----
-layout: compress
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title | default: site.title }}</title>
+  <meta name="description" content="{{ site.description }}">
+  <meta property="og:title" content="{{ page.title | default: site.title }}">
+  <meta property="og:description" content="{{ site.description }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ site.url }}">
+  <link rel="icon" href="{{ '/assets/img/favicons/favicon.ico' | relative_url }}">
+  <link rel="apple-touch-icon" href="{{ '/assets/img/favicons/apple-touch-icon.png' | relative_url }}">
+  {% seo %}
+  <style>
+    :root {
+      --text-primary: #1a1a1a;
+      --text-secondary: #555;
+      --text-muted: #888;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --bg: #ffffff;
+      --bg-subtle: #f8f9fa;
+      --border: #e5e7eb;
+    }
 
-<!doctype html>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-{% include origin-type.html %}
+    html { scroll-behavior: smooth; }
 
-{% include lang.html %}
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      color: var(--text-primary);
+      background: var(--bg);
+      line-height: 1.75;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
 
-{% if site.theme_mode %}
-  {% capture prefer_mode %}data-mode="{{ site.theme_mode }}"{% endcapture %}
-{% endif %}
+    /* --- Links --- */
+    a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--accent-hover); text-decoration: underline; }
 
-<!-- `site.alt_lang` can specify a language different from the UI -->
-<html lang="{{ site.alt_lang | default: site.lang }}" {{ prefer_mode }}>
-  {% include head.html %}
+    /* --- Container --- */
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
 
-  <body>
-    {% include sidebar.html lang=lang %}
+    /* --- Header / Hero --- */
+    .header {
+      display: flex;
+      align-items: flex-start;
+      gap: 28px;
+      margin-bottom: 28px;
+    }
 
-    <div id="main-wrapper" class="d-flex justify-content-center">
-      <div class="container d-flex flex-column px-xxl-5">
-        {% include topbar.html lang=lang %}
+    .profile-photo {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 3px solid var(--border);
+    }
 
-        <div class="row flex-grow-1">
-          <main aria-label="Main Content" class="col-12 col-lg-11 col-xl-9 px-md-4">
-            {% if layout.refactor or layout.layout == 'default' %}
-              {% include refactor-content.html content=content lang=lang %}
-            {% else %}
-              {{ content }}
-            {% endif %}
-          </main>
+    .header-info { flex: 1; }
 
-          <!-- panel -->
-          <aside aria-label="Panel" id="panel-wrapper" class="col-xl-3 ps-2 mb-5 text-muted">
-            <div class="access">
-              {% include_cached update-list.html lang=lang %}
-              {% include_cached trending-tags.html lang=lang %}
-            </div>
+    .header-info h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      letter-spacing: -0.02em;
+    }
 
-            {% for _include in layout.panel_includes %}
-              {% assign _include_path = _include | append: '.html' %}
-              {% include {{ _include_path }} lang=lang %}
-            {% endfor %}
-          </aside>
+    .header-info .subtitle {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 18px;
+      font-size: 0.92rem;
+      list-style: none;
+    }
+
+    .contact-links a {
+      color: var(--text-secondary);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .contact-links a:hover { color: var(--accent); text-decoration: none; }
+    .contact-links svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+    /* --- Content typography --- */
+    .content h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-top: 40px;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border);
+      letter-spacing: -0.01em;
+    }
+
+    .content h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-top: 24px;
+      margin-bottom: 6px;
+    }
+
+    .content p {
+      margin-bottom: 14px;
+      line-height: 1.8;
+    }
+
+    .content ul, .content ol {
+      margin-bottom: 14px;
+      padding-left: 1.4em;
+    }
+
+    .content li {
+      margin-bottom: 10px;
+      line-height: 1.7;
+    }
+
+    .content li p { margin-bottom: 6px; }
+
+    .content hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 36px 0;
+    }
+
+    .content img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin: 12px 0;
+      border: 1px solid var(--border);
+    }
+
+    .content code {
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      font-size: 0.88em;
+      background: var(--bg-subtle);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .content blockquote {
+      border-left: 3px solid var(--accent);
+      margin: 16px 0;
+      padding: 8px 16px;
+      color: var(--text-secondary);
+      background: var(--bg-subtle);
+      border-radius: 0 6px 6px 0;
+    }
+
+    /* --- Video embed --- */
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #000;
+      margin: 10px 0;
+    }
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: 0;
+      border-radius: 8px;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 12px 0;
+    }
+
+    .video-grid .video-wrapper:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+      max-width: 50%;
+    }
+
+    /* --- Tool cards --- */
+    .tool-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px;
+      margin-bottom: 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .tool-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 2px 12px rgba(37, 99, 235, 0.08);
+    }
+    .tool-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      width: 36px;
+      text-align: center;
+      padding-top: 2px;
+    }
+    .tool-info { flex: 1; }
+    .tool-name { font-weight: 600; font-size: 0.98rem; margin-bottom: 2px; }
+    .tool-name a { color: var(--text-primary); }
+    .tool-name a:hover { color: var(--accent); text-decoration: none; }
+    .tool-desc { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; }
+    .tool-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 1px 8px;
+      border-radius: 12px;
+      background: var(--bg-subtle);
+      color: var(--text-muted);
+      margin-top: 6px;
+      border: 1px solid var(--border);
+    }
+
+    /* --- Footer --- */
+    .footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 600px) {
+      .container { padding: 36px 18px 60px; }
+      .header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 16px;
+      }
+      .contact-links { justify-content: center; }
+      .header-info h1 { font-size: 1.6rem; }
+      .profile-photo { width: 110px; height: 110px; }
+      .video-grid { grid-template-columns: 1fr; }
+      .video-grid .video-wrapper:last-child:nth-child(odd) { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <div class="header">
+      <img src="{{ '/assets/img/about/jinyu_profile.jpg' | relative_url }}" alt="Jinyu Xie" class="profile-photo">
+      <div class="header-info">
+        <h1>Jinyu Xie</h1>
+        <div class="subtitle">Senior Research Engineer at Google DeepMind Robotics</div>
+        <div class="contact-links">
+          <a href="mailto:xjygr08@gmail.com">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            Email
+          </a>
+          <a href="https://github.com/jxx123" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a href="https://twitter.com/xjygr08" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            Twitter
+          </a>
+          <a href="https://scholar.google.com/citations?user=m-vkma0AAAAJ&hl=en&oi=ao" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
+            Scholar
+          </a>
         </div>
-
-        <div class="row">
-          <!-- tail -->
-          <div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-md-4">
-            {% for _include in layout.tail_includes %}
-              {% assign _include_path = _include | append: '.html' %}
-              {% include {{ _include_path }} lang=lang %}
-            {% endfor %}
-
-            {% include_cached footer.html lang=lang %}
-          </div>
-        </div>
-
-        {% include_cached search-results.html lang=lang %}
       </div>
-
-      <aside aria-label="Scroll to Top">
-        <button id="back-to-top" type="button" class="btn btn-lg btn-box-shadow">
-          <i class="fas fa-angle-up"></i>
-        </button>
-      </aside>
     </div>
 
-    <div id="mask"></div>
+    <!-- Main content from Markdown -->
+    <div class="content">
+      {{ content }}
+    </div>
 
-    {% if site.pwa.enabled %}
-      {% include_cached notification.html lang=lang %}
-    {% endif %}
+    <!-- Footer -->
+    <div class="footer">
+      &copy; 2025 Jinyu Xie
+    </div>
 
-    <!-- JavaScripts -->
-
-    {% include js-selector.html %}
-
-    {% if page.mermaid %}
-      {% include mermaid.html %}
-    {% endif %}
-
-    {% include_cached search-loader.html %}
-  </body>
+  </div>
+</body>
 </html>
