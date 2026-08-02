@@ -1,0 +1,758 @@
+<meta name="robots" content="noindex,nofollow"><title>Apprentice — Pitch Deck</title>
+<style>
+  :root{
+    --bg:#F4F5F1; --bg2:#FBFBF9; --ink:#1A211E; --muted:#5C6963;
+    --line:#D9DED8; --accent:#2E7D68; --accent-strong:#1E5A4B;
+    --accent-soft:rgba(46,125,104,.14); --chip:#E9EEE9; --wm:rgba(46,125,104,.08);
+    --good:#2E7D68; --warn:#9A6B15; --crit:#A34335; --crit-soft:rgba(163,67,53,.12);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{--bg:#0F1513; --bg2:#141B18; --ink:#E6EBE7; --muted:#93A29B;
+      --line:#242E29; --accent:#5CB89E; --accent-strong:#7BCBB2;
+      --accent-soft:rgba(92,184,158,.14); --chip:#18211D; --wm:rgba(92,184,158,.07);
+      --good:#5CB89E; --warn:#D2A24C; --crit:#D07A6B; --crit-soft:rgba(208,122,107,.14);}
+  }
+  :root[data-theme="dark"]{--bg:#0F1513; --bg2:#141B18; --ink:#E6EBE7; --muted:#93A29B;
+    --line:#242E29; --accent:#5CB89E; --accent-strong:#7BCBB2;
+    --accent-soft:rgba(92,184,158,.14); --chip:#18211D; --wm:rgba(92,184,158,.07);
+    --good:#5CB89E; --warn:#D2A24C; --crit:#D07A6B; --crit-soft:rgba(208,122,107,.14);}
+  :root[data-theme="light"]{--bg:#F4F5F1; --bg2:#FBFBF9; --ink:#1A211E; --muted:#5C6963;
+    --line:#D9DED8; --accent:#2E7D68; --accent-strong:#1E5A4B;
+    --accent-soft:rgba(46,125,104,.14); --chip:#E9EEE9; --wm:rgba(46,125,104,.08);
+    --good:#2E7D68; --warn:#9A6B15; --crit:#A34335; --crit-soft:rgba(163,67,53,.12);}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+  body{margin:0; background:var(--bg); color:var(--ink);
+    font-family:system-ui,"Segoe UI","Helvetica Neue",Arial,sans-serif; font-size:17px; line-height:1.55}
+  .serif{font-family:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif}
+  nav.top{position:sticky; top:0; z-index:10; display:flex; gap:1.5rem; align-items:baseline;
+    padding:.6rem 1.4rem; background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:blur(6px); border-bottom:1px solid var(--line);
+    font-family:ui-monospace,"SF Mono","Cascadia Code",Consolas,monospace;
+    font-size:.72rem; letter-spacing:.08em; text-transform:uppercase}
+  nav.top .brand{color:var(--accent-strong); font-weight:700}
+  nav.top a{color:var(--muted); text-decoration:none}
+  nav.top a:hover, nav.top a:focus-visible{color:var(--ink)}
+  a:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+  main{scroll-snap-type:y proximity}
+  section.slide{min-height:100svh; scroll-snap-align:start; position:relative;
+    display:grid; align-content:center; justify-items:start;
+    padding:5rem clamp(1.2rem,6vw,5rem); max-width:1100px; margin:0 auto;
+    border-bottom:1px solid var(--line)}
+  .eyebrow{font-family:ui-monospace,"SF Mono","Cascadia Code",Consolas,monospace;
+    font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--accent-strong); margin-bottom:1rem}
+  h1,h2{font-family:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+    font-weight:600; text-wrap:balance; margin:0 0 .8rem}
+  h1{font-size:clamp(2.4rem,6vw,4.2rem); line-height:1.08}
+  h2{font-size:clamp(1.8rem,4vw,2.7rem); line-height:1.12}
+  .lede{font-size:clamp(1rem,1.5vw,1.15rem); max-width:36em; color:var(--muted)}
+  .punch{margin-top:1.2rem; font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    font-size:clamp(1.1rem,1.9vw,1.4rem); font-style:italic; color:var(--accent-strong);
+    border-left:3px solid var(--accent); padding-left:1rem; max-width:32em; text-wrap:balance}
+  .wm{position:absolute; right:-.05em; top:50%; transform:translateY(-50%);
+    font-family:"Iowan Old Style",Palatino,Georgia,serif;
+    font-size:clamp(14rem,32vw,26rem); line-height:1; color:var(--wm);
+    user-select:none; pointer-events:none; z-index:0}
+  section.slide > *:not(.wm){position:relative; z-index:1}
+  .fig{width:100%; max-width:840px; margin-top:1.2rem}
+  .fig svg{width:100%; height:auto; display:block}
+  .figcap{font-size:.8rem; color:var(--muted); margin-top:.55rem; max-width:46em}
+  svg .lab{font-family:ui-monospace,"SF Mono",Consolas,monospace; font-size:11px; letter-spacing:.06em; fill:var(--muted)}
+  svg .lab2{font-family:ui-monospace,"SF Mono",Consolas,monospace; font-size:11.5px; letter-spacing:.04em; fill:var(--ink)}
+  svg .ann{font-family:"Iowan Old Style",Palatino,Georgia,serif; font-style:italic; font-size:15px; fill:var(--accent-strong)}
+  svg .big{font-family:"Iowan Old Style",Palatino,Georgia,serif; font-size:19px; fill:var(--ink)}
+  .tiles{display:grid; gap:.8rem; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); margin-top:1.4rem; width:100%; max-width:900px}
+  .tile{background:var(--bg2); border:1px solid var(--line); padding:1rem 1.1rem}
+  .tile .n{font-family:"Iowan Old Style",Palatino,Georgia,serif; font-size:clamp(1.8rem,3vw,2.6rem);
+    line-height:1.05; color:var(--accent-strong); font-variant-numeric:tabular-nums}
+  .tile .d{font-size:.82rem; color:var(--muted); margin-top:.35rem}
+  table{border-collapse:collapse; width:100%; font-size:.92rem}
+  .tablewrap{overflow-x:auto; max-width:100%; margin:1.2rem 0}
+  th{font-family:ui-monospace,"SF Mono",Consolas,monospace; font-size:.68rem;
+    text-transform:uppercase; letter-spacing:.1em; color:var(--muted);
+    text-align:left; padding:.5rem .8rem .5rem 0; border-bottom:1px solid var(--line)}
+  td{padding:.55rem .8rem .55rem 0; border-bottom:1px solid var(--line); vertical-align:top}
+  .num{font-variant-numeric:tabular-nums}
+  .board{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:.8rem; margin-top:1.4rem; width:100%}
+  .panel{background:var(--bg2); border:1px solid var(--line); padding:.9rem}
+  .panel svg{width:100%; height:auto; display:block}
+  .panel .cap{font-family:ui-monospace,"SF Mono",Consolas,monospace; font-size:.68rem;
+    letter-spacing:.1em; text-transform:uppercase; color:var(--accent-strong); margin-top:.6rem}
+  .panel .sub{font-size:.8rem; color:var(--muted); margin-top:.15rem}
+  .cards{display:grid; gap:.7rem; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); margin-top:1.2rem; width:100%}
+  .card{background:var(--bg2); border:1px solid var(--line); padding:.85rem 1rem}
+  .card .k{font-family:ui-monospace,"SF Mono",Consolas,monospace; font-size:.64rem;
+    letter-spacing:.1em; text-transform:uppercase; color:var(--accent-strong); display:block; margin-bottom:.3rem}
+  .card p{margin:0; font-size:.86rem; color:var(--muted)}
+  .steps{display:flex; flex-wrap:wrap; gap:.5rem .4rem; margin-top:1.4rem; align-items:center;
+    font-family:ui-monospace,"SF Mono",Consolas,monospace; font-size:.76rem}
+  .step{background:var(--chip); border:1px solid var(--line); padding:.35rem .6rem; white-space:nowrap}
+  .step.done{border-color:var(--accent); color:var(--accent-strong)}
+  .step.gate{background:var(--accent); color:var(--bg); border-color:var(--accent); font-weight:700}
+  .arrow{color:var(--muted)}
+  .appendix-head{background:var(--bg2)}
+  article.appx{max-width:900px; margin:0 auto; padding:3.2rem clamp(1.2rem,6vw,4rem); border-bottom:1px solid var(--line)}
+  article.appx h3{font-family:"Iowan Old Style",Palatino,Georgia,serif; font-size:1.6rem; margin:0 0 .3rem}
+  article.appx .eyebrow{margin-bottom:.6rem}
+  article.appx p{max-width:66ch}
+  article.appx ul{max-width:70ch; padding-left:1.2rem}
+  article.appx li{margin:.35rem 0}
+  article.appx table{font-size:.85rem}
+  code{font-family:ui-monospace,"SF Mono","Cascadia Code",Consolas,monospace;
+    font-size:.86em; background:var(--chip); padding:.08em .35em; border:1px solid var(--line)}
+  .formula{font-family:ui-monospace,"SF Mono",Consolas,monospace; font-size:.9rem;
+    background:var(--chip); border:1px solid var(--line); padding:.8rem 1rem; overflow-x:auto; margin:1rem 0}
+  .tag{display:inline-block; font-family:ui-monospace,"SF Mono",Consolas,monospace;
+    font-size:.64rem; letter-spacing:.1em; text-transform:uppercase;
+    border:1px solid var(--line); padding:.1rem .45rem; color:var(--muted); margin-right:.4rem}
+  .tag.ok{color:var(--good); border-color:var(--good)}
+  .tag.warn{color:var(--warn); border-color:var(--warn)}
+  .bridge{display:grid; grid-template-columns:minmax(150px,auto) 56px minmax(200px,1fr);
+    gap:.35rem 0; align-items:center; margin-top:1rem; width:100%; max-width:760px}
+  .bridge .gr{font-family:"Iowan Old Style",Palatino,Georgia,serif; font-size:1.15rem; padding:.5rem 0; border-bottom:1px solid var(--line)}
+  .bridge .gr small{display:block; font-size:.68rem; color:var(--muted); font-style:italic; font-family:system-ui,sans-serif}
+  .bridge .arr{height:1px; background:var(--accent); position:relative; margin:0 .4rem}
+  .bridge .arr::after{content:""; position:absolute; right:-1px; top:-3.5px;
+    border-left:7px solid var(--accent); border-top:4px solid transparent; border-bottom:4px solid transparent}
+  .bridge .sys{font-weight:600; font-size:.95rem; padding:.5rem 0; border-bottom:1px solid var(--line)}
+  footer{max-width:900px; margin:0 auto; padding:2.5rem clamp(1.2rem,6vw,4rem); font-size:.78rem; color:var(--muted)}
+  @media print{
+    nav.top{display:none}
+    section.slide{min-height:auto; page-break-after:always; border-bottom:none; padding:2rem}
+    article.appx{page-break-inside:avoid}
+    .wm{display:none}
+  }
+</style>
+
+<nav class="top" aria-label="Deck navigation">
+  <span class="brand">Apprentice</span>
+  <a href="#deck">Deck</a>
+  <a href="#curve">The Curve</a>
+  <a href="#market">Market</a>
+  <a href="#appendix">Appendix</a>
+</nav>
+
+<main id="deck">
+
+<!-- 01 · TITLE -->
+<section class="slide">
+  <span class="wm serif" aria-hidden="true">ἀ</span>
+  <p class="eyebrow">Apprentice · Pre-seed · 2026</p>
+  <h1>Robots that know<br>when to ask for help.</h1>
+  <p class="lede">So the most dangerous hours of industrial work stop needing a person in the dangerous place.</p>
+  <p style="font-family:ui-monospace,'SF Mono',Consolas,monospace;margin-top:2rem;font-size:.72rem;color:var(--muted)">[Founder] · Confidential · figures marked ~ are planning estimates</p>
+</section>
+
+<!-- 02 · THE HUMAN PROBLEM -->
+<section class="slide">
+  <p class="eyebrow">01 · The problem</p>
+  <h2>Dangerous work still belongs to people.</h2>
+  <div class="tiles">
+    <div class="tile"><div class="n">~90<span style="font-size:.5em">/yr</span></div><div class="d">U.S. workers killed in confined spaces alone (OSHA, 2011–2018 avg) — tanks, vessels, pits that someone still has to enter and check</div></div>
+    <div class="tile"><div class="n">$1.3M+</div><div class="d">OSHA fines for a single confined-space fatality — before lawsuits, downtime, and insurance repricing</div></div>
+    <div class="tile"><div class="n">Daily</div><div class="d">gauge readings, gas checks, valve rounds, sample runs — simple, repetitive tasks in places built to hurt people</div></div>
+  </div>
+  <p class="punch">Why hasn’t automation fixed this? Because a robot that “usually works” is useless where one silent failure is an incident.</p>
+</section>
+
+<!-- 03 · WHY ROBOTS FAIL HERE -->
+<section class="slide">
+  <p class="eyebrow">02 · Why today’s robots can’t do it</p>
+  <h2>They don’t know when they’re wrong.</h2>
+  <div class="fig"><svg viewBox="0 0 840 400" role="img" aria-label="Quadrant of confidence versus correctness; confidently wrong is the deployment killer">
+    <line x1="420" y1="40" x2="420" y2="360" stroke="var(--line)"/>
+    <line x1="80" y1="200" x2="760" y2="200" stroke="var(--line)"/>
+    <text x="420" y="390" text-anchor="middle" class="lab">ROBOT’S CONFIDENCE →</text>
+    <text x="58" y="205" class="lab" transform="rotate(-90 58 205)" text-anchor="middle">ROBOT IS ACTUALLY RIGHT →</text>
+    <text x="250" y="110" text-anchor="middle" class="big" fill="var(--muted)">unsure but right</text>
+    <text x="250" y="133" text-anchor="middle" class="lab">ASKS UNNECESSARILY — COSTS MINUTES</text>
+    <rect x="435" y="55" width="310" height="120" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+    <text x="590" y="110" text-anchor="middle" class="big">sure and right</text>
+    <text x="590" y="133" text-anchor="middle" class="lab">THE PRODUCTIVE ZONE</text>
+    <text x="250" y="280" text-anchor="middle" class="big" fill="var(--muted)">unsure and wrong</text>
+    <text x="250" y="303" text-anchor="middle" class="lab">STOPS AND ASKS — SAFE</text>
+    <rect x="435" y="225" width="310" height="120" fill="var(--crit-soft)" stroke="var(--crit)" stroke-width="2.5"/>
+    <text x="590" y="278" text-anchor="middle" class="big" fill="var(--crit)">confidently wrong</text>
+    <text x="590" y="303" text-anchor="middle" class="lab" fill="var(--crit)">THE INCIDENT. THE END OF THE DEPLOYMENT.</text>
+  </svg></div>
+  <p class="figcap">Every AI robot demo you’ve seen lives on the right side of this chart — and can’t tell you which square it’s in. Modern AI is a famously confident guesser: the industry calls the failures “hallucinations.” On a factory floor, a hallucination has a blast radius.</p>
+</section>
+
+<!-- 04 · OUR IDEA -->
+<section class="slide">
+  <p class="eyebrow">03 · Our idea</p>
+  <h2>A robot with a working sense of doubt.</h2>
+  <div class="fig"><svg viewBox="0 0 840 240" role="img" aria-label="The loop: deploy with a human safety net; robot does what it is sure of and asks when not; every rescue is revenue and a lesson">
+    <rect x="40" y="60" width="200" height="60" fill="var(--accent-soft)" stroke="var(--accent)"/>
+    <text x="140" y="86" text-anchor="middle" class="lab2">DEPLOY ON DAY ONE</text>
+    <text x="140" y="104" text-anchor="middle" class="lab">WITH A REMOTE HUMAN SAFETY NET</text>
+    <rect x="320" y="60" width="200" height="60" fill="var(--accent-soft)" stroke="var(--accent)"/>
+    <text x="420" y="86" text-anchor="middle" class="lab2">SURE → DOES IT</text>
+    <text x="420" y="104" text-anchor="middle" class="lab">NOT SURE → STOPS &amp; ASKS</text>
+    <rect x="600" y="60" width="200" height="60" fill="var(--accent-soft)" stroke="var(--accent)"/>
+    <text x="700" y="86" text-anchor="middle" class="lab2">EVERY RESCUE =</text>
+    <text x="700" y="104" text-anchor="middle" class="lab">REVENUE + A LESSON IT KEEPS</text>
+    <line x1="240" y1="90" x2="314" y2="90" stroke="var(--accent)" stroke-width="1.8"/>
+    <line x1="520" y1="90" x2="594" y2="90" stroke="var(--accent)" stroke-width="1.8"/>
+    <path d="M700,120 C700,190 140,190 140,124" fill="none" stroke="var(--accent)" stroke-width="1.8"/>
+    <path d="M134,135 L140,121 L147,134 Z" fill="var(--accent)"/>
+    <text x="420" y="185" text-anchor="middle" class="ann">tasks that needed help this month run alone the next</text>
+  </svg></div>
+  <p class="figcap">The customer sees 100% task completion from day one — some done by the robot, the rest by a remote operator through the robot. The mix shifts every month. That shift is the entire business.</p>
+</section>
+
+<!-- 05 · STORYBOARD -->
+<section class="slide">
+  <p class="eyebrow">04 · One task, four beats</p>
+  <h2>What “asking” looks like.</h2>
+  <div class="board">
+    <div class="panel">
+      <svg viewBox="0 0 160 100" aria-label="Robot acting with high confidence">
+        <rect x="18" y="30" width="10" height="45" fill="var(--ink)"/>
+        <rect x="28" y="38" width="34" height="8" fill="var(--ink)" transform="rotate(-18 28 42)"/>
+        <circle cx="66" cy="27" r="5" fill="none" stroke="var(--ink)" stroke-width="2"/>
+        <rect x="95" y="20" width="50" height="8" fill="var(--accent)"/>
+        <rect x="95" y="20" width="60" height="8" fill="none" stroke="var(--line)"/>
+        <text x="95" y="44" class="lab">SURE: 92%</text>
+        <circle cx="120" cy="70" r="9" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+        <path d="M115,70 L119,74 L126,65" fill="none" stroke="var(--accent)" stroke-width="2"/>
+      </svg>
+      <p class="cap">1 · Works</p><p class="sub">Checks its own confidence before every move.</p>
+    </div>
+    <div class="panel">
+      <svg viewBox="0 0 160 100" aria-label="Robot pausing at low confidence">
+        <rect x="18" y="30" width="10" height="45" fill="var(--ink)"/>
+        <rect x="28" y="42" width="34" height="8" fill="var(--ink)"/>
+        <circle cx="66" cy="46" r="5" fill="none" stroke="var(--ink)" stroke-width="2"/>
+        <rect x="95" y="20" width="14" height="8" fill="var(--warn)"/>
+        <rect x="95" y="20" width="60" height="8" fill="none" stroke="var(--line)"/>
+        <text x="95" y="44" class="lab">SURE: 31%</text>
+        <text x="120" y="78" text-anchor="middle" class="big">✋</text>
+      </svg>
+      <p class="cap">2 · Stops</p><p class="sub">Not sure enough → it does not improvise.</p>
+    </div>
+    <div class="panel">
+      <svg viewBox="0 0 160 100" aria-label="Remote human answering a specific question">
+        <circle cx="40" cy="30" r="9" fill="none" stroke="var(--ink)" stroke-width="2"/>
+        <path d="M25,62 C25,45 55,45 55,62 L55,75 L25,75 Z" fill="var(--ink)"/>
+        <path d="M70,45 L120,45" stroke="var(--accent)" stroke-width="2"/>
+        <path d="M112,38 L122,45 L112,52 Z" fill="var(--accent)"/>
+        <text x="128" y="35" class="lab2">“SHOW ME THIS</text>
+        <text x="128" y="50" class="lab2">VALVE, ONCE,</text>
+        <text x="128" y="65" class="lab2">FROM HERE.”</text>
+      </svg>
+      <p class="cap">3 · Asks precisely</p><p class="sub">A remote operator finishes the task — from a desk, not a hazard zone.</p>
+    </div>
+    <div class="panel">
+      <svg viewBox="0 0 160 100" aria-label="Next week the same task runs autonomously">
+        <rect x="18" y="30" width="10" height="45" fill="var(--ink)"/>
+        <rect x="28" y="38" width="34" height="8" fill="var(--ink)" transform="rotate(-18 28 42)"/>
+        <circle cx="66" cy="27" r="5" fill="none" stroke="var(--ink)" stroke-width="2"/>
+        <rect x="95" y="20" width="55" height="8" fill="var(--accent)"/>
+        <rect x="95" y="20" width="60" height="8" fill="none" stroke="var(--line)"/>
+        <text x="95" y="44" class="lab">SURE: 95%</text>
+        <text x="95" y="66" class="lab">SAME TASK, NEXT WEEK</text>
+      </svg>
+      <p class="cap">4 · Learns</p><p class="sub">The rescue became training data overnight.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 06 · THE CURVE -->
+<section class="slide" id="curve">
+  <p class="eyebrow">05 · The one chart that matters</p>
+  <h2>The Apprentice Curve.</h2>
+  <div class="fig">
+    <svg viewBox="0 0 760 340" role="img" aria-label="Share of tasks needing human help declines over deployment time">
+      <g stroke="var(--line)" stroke-width="1">
+        <line x1="70" y1="70" x2="710" y2="70"/><line x1="70" y1="150" x2="710" y2="150"/><line x1="70" y1="230" x2="710" y2="230"/>
+      </g>
+      <path d="M70,72 C180,80 260,120 360,175 C470,235 580,262 700,272 L700,290 L70,290 Z" fill="var(--accent)" opacity="0.12"/>
+      <path d="M70,72 C180,80 260,120 360,175 C470,235 580,262 700,272" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="700" cy="272" r="5" fill="var(--accent)"/>
+      <line x1="70" y1="290" x2="710" y2="290" stroke="var(--muted)" stroke-width="1.2"/>
+      <line x1="70" y1="55" x2="70" y2="290" stroke="var(--muted)" stroke-width="1.2"/>
+      <g class="lab">
+        <text x="66" y="48">% OF TASKS NEEDING A HUMAN</text>
+        <text x="710" y="312" text-anchor="end">MONTHS DEPLOYED →</text>
+      </g>
+      <text x="200" y="120" class="ann">month 1: human does most of it — and gets paid for it</text>
+      <text x="688" y="256" text-anchor="end" class="ann">month N: robot does most of it — margin</text>
+    </svg>
+  </div>
+  <p class="figcap">Help needed falls as the fleet learns from its own rescues. This one line is our research score, our product promise to the customer, and our gross margin. They are not three things.</p>
+</section>
+
+<!-- 07 · MENO BEAT -->
+<section class="slide">
+  <span class="wm serif" aria-hidden="true">Μ</span>
+  <p class="eyebrow">06 · An idea old enough to be true</p>
+  <h2 class="serif">“How will you search for a thing<br>when you do not know what it is?”</h2>
+  <p class="lede" style="margin-top:.5rem">— Plato, the <i>Meno</i>, 385 BC. His answer: real intelligence begins with knowing what you don’t know — and the fastest learner is the one who asks the right question at the right moment.</p>
+  <p class="punch">Philosophy figured this out 2,400 years ago. We built it into a robot.</p>
+</section>
+
+<!-- 08 · WHERE WE START -->
+<section class="slide">
+  <p class="eyebrow">07 · Where we start</p>
+  <h2>Places where people shouldn’t be.</h2>
+  <div class="fig"><svg viewBox="0 0 840 400" role="img" aria-label="Task selection quadrant: high danger to humans, low cost of robot error">
+    <line x1="420" y1="40" x2="420" y2="360" stroke="var(--line)"/>
+    <line x1="80" y1="200" x2="760" y2="200" stroke="var(--line)"/>
+    <rect x="85" y="45" width="330" height="150" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+    <text x="250" y="100" text-anchor="middle" class="big" fill="var(--accent-strong)">START HERE</text>
+    <text x="250" y="125" text-anchor="middle" class="lab2">GAS CHECKS · GAUGE ROUNDS · SAMPLING · VALVES</text>
+    <text x="250" y="146" text-anchor="middle" class="lab">DANGEROUS FOR PEOPLE · A ROBOT MISTAKE = A RETRY</text>
+    <text x="250" y="167" text-anchor="middle" class="lab">MINES · CHEMICAL PLANTS · REFINERIES</text>
+    <text x="590" y="115" text-anchor="middle" class="big" fill="var(--muted)">too hard for a first product</text>
+    <text x="590" y="138" text-anchor="middle" class="lab">COMPLEX RESCUE &amp; REPAIR WORK</text>
+    <text x="250" y="285" text-anchor="middle" class="big" fill="var(--muted)">already automated</text>
+    <text x="590" y="285" text-anchor="middle" class="big" fill="var(--muted)">wrong place to learn</text>
+    <text x="420" y="390" text-anchor="middle" class="lab">COST OF A ROBOT MISTAKE →</text>
+    <text x="58" y="205" class="lab" transform="rotate(-90 58 205)" text-anchor="middle">DANGER TO A HUMAN →</text>
+  </svg></div>
+  <p class="figcap">These industries already run remote operations and already pay for robotic hazard-zone data — Gecko Robotics sells wall-crawling inspection in this exact world: $34.5M revenue (2023), $1.25B valuation. The buyers exist. What nobody sells them yet is a robot that <i>handles</i> things — and knows its limits.</p>
+</section>
+
+<!-- 09 · MARKET -->
+<section class="slide" id="market">
+  <p class="eyebrow">08 · Market</p>
+  <h2>Boring market. Serious money.</h2>
+  <div class="tiles">
+    <div class="tile"><div class="n">$26B</div><div class="d">global industrial inspection services today — the tasks in our first quadrant, done mostly by people (GMI, 2025)</div></div>
+    <div class="tile"><div class="n">$39B<span style="font-size:.5em">+</span></div><div class="d">projected by 2034 as aging plants meet shrinking hazardous-work labor pools</div></div>
+    <div class="tile"><div class="n">10×</div><div class="d">expansion path: every adjacent task family (maintenance prep, material moves, turnaround support) shares the same robots, operators, and learned skills</div></div>
+  </div>
+  <p class="punch">We don’t need a robot revolution. We need a small share of work that’s already budgeted, already regulated, and already unpopular with the humans doing it.</p>
+</section>
+
+<!-- 10 · UNIT ECONOMICS -->
+<section class="slide">
+  <p class="eyebrow">09 · How the money works</p>
+  <h2>Priced per task. Margin follows the curve.</h2>
+  <div class="fig"><svg viewBox="0 0 760 320" role="img" aria-label="Price per task flat; cost per task falls as fewer tasks need a human; gap is margin">
+    <line x1="70" y1="280" x2="710" y2="280" stroke="var(--muted)" stroke-width="1.2"/>
+    <line x1="70" y1="50" x2="70" y2="280" stroke="var(--muted)" stroke-width="1.2"/>
+    <line x1="70" y1="100" x2="700" y2="100" stroke="var(--ink)" stroke-width="2" stroke-dasharray="7 5"/>
+    <text x="695" y="88" text-anchor="end" class="lab2">PRICE PER TASK — FLAT</text>
+    <path d="M70,115 C220,125 340,180 480,225 C570,252 640,262 700,266" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
+    <circle cx="700" cy="266" r="5" fill="var(--accent)"/>
+    <text x="695" y="255" text-anchor="end" class="lab2">OUR COST — OPERATOR MINUTES</text>
+    <path d="M70,100 L700,100 L700,266 C640,262 570,252 480,225 C340,180 220,125 70,115 Z" fill="var(--accent)" opacity=".12"/>
+    <text x="430" y="165" text-anchor="middle" class="ann" font-size="19">margin — widens as the robot needs less help</text>
+    <text x="710" y="302" text-anchor="end" class="lab">MONTHS DEPLOYED →</text>
+  </svg></div>
+  <div class="tablewrap"><table>
+    <tr><th>Fleet stage</th><th>Tasks needing a human</th><th>One operator runs</th><th>What the business looks like</th></tr>
+    <tr><td>Month 1</td><td class="num">~100%</td><td class="num">1–2 robots</td><td>a remote-operations service (already paid)</td></tr>
+    <tr><td>Curve mid</td><td class="num">~40%</td><td class="num">~5 robots</td><td>service price, improving software cost</td></tr>
+    <tr><td>Curve late</td><td class="num">~10%</td><td class="num">15–20+ robots</td><td>software margins on service prices</td></tr>
+  </table></div>
+</section>
+
+<!-- 11 · WHY NOW -->
+<section class="slide">
+  <p class="eyebrow">10 · Why now</p>
+  <h2>Three curves just crossed.</h2>
+  <div class="cards">
+    <div class="card"><span class="k">Robot brains — free-falling cost</span><p>Open AI models for robots improve every quarter on other people’s billions. We build the judgment layer on top; every release makes our floor higher.</p></div>
+    <div class="card"><span class="k">Robot bodies — collapsing price</span><p>Capable arms cost 10× less than five years ago. Hardware stopped being the barrier; trusting it is the barrier.</p></div>
+    <div class="card"><span class="k">Hazard labor — vanishing</span><p>Aging workforce, tightening safety regulation, rising insurance costs. The people who do these rounds are retiring faster than they’re replaced.</p></div>
+  </div>
+  <p class="punch">$18.8B has gone into robotics this year. Almost none of it into robots knowing when they’re wrong — the one thing every deployment needs.</p>
+</section>
+
+<!-- 12 · COMPETITION -->
+<section class="slide">
+  <p class="eyebrow">11 · The field</p>
+  <h2>Everyone else is betting on confidence.<br>We’re betting on doubt.</h2>
+  <div class="fig"><svg viewBox="0 0 840 400" role="img" aria-label="Competitive map: learns on the job versus knows its limits; Apprentice occupies the empty corner">
+    <line x1="420" y1="40" x2="420" y2="360" stroke="var(--line)"/>
+    <line x1="80" y1="200" x2="760" y2="200" stroke="var(--line)"/>
+    <text x="250" y="110" text-anchor="middle" class="big" fill="var(--muted)">humanoid &amp; AI-generalist labs</text>
+    <text x="250" y="133" text-anchor="middle" class="lab">$39B VALUATIONS · ~150 UNITS SHIPPED · NO RELIABILITY STORY</text>
+    <text x="250" y="290" text-anchor="middle" class="big" fill="var(--muted)">traditional automation</text>
+    <text x="250" y="313" text-anchor="middle" class="lab">SAFE, RIGID, CAN’T ADAPT — ALREADY SOLD</text>
+    <text x="590" y="290" text-anchor="middle" class="big" fill="var(--muted)">inspection incumbents</text>
+    <text x="590" y="313" text-anchor="middle" class="lab">GECKO ET AL — SENSORS THAT LOOK, NOT HANDS THAT DO</text>
+    <rect x="435" y="55" width="310" height="120" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.5"/>
+    <text x="590" y="105" text-anchor="middle" class="big" fill="var(--accent-strong)">Apprentice</text>
+    <text x="590" y="130" text-anchor="middle" class="lab2">LEARNS ON THE JOB + KNOWS ITS LIMITS</text>
+    <text x="590" y="150" text-anchor="middle" class="lab">THE EMPTY CORNER</text>
+    <text x="420" y="390" text-anchor="middle" class="lab">KNOWS ITS LIMITS →</text>
+    <text x="58" y="205" class="lab" transform="rotate(-90 58 205)" text-anchor="middle">LEARNS ON THE JOB →</text>
+  </svg></div>
+  <p class="figcap">The humanoid wave is not our enemy — it’s our future customer base: every one of those robots will eventually need a limits-aware layer to get deployed somewhere real. We meet them there.</p>
+</section>
+
+<!-- 13 · MOAT -->
+<section class="slide">
+  <p class="eyebrow">12 · What compounds</p>
+  <h2>Our robots’ mistakes are our private textbook.</h2>
+  <div class="cards">
+    <div class="card"><span class="k">Data nobody can buy</span><p>Every rescue records exactly what our robot got wrong, where, and what the fix was. That dataset exists nowhere else and regrows daily.</p></div>
+    <div class="card"><span class="k">A judge you can’t fake</span><p>Knowing when you’ll fail can only be learned from real failures. Demo-reel datasets contain none — ours is made of them.</p></div>
+    <div class="card"><span class="k">Slow industries cut both ways</span><p>Certification, site contracts, insurance relationships take years — and then protect you for years.</p></div>
+    <div class="card"><span class="k">Paid while learning</span><p>Competitors burn money until their robot is perfect. Ours earns from week one, imperfect on purpose.</p></div>
+  </div>
+</section>
+
+<!-- 14 · TEAM -->
+<section class="slide">
+  <p class="eyebrow">13 · Why this founder</p>
+  <h2>I’ve spent a career on machines that<br>must know when they’re wrong.</h2>
+  <div class="fig"><svg viewBox="0 0 840 190" role="img" aria-label="Founder timeline">
+    <line x1="60" y1="95" x2="780" y2="95" stroke="var(--line)" stroke-width="2"/>
+    <circle cx="120" cy="95" r="7" fill="var(--accent)"/>
+    <text x="120" y="60" text-anchor="middle" class="lab2">INSULIN-DOSING CONTROL</text>
+    <text x="120" y="130" text-anchor="middle" class="lab">PhD — WHERE OVERCONFIDENCE KILLS</text>
+    <text x="120" y="148" text-anchor="middle" class="lab">BUILT THE FIELD’S STANDARD SIMULATOR</text>
+    <circle cx="340" cy="95" r="7" fill="var(--accent)"/>
+    <text x="340" y="60" text-anchor="middle" class="lab2">PLANET-SCALE ML</text>
+    <text x="340" y="130" text-anchor="middle" class="lab">9 YEARS AT GOOGLE</text>
+    <circle cx="560" cy="95" r="7" fill="var(--accent)"/>
+    <text x="560" y="60" text-anchor="middle" class="lab2">FRONTIER ROBOT LEARNING</text>
+    <text x="560" y="130" text-anchor="middle" class="lab">TOP INDUSTRIAL LAB</text>
+    <circle cx="740" cy="95" r="9" fill="none" stroke="var(--accent)" stroke-width="3"/>
+    <text x="740" y="60" text-anchor="middle" class="lab2">APPRENTICE</text>
+    <text x="740" y="130" text-anchor="middle" class="lab">FULL SYSTEM, BUILT SOLO</text>
+  </svg></div>
+  <p class="figcap">A confidently-wrong insulin controller kills a patient. A confidently-wrong robot kills the company. Same discipline, third act. (Technical depth: Appendix A1–A11.)</p>
+</section>
+
+<!-- 15 · ASK -->
+<section class="slide">
+  <p class="eyebrow">14 · The ask</p>
+  <h2>[$ TBD] · 18 months · two proof points.</h2>
+  <p class="lede"><b>Proof 1 — the safety gate:</b> our robot’s self-doubt is measurably trustworthy (it knows when it will fail, audited statistically). <b>Proof 2 — a paid pilot:</b> one real site, one task family, revenue from week one, help-rate falling monthly.</p>
+  <div class="tablewrap"><table>
+    <tr><th>Spend</th><th>What it buys</th><th>Est.</th></tr>
+    <tr><td>Data instrument fleet</td><td>Handheld capture tools (with force sensing) + paid collection in target industries</td><td class="num">~$50–150K</td></tr>
+    <tr><td>Practice cell (“dojo”)</td><td>Robot + remote-operation rig + operator hours — the learning loop runs before any customer</td><td class="num">~$30–60K</td></tr>
+    <tr><td>Model training</td><td>Full program on rented GPUs — costs less than one big lab’s single training run</td><td class="num">~$40–70K</td></tr>
+    <tr><td>First pilot cell</td><td>Commissioning at a customer site</td><td class="num">TBD</td></tr>
+  </table></div>
+  <p style="font-family:ui-monospace,'SF Mono',Consolas,monospace;font-size:.72rem;color:var(--muted)">Contact: [email] · Full technical program &amp; costs: Appendix A8</p>
+</section>
+
+</main>
+
+<!-- ═══════════════ APPENDIX ═══════════════ -->
+
+<section class="slide appendix-head" id="appendix" style="min-height:60svh">
+  <p class="eyebrow">Appendix · Diligence depth</p>
+  <h2>Everything above, with the bolts showing.</h2>
+  <p class="lede">A0 Theses &amp; the Meno mapping · A1 Architecture · A2 Vocabulary &amp; adaptation · A3 RL doctrine · A4 Judgment layer · A5 World model · A6 Data proposer · A7 Verification · A8 Infra &amp; budget · A9 Encoders &amp; corpus · A10 Strategy reviews &amp; kill criteria · A11 Why LLMs don’t know what they don’t know</p>
+</section>
+
+<article class="appx">
+  <p class="eyebrow">A0 · The nine theses &amp; the full Meno mapping</p>
+  <h3>The doctrine behind the plain-language deck</h3>
+  <div class="bridge" role="table" aria-label="Mapping from Platonic concepts to system components">
+    <div class="gr serif">ἀπορία<small>knowing you don’t know</small></div><div class="arr"></div><div class="sys">Calibrated “I don’t know” → escalation</div>
+    <div class="gr serif">ἀνάμνησις<small>learning as recollection</small></div><div class="arr"></div><div class="sys">Pretraining — one demo elicits a skill</div>
+    <div class="gr serif">ἔλεγχος<small>refutation reveals ignorance</small></div><div class="arr"></div><div class="sys">Verify battery + self-play failure discovery</div>
+    <div class="gr serif">δόξα / ἐπιστήμη<small>belief vs. tethered knowledge</small></div><div class="arr"></div><div class="sys">Demo reels vs. certified competence</div>
+    <div class="gr serif">Socratic method<small>teach at the point of failure</small></div><div class="arr"></div><div class="sys">DAgger — intervention learning</div>
+  </div>
+  <ul style="margin-top:1.2rem">
+    <li><b>T1 Entropy:</b> robots have no internet — the fleet must grow its own; escalations sample exactly where the model is wrong.</li>
+    <li><b>T2 Caching:</b> System-2 → System-1 distillation converts rented intelligence and human help into weights; opex becomes capex.</li>
+    <li><b>T3 Certification:</b> statistically guaranteed “I don’t know” is the insurable product — a regulatory moat demos can’t cross.</li>
+    <li><b>T4 Curriculum:</b> learning-progress-driven practice; escalations become structured help requests; metric = help-seconds per skill.</li>
+    <li><b>T5 Crossover:</b> win = fleet learning rate exceeds labs’ collection rate; heavy flywheel in the internal dojo, thin data streams at sites.</li>
+    <li><b>T6 On-device:</b> both systems ship on the robot; calibration substitutes for frontier access; capability placement, not max SKU.</li>
+    <li><b>T7 Control stack:</b> own to the servo on deployment hardware — no vendor black box inside a certified loop.</li>
+    <li><b>T8 Instrument:</b> own the capture device (UMI-first; force sensing v2 — the modality no public corpus has).</li>
+    <li><b>T9 Hazard asymmetry:</b> human presence high-consequence, robot error low-consequence, low complexity, latency-tolerant.</li>
+  </ul>
+</article>
+
+<article class="appx">
+  <p class="eyebrow">A1 · Model architecture</p>
+  <h3>A two-level world-action model</h3>
+  <p><b>Backbone (rented, then owned at the margin):</b> an open VLM (~4B) continued-pretrained on an interleaved corpus of video tokens, latent-action tokens, state bins, and language under Policy / World / Dynamics templates, plus an outcome-conditioned “try-your-best” template (advantage conditioning at CPT level; A3). Dense features for the action system come from a separate frozen encoder (A9).</p>
+  <p><b>Latent-action model (LAM, owned):</b> IDM/FDM over video. IDM: frame pairs → discrete latent action z (FSQ codebook). FDM: (frame, z) → next latent frame. Hard-won design rules:</p>
+  <ul>
+    <li><b>State-free IDM/FDM.</b> Proprioception never enters the LAM as input — human video has none, and masked-input variants partition z-space by data source (our F1/F3 failure; theory concurs: the bottleneck spends capacity on whatever best explains next-frame prediction). State appears only as <em>masked auxiliary targets</em>.</li>
+    <li><b>Semantic-feature inputs.</b> IDM reads frozen dense features (DINOv3-class), not reconstruction latents — the convergent choice of every working cross-domain LAM; also our rotation-blindness (F15) fix candidate.</li>
+    <li><b>Cross-embodiment gate.</b> One LAM controls both Franka-LIBERO and SO-101; z mixing verified visually (z-transplant grids, PCA) and numerically (leakage bits, shared mass, probe accuracy). Numbers gate, pictures verify.</li>
+  </ul>
+  <p><b>Decoder (per-embodiment, quality-agnostic):</b> flow/diffusion head (z, state, visual latent) → action chunks. An <em>embodiment adapter, not a policy</em>: trains on any interaction data including autonomous play — which keeps new-embodiment adaptation cheap.</p>
+  <p><b>Judgment heads:</b> verdict (calibrated success probability, three-way; A4) and progress (a value function — dense, not binary). Trained on fleet-verified outcomes.</p>
+  <div class="fig" style="max-width:900px"><svg viewBox="0 0 900 560" role="img" aria-label="System architecture: data sources through frozen encoder and LAM into the backbone, decoder, and judgment heads">
+    <g>
+      <rect x="20" y="30" width="150" height="34" fill="var(--chip)" stroke="var(--line)"/><text x="95" y="51" text-anchor="middle" class="lab2">HUMAN VIDEO</text>
+      <rect x="20" y="72" width="150" height="34" fill="var(--chip)" stroke="var(--line)"/><text x="95" y="93" text-anchor="middle" class="lab2">ROBOT EPISODES</text>
+      <rect x="20" y="114" width="150" height="34" fill="var(--chip)" stroke="var(--line)"/><text x="95" y="135" text-anchor="middle" class="lab2">INSTRUMENT (UMI+F)</text>
+      <text x="95" y="170" text-anchor="middle" class="lab">RAW, MODEL-INDEPENDENT</text>
+    </g>
+    <line x1="170" y1="90" x2="215" y2="90" stroke="var(--muted)" stroke-width="1.5"/>
+    <rect x="220" y="55" width="140" height="70" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <text x="290" y="84" text-anchor="middle" class="lab2">DENSE ENCODER</text>
+    <text x="290" y="102" text-anchor="middle" class="lab">DINOv3 · FROZEN</text>
+    <line x1="360" y1="90" x2="405" y2="90" stroke="var(--muted)" stroke-width="1.5"/>
+    <rect x="410" y="55" width="120" height="70" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/>
+    <text x="470" y="84" text-anchor="middle" class="lab2">IDM</text>
+    <text x="470" y="102" text-anchor="middle" class="lab">FRAME PAIRS → z</text>
+    <line x1="530" y1="90" x2="575" y2="90" stroke="var(--muted)" stroke-width="1.5"/>
+    <rect x="580" y="55" width="130" height="70" fill="none" stroke="var(--warn)" stroke-width="2"/>
+    <text x="645" y="80" text-anchor="middle" class="lab2">FSQ CODEBOOK</text>
+    <text x="645" y="98" text-anchor="middle" class="lab">z VOCAB · FROZEN</text>
+    <text x="645" y="114" text-anchor="middle" class="lab">CONTRACT vN — THE CLIFF</text>
+    <rect x="580" y="170" width="130" height="60" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/>
+    <text x="645" y="195" text-anchor="middle" class="lab2">FDM / WORLD MODEL</text>
+    <text x="645" y="213" text-anchor="middle" class="lab">(o, z) → ô′ · ONE-STEP</text>
+    <line x1="645" y1="125" x2="645" y2="168" stroke="var(--muted)" stroke-width="1.5"/>
+    <path d="M740,200 C790,200 790,320 745,330" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="4 4"/>
+    <text x="800" y="255" class="ann" text-anchor="middle" transform="rotate(90 800 255)">imagination</text>
+    <line x1="710" y1="200" x2="740" y2="200" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="4 4"/>
+    <rect x="230" y="280" width="440" height="100" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.5"/>
+    <text x="450" y="312" text-anchor="middle" class="big">VLM backbone · ~4B · CPT</text>
+    <text x="450" y="336" text-anchor="middle" class="lab2">TEMPLATES: POLICY · WORLD · DYNAMICS · TRY-YOUR-BEST</text>
+    <text x="450" y="356" text-anchor="middle" class="lab">IN: VIDEO TOKENS · z · STATE BINS · LANGUAGE · OUTCOME — OUT: z · VERDICT · LANGUAGE</text>
+    <path d="M620,125 C560,180 520,230 480,278" fill="none" stroke="var(--muted)" stroke-width="1.5"/>
+    <text x="200" y="268" class="lab">LANGUAGE + STATE BINS</text>
+    <line x1="60" y1="405" x2="840" y2="405" stroke="var(--crit)" stroke-width="1.5" stroke-dasharray="7 5"/>
+    <text x="65" y="398" class="lab" fill="var(--crit)">RL BOUNDARY — EXACT LIKELIHOODS ABOVE (GRPO ON z / VERDICT TOKENS) · SUPERVISED BELOW</text>
+    <line x1="380" y1="380" x2="380" y2="430" stroke="var(--accent)" stroke-width="2"/>
+    <path d="M373,420 L380,433 L387,420 Z" fill="var(--accent)"/>
+    <rect x="240" y="435" width="280" height="70" fill="var(--chip)" stroke="var(--line)" stroke-width="1.5"/>
+    <text x="380" y="462" text-anchor="middle" class="lab2">FLOW/DIFFUSION DECODER (z, STATE, LATENT) → ACTIONS</text>
+    <text x="380" y="482" text-anchor="middle" class="lab">PER-EMBODIMENT · QUALITY-AGNOSTIC · TRAINS ON PLAY</text>
+    <rect x="545" y="435" width="140" height="70" fill="none" stroke="var(--line)" stroke-width="1.5" stroke-dasharray="4 4"/>
+    <text x="615" y="462" text-anchor="middle" class="lab2">± GAUSSIAN RESIDUAL</text>
+    <text x="615" y="482" text-anchor="middle" class="lab">PPO · CLAMPED · OPTIONAL</text>
+    <rect x="700" y="290" width="170" height="80" fill="var(--bg2)" stroke="var(--accent-strong)" stroke-width="2"/>
+    <text x="785" y="316" text-anchor="middle" class="lab2">VERDICT (3-WAY, CALIB.)</text>
+    <text x="785" y="334" text-anchor="middle" class="lab2">PROGRESS (VALUE FN)</text>
+    <text x="785" y="356" text-anchor="middle" class="lab">THE JUDGMENT LAYER</text>
+    <line x1="670" y1="330" x2="698" y2="330" stroke="var(--accent-strong)" stroke-width="1.5"/>
+    <line x1="380" y1="505" x2="380" y2="530" stroke="var(--muted)" stroke-width="1.5"/>
+    <text x="380" y="548" text-anchor="middle" class="lab2">ROBOT (OWNED IK / SERVO STACK) · FLEET LOGS → SOURCES</text>
+  </svg></div>
+  <p class="figcap">Solid accent = trained by us. Dashed = frozen or optional. Amber = the frozen vocabulary contract (the cliff). Below the red line: supervised or small-Gaussian RL only. Fleet logs feed back into the source tier — the loop closes through the real world.</p>
+</article>
+
+<article class="appx">
+  <p class="eyebrow">A2 · The vocabulary contract &amp; adaptation ladder</p>
+  <h3>Why a new robot is cheap — and the one expensive mistake</h3>
+  <p>Normalization bins, embodiment specs, and the z codebook are <b>frozen, versioned contracts</b>. Everything below the codebook adapts per-embodiment; changing the codebook cascades (re-extract → re-CPT → re-SFT): the <b>vocabulary cliff</b>, crossed only at scheduled LAM version bumps.</p>
+  <div class="tablewrap"><table>
+    <tr><th>Adaptation lever</th><th>Trains</th><th>Data needed</th><th>Vocabulary safe?</th></tr>
+    <tr><td>EE-space remap via owned IK + spec</td><td>nothing</td><td>calibration session</td><td><span class="tag ok">safe</span></td></tr>
+    <tr><td>Embodiment conditioning token</td><td class="num">10³–10⁶ params</td><td>tens of demos</td><td><span class="tag ok">safe</span></td></tr>
+    <tr><td>LoRA on decoder</td><td class="num">10⁶–10⁷</td><td>50–200 demos <i>or play</i></td><td><span class="tag ok">safe</span></td></tr>
+    <tr><td>Full decoder retrain</td><td class="num">10⁷–10⁸</td><td>100s of demos <i>or play</i></td><td><span class="tag ok">safe</span></td></tr>
+    <tr><td>IDM front-end adapter (frozen quantizer)</td><td>encoder only</td><td>video only — no actions</td><td><span class="tag ok">safe</span></td></tr>
+    <tr><td>Full IDM retrain</td><td>IDM + corpus + backbone</td><td>everything</td><td><span class="tag warn">cliff</span></td></tr>
+  </table></div>
+  <div class="fig"><svg viewBox="0 0 900 300" role="img" aria-label="Adaptation cost staircase ending at the vocabulary cliff">
+    <g stroke="var(--accent)" stroke-width="2" fill="var(--accent-soft)">
+      <rect x="30" y="200" width="130" height="34"/>
+      <rect x="170" y="180" width="130" height="54"/>
+      <rect x="310" y="155" width="130" height="79"/>
+      <rect x="450" y="125" width="130" height="109"/>
+      <rect x="590" y="95" width="130" height="139"/>
+    </g>
+    <g class="lab" text-anchor="middle">
+      <text x="95" y="192">IK REMAP · $0</text>
+      <text x="235" y="172">EMB. TOKEN · DEMOS×10</text>
+      <text x="375" y="147">DECODER LoRA · PLAY</text>
+      <text x="515" y="117">DECODER FULL · PLAY</text>
+      <text x="655" y="87">IDM FRONT-END · VIDEO</text>
+    </g>
+    <line x1="30" y1="234" x2="720" y2="234" stroke="var(--muted)" stroke-width="1.2"/>
+    <line x1="720" y1="234" x2="720" y2="292" stroke="var(--crit)" stroke-width="2"/>
+    <rect x="740" y="240" width="150" height="52" fill="none" stroke="var(--crit)" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <text x="815" y="261" text-anchor="middle" class="lab2" fill="var(--crit)">IDM RETRAIN</text>
+    <text x="815" y="279" text-anchor="middle" class="lab" fill="var(--crit)">RE-EXTRACT → RE-CPT → RE-SFT</text>
+    <text x="815" y="228" text-anchor="middle" class="ann" fill="var(--crit)">the cliff</text>
+    <text x="375" y="275" text-anchor="middle" class="lab">ADAPTATION COST → (EVERY RUNG PRESERVES THE z VOCABULARY)</text>
+  </svg></div>
+  <p>New-embodiment protocol: mount cameras → spec + IK config → hours of unattended play → decoder overnight → deploy with teleop backstop → flywheel refines. The verify battery’s probes diagnose which rung is needed before money is spent.</p>
+</article>
+
+<article class="appx">
+  <p class="eyebrow">A3 · RL doctrine</p>
+  <h3>Exact likelihoods wherever RL happens</h3>
+  <p>Every learning update is one of three shapes: <b>(a)</b> GRPO over a <em>categorical</em> (z / verdict tokens on the backbone); <b>(b)</b> PPO over a <em>small Gaussian</em> (magnitude-clamped residual on the frozen decoder); <b>(c)</b> <em>weighted regression</em> (supervised flow-matching decoder refresh). Policy gradients <em>through</em> the flow head (FPO/DiPOD lineage) are excluded by default: documented surrogate drift, 2–5× per-gradient cost, and no remaining job in a two-level architecture with a discrete decision interface.</p>
+  <p>The gate is measured, not argued: <code>entropy_below_z</code> — the share of state-residualized action variance the codes do NOT capture — is a headline verify metric. Low → tier (a) sees every decision that matters. Rising on contact dims → residual tier, periodically distilled back into the decoder. Multimodal below-z residuals → neither RL tier: mode selection is leaking below the vocabulary; fix = finer codebook at the next scheduled bump.</p>
+  <p><b>Advantage conditioning</b> lives at CPT level (outcome-conditioned template — uses failures instead of discarding them; shares labels with verdict training). The flow level stays advantage-agnostic: weighting there only acts on below-z variation (same gate) and would break the decoder’s task-free play-data diet.</p>
+  <p><b>Fleet training is iterated offline RL kept near-on-policy by cadence</b> (30-min LoRA loop): filtered/advantage-conditioned BC + DAgger-by-escalation (takeovers = expert actions on the deployed policy’s own state distribution). True on-policy rollouts only in sim and imagination, verifier-guarded. Verdict calibration is policy-conditional: every redeploy starts conservative and re-temperatures on first fresh episodes.</p>
+  <div class="fig"><svg viewBox="0 0 900 330" role="img" aria-label="Where each RL algorithm acts, gated by entropy below z">
+    <rect x="40" y="40" width="540" height="70" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+    <text x="310" y="68" text-anchor="middle" class="lab2">BACKBONE — DISCRETE z + VERDICT TOKENS</text>
+    <text x="310" y="90" text-anchor="middle" class="lab">DECISIONS LIVE HERE</text>
+    <rect x="610" y="40" width="250" height="70" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+    <text x="735" y="68" text-anchor="middle" class="lab2">(a) GRPO — EXACT RATIOS, EXACT KL</text>
+    <text x="735" y="90" text-anchor="middle" class="lab">REWARDS: SIM · FLEET OUTCOMES · IMAGINATION</text>
+    <rect x="40" y="140" width="540" height="70" fill="var(--chip)" stroke="var(--line)" stroke-width="1.5"/>
+    <text x="310" y="168" text-anchor="middle" class="lab2">DECODER — FROZEN DURING RL</text>
+    <text x="310" y="190" text-anchor="middle" class="lab">EMBODIMENT ADAPTER, NOT A POLICY</text>
+    <rect x="610" y="140" width="250" height="70" fill="none" stroke="var(--muted)" stroke-width="1.5"/>
+    <text x="735" y="168" text-anchor="middle" class="lab2">(c) WEIGHTED REGRESSION</text>
+    <text x="735" y="190" text-anchor="middle" class="lab">SUPERVISED CFM REFRESH, OWN CADENCE</text>
+    <rect x="40" y="240" width="540" height="60" fill="none" stroke="var(--line)" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <text x="310" y="264" text-anchor="middle" class="lab2">± GAUSSIAN RESIDUAL — OPTIONAL, CLAMPED</text>
+    <text x="310" y="284" text-anchor="middle" class="lab">DISTILLED BACK INTO DECODER, THEN RESET (T2)</text>
+    <rect x="610" y="240" width="250" height="60" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <text x="735" y="264" text-anchor="middle" class="lab2">(b) PPO — EXACT GAUSSIAN LIKELIHOOD</text>
+    <text x="735" y="284" text-anchor="middle" class="lab">ENABLED ONLY WHEN THE GATE OPENS</text>
+    <line x1="310" y1="110" x2="310" y2="138" stroke="var(--muted)" stroke-width="1.5"/>
+    <line x1="310" y1="210" x2="310" y2="238" stroke="var(--muted)" stroke-width="1.5"/>
+    <rect x="115" y="119" width="390" height="14" fill="var(--bg)" stroke="none"/>
+    <text x="310" y="130" text-anchor="middle" class="ann">gate: entropy_below_z — measured every verify run, never argued</text>
+  </svg></div>
+</article>
+
+<article class="appx">
+  <p class="eyebrow">A4 · The judgment layer</p>
+  <h3>The verifier program — success, progress, blame, next question</h3>
+  <ul>
+    <li><b>Verdict head, three-way:</b> autonomous / assistable / beyond-current-capability. The third class (ZPD boundary) stops the fleet grinding out-of-zone tasks. Measured dynamically: dose-response probes (does one in-context demo move the score?), z-vocabulary coverage of a teacher demo, sequential learning-progress tests under a help-seconds budget, failure localization. A fourth escalation type — <i>instruction ambiguity</i> (ask a clarifying question, not a demo) — adopted from Introspective Planning (2024).</li>
+    <li><b>Progress head = value function:</b> dense score, not binary — needed for learning-progress (a derivative), mid-episode escalation on <em>stall</em> rather than after failure, imagination ranking, RLVR shaping. Pretrainable from actionless video (VIP/GVL-style); anchored by binary outcomes; anti-hacking via temporal-contrastive training. Two monitors, not one (Sentinel lesson): erratic-behavior (distributional) and task-progress (semantic) failures are caught by different detectors.</li>
+    <li><b>Label-the-labeler:</b> periodic human audit of auto-verdicts; audit disagreement is a standing gate.</li>
+    <li><b>Ordering rule:</b> borrow judgment before action — human verdict labels (seconds) are cheaper than demonstrations (minutes).</li>
+  </ul>
+  <p>Structural claim behind the moat: success-biased corpora <em>cannot</em> train a calibrated judge — failure examples are prerequisites, and dojo self-play manufactures them deliberately.</p>
+</article>
+
+<article class="appx">
+  <p class="eyebrow">A5 · World model</p>
+  <h3>Fast imagination, honestly guarded</h3>
+  <p>The FDM doubles as an offline simulator. Direction: one-step generation (DriftWorld-class drifting loss) as a drop-in upgrade over the MSE one-step baseline at unchanged inference cost — reprices imagination-RLVR (~17× cheaper rollouts) and enables deployment-time lookahead on-device.</p>
+  <ul>
+    <li><b>Offline policy ranking:</b> candidate LoRA updates rolled out in imagination before fleet push — a pre-deploy gate for the 30-min loop (published analogs: 0.92–0.99 rank correlation; requires failure-case training, which self-play supplies).</li>
+    <li><b>Replay-consistency test:</b> feed logged real actions; divergence from logged frames separates world-model error from policy error — each routes to a different data purchase.</li>
+    <li><b>Guards:</b> short horizons, verifier/model ensembles, logged-episode replay as the reality check.</li>
+  </ul>
+  <div class="fig"><svg viewBox="0 0 900 300" role="img" aria-label="Imagination loop with replay-consistency test">
+    <rect x="30" y="50" width="180" height="64" fill="var(--chip)" stroke="var(--line)"/>
+    <text x="120" y="76" text-anchor="middle" class="lab2">POLICY PROPOSES</text>
+    <text x="120" y="96" text-anchor="middle" class="lab">K CANDIDATE z / ACTION CHUNKS</text>
+    <line x1="210" y1="82" x2="255" y2="82" stroke="var(--accent)" stroke-width="1.8"/>
+    <rect x="260" y="50" width="180" height="64" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/>
+    <text x="350" y="76" text-anchor="middle" class="lab2">FDM — ONE PASS EACH</text>
+    <text x="350" y="96" text-anchor="middle" class="lab">30+ FPS · K FUTURES, CHEAP</text>
+    <line x1="440" y1="82" x2="485" y2="82" stroke="var(--accent)" stroke-width="1.8"/>
+    <rect x="490" y="50" width="180" height="64" fill="var(--bg2)" stroke="var(--accent-strong)" stroke-width="2"/>
+    <text x="580" y="76" text-anchor="middle" class="lab2">VERDICT + PROGRESS</text>
+    <text x="580" y="96" text-anchor="middle" class="lab">SCORE EVERY FUTURE</text>
+    <line x1="670" y1="82" x2="715" y2="82" stroke="var(--accent)" stroke-width="1.8"/>
+    <rect x="720" y="35" width="160" height="44" fill="none" stroke="var(--ink)" stroke-width="1.5"/>
+    <text x="800" y="62" text-anchor="middle" class="lab2">EXECUTE BEST</text>
+    <rect x="720" y="88" width="160" height="44" fill="none" stroke="var(--ink)" stroke-width="1.5"/>
+    <text x="800" y="115" text-anchor="middle" class="lab2">RLVR REWARD</text>
+    <rect x="30" y="190" width="220" height="60" fill="var(--chip)" stroke="var(--line)"/>
+    <text x="140" y="214" text-anchor="middle" class="lab2">LOGGED REAL ACTIONS</text>
+    <text x="140" y="234" text-anchor="middle" class="lab">OFFLINE REPLAY HARNESS</text>
+    <line x1="250" y1="220" x2="295" y2="220" stroke="var(--muted)" stroke-width="1.5"/>
+    <rect x="300" y="190" width="150" height="60" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/>
+    <text x="375" y="224" text-anchor="middle" class="lab2">FDM REPLAY</text>
+    <line x1="450" y1="220" x2="495" y2="220" stroke="var(--muted)" stroke-width="1.5"/>
+    <rect x="500" y="190" width="180" height="60" fill="none" stroke="var(--muted)" stroke-width="1.5"/>
+    <text x="590" y="214" text-anchor="middle" class="lab2">DIVERGES FROM LOGS?</text>
+    <text x="590" y="234" text-anchor="middle" class="lab">YES → WM ERROR · NO → POLICY ERROR</text>
+    <text x="770" y="214" class="lab2">→ BUY VIDEO (FDM)</text>
+    <text x="770" y="236" class="lab2">→ BUY DEMOS (POLICY)</text>
+    <text x="350" y="165" class="ann" text-anchor="middle">the reality check that keeps imagination honest</text>
+  </svg></div>
+</article>
+
+<article class="appx">
+  <p class="eyebrow">A6 · Data proposer (Phase 2 collection)</p>
+  <h3>The model writes next week’s shopping list</h3>
+  <div class="formula">score(candidate) = P(failure) × E[learning progress] × transfer breadth ÷ cost</div>
+  <p>Never failure alone (the noisy-TV trap: always-failing, never-improving regions are out-of-ZPD). Generators, each blind differently: verdict-scored imagination sweeps; perturbation boundary mapping; fleet escalation clusters; vocabulary diagnostics. A bandit allocates the weekly budget; output is a structured proposal a human vetoes in thirty seconds. Double-model error handled by replay-consistency + a five-rollout dojo spot-check; proposer precision is a standing audit. The proposer trains on its own realized outcomes — collection taste compounds. Staging: v0 rule-based; v1 adds imagination; v2 adds boundary mapping + the learned proposer.</p>
+  <div class="fig"><svg viewBox="0 0 900 330" role="img" aria-label="Data proposer pipeline">
+    <g>
+      <rect x="30" y="30" width="185" height="44" fill="var(--chip)" stroke="var(--line)"/><text x="122" y="57" text-anchor="middle" class="lab2">IMAGINATION SWEEPS</text>
+      <rect x="30" y="84" width="185" height="44" fill="var(--chip)" stroke="var(--line)"/><text x="122" y="111" text-anchor="middle" class="lab2">BOUNDARY MAPPING</text>
+      <rect x="30" y="138" width="185" height="44" fill="var(--chip)" stroke="var(--line)"/><text x="122" y="165" text-anchor="middle" class="lab2">ESCALATION CLUSTERS</text>
+      <rect x="30" y="192" width="185" height="44" fill="var(--chip)" stroke="var(--line)"/><text x="122" y="219" text-anchor="middle" class="lab2">VOCAB DIAGNOSTICS</text>
+      <text x="122" y="256" text-anchor="middle" class="lab">EACH BLIND DIFFERENTLY</text>
+    </g>
+    <g stroke="var(--muted)" stroke-width="1.5">
+      <line x1="215" y1="52" x2="265" y2="120"/><line x1="215" y1="106" x2="265" y2="128"/>
+      <line x1="215" y1="160" x2="265" y2="140"/><line x1="215" y1="214" x2="265" y2="150"/>
+    </g>
+    <rect x="270" y="100" width="200" height="68" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+    <text x="370" y="126" text-anchor="middle" class="lab2">SCORER</text>
+    <text x="370" y="146" text-anchor="middle" class="lab">P(FAIL) × E[LP] × TRANSFER ÷ COST</text>
+    <line x1="470" y1="134" x2="515" y2="134" stroke="var(--accent)" stroke-width="1.8"/>
+    <rect x="520" y="100" width="150" height="68" fill="var(--chip)" stroke="var(--line)"/>
+    <text x="595" y="126" text-anchor="middle" class="lab2">BANDIT BUDGET</text>
+    <text x="595" y="146" text-anchor="middle" class="lab">+ 30-SECOND HUMAN VETO</text>
+    <line x1="670" y1="134" x2="715" y2="134" stroke="var(--accent)" stroke-width="1.8"/>
+    <rect x="720" y="100" width="160" height="68" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+    <text x="800" y="126" text-anchor="middle" class="lab2">DOJO SPOT-CHECK</text>
+    <text x="800" y="146" text-anchor="middle" class="lab">5 REAL ROLLOUTS → GO / KILL</text>
+    <line x1="800" y1="168" x2="800" y2="205" stroke="var(--accent)" stroke-width="1.8"/>
+    <rect x="700" y="210" width="180" height="50" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/>
+    <text x="790" y="240" text-anchor="middle" class="lab2">COLLECT (BY MODALITY)</text>
+    <path d="M700,240 C520,290 400,250 372,172" fill="none" stroke="var(--accent-strong)" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <path d="M366,185 L371,168 L380,181 Z" fill="var(--accent-strong)"/>
+    <text x="540" y="292" text-anchor="middle" class="ann">realized ΔLP trains the proposer — collection taste compounds</text>
+  </svg></div>
+</article>
+
+<article class="appx">
+  <p class="eyebrow">A7 · Verification discipline</p>
+  <h3>Numbers gate, pictures verify</h3>
+  <p>Every model version runs a standard battery before its gates are trusted; artifacts are regenerable, resumable, and double as flywheel data. Institutionalized lesson from v1: per-embodiment quantitative gates looked fine while z-space was fully embodiment-partitioned — only cross-embodiment visualization exposed it.</p>
+  <ul>
+    <li><b>Pictures:</b> z-transplant clip grids, z-PCA by embodiment/task, code-usage heatmaps, FDM reconstruction videos, action-prediction overlays.</li>
+    <li><b>Numbers:</b> action-information capture in bits (state-conditioned ANOVA), embodiment-leakage bits (want ~0), <code>entropy_below_z</code>, decoder z-reliance (counterfactual code swap), error-placement metrics (flip-chunk MAE), calibration audits.</li>
+    <li><b>Discipline:</b> checkpoints are bundles (weights + config + architecture contract + lineage); pipelines constructed FROM the bundle; training-owned keys cannot be overridden at eval; embodiment-spec version mismatch refuses to load.</li>
+  </ul>
+</article>
+
+<article class="appx">
+  <p class="eyebrow">A8 · Infrastructure &amp; budget</p>
+  <h3>The judgment-per-FLOP regime, priced</h3>
+  <p>Anchor: a lab-scale world-model run (256 H100 × 7 d ≈ 43K H100-hrs) ≈ $86K on spot. Our regime — 0.5–4B models, 288p token proxy, 1–2 epochs over a curated ~10k-hr corpus — is 20–40× cheaper per run, and it is the correct research regime: below the scale where lab compute dominates, above the scale where nothing works.</p>
+  <div class="tablewrap"><table>
+    <tr><th>Training</th><th>Scale</th><th>Cost / run</th><th>Cumulative</th></tr>
+    <tr><td>S3 tokenization + z extraction</td><td>inference-only, 4090-class</td><td class="num">$0.4–1K</td><td class="num">$1–3K</td></tr>
+    <tr><td>S2 LAM iterations (100–350M)</td><td>8×A100, 1–3 d</td><td class="num">$0.3–1.5K</td><td class="num">$4–8K</td></tr>
+    <tr><td>World model / FDM (1–3B)</td><td>8×H100, 3–7 d</td><td class="num">$2–5K</td><td class="num">$6–12K</td></tr>
+    <tr><td>S4 backbone CPT (4B, 20–40B tokens)</td><td>8×H100, 2–5 d</td><td class="num">$2–5K</td><td class="num">$8–16K</td></tr>
+    <tr><td>S5 SFT (policy/verdict/IDK)</td><td>hours–1 d</td><td class="num">$0.1–0.5K</td><td class="num">$4–8K</td></tr>
+    <tr><td>RLVR (sim + imagination)</td><td>8×H100, 1–3 d</td><td class="num">$0.5–1.5K</td><td class="num">$8–15K</td></tr>
+  </table></div>
+  <p>Program to pilot-ready: <b>$40–70K</b> compute over 9–12 months (lean path $20–30K). Rules: subset probes gate flagship runs; spot + resumable stage-DAG above $500; the only five-figure mistake available is an unscheduled vocabulary-cliff crossing; one local 4090-class box pays for itself in ~3 months. Rented tier verified July 2026: H100 $1.99–2.69/hr (RunPod), spot lows ~$1.3 (Vast); hyperscalers 2–5× higher.</p>
+</article>
+
+<article class="appx">
+  <p class="eyebrow">A9 · Encoders &amp; pretrain corpus</p>
+  <h3>Perception choices, empirically gated</h3>
+  <p><b>Dense features:</b> DINOv3 distilled tier (S+/B) — the field’s convergent choice for dense prediction and robot feature spaces (license review before product dependence). <b>Video-native ablation:</b> V-JEPA 2.1. <b>Watch:</b> EUPE (≤89M universal encoders) for on-device economics — research-licensed, benched pending terms. CLIP-family encoders excluded from the IDM path (weak dense features, appearance bias). The decision is an afternoon: the probe battery runs over all candidates on the 1–2k-hr subset.</p>
+  <p><b>Corpus (~10k hrs, composition-first):</b> natural human video + open robot corpora (free bulk); owned instrument data (accurate EE + force at v2); recovery-dense protocol — perturbations scripted, fumbles paid for, never filtered; dojo self-play for the failure tail. Ingestion prerequisites scoped: camera-motion filtering, stabilization, frame-gap normalization. All raw streams are model-independent by construction: the LAM relabels every stream into the current vocabulary, retroactively — collection sits above the cliff.</p>
+</article>
+
+<article class="appx">
+  <p class="eyebrow">A10 · Strategy reviews, contingencies, kill criteria</p>
+  <h3>What would change our mind, written down in advance</h3>
+  <ul>
+    <li><b>Scale-first vs depth-first:</b> pure scale-first is dominated for us (capital game; open-loop corpora structurally exclude the closed-loop tail; defers rather than avoids vertical work). Pure depth-first is fragile without a transfer carrier. Adopted: <b>rent breadth, own depth</b> — antifragile to the other path succeeding. Expansion tracked as demos-to-competence per vertical; adjacency measured in z-space.</li>
+    <li><b>Recovery-emergence watch:</b> (a) recovery <em>behaviors</em> will emerge from scale (~80% by 2028–30; good for us — escalation baseline drops); (b) contact-precision recovery is sensing-gated (instrument v2 force); (c) policy-specific failure awareness never emerges from open-loop data (self-referential); (d) site drift is non-stationary. When (a) moves in published benchmarks, re-price the wedge’s escalation baseline.</li>
+    <li><b>Closed-frontier contingency:</b> closed APIs cannot enter air-gapped, certification-bound sites; fallback breadth = open fast-follower tier + own corpus; our bundle/verify infra makes us the fastest integrator of any open release.</li>
+    <li><b>Market lessons from outside (2026):</b> Gecko Robotics ($347M raised, $1.25B valuation, ~$34.5M 2023 revenue) proves hazard-industry buyers pay for robotic data — and that the wedge supports venture outcomes. Covariant ($200M+ raised, 300 robots deployed, reverse-acquihired by Amazon 2024) proves even winning robot-FM companies get absorbed when their biggest customer outweighs them — negotiate data/IP terms from LOI #1. The humanoid wave ($18.8B into robotics in 2026 YTD; $39B valuation on ~150 shipped units) is a belief market — our posture: sell the boring layer that makes belief deployable.</li>
+    <li><b>Kill criterion (standing):</b> no pilot LOI + collection agreement within ~6 months of raise conversations ⇒ this remains a research project. Hedge on file: the judgment layer as a standalone reliability product for OTHERS’ robots — including humanoid fleets needing a deployability story.</li>
+    <li><b>Naming:</b> category = World-Action Model; model = Apprentice; metric = the Apprentice Curve. The Meno framing is unclaimed in robotics.</li>
+  </ul>
+</article>
+
+<article class="appx">
+  <p class="eyebrow">A11 · Why LLMs don’t know what they don’t know</p>
+  <h3>The IDK literature, and why our setting escapes its trap</h3>
+  <p>The abstention/calibration literature converges on a diagnosis: <b>(1)</b> pretraining has no IDK gradient — hallucination rate lower-bounded by singleton facts (Kalai et&nbsp;al. 2025, <i>Nature</i> 2026); <b>(2)</b> post-training anti-calibrates — binary-graded evals and raters reward guessing; <b>(3)</b> parametric knowledge has no index — self-knowledge is a weak probeable correlate (AUROC ~0.75–0.85); <b>(4)</b> internal calibration isn’t routed to verbalization; <b>(5)</b> the boundary moves with every fine-tune, and training beyond the model’s knowledge actively teaches hallucination (Gekhman 2024); <b>(6)</b> no grounded verification loop — text has no cheap verifier outside math/code.</p>
+  <p><b>Point 6 inverts for a deployed fleet:</b> every episode ends in physical ground truth verified by a paying customer; a narrow ODD makes in-distribution calibration feasible; self-play manufactures the failure examples that must never be faked; conformal wrappers (KnowNo lineage) convert verdict scores into statistical guarantees; and the field’s proposed fix — grade confident errors negatively, reward calibrated abstention — is our fleet’s <em>native</em> grading, with the abstention operating point set by escalation economics. Design rules adopted: separate verdict head, never verbalized-only; per-version IDK data from consistency probing; never fine-tune competence the decoder can’t ground; ensemble/consistency features as verdict inputs; conformal layer on top; out-of-scope column in every eval.</p>
+</article>
+
+<footer>
+  Apprentice — pre-seed pitch deck, July 2026. Confidential working draft; ask figures and contact are placeholders. Sources for market/comp figures: OSHA/BLS confined-space data; GMI industrial inspection services 2025; CNBC (Gecko, June 2025); TechCrunch/GeekWire (Covariant–Amazon, 2024); 2026 robotics funding press. 14 visual slides; appendix A0–A11 carries diligence depth. Print-friendly.
+</footer>

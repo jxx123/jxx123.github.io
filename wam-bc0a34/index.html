@@ -1,0 +1,24 @@
+<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name="robots" content="noindex,nofollow"><title>apprentice evals</title><style>
+:root{--bg:#F4F5F1;--card:#FBFBF9;--ink:#1A211E;--mut:#5C6963;--line:#D9DED8;
+--acc:#2E7D68;--warn:#9A6B15;--crit:#A34335}
+@media (prefers-color-scheme:dark){:root{--bg:#0F1513;--card:#141B18;
+--ink:#E6EBE7;--mut:#93A29B;--line:#242E29;--acc:#5CB89E;--warn:#D2A24C;--crit:#D07A6B}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);
+font:15px/1.5 system-ui,sans-serif;padding:1.5rem}
+a{color:var(--acc)}h1,h2{font-weight:600;margin:.2rem 0 .8rem}
+.mono{font-family:ui-monospace,Consolas,monospace}
+.grid{display:grid;gap:.8rem;grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.tile{background:var(--card);border:1px solid var(--line);padding:.8rem 1rem}
+.tile .n{font-size:1.9rem;font-variant-numeric:tabular-nums;color:var(--acc)}
+.tile .d{font-size:.75rem;color:var(--mut)}
+.tile .delta{font-size:.8rem;font-variant-numeric:tabular-nums}
+.up{color:var(--acc)}.down{color:var(--crit)}.flat{color:var(--mut)}
+table{border-collapse:collapse;width:100%;font-size:.85rem;background:var(--card)}
+th,td{border:1px solid var(--line);padding:.4rem .6rem;text-align:left;
+font-variant-numeric:tabular-nums}th{color:var(--mut);font-size:.7rem;
+text-transform:uppercase;letter-spacing:.08em}
+.chip{display:inline-block;border:1px solid var(--line);padding:.1rem .5rem;
+font-size:.7rem;border-radius:2px;margin-right:.3rem}
+nav{margin-bottom:1.2rem;font-size:.8rem}nav a{margin-right:1rem}
+svg{max-width:100%}
+</style><nav><b>apprentice evals</b> <a href='index.html'>summary</a><a href='models.html'>models &amp; compare</a><a href='debug.html'>debug</a><a href='architecture.html'>architecture</a><a href='pitch.html'>pitch deck</a></nav><h1>Latest: lam-sym-human <span class='chip mono'>backfil</span><span class='chip'>2026-07-28T00:47:18+00:00</span></h1><div class='grid'><div class="tile"><div class="n">1.444</div><div class="d">capacity_bits/franka_libero (codebook watch)</div><span class="delta down">-0.788 vs prev</span></div><div class="tile"><div class="n">2.621</div><div class="d">capacity_bits/so101 (codebook watch)</div><span class="delta up">+0.300 vs prev</span></div><div class="tile"><div class="n">0.995</div><div class="d">entropy_below_z/franka_libero</div><span class="delta down">+0.002 vs prev</span></div><div class="tile"><div class="n">0.853</div><div class="d">entropy_below_z/so101</div><span class="delta up">-0.097 vs prev</span></div></div><h2>Success trend (0 evaluated runs)</h2><h2>Model fit — latest run media</h2><div style='display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))'><figure><video controls loop muted playsinline src='media/20260728-004718-lam-sym-human/fdm_recon_franka_libero.mp4' style='max-width:100%'></video><figcaption class='mono'>fdm_recon_franka_libero.mp4</figcaption></figure><figure><video controls loop muted playsinline src='media/20260728-004718-lam-sym-human/fdm_recon_so101.mp4' style='max-width:100%'></video><figcaption class='mono'>fdm_recon_so101.mp4</figcaption></figure><figure><img src='media/20260728-004718-lam-sym-human/z_clips_grid.gif' alt='z_clips_grid.gif' style='max-width:100%' loading='lazy'><figcaption class='mono'>z_clips_grid.gif</figcaption></figure><figure><img src='media/20260728-004718-lam-sym-human/action_pred_franka_libero.png' alt='action_pred_franka_libero.png' style='max-width:100%' loading='lazy'><figcaption class='mono'>action_pred_franka_libero.png</figcaption></figure><figure><img src='media/20260728-004718-lam-sym-human/action_pred_so101.png' alt='action_pred_so101.png' style='max-width:100%' loading='lazy'><figcaption class='mono'>action_pred_so101.png</figcaption></figure><figure><img src='media/20260728-004718-lam-sym-human/z_scatter.png' alt='z_scatter.png' style='max-width:100%' loading='lazy'><figcaption class='mono'>z_scatter.png</figcaption></figure><figure><img src='media/20260728-004718-lam-sym-human/z_task_heatmap.png' alt='z_task_heatmap.png' style='max-width:100%' loading='lazy'><figcaption class='mono'>z_task_heatmap.png</figcaption></figure></div><h2>Sample journeys (step-by-step pipeline traces)</h2><ul><li><a href="../../runs/eval_app/lam-sym-human">runs/eval_app/lam-sym-human</a></li></ul>

@@ -1,0 +1,515 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow"><title>LAM eval — token debugger</title>
+<style>
+:root{--bg:#14161a;--panel:#1c1f25;--ink:#e6e4df;--mut:#8b919b;--acc:#6aa9e9;
+--gt:#5b9bd5;--pred:#67c288;--diff:#4a3320;--diffb:#c07a2a;--rule:#2b2f36}
+body{background:var(--bg);color:var(--ink);font:13px/1.45 system-ui,sans-serif;margin:0;padding:14px}
+h1{font-size:15px;margin:0 0 10px}
+select,button{background:var(--panel);color:var(--ink);border:1px solid var(--rule);
+border-radius:4px;padding:4px 8px;font:inherit}
+button{cursor:pointer}
+details.sec{border:1px solid var(--rule);border-radius:5px;margin-top:10px;background:#181b20}
+details.sec>summary{cursor:pointer;padding:6px 10px;font-size:12px;font-weight:600;
+color:var(--acc);list-style:none;user-select:none}
+details.sec>summary::before{content:"▸ ";color:var(--mut)}
+details.sec[open]>summary::before{content:"▾ "}
+details.sec>.body{padding:2px 10px 10px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.bar label{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+.cols{display:grid;grid-template-columns:repeat(var(--n,1),1fr);gap:14px}
+.run{background:var(--panel);border:1px solid var(--rule);border-radius:6px;padding:12px;min-width:0}
+.run h2{font-size:13px;margin:0 0 8px;color:var(--acc)}
+.strip{display:flex;flex-wrap:wrap;gap:2px;margin:8px 0}
+.tok{width:16px;height:16px;border-radius:3px;cursor:pointer;display:flex;
+align-items:center;justify-content:center;font-size:8px;color:#000;opacity:.85}
+.tok.cur{outline:2px solid #fff;opacity:1}
+.media{display:flex;gap:10px;margin:8px 0}
+.media figure{margin:0}
+.media img{width:210px;height:210px;border:1px solid var(--rule);border-radius:4px}
+.media figcaption{font-size:10px;color:var(--mut);margin-top:2px}
+.legend{display:flex;gap:14px;font-size:11px;color:var(--mut);margin:6px 0 2px}
+.legend i{display:inline-block;width:14px;height:3px;margin-right:4px;vertical-align:middle}
+canvas{background:#101216;border:1px solid var(--rule);border-radius:4px;width:100%;cursor:crosshair}
+.tip{position:fixed;pointer-events:none;background:#000d;color:#fff;border:1px solid var(--rule);
+border-radius:4px;padding:5px 8px;font:11px ui-monospace,monospace;display:none;z-index:9;white-space:pre}
+table{border-collapse:collapse;font-size:11px;margin-top:6px;width:100%}
+td,th{padding:2px 10px 2px 0;color:var(--mut);text-align:left;vertical-align:top}
+td.v{color:var(--ink);font-family:ui-monospace,monospace}
+tr.diff td{background:var(--diff)}tr.diff td.v{color:var(--diffb);font-weight:600}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:8px}
+.gal figure{margin:0}
+.gal img{width:100%;border:1px solid var(--rule);border-radius:4px}
+.gal figcaption{font-size:10px;color:var(--mut)}
+.meta{color:var(--mut);font-size:11px;margin:4px 0}
+.sect{margin-top:10px}
+.sect h3{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin:10px 0 4px}
+ul{margin:2px 0 6px 18px;padding:0}li{margin:2px 0}
+</style>
+</head>
+<body>
+<h1>LAM token debugger</h1>
+<div class="bar">
+  <label>Run A</label><select id="runA"></select>
+  <label>Run B</label><select id="runB"><option value="">— none —</option></select>
+  <label>Embodiment</label><select id="emb"></select>
+  <label>Episode</label><select id="ep"></select>
+  <button id="prev">◀ prev</button><button id="next">next ▶</button>
+  <span id="pos" class="meta"></span>
+</div>
+<div class="cols" id="cols"></div>
+<div class="tip" id="tip"></div>
+<script>
+const PAL=["#e6798a","#e9a86a","#e9d76a","#a8e96a","#6ae9a4","#6ae0e9","#6aa9e9",
+"#8a79e6","#c86ae9","#e96ac8","#b5b5b5","#7ee081","#f0b0d0","#90c0f0","#d0f090",
+"#f09090","#90f0d0","#d090f0","#f0d090","#90a0f0","#a0f090","#f0a0a0","#a0f0f0",
+"#f0f0a0","#c0c0f0","#f0c0c0","#c0f0c0","#e0a070","#70a0e0","#a0e070","#e070a0","#70e0a0"];
+let runs=[],data={},sel={emb:null,ep:0,k:1,code:null,
+  folds:{tokens:true,metrics:false,code:false,data:false,config:false,scheme:false}};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+async function loadIndex(){
+  let listed=[];
+  try{listed=await (await fetch("runs.json",{cache:"no-store"})).json();}
+  catch(e){}
+  // only offer runs whose data actually loads (a run mid-build 404s)
+  runs=[];
+  for(const r of listed){ if(await loadRun(r.tag)) runs.push(r); }
+  if(!runs.length){
+    $("cols").innerHTML=`<div class="run"><div class="meta">no runs available yet
+      (assets building?) — retrying in 10 s…</div></div>`;
+    setTimeout(loadIndex,10000);return;
+  }
+  for(const s of [$("runA"),$("runB")]){
+    s.querySelectorAll("option:not([value=''])").forEach(o=>o.remove());
+    for(const r of runs){
+      const o=document.createElement("option");o.value=r.tag;o.textContent=r.tag;
+      s.appendChild(o);}}
+  $("runA").value=runs[runs.length-1].tag;
+  await reload();
+}
+async function loadRun(tag){
+  if(!tag)return null;
+  if(!data[tag]){
+    try{
+      const resp=await fetch(tag+"/data.json",{cache:"no-store"});
+      if(!resp.ok)return null;
+      data[tag]=await resp.json();
+    }catch(e){return null;}
+  }
+  return data[tag];
+}
+function active(){return [$("runA").value,$("runB").value].filter(Boolean);}
+async function reload(){
+  const A=await loadRun($("runA").value); await loadRun($("runB").value);
+  if(!A){loadIndex();return;}
+  const embs=Object.keys(A.embodiments);
+  $("emb").innerHTML=embs.map(e=>`<option>${e}</option>`).join("");
+  if(!embs.includes(sel.emb))sel.emb=embs[0];
+  $("emb").value=sel.emb;
+  fillEp(); render();
+}
+function fillEp(){
+  const A=data[$("runA").value];
+  const eps=A.embodiments[sel.emb]||[];
+  $("ep").innerHTML=eps.map((e,i)=>`<option value="${i}">${e.id}</option>`).join("");
+  if(sel.ep>=eps.length)sel.ep=0;
+  $("ep").value=sel.ep;
+}
+/* ---------------- action chart: big rows, legend, hover ---------------- */
+const ROW=88,LPAD=56,RPAD=12;
+function drawActions(cv,act){
+  const dpr=devicePixelRatio||1,W=cv.clientWidth||560,D=act.names.length,H=D*ROW+8;
+  cv.width=W*dpr;cv.height=H*dpr;cv.style.height=H+"px";
+  const g=cv.getContext("2d");g.scale(dpr,dpr);g.clearRect(0,0,W,H);
+  const T=act.gt.length;
+  cv._layout={W,H,T,D,act};
+  for(let d=0;d<D;d++){
+    const y0=d*ROW+6,h=ROW-14;
+    const vals=[...act.gt.map(r=>r[d]),...(act.pred||[]).map(r=>r[d])];
+    let lo=Math.min(...vals),hi=Math.max(...vals);
+    if(hi-lo<1e-6){lo-=.5;hi+=.5}
+    const pad=(hi-lo)*.08;lo-=pad;hi+=pad;
+    const X=t=>LPAD+(W-LPAD-RPAD)*t/Math.max(1,T-1), Y=v=>y0+h-(h*(v-lo)/(hi-lo));
+    cv._layout["row"+d]={y0,h,lo,hi};
+    g.strokeStyle="#2b2f36";g.strokeRect(LPAD,y0,W-LPAD-RPAD,h);
+    g.fillStyle="#8b919b";g.font="11px system-ui";
+    g.fillText(act.names[d],4,y0+12);
+    g.font="9px ui-monospace";g.fillText(hi.toFixed(2),4,y0+24);
+    g.fillText(lo.toFixed(2),4,y0+h);
+    const line=(rows,color,w)=>{if(!rows)return;g.strokeStyle=color;g.lineWidth=w;
+      g.beginPath();
+      rows.forEach((r,t)=>{t===0?g.moveTo(X(0),Y(r[d])):g.lineTo(X(t),Y(r[d]))});
+      g.stroke();
+      g.fillStyle=color;
+      rows.forEach((r,t)=>{g.beginPath();g.arc(X(t),Y(r[d]),2,0,7);g.fill();});};
+    line(act.gt,"#5b9bd5",1.8);line(act.pred,"#67c288",1.8);
+  }
+}
+function hover(cv,ev){
+  const L=cv._layout;if(!L)return;
+  const r=cv.getBoundingClientRect();
+  const x=ev.clientX-r.left,y=ev.clientY-r.top;
+  const t=Math.round((x-LPAD)/((L.W-LPAD-RPAD)/Math.max(1,L.T-1)));
+  const tip=$("tip");
+  if(t<0||t>=L.T||x<LPAD){tip.style.display="none";redraw(cv);return;}
+  redraw(cv,t);
+  let txt=`t = ${t}\n`;
+  for(let d=0;d<L.D;d++){
+    const gt=L.act.gt[t][d].toFixed(3);
+    const pr=L.act.pred?L.act.pred[t][d].toFixed(3):"—";
+    txt+=`${L.act.names[d].padEnd(14)} gt ${gt}  pred ${pr}\n`;}
+  tip.textContent=txt;tip.style.display="block";
+  tip.style.left=(ev.clientX+16)+"px";tip.style.top=(ev.clientY+12)+"px";
+}
+function redraw(cv,cursorT){
+  drawActions(cv,cv._layout.act);
+  if(cursorT===undefined)return;
+  const L=cv._layout,g=cv.getContext("2d");
+  const X=LPAD+(L.W-LPAD-RPAD)*cursorT/Math.max(1,L.T-1);
+  g.strokeStyle="#ffffff55";g.lineWidth=1;
+  g.beginPath();g.moveTo(X,0);g.lineTo(X,L.H);g.stroke();
+}
+/* ---------------- stitched episode chart with z-token bands ------------- */
+const SROW=52;
+function drawStitch(cv,ep,curK){
+  const dpr=devicePixelRatio||1,W=cv.clientWidth||560;
+  const D=ep.transitions[0].actions.names.length,H=D*SROW+18;
+  cv.width=W*dpr;cv.height=H*dpr;cv.style.height=H+"px";
+  const g=cv.getContext("2d");g.scale(dpr,dpr);g.clearRect(0,0,W,H);
+  const apz=ep.apz,N=ep.transitions.length,T=N*apz;
+  const gt=[],pr=[];
+  for(const tr of ep.transitions){gt.push(...tr.actions.gt);
+    pr.push(...(tr.actions.pred||[]));}
+  const X=t=>LPAD+(W-LPAD-RPAD)*t/Math.max(1,T-1);
+  cv._stitch={W,apz,N,T};
+  // z bands + token labels
+  for(let k=0;k<N;k++){
+    const z=ep.transitions[k].z,x0=X(k*apz),x1=X(Math.min(T-1,(k+1)*apz));
+    g.fillStyle=PAL[z%PAL.length]+(k+1===curK?"66":"22");
+    g.fillRect(x0,14,x1-x0,H-14);
+    if(k+1===curK){g.strokeStyle=PAL[z%PAL.length];g.lineWidth=1.5;
+      g.strokeRect(x0,14,x1-x0,H-14);}
+    g.fillStyle=PAL[z%PAL.length];g.font="8px ui-monospace";
+    if((x1-x0)>12)g.fillText(z,x0+2,10);
+  }
+  const names=ep.transitions[0].actions.names;
+  for(let d=0;d<D;d++){
+    const y0=d*SROW+18,h=SROW-10;
+    const vals=[...gt.map(r=>r[d]),...pr.map(r=>r[d])];
+    let lo=Math.min(...vals),hi=Math.max(...vals);
+    if(hi-lo<1e-6){lo-=.5;hi+=.5}
+    const Y=v=>y0+h-(h*(v-lo)/(hi-lo));
+    g.strokeStyle="#2b2f3688";g.strokeRect(LPAD,y0,W-LPAD-RPAD,h);
+    g.fillStyle="#8b919b";g.font="10px system-ui";g.fillText(names[d],4,y0+11);
+    if(pr.length===gt.length&&gt.length){
+      const gm=gt.reduce((a,r)=>a+r[d],0)/gt.length;
+      let sr=0,st=0;
+      for(let t=0;t<gt.length;t++){sr+=(pr[t][d]-gt[t][d])**2;st+=(gt[t][d]-gm)**2;}
+      const lab=st<1e-8?"R² —":"R²="+(1-sr/st).toFixed(2);
+      g.fillStyle=st>=1e-8&&(1-sr/st)>=.7?"#67c288":"#8b919b";
+      g.font="9px ui-monospace";g.fillText(lab,4,y0+23);
+    }
+    const line=(rows,color,w)=>{if(!rows.length)return;g.strokeStyle=color;
+      g.lineWidth=w;g.beginPath();
+      rows.forEach((r,t)=>{t===0?g.moveTo(X(0),Y(r[d])):g.lineTo(X(t),Y(r[d]))});
+      g.stroke();};
+    line(gt,"#5b9bd5",1.3);line(pr,"#67c288",1.3);
+  }
+}
+function stitchClick(cv,ev){
+  const L=cv._stitch;if(!L)return;
+  const r=cv.getBoundingClientRect();
+  const t=(ev.clientX-r.left-LPAD)/((L.W-LPAD-RPAD)/Math.max(1,L.T-1));
+  const k=Math.max(1,Math.min(L.N,Math.floor(t/L.apz)+1));
+  setK(k);
+}
+/* ------------- model spec + metrics ------------- */
+function fmtP(n){return n>=1e6?(n/1e6).toFixed(2)+"M":(n/1e3).toFixed(0)+"K";}
+function headline(d){
+  const m=d.metrics||{},g=m.in_training_gates||{},er=m.executed_replay;
+  const cell=(v,lab,hi)=>`<div style="text-align:center;padding:4px 14px">
+    <div style="font-size:${hi?"22px":"15px"};font-weight:700;color:${hi?"var(--acc)":"var(--ink)"}">${v}</div>
+    <div style="font-size:9px;color:var(--mut);text-transform:uppercase;letter-spacing:.05em">${lab}</div></div>`;
+  let h="";
+  h+=cell(er?`${(100*er.rate).toFixed(0)}%`:"—","executed replay",true);
+  for(const[k,v] of Object.entries(g))
+    if(k.endsWith("action_r2"))h+=cell(v.toFixed(2),k.replace("/action_r2"," aux R²"));
+  for(const[k,v] of Object.entries(g))
+    if(k.endsWith("val_fdm"))h+=cell(v.toFixed(3),k.replace("/val_fdm"," FDM"));
+  if(m.zdec_val_mae_normalized!=null)h+=cell(m.zdec_val_mae_normalized.toFixed(3),"zdec MAE");
+  if(d.model_spec)h+=cell(fmtP(d.model_spec.total_params),"params");
+  if(g["vq/codes_used"]!=null)h+=cell(`${g["vq/codes_used"]}/${g["vq/n_codes"]}`,"codes used");
+  return `<div style="display:flex;flex-wrap:wrap;gap:2px;background:#181b20;
+    border:1px solid var(--rule);border-radius:5px;margin-bottom:6px">${h}</div>`;
+}
+function specTable(d){
+  const sp=d.model_spec;if(!sp)return "";
+  const rows=Object.entries(sp.components).map(([n,v])=>
+    `<tr><td>${n}</td><td class="v">${fmtP(v)}</td></tr>`).join("");
+  return `<table style="margin-bottom:4px"><tr><td><b>total</b></td>
+    <td class="v"><b>${fmtP(sp.total_params)}</b></td>
+    <td style="padding-left:18px">z: ${sp.n_codes} codes × ${sp.z_dim}d ·
+    chunk ${sp.chunk}${sp.k_span>1?` (k=${sp.k_span})`:""} · head ${sp.head_type} ·
+    ${sp.latent}</td></tr>${rows}</table>`;
+}
+function metricsView(tag,d){
+  const m=d.metrics;if(!m)return `<div class="meta">rebuild assets for metrics</div>`;
+  let html="";
+  const er=m.executed_replay;
+  if(er){
+    html+=`<div class="sect"><h3>executed replay success — the physics gate</h3>
+      <div class="meta" style="font-size:13px;color:var(--ink)">
+      <b style="font-size:16px">${(100*er.rate).toFixed(0)}%</b>
+      (${er.success}/${er.n}) — ${esc(er.protocol||"")}</div>
+      <div class="meta">z sequence and initial state from the demo (GT z);
+      decoder runs on LIVE sim state per chunk; chunks execute open-loop;
+      success = LIBERO task flag. Catches closed-loop compounding that
+      offline fit cannot.</div></div>`;
+  } else html+=`<div class="meta">executed replay not measured for this run
+      (scripts/replay_z_experiment.py --save-videos 4 writes it next to the ckpt)</div>`;
+  if(d.replay_videos&&d.replay_videos.length){
+    html+=`<div class="sect"><h3>replay videos (decoder-driven sim rollouts)</h3>
+      <div class="gal">${d.replay_videos.map(v=>`
+        <figure><video src="${tag}/${v}" controls loop muted style="width:100%"></video>
+        <figcaption>${esc(v.replace("replay__","").replace(".mp4",""))}</figcaption></figure>`).join("")}
+      </div></div>`;
+  }
+  if(m.zdec_val_mae_normalized!=null)
+    html+=`<div class="sect"><h3>decoder offline</h3><table>
+      <tr><td>zdec val MAE (normalized)</td><td class="v">${m.zdec_val_mae_normalized.toFixed(4)}</td></tr></table></div>`;
+  const g=m.in_training_gates;
+  if(g&&Object.keys(g).length)
+    html+=`<div class="sect"><h3>in-training gates (held-out)</h3><table>${
+      Object.entries(g).map(([k,v])=>`<tr><td>${k}</td>
+      <td class="v">${typeof v==="number"?v.toFixed(4):esc(JSON.stringify(v))}</td></tr>`).join("")}
+    </table></div>`;
+  return html;
+}
+/* ------------- code explorer: same z, many transitions ------------- */
+function codeGroups(d){
+  // selected code's transitions grouped by EMBODIMENT — the cross-embodiment
+  // transplant view: one intent code, two robots
+  const by={};
+  for(const[emb,eps] of Object.entries(d.embodiments))
+    eps.forEach(ep=>ep.transitions.forEach(tr=>{
+      ((by[tr.z]=by[tr.z]||{})[emb]=by[tr.z][emb]||[]).push({ep,tr});}));
+  return by;
+}
+function codeView(tag,d){
+  const by=codeGroups(d);
+  const total=c=>Object.values(by[c]).reduce((a,v)=>a+v.length,0);
+  const codes=Object.keys(by).map(Number).sort((a,b)=>total(b)-total(a));
+  if(!codes.length)return `<div class="meta">no transitions</div>`;
+  if(sel.code===null||!by[sel.code])sel.code=codes[0];
+  const groups=by[sel.code];
+  const embs=Object.keys(groups);
+  const chips=codes.map(c=>{
+    const shared=Object.keys(by[c]).length>1;
+    return `<div class="tok ${c===sel.code?"cur":""}"
+    style="background:${PAL[c%PAL.length]};${shared?"":"opacity:.35"}"
+    title="${total(c)} instances, ${Object.keys(by[c]).length} embodiment(s)"
+    onclick="setCode(${c})">${c}</div>`;}).join("");
+  let body="";
+  for(const emb of embs){
+    const items=groups[emb];
+    const clips=items.filter(x=>x.tr.gif_idm).slice(0,4).map(x=>`
+      <figure><img src="${tag}/${x.tr.gif_idm}">
+      <figcaption>${x.ep.id} · k=${x.tr.k} — “${esc(x.ep.task).slice(0,38)}”</figcaption></figure>`).join("");
+    body+=`<div class="sect"><h3>${emb} — ${items.length} instances of z=${sel.code}</h3>
+      <div class="gal">${clips||'<div class="meta">no clips (built without pixels)</div>'}</div>
+      <div class="legend"><span>GT action chunks, all instances (thin) · mean (red)</span></div>
+      <canvas class="codeacts" data-emb="${emb}"></canvas></div>`;
+  }
+  return `<div class="meta"><b>z = ${sel.code}</b> across ${embs.length} embodiment(s) —
+      the transplant test: does the same code mean the same MOTION on both
+      robots? (dimmed chips = code used by one embodiment only)</div>
+    <div class="strip">${chips}</div>${body}`;
+}
+function drawCodeActs(cv,items){
+  const dpr=devicePixelRatio||1,W=cv.clientWidth||560;
+  const names=items[0].tr.actions.names,D=names.length,H=D*64+8;
+  cv.width=W*dpr;cv.height=H*dpr;cv.style.height=H+"px";
+  const g=cv.getContext("2d");g.scale(dpr,dpr);g.clearRect(0,0,W,H);
+  const T=items[0].tr.actions.gt.length;
+  const X=t=>LPAD+(W-LPAD-RPAD)*t/Math.max(1,T-1);
+  for(let d=0;d<D;d++){
+    const y0=d*64+6,h=50;
+    let lo=1e9,hi=-1e9;
+    items.forEach(x=>x.tr.actions.gt.forEach(r=>{lo=Math.min(lo,r[d]);hi=Math.max(hi,r[d]);}));
+    if(hi-lo<1e-6){lo-=.5;hi+=.5}
+    const Y=v=>y0+h-(h*(v-lo)/(hi-lo));
+    g.strokeStyle="#2b2f36";g.strokeRect(LPAD,y0,W-LPAD-RPAD,h);
+    g.fillStyle="#8b919b";g.font="10px system-ui";g.fillText(names[d],4,y0+12);
+    g.strokeStyle="#5b9bd5";g.globalAlpha=.16;g.lineWidth=.8;
+    for(const x of items){
+      g.beginPath();
+      x.tr.actions.gt.forEach((r,t)=>{t===0?g.moveTo(X(0),Y(r[d])):g.lineTo(X(t),Y(r[d]))});
+      g.stroke();}
+    g.globalAlpha=1;
+    const mean=[];
+    for(let t=0;t<T;t++){let a=0,n=0;
+      items.forEach(x=>{if(x.tr.actions.gt[t]){a+=x.tr.actions.gt[t][d];n++;}});
+      mean.push(a/Math.max(1,n));}
+    g.strokeStyle="#e6798a";g.lineWidth=2;g.beginPath();
+    mean.forEach((v,t)=>{t===0?g.moveTo(X(0),Y(v)):g.lineTo(X(t),Y(v))});g.stroke();
+  }
+}
+window.setCode=c=>{sel.code=c;render();};
+/* ---------------- per-run tab renderers ---------------- */
+function tokensView(tag,d){
+  const eps=d.embodiments[sel.emb]||[];
+  const epA=data[$("runA").value].embodiments[sel.emb]||[];
+  const wantId=(epA[sel.ep]||{}).id;
+  let ep=eps.find(e=>e.id===wantId)||eps[Math.min(sel.ep,eps.length-1)];
+  if(!ep)return `<div class="meta">no ${sel.emb} episodes</div>`;
+  const k=Math.min(sel.k,ep.transitions.length);
+  const tr=ep.transitions[k-1];
+  const strip=ep.transitions.map(t=>
+    `<div class="tok ${t.k===k?"cur":""}" style="background:${PAL[t.z%PAL.length]}"
+      title="k=${t.k} z=${t.z}" onclick="setK(${t.k})">${t.z}</div>`).join("");
+  const media=tr.gif_idm?`
+    <div class="media">
+      <figure><img src="${tag}/${tr.gif_idm}"><figcaption>IDM input (cosmos roundtrip, token ${k})</figcaption></figure>
+      <figure><img src="${tag}/${tr.gif_fdm}"><figcaption>FDM predicted continuation</figcaption></figure>
+    </div>`:`<div class="meta">built without pixel decode</div>`;
+  const dur=ep.sec_per_z||(tr.actions.gt.length/(ep.fps||20));
+  return `
+    <div class="meta">${ep.id} — “${esc(ep.task)}” — ${ep.transitions.length} tokens ×
+      ${tr.actions.gt.length} actions = <b>${dur.toFixed(2)} s per z token</b>
+      ${ep.k_span>1?`(wide-baseline k=${ep.k_span})`:""}</div>
+    <div class="strip">${strip}</div>
+    <div class="legend"><span>stitched episode actions — background bands = z tokens (click to jump)</span></div>
+    <canvas class="stitch"></canvas>
+    <span style="display:inline-block;padding:2px 10px;border-radius:4px;color:#000;font-weight:600;background:${PAL[tr.z%PAL.length]}">z = ${tr.z} · ${dur.toFixed(2)} s</span>
+    ${media}
+    <div class="legend"><span><i style="background:#5b9bd5"></i>ground-truth actions</span>
+      <span><i style="background:#67c288"></i>decoded: ${esc(ep.pred_src||"?")}</span>
+      ${d.build&&d.build.relative_actions?`<span style="color:var(--diffb)">⚠ relative-action run:
+        plotted pred = decoded Δ + GT state — R² rides the posture baseline,
+        NOT comparable to absolute-target runs</span>`:""}
+      <span style="margin-left:auto">hover for values</span></div>
+    <canvas class="act"></canvas>
+    <table>${Object.entries(tr.state).map(([n,v])=>
+      `<tr><td>${n}</td><td class="v">${v.toFixed(4)}</td></tr>`).join("")}</table>`;
+}
+function dataView(tag,d){
+  const mix=d.mixture||{},samp=d.data_samples||{};
+  let html="";
+  for(const[emb,m] of Object.entries(mix)){
+    html+=`<div class="sect"><h3>${emb} — mixture</h3><table>
+      <tr><td>episodes (train/val)</td><td class="v">${m.episodes} (${m.train_episodes}/${m.val_episodes})</td></tr>
+      <tr><td>z transitions</td><td class="v">${m.transitions}</td></tr>
+      <tr><td>control rate / actions per z</td><td class="v">${m.fps} Hz / ${m.actions_per_z}</td></tr>
+      <tr><td>state dims</td><td class="v">${m.state_dims.join(", ")}</td></tr>
+      <tr><td>action dims</td><td class="v">${m.action_dims.join(", ")}</td></tr>
+      ${Object.entries(m.tasks).map(([t,n])=>
+        `<tr><td style="padding-left:14px">“${esc(t)}”</td><td class="v">${n} eps</td></tr>`).join("")}
+    </table>
+    <h3>${emb} — training-data samples</h3>
+    <div class="gal">${(samp[emb]||[]).map(s=>s.gif?`
+      <figure><img src="${tag}/${s.gif}">
+      <figcaption>${s.episode} — “${esc(s.task)}” (${s.n_tokens} tokens)</figcaption></figure>`:"").join("")}
+    </div></div>`;
+  }
+  return html||`<div class="meta">no mixture info — rebuild assets with the current builder</div>`;
+}
+function configView(tag,d){
+  const other=active().find(t=>t!==tag);
+  const oc=other&&data[other]?data[other].train_config||{}:null;
+  const tc=d.train_config||{};
+  if(!Object.keys(tc).length)return `<div class="meta">no config — rebuild assets</div>`;
+  const keys=[...new Set([...Object.keys(tc),...(oc?Object.keys(oc):[])])].sort();
+  return `<div class="sect"><h3>training config ${oc?"(rows highlighted where runs differ)":""}</h3>
+    <table>${keys.map(k=>{
+      const v=tc[k]===undefined?"—":JSON.stringify(tc[k]);
+      const ov=oc?(oc[k]===undefined?"—":JSON.stringify(oc[k])):null;
+      const diff=oc&&v!==ov;
+      return `<tr class="${diff?"diff":""}"><td>${k}</td><td class="v">${esc(v)}</td></tr>`;}).join("")}
+    </table></div>`;
+}
+function schemeView(tag,d){
+  const s=d.scheme;if(!s)return `<div class="meta">no scheme — rebuild assets</div>`;
+  const li=a=>a.map(x=>`<li>${esc(x)}</li>`).join("");
+  return `<div class="sect">
+    <h3>inputs</h3><ul>${li(s.inputs)}</ul>
+    <h3>outputs</h3><ul>${li(s.outputs)}</ul>
+    <h3>losses</h3><table>${s.losses.map(l=>
+      `<tr><td>${l.name}</td><td class="v">w=${l.weight}</td><td>${esc(l.desc)}</td></tr>`).join("")}</table>
+    <h3>notes</h3><ul>${li(s.notes)}</ul>
+    <h3>serialization downstream (S4 corpus)</h3>
+    <ul><li>template P (propose): [emb][state sv][instruction][outcome cond] → z tokens (CE)</li>
+    <li>template W (world/judge): [emb][state sv][instruction][z executed] → future dv tokens + verdict (CE); outcome token structurally absent</li></ul>
+  </div>`;
+}
+function renderRun(tag,col){
+  const d=data[tag];if(!d)return;
+  const sec=(id,title,html)=>`<details class="sec" data-sec="${id}" ${sel.folds[id]?"open":""}>
+    <summary>${title}</summary><div class="body">${html}</div></details>`;
+  col.innerHTML=`<h2>${tag}</h2>`+headline(d)+specTable(d)
+    +sec("tokens","Tokens — per-z debugging",tokensView(tag,d))
+    +sec("metrics","Eval metrics — gates & executed replay",metricsView(tag,d))
+    +sec("code","Code explorer — same z across the dataset",codeView(tag,d))
+    +sec("data","Training data — mixture & samples",dataView(tag,d))
+    +sec("config","Training config"+(active().length>1?" (diffs highlighted)":""),configView(tag,d))
+    +sec("scheme","Training scheme — inputs / outputs / losses",schemeView(tag,d));
+  col.querySelectorAll("details.sec").forEach(el=>{
+    el.addEventListener("toggle",()=>{sel.folds[el.dataset.sec]=el.open;});});
+  const cv=col.querySelector(".act");
+  if(cv){
+    drawActions(cv,currentAct(d));
+    cv.onmousemove=e=>hover(cv,e);
+    cv.onmouseleave=()=>{$("tip").style.display="none";redraw(cv);};
+  }
+  col.querySelectorAll(".codeacts").forEach(cc=>{
+    const emb=cc.dataset.emb;
+    const items=[];
+    (data[tag].embodiments[emb]||[]).forEach(ep=>ep.transitions.forEach(tr=>{
+      if(tr.z===sel.code)items.push({ep,tr});}));
+    if(items.length)drawCodeActs(cc,items);
+  });
+  const sv=col.querySelector(".stitch");
+  if(sv){
+    const ep=currentEp(d);
+    if(ep&&ep.transitions.length){
+      drawStitch(sv,ep,Math.min(sel.k,ep.transitions.length));
+      sv.onclick=e=>stitchClick(sv,e);
+    }
+  }
+}
+function currentEp(d){
+  const eps=d.embodiments[sel.emb]||[];
+  const epA=data[$("runA").value].embodiments[sel.emb]||[];
+  const wantId=(epA[sel.ep]||{}).id;
+  return eps.find(e=>e.id===wantId)||eps[Math.min(sel.ep,eps.length-1)];
+}
+function currentAct(d){
+  const ep=currentEp(d);
+  const k=Math.min(sel.k,ep.transitions.length);
+  return ep.transitions[k-1].actions;
+}
+function render(){
+  const tags=active();
+  const cols=$("cols");cols.style.setProperty("--n",tags.length);
+  cols.innerHTML=tags.map(()=>`<div class="run"></div>`).join("");
+  tags.forEach((t,i)=>renderRun(t,cols.children[i]));
+  const A=data[$("runA").value];
+  const ep=(A.embodiments[sel.emb]||[])[sel.ep];
+  $("pos").textContent=ep?`token ${sel.k}/${ep.transitions.length}`:"";
+}
+window.setK=k=>{sel.k=k;render();};
+$("runA").onchange=()=>reload();
+$("runB").onchange=async()=>{await loadRun($("runB").value);render();};
+$("emb").onchange=e=>{sel.emb=e.target.value;sel.ep=0;sel.k=1;fillEp();render();};
+$("ep").onchange=e=>{sel.ep=+e.target.value;sel.k=1;render();};
+$("prev").onclick=()=>{if(sel.k>1){sel.k--;render();}};
+$("next").onclick=()=>{sel.k++;render();};
+document.addEventListener("keydown",e=>{
+  if(e.key==="ArrowLeft")$("prev").click();
+  if(e.key==="ArrowRight")$("next").click();});
+loadIndex();
+</script>
+</body>
+</html>

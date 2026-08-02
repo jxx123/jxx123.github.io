@@ -1,0 +1,29 @@
+<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name="robots" content="noindex,nofollow"><title>journey_demo — call 000001</title><style>
+:root{--bg:#F4F5F1;--card:#FBFBF9;--ink:#1A211E;--mut:#5C6963;--line:#D9DED8;
+--acc:#2E7D68;--warn:#9A6B15;--crit:#A34335}
+@media (prefers-color-scheme:dark){:root{--bg:#0F1513;--card:#141B18;
+--ink:#E6EBE7;--mut:#93A29B;--line:#242E29;--acc:#5CB89E;--warn:#D2A24C;--crit:#D07A6B}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);
+font:15px/1.5 system-ui,sans-serif;padding:1.5rem}
+a{color:var(--acc)}h1,h2{font-weight:600;margin:.2rem 0 .8rem}
+.mono{font-family:ui-monospace,Consolas,monospace}
+.card{background:var(--card);border:1px solid var(--line);margin:0 0 1rem;
+padding:.8rem 1rem}
+.card h2{font-size:1rem}.card h2 .seq{color:var(--mut);font-weight:400}
+.cols{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.col h3{font-size:.7rem;color:var(--mut);text-transform:uppercase;
+letter-spacing:.08em;margin:.2rem 0 .4rem}
+table{border-collapse:collapse;width:100%;font-size:.8rem}
+th,td{border:1px solid var(--line);padding:.25rem .5rem;text-align:left;
+font-variant-numeric:tabular-nums}th{color:var(--mut);font-size:.65rem;
+text-transform:uppercase;letter-spacing:.08em}
+img{max-width:100%;image-rendering:pixelated;border:1px solid var(--line)}
+figure{margin:.3rem 0}figcaption{font-size:.7rem;color:var(--mut)}
+.vals{font-size:.75rem;overflow-x:auto;white-space:nowrap;margin:.3rem 0;
+color:var(--ink)}.vals b{color:var(--mut);font-weight:400}
+.delta{color:var(--acc);font-weight:600}
+.flag{color:var(--crit);font-weight:600}
+.flags{margin:.3rem 0;font-size:.8rem}
+nav{margin-bottom:1.2rem;font-size:.8rem}nav a{margin-right:1rem}
+.meta{font-size:.75rem;color:var(--mut)}
+</style><nav><b>data journey</b> <a href='../index.html'>all calls</a></nav><h1>journey_demo — call 000001</h1><div class="card"><h2><span class="seq mono">00</span> window</h2><div class='cols'><div class='col'><h3>in</h3><table><tr><th>key</th><th>shape</th><th>dtype</th><th>min</th><th>max</th><th>mean</th></tr><tr><td class='mono'>frames</td><td>4×64×64×3</td><td>uint8</td><td>0</td><td>255</td><td>—</td></tr><tr><td class='mono'>states</td><td>4×7</td><td>float32</td><td>94.85</td><td>116.1</td><td>101</td></tr></table></div><div class='col'><h3>out</h3><figure><img src="00_window_out_frame.png" alt=""><figcaption>frame</figcaption></figure><table><tr><th>key</th><th>shape</th><th>dtype</th><th>min</th><th>max</th><th>mean</th></tr><tr><td class='mono'>frame</td><td>64×64×3</td><td>uint8</td><td>0</td><td>255</td><td>—</td></tr><tr><td class='mono'>state_window</td><td>14</td><td>float32</td><td>94.85</td><td>106.5</td><td>100.3</td></tr></table><div class="vals mono"><b>state_window</b> = [97.79, 96.7, 103, 102.8, 101.4, 98.77, 106.5, 106.1, 99.11, 95.11, 101.4, 99.11, 101.1, 94.85]</div></div></div></div><div class="card"><h2><span class="seq mono">01</span> crop</h2><div class='cols'><div class='col'><h3>in</h3><figure><img src="01_crop_in_frame.png" alt=""><figcaption>frame</figcaption></figure><table><tr><th>key</th><th>shape</th><th>dtype</th><th>min</th><th>max</th><th>mean</th></tr><tr><td class='mono'>frame</td><td>64×64×3</td><td>uint8</td><td>0</td><td>255</td><td>—</td></tr></table></div><div class='col'><h3>out</h3><figure><img src="01_crop_out_frame.png" alt=""><figcaption>frame</figcaption></figure><table><tr><th>key</th><th>shape</th><th>dtype</th><th>min</th><th>max</th><th>mean</th></tr><tr><td class='mono'>frame</td><td><span class="delta">64×64×3 → 48×48×3</span></td><td>uint8</td><td><span class="delta">0 → 14</span></td><td>255</td><td>—</td></tr></table></div></div></div><div class="card"><h2><span class="seq mono">02</span> lighting_jitter</h2><div class='cols'><div class='col'><h3>in</h3><figure><img src="02_lighting_jitter_in_frame.png" alt=""><figcaption>frame</figcaption></figure><table><tr><th>key</th><th>shape</th><th>dtype</th><th>min</th><th>max</th><th>mean</th></tr><tr><td class='mono'>frame</td><td>48×48×3</td><td>uint8</td><td>14</td><td>255</td><td>—</td></tr></table></div><div class='col'><h3>out</h3><figure><img src="02_lighting_jitter_out_frame.png" alt=""><figcaption>frame</figcaption></figure><table><tr><th>key</th><th>shape</th><th>dtype</th><th>min</th><th>max</th><th>mean</th></tr><tr><td class='mono'>frame</td><td>48×48×3</td><td>uint8</td><td><span class="delta">14 → 0</span></td><td><span class="delta">255 → 246</span></td><td>—</td></tr></table></div></div></div><div class="card"><h2><span class="seq mono">03</span> normalize_dropout</h2><div class='cols'><div class='col'><h3>in</h3><table><tr><th>key</th><th>shape</th><th>dtype</th><th>min</th><th>max</th><th>mean</th></tr><tr><td class='mono'>state_window</td><td>14</td><td>float32</td><td>94.85</td><td>106.5</td><td>100.3</td></tr></table><div class="vals mono"><b>state_window</b> = [97.79, 96.7, 103, 102.8, 101.4, 98.77, 106.5, 106.1, 99.11, 95.11, 101.4, 99.11, 101.1, 94.85]</div></div><div class='col'><h3>out</h3><div class="flags"><span class="flag">state_window: all-zero array</span></div><table><tr><th>key</th><th>shape</th><th>dtype</th><th>min</th><th>max</th><th>mean</th></tr><tr><td class='mono'>state_window</td><td>14</td><td>float32</td><td><span class="delta">94.85 → 0</span></td><td><span class="delta">106.5 → 0</span></td><td><span class="delta">100.3 → 0</span></td></tr></table><div class="vals mono"><b>state_window</b> = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]</div></div></div></div>

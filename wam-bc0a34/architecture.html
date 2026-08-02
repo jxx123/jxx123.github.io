@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Apprentice — Architecture</title>
+<style>
+  :root {
+    --bg: #F4F5F1; --ink: #1A211E; --accent: #2E7D68;
+    --muted: #5c6660; --faint: #8a938d; --line: #d3d7d0;
+    --panel: #FBFBF9; --panel2: #ECEEE7; --edge: #6b756f;
+    --c-dv: #4A6B8A;  --bg-dv: rgba(74,107,138,.13);
+    --c-sv: #8A6D3B;  --bg-sv: rgba(138,109,59,.13);
+    --c-z:  #2E7D68;  --bg-z:  rgba(46,125,104,.14);
+    --c-vd: #A85C24;  --bg-vd: rgba(168,92,36,.15);
+    --serif: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0F1513; --ink: #E6EBE7; --accent: #5CB89E;
+      --muted: #9aa8a1; --faint: #6e7d76; --line: #2c3833;
+      --panel: #141b18; --panel2: #1a2420; --edge: #7d8b84;
+      --c-dv: #8FB4D9; --bg-dv: rgba(143,180,217,.14);
+      --c-sv: #D2AC6F; --bg-sv: rgba(210,172,111,.14);
+      --c-z:  #5CB89E; --bg-z:  rgba(92,184,158,.15);
+      --c-vd: #DD9A66; --bg-vd: rgba(221,154,102,.15);
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font: 16px/1.55 var(--serif);
+    padding: 3rem 1.25rem 4rem;
+  }
+  .page { max-width: 1020px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 2.2rem; }
+  h1 { font-size: 1.7rem; font-weight: 600; margin: 0 0 .35rem; letter-spacing: .01em; }
+  .subtitle { font-size: 1.02rem; color: var(--muted); font-style: italic; margin: 0 0 .6rem; }
+  .provenance { font: 11px var(--mono); color: var(--faint); }
+  h2 { font-size: 1.12rem; font-weight: 600; margin: 2.6rem 0 .7rem;
+       border-bottom: 1px solid var(--line); padding-bottom: .3rem; }
+  h2 .secno { color: var(--accent); margin-right: .5em; }
+  p { margin: .65rem 0; text-align: justify; hyphens: auto; }
+  .abstract { max-width: 88%; margin: 0 auto 1rem; font-size: .97rem; }
+  .abstract .lead { font-variant: small-caps; letter-spacing: .06em; font-weight: 600; }
+  .src { font: 9.5px var(--mono); color: var(--faint); white-space: nowrap; }
+  .figure { margin: 1.6rem 0 2.2rem; }
+  .fig-scroll { overflow-x: auto; background: var(--panel);
+                border: 1px solid var(--line); border-radius: 6px; padding: 10px 6px; }
+  .fig-scroll svg { display: block; min-width: 1080px; width: 100%; height: auto; }
+  .figcap { font-size: .88rem; color: var(--muted); margin-top: .7rem; text-align: justify; }
+  .figcap b { color: var(--ink); }
+
+  /* ---- SVG figure styles ---- */
+  .band-d { fill: var(--accent); opacity: .05; }
+  .band-c { fill: var(--ink); opacity: .035; }
+  .bandframe { fill: none; stroke: var(--line); stroke-width: 1; }
+  .bandlab { font: 700 11px var(--sans); letter-spacing: .14em; fill: var(--accent); }
+  .bandlab2 { font: 700 11px var(--sans); letter-spacing: .14em; fill: var(--muted); }
+  .box { fill: var(--panel); stroke: var(--edge); stroke-width: 1.1; }
+  .box-hero { fill: var(--panel); stroke: var(--accent); stroke-width: 1.6; }
+  .box-aux { fill: none; stroke: var(--faint); stroke-width: 1; stroke-dasharray: 4 3; }
+  .lbl { font: 600 12.5px var(--sans); fill: var(--ink); }
+  .lbl-hero { font: 700 14px var(--sans); fill: var(--ink); }
+  .sub { font: 10.5px var(--sans); fill: var(--muted); }
+  .cite { font: 8.5px var(--mono); fill: var(--faint); }
+  .edge-l { stroke: var(--edge); stroke-width: 1.2; fill: none; }
+  .edge-a { stroke: var(--accent); stroke-width: 1.2; fill: none; }
+  .edge-dash { stroke: var(--faint); stroke-width: 1; fill: none; stroke-dasharray: 4 3; }
+  .elabel { font: 10px var(--sans); fill: var(--muted); }
+  .rlline { stroke: var(--c-vd); stroke-width: 1.2; stroke-dasharray: 7 5; }
+  .rllab { font: italic 600 10.5px var(--sans); fill: var(--c-vd); }
+  .esc { font: italic 12px var(--serif); fill: var(--accent); }
+  .ah { fill: var(--edge); }
+  .ah-a { fill: var(--accent); }
+
+  /* ---- token stream (Figure 2) ---- */
+  .stream { background: var(--panel); border: 1px solid var(--line); border-radius: 6px;
+            padding: 14px 16px 10px; }
+  .blk { margin: 0 0 10px; }
+  .blk-label { display: block; font: italic 10.5px var(--sans); color: var(--muted);
+               margin-bottom: 3px; }
+  .t { display: inline-block; font: 10.5px var(--mono); padding: 1px 5px; margin: 1px 2px 1px 0;
+       border-radius: 3px; border: 1px solid var(--line); color: var(--faint);
+       background: transparent; white-space: nowrap; }
+  .t.g { color: var(--ink); font-weight: 600; }
+  .t.g.dv { border-color: var(--c-dv); background: var(--bg-dv); }
+  .t.g.sv { border-color: var(--c-sv); background: var(--bg-sv); }
+  .t.g.z  { border-color: var(--c-z);  background: var(--bg-z); }
+  .t.g.vd { border-color: var(--c-vd); background: var(--bg-vd); }
+  .t.g.mk { border-color: var(--edge); background: var(--panel2); }
+  .t.el { border: none; color: var(--faint); font-style: italic; background: none; padding: 1px 2px; }
+  .t.tx { font-family: var(--serif); font-style: italic; }
+  .legend { display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: center;
+            font: 10.5px var(--sans); color: var(--muted);
+            border-top: 1px solid var(--line); padding-top: 8px; margin-top: 6px; }
+
+  /* ---- tables ---- */
+  .tblwrap { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: .84rem; margin: .8rem 0; }
+  caption { caption-side: top; text-align: left; font-size: .88rem; color: var(--muted);
+            padding-bottom: .45rem; }
+  caption b { color: var(--ink); }
+  th { font: 600 11px var(--sans); text-transform: uppercase; letter-spacing: .07em;
+       color: var(--muted); text-align: left; padding: 6px 10px 6px 0;
+       border-top: 2px solid var(--ink); border-bottom: 1px solid var(--line); }
+  td { padding: 5px 10px 5px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child td { border-bottom: 2px solid var(--ink); }
+  td.mono, .mono { font: 11px var(--mono); }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  footer { margin-top: 3rem; text-align: center; font: 10.5px var(--mono); color: var(--faint); }
+
+  @media print {
+    body { padding: 0; font-size: 11pt; background: #fff; color: #111; }
+    .fig-scroll { overflow: visible; border: none; padding: 0; }
+    .fig-scroll svg { min-width: 0; }
+    .figure, table, .stream { break-inside: avoid; }
+    h2 { break-after: avoid; }
+    a { color: inherit; text-decoration: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <h1>Apprentice: A World-Action Model with Calibrated Escalation</h1>
+  <p class="subtitle">Two-level design: discrete latent-action decisions on a VLM backbone; continuous per-embodiment decode below.</p>
+  <p class="provenance">architecture reference &middot; every number extracted from source (cited inline as <span class="src">file:line</span>) &middot; repo: apprentice, branch dev</p>
+</header>
+
+<p class="abstract"><span class="lead">Abstract.</span>
+Apprentice is a world-action model built so that a robot can be deployed <em>before</em> competence because it is
+calibrated: it knows what it does not know, and escalates ("show me") exactly at its knowledge frontier.
+The system is two-level. Above a hard interface line, all decisions are <em>discrete tokens</em> in one causal
+stream on a Qwen3-VL-4B backbone <span class="src">scripts/s4_cpt.py:79</span>: Cosmos-tokenized video
+(64,000 codes <span class="src">tokenizers/cosmos_dv.py:18</span>), binned proprioception (256 bins
+<span class="src">embodiment/normalize.py:55</span>), latent actions from a Latent Action Model
+(12 live codes in 64 reserved slots <span class="src">configs/stages/s2_lam_v4_17a_fsq12.yaml:25, data/qwen_vocab.py:25</span>),
+and in-grammar verdict tokens that make the policy its own judge. Below the line, small per-embodiment
+flow-matching heads decode each latent action into 4-step continuous action chunks
+<span class="src">models/lam.py:354</span>. The same stream is simultaneously policy (z-spans), world model
+(future video tokens), and critic (verdicts) — so every deployment minute produces training data, and
+reinforcement learning stays entirely on the discrete side where likelihoods are exact
+<span class="src">docs/TECH_REPORT.md:147</span>.</p>
+
+<!-- ================= FIGURE 1 ================= -->
+<div class="figure" id="fig1">
+<div class="fig-scroll">
+<svg viewBox="0 0 1240 850" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="fig1title">
+  <title id="fig1title">Apprentice system architecture: discrete decision plane over continuous per-embodiment plane</title>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="ah"/>
+    </marker>
+    <marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="ah-a"/>
+    </marker>
+  </defs>
+
+  <!-- ======== DISCRETE BAND ======== -->
+  <rect x="16" y="16" width="1208" height="384" rx="8" class="band-d"/>
+  <rect x="16" y="16" width="1208" height="384" rx="8" class="bandframe"/>
+  <text x="32" y="42" class="bandlab">DISCRETE PLANE — LATENT-ACTION DECISIONS ON A VLM BACKBONE</text>
+  <text x="1208" y="42" text-anchor="end" class="sub">one causal token stream · GRPO-compatible interface</text>
+
+  <!-- instruction input -->
+  <rect x="48" y="150" width="170" height="56" rx="6" class="box"/>
+  <text x="133" y="173" text-anchor="middle" class="lbl">task instruction</text>
+  <text x="133" y="190" text-anchor="middle" class="sub">plain text (context)</text>
+  <path d="M218,178 H295" class="edge-l" marker-end="url(#ah)"/>
+
+  <!-- backbone -->
+  <rect x="300" y="90" width="380" height="230" rx="10" class="box-hero"/>
+  <text x="490" y="122" text-anchor="middle" class="lbl-hero">Qwen3-VL-4B-Instruct</text>
+  <text x="490" y="140" text-anchor="middle" class="sub">continued pretraining (S4)</text>
+  <text x="490" y="166" text-anchor="middle" class="sub">+ 64,337 added tokens — frozen vocabulary contract</text>
+  <text x="490" y="184" text-anchor="middle" class="sub">LoRA r=16 (attn + MLP) · embed_tokens &amp; lm_head trained full</text>
+  <text x="490" y="202" text-anchor="middle" class="sub">templates: P policy · W world+verdict · E episode stream</text>
+  <text x="490" y="220" text-anchor="middle" class="sub">loss only on target spans (CE)</text>
+  <text x="490" y="238" text-anchor="middle" class="sub">one episode = one causal document (persistent KV cache)</text>
+  <text x="490" y="262" text-anchor="middle" class="sub">surprise = NLL of observed dv tokens — free telemetry</text>
+  <text x="490" y="292" text-anchor="middle" class="cite">s4_cpt.py:79,148 · qwen_vocab.py:24–36 · E_STREAM_SPEC.md</text>
+
+  <!-- outputs -->
+  <rect x="740" y="100" width="210" height="68" rx="6" class="box"/>
+  <text x="845" y="122" text-anchor="middle" class="lbl">z-span plan (act)</text>
+  <text x="845" y="138" text-anchor="middle" class="sub">&#x27E8;boz&#x27E9; z z z z &#x27E8;eoz&#x27E9; · N = 4 codes / span</text>
+  <text x="845" y="152" text-anchor="middle" class="sub">&#8776; 16 robot actions &#8776; 0.8 s</text>
+  <text x="845" y="164" text-anchor="middle" class="cite">data/e_serializer.py:64</text>
+  <path d="M680,134 H735" class="edge-l" marker-end="url(#ah)"/>
+
+  <rect x="740" y="190" width="210" height="68" rx="6" class="box"/>
+  <text x="845" y="212" text-anchor="middle" class="lbl">verdict readout (judge)</text>
+  <text x="845" y="228" text-anchor="middle" class="sub">3-way renormalized logits</text>
+  <text x="845" y="242" text-anchor="middle" class="sub">ongoing · success · failure</text>
+  <text x="845" y="254" text-anchor="middle" class="cite">policy/estream_policy.py:33</text>
+  <path d="M680,224 H735" class="edge-l" marker-end="url(#ah)"/>
+
+  <rect x="740" y="278" width="210" height="76" rx="6" class="box"/>
+  <text x="845" y="300" text-anchor="middle" class="lbl">imagined future (world)</text>
+  <text x="845" y="316" text-anchor="middle" class="sub">next dv block: 256 tokens / latent step</text>
+  <text x="845" y="330" text-anchor="middle" class="sub">multi-step: horizon = span N</text>
+  <text x="845" y="344" text-anchor="middle" class="cite">data/qwen_serializer.py:19 · E_STREAM_SPEC.md</text>
+  <path d="M680,316 H735" class="edge-l" marker-end="url(#ah)"/>
+
+  <!-- escalation annotation -->
+  <path d="M950,224 H995" class="edge-dash" marker-end="url(#aha)"/>
+  <text x="1005" y="206" class="esc">calibrated escalation:</text>
+  <text x="1005" y="224" class="esc">&#8220;I don&#8217;t know &#8594; show me&#8221;</text>
+  <text x="1005" y="242" class="sub">takeover = DAgger label at the frontier</text>
+  <text x="1005" y="256" class="cite">docs/TECH_REPORT.md (Theory 1)</text>
+
+  <!-- ======== RL BOUNDARY ======== -->
+  <line x1="16" y1="420" x2="1224" y2="420" class="rlline"/>
+  <text x="815" y="412" text-anchor="middle" class="rllab">RL boundary: GRPO on discrete tokens only</text>
+  <text x="815" y="436" text-anchor="middle" class="rllab">below: supervised flow matching / regression</text>
+  <text x="815" y="450" text-anchor="middle" class="cite">docs/TECH_REPORT.md:147</text>
+
+  <!-- tokenization arrows crossing the boundary -->
+  <path d="M340,508 V325" class="edge-a" marker-end="url(#aha)"/>
+  <text x="348" y="478" class="elabel">dv indices (T&#8242;,16,16) int32</text>
+  <text x="348" y="492" class="elabel">= 256 tokens / latent frame</text>
+
+  <path d="M660,524 V325" class="edge-a" marker-end="url(#aha)"/>
+  <text x="668" y="478" class="elabel">z index &#8712; {0…11}</text>
+  <text x="668" y="492" class="elabel">1 token / 4-frame transition</text>
+
+  <path d="M220,700 H238 V285 H295" class="edge-a" marker-end="url(#aha)"/>
+  <text x="232" y="460" text-anchor="end" class="elabel">&#x27E8;sv&#x27E9; bins</text>
+  <text x="232" y="474" text-anchor="end" class="elabel">StateBinner: 256 / dim</text>
+  <text x="232" y="488" text-anchor="end" class="cite">embodiment/normalize.py:55</text>
+
+  <path d="M950,134 H970 V503" class="edge-a" marker-end="url(#aha)"/>
+  <text x="976" y="470" class="elabel">planned z codes</text>
+  <text x="976" y="484" class="elabel">(vq.codebook[z])</text>
+
+  <!-- ======== CONTINUOUS BAND ======== -->
+  <rect x="16" y="440" width="1208" height="394" rx="8" class="band-c"/>
+  <rect x="16" y="440" width="1208" height="394" rx="8" class="bandframe"/>
+  <text x="32" y="466" class="bandlab2">CONTINUOUS PLANE — PER-EMBODIMENT PERCEPTION &amp; DECODE (SUPERVISED)</text>
+
+  <!-- frames -->
+  <rect x="40" y="520" width="180" height="76" rx="6" class="box"/>
+  <text x="130" y="544" text-anchor="middle" class="lbl">camera frames</text>
+  <text x="130" y="560" text-anchor="middle" class="sub">RGB 128&#215;128 uint8</text>
+  <text x="130" y="574" text-anchor="middle" class="sub">4 raw frames / latent step</text>
+  <text x="130" y="588" text-anchor="middle" class="cite">qwen_serializer.py:19</text>
+  <path d="M220,558 H245" class="edge-l" marker-end="url(#ah)"/>
+
+  <!-- cosmos -->
+  <rect x="250" y="508" width="180" height="100" rx="6" class="box"/>
+  <text x="340" y="530" text-anchor="middle" class="lbl">Cosmos DV4&#215;8&#215;8</text>
+  <text x="340" y="546" text-anchor="middle" class="sub">frozen dense video tokenizer</text>
+  <text x="340" y="562" text-anchor="middle" class="sub">FSQ (8,8,8,5,5,5) = 64,000 codes</text>
+  <text x="340" y="576" text-anchor="middle" class="sub">8&#215; spatial · 4&#215; temporal</text>
+  <text x="340" y="596" text-anchor="middle" class="cite">tokenizers/cosmos_dv.py:10,18</text>
+  <path d="M430,558 H465" class="edge-l" marker-end="url(#ah)"/>
+  <text x="450" y="622" text-anchor="middle" class="elabel">pre-quant latents (6,16,16) fp16 · <tspan class="cite">cosmos_dv.py:66</tspan></text>
+
+  <!-- IDM -->
+  <rect x="470" y="524" width="140" height="72" rx="6" class="box"/>
+  <text x="540" y="546" text-anchor="middle" class="lbl">IDM (video-only)</text>
+  <text x="540" y="562" text-anchor="middle" class="sub">(L&#8348;, L&#8348;&#8330;&#8321;) &#8594; z&#8346;&#7523;&#8337; &#8712; &#8477;&#185;&#8310;</text>
+  <text x="540" y="576" text-anchor="middle" class="sub">conv or 4-layer transformer</text>
+  <text x="540" y="589" text-anchor="middle" class="cite">models/lam.py:174,208</text>
+  <path d="M610,558 H635" class="edge-l" marker-end="url(#ah)"/>
+
+  <!-- FSQ -->
+  <rect x="640" y="524" width="140" height="72" rx="6" class="box"/>
+  <text x="710" y="546" text-anchor="middle" class="lbl">FSQ quantizer</text>
+  <text x="710" y="562" text-anchor="middle" class="sub">levels [4,3] &#8594; 12 codes</text>
+  <text x="710" y="576" text-anchor="middle" class="sub">z_dim 16 · frozen, versioned</text>
+  <text x="710" y="589" text-anchor="middle" class="cite">lam.py:99 · fsq12.yaml:25</text>
+
+  <!-- cond encoder edge -->
+  <path d="M450,558 V498 H830 V503" class="edge-l" marker-end="url(#ah)"/>
+  <text x="545" y="512" text-anchor="middle" class="elabel">CondEncoder &#8594; cond &#8712; &#8477;&#8310;&#8308; · <tspan class="cite">lam.py:326</tspan></text>
+
+  <!-- flow decoder -->
+  <rect x="810" y="508" width="190" height="124" rx="6" class="box-hero"/>
+  <text x="905" y="530" text-anchor="middle" class="lbl">flow-matching action head</text>
+  <text x="905" y="546" text-anchor="middle" class="sub">per embodiment · MLP or DiT</text>
+  <text x="905" y="560" text-anchor="middle" class="sub">z(16) &#8853; state(D&#8347;) &#8853; cond(64) &#8853; a&#8346;&#7523;&#8337;&#7515;</text>
+  <text x="905" y="574" text-anchor="middle" class="sub">10-step rectified flow · z-CFG</text>
+  <text x="905" y="588" text-anchor="middle" class="sub">init=&#8217;zero&#8217; deterministic mean-sample</text>
+  <text x="905" y="614" text-anchor="middle" class="cite">models/lam.py:354,504,819</text>
+  <path d="M1000,556 H1035" class="edge-l" marker-end="url(#ah)"/>
+
+  <!-- action chunk -->
+  <rect x="1040" y="508" width="180" height="96" rx="6" class="box"/>
+  <text x="1130" y="530" text-anchor="middle" class="lbl">action chunk (4, D&#8342;)</text>
+  <text x="1130" y="546" text-anchor="middle" class="sub">normalized &#8712; [&#8722;1, 1]</text>
+  <text x="1130" y="560" text-anchor="middle" class="sub">franka: 7-D &#916;-pose @ 20 Hz</text>
+  <text x="1130" y="574" text-anchor="middle" class="sub">so101: 6 joints @ 30 Hz &#8594; robot</text>
+  <text x="1130" y="592" text-anchor="middle" class="cite">spec.py:154,120 · lam.py:262</text>
+
+  <!-- proprio -->
+  <rect x="40" y="680" width="180" height="64" rx="6" class="box"/>
+  <text x="130" y="702" text-anchor="middle" class="lbl">proprio state</text>
+  <text x="130" y="718" text-anchor="middle" class="sub">so101: 6-D · franka: 9-D (NamedVector)</text>
+  <text x="130" y="734" text-anchor="middle" class="cite">spec.py:120,154 · core/named.py</text>
+  <path d="M220,690 H795 V605 H805" class="edge-l" marker-end="url(#ah)"/>
+  <text x="500" y="682" text-anchor="middle" class="elabel">state (D&#8347;), affine-normalized</text>
+
+  <!-- FDM -->
+  <rect x="470" y="700" width="150" height="72" rx="6" class="box"/>
+  <text x="545" y="722" text-anchor="middle" class="lbl">FDM — world scaffold</text>
+  <text x="545" y="738" text-anchor="middle" class="sub">(L&#8348;, z) &#8594; L&#770;&#8348;&#8330;&#8321; (residual)</text>
+  <text x="545" y="752" text-anchor="middle" class="sub">trains z · gate probe</text>
+  <text x="545" y="765" text-anchor="middle" class="cite">models/lam.py:193,234</text>
+  <path d="M340,608 V736 H465" class="edge-l" marker-end="url(#ah)"/>
+  <path d="M710,596 V716 H625" class="edge-l" marker-end="url(#ah)"/>
+  <path d="M545,772 V788" class="edge-dash"/>
+  <text x="470" y="802" class="sub">decode of predicted latents: EmpiricalFSQ &#8594; Cosmos decoder &#8594; pixels</text>
+  <text x="470" y="816" class="sub">(verification &amp; imagination rendering) · <tspan class="cite">tokenizers/fsq_calibration.py:1</tspan></text>
+
+  <!-- aux heads group -->
+  <rect x="840" y="660" width="380" height="150" rx="6" class="box-aux"/>
+  <text x="856" y="682" class="lbl">train-time aux heads — gradients shape z, discarded at deploy</text>
+  <text x="856" y="702" class="sub">shared EE-pose head: (2 arms &#215; 4 substeps &#215; 10)</text>
+  <text x="856" y="716" class="sub">&#8195;= rot6d(6) + &#916;midpoint/reach(3) + &#916;aperture(1), chunk-anchored</text>
+  <text x="856" y="734" class="sub">per-embodiment action heads (4 &#215; D&#8342;) · state-&#916; heads (masked)</text>
+  <text x="856" y="752" class="sub">DANN embodiment adversary (GRL) · family-bank InfoNCE</text>
+  <text x="856" y="772" class="cite">models/lam.py:259–344,654 · embodiment/ee_geometry.py:1</text>
+  <path d="M760,596 V640 H900 V655" class="edge-dash" marker-end="url(#ah)"/>
+</svg>
+</div>
+<p class="figcap"><b>Figure 1: System overview.</b> Left-to-right dataflow through both planes.
+<b>Below the line</b>, a frozen Cosmos DV4&#215;8&#215;8 tokenizer maps each 128&#215;128 frame window to
+discrete indices (16&#215;16 = 256 tokens per latent frame, vocabulary 64,000
+<span class="src">cosmos_dv.py:8-18</span>) and to continuous pre-quant latents (6,16,16)
+<span class="src">models/lam.py:11</span>. The LAM&#8217;s video-only IDM compresses each latent transition
+(4 raw frames) into z&#8346;&#7523;&#8337; &#8712; &#8477;&#185;&#8310;, quantized by an FSQ grid with levels
+[4,3] into one of <b>12 codes</b> <span class="src">s2_lam_v4_17a_fsq12.yaml:25</span>; the FDM
+reconstructs the next latent from (L&#8348;, z), making z a bottleneck that must carry the dynamics.
+<b>Above the line</b>, dv, sv and z tokens join instruction text in a single stream consumed by the
+Qwen3-VL-4B backbone, which emits z-span plans, in-grammar verdicts, and future video tokens.
+<b>Decode</b>: planned z codes, fresh proprio state, and a visual conditioning vector are consumed by a
+per-embodiment rectified-flow head producing 4-action chunks <span class="src">models/lam.py:354-480</span>.
+The dashed rust line is the reinforcement-learning boundary: exact-likelihood updates (GRPO) act only on
+categorical tokens above it; everything below trains by supervised flow matching or regression
+<span class="src">docs/TECH_REPORT.md:147</span>.</p>
+</div>
+
+<!-- ================= FIGURE 2 ================= -->
+<h2><span class="secno">2</span>The unified token stream (template E)</h2>
+<p>One episode is serialized as one causal document: alternating observation blocks (video tokens +
+state bins), latent-action spans, and verdict positions <span class="src">data/e_serializer.py:1-18</span>.
+The stream below is a <b>genuine serializer output</b> — <code class="mono">serialize_episode_e</code>
+run on a synthetic 9-latent-frame <code class="mono">franka_libero</code> episode
+(span_n=4, judge_prob=0.25, success=True, seed 14); long dv runs are elided for display, token values
+and role assignments are verbatim.</p>
+
+<div class="figure" id="fig2">
+<div class="stream">
+  <div class="blk"><span class="blk-label">instruction — context, never supervised</span>
+    <span class="t tx">put the bowl on the stove</span>
+  </div>
+  <div class="blk"><span class="blk-label">observation t=0 — first observation is pure context <span class="src">e_serializer.py:83</span></span>
+    <span class="t">&lt;|bov|&gt;</span><span class="t">&lt;|dv_18317|&gt;</span><span class="t">&lt;|dv_59761|&gt;</span><span class="t">&lt;|dv_18970|&gt;</span><span class="t">&lt;|dv_43779|&gt;</span><span class="t el">&#8943; 251 more dv</span><span class="t">&lt;|eov|&gt;</span>
+    <span class="t">&lt;|bostate|&gt;</span><span class="t">&lt;|emb_franka_libero|&gt;</span><span class="t">&lt;|sv_163|&gt;</span><span class="t">&lt;|sv_69|&gt;</span><span class="t">&lt;|sv_10|&gt;</span><span class="t">&lt;|sv_138|&gt;</span><span class="t">&lt;|sv_208|&gt;</span><span class="t">&lt;|sv_102|&gt;</span><span class="t">&lt;|sv_155|&gt;</span><span class="t">&lt;|sv_58|&gt;</span><span class="t">&lt;|sv_244|&gt;</span><span class="t">&lt;|eostate|&gt;</span>
+  </div>
+  <div class="blk"><span class="blk-label">z-span 1 — target (episode succeeded &#8658; filtered BC; failures become context) <span class="src">e_serializer.py:79</span></span>
+    <span class="t g mk">&lt;|boz|&gt;</span><span class="t g z">&lt;|z_3|&gt;</span><span class="t g z">&lt;|z_7|&gt;</span><span class="t g z">&lt;|z_1|&gt;</span><span class="t g z">&lt;|z_1|&gt;</span><span class="t g mk">&lt;|eoz|&gt;</span>
+  </div>
+  <div class="blk"><span class="blk-label">Q-verdict — eventual-outcome token directly after the plan (fast, evidence-free critic; commit 8303f8d) <span class="src">e_serializer.py:92-96</span></span>
+    <span class="t g vd">&lt;|verdict_success|&gt;</span>
+  </div>
+  <div class="blk"><span class="blk-label">observation t=1 — motion-weighted dv supervision: changed tokens always target, static keep p=0.3 (here 106/256 supervised) <span class="src">e_serializer.py:29-51</span></span>
+    <span class="t">&lt;|bov|&gt;</span><span class="t">&lt;|dv_18317|&gt;</span><span class="t">&lt;|dv_59761|&gt;</span><span class="t">&lt;|dv_18970|&gt;</span><span class="t g dv">&lt;|dv_43779|&gt;</span><span class="t g dv">&lt;|dv_22490|&gt;</span><span class="t">&lt;|dv_52722|&gt;</span><span class="t">&lt;|dv_37462|&gt;</span><span class="t">&lt;|dv_57395|&gt;</span><span class="t">&lt;|dv_40800|&gt;</span><span class="t">&lt;|dv_37332|&gt;</span><span class="t">&lt;|dv_31268|&gt;</span><span class="t g dv">&lt;|dv_2573|&gt;</span><span class="t g dv">&lt;|dv_7723|&gt;</span><span class="t">&lt;|dv_45535|&gt;</span><span class="t">&lt;|dv_40933|&gt;</span><span class="t g dv">&lt;|dv_36417|&gt;</span><span class="t">&lt;|dv_7479|&gt;</span><span class="t">&lt;|dv_52861|&gt;</span><span class="t g dv">&lt;|dv_50955|&gt;</span><span class="t">&lt;|dv_34058|&gt;</span><span class="t">&lt;|dv_16275|&gt;</span><span class="t g dv">&lt;|dv_52047|&gt;</span><span class="t">&lt;|dv_33390|&gt;</span><span class="t g dv">&lt;|dv_63808|&gt;</span><span class="t">&lt;|dv_17953|&gt;</span><span class="t el">&#8943; 230 more dv (98 supervised)</span><span class="t">&lt;|eov|&gt;</span>
+    <span class="t g mk">&lt;|bostate|&gt;</span><span class="t g sv">&lt;|emb_franka_libero|&gt;</span><span class="t g sv">&lt;|sv_104|&gt;</span><span class="t g sv">&lt;|sv_232|&gt;</span><span class="t g sv">&lt;|sv_11|&gt;</span><span class="t g sv">&lt;|sv_255|&gt;</span><span class="t g sv">&lt;|sv_106|&gt;</span><span class="t g sv">&lt;|sv_81|&gt;</span><span class="t g sv">&lt;|sv_2|&gt;</span><span class="t g sv">&lt;|sv_0|&gt;</span><span class="t g sv">&lt;|sv_255|&gt;</span><span class="t g mk">&lt;|eostate|&gt;</span>
+  </div>
+  <div class="blk"><span class="blk-label">mid-episode judge — subsampled with p=0.25; trains the running health monitor <span class="src">e_serializer.py:107-109</span></span>
+    <span class="t g vd">&lt;|verdict_ongoing|&gt;</span>
+  </div>
+  <div class="blk"><span class="blk-label">z-span 2 — target</span>
+    <span class="t g mk">&lt;|boz|&gt;</span><span class="t g z">&lt;|z_10|&gt;</span><span class="t g z">&lt;|z_4|&gt;</span><span class="t g z">&lt;|z_4|&gt;</span><span class="t g z">&lt;|z_0|&gt;</span><span class="t g mk">&lt;|eoz|&gt;</span>
+  </div>
+  <div class="blk"><span class="blk-label">Q-verdict after span 2</span>
+    <span class="t g vd">&lt;|verdict_success|&gt;</span>
+  </div>
+  <div class="blk"><span class="blk-label">observation t=2 — 103/256 dv supervised; state block target</span>
+    <span class="t">&lt;|bov|&gt;</span><span class="t g dv">&lt;|dv_18317|&gt;</span><span class="t g dv">&lt;|dv_59761|&gt;</span><span class="t">&lt;|dv_18970|&gt;</span><span class="t g dv">&lt;|dv_43779|&gt;</span><span class="t g dv">&lt;|dv_22490|&gt;</span><span class="t el">&#8943; 250 more dv (99 supervised)</span><span class="t">&lt;|eov|&gt;</span>
+    <span class="t g mk">&lt;|bostate|&gt;</span><span class="t g sv">&lt;|emb_franka_libero|&gt;</span><span class="t g sv">&lt;|sv_146|&gt;</span><span class="t g sv">&lt;|sv_24|&gt;</span><span class="t g sv">&lt;|sv_100|&gt;</span><span class="t el">&#8943; 6 more sv</span><span class="t g mk">&lt;|eostate|&gt;</span>
+  </div>
+  <div class="blk"><span class="blk-label">terminal judgment — always supervised, from the free environment label <span class="src">e_serializer.py:101-106</span></span>
+    <span class="t g vd">&lt;|verdict_success|&gt;</span><span class="t g mk">&lt;|eot|&gt;</span>
+  </div>
+  <div class="legend">
+    <span><span class="t">context</span> no loss</span>
+    <span><span class="t g dv">&lt;|dv_*|&gt;</span> video token, supervised</span>
+    <span><span class="t g sv">&lt;|sv_*|&gt;</span> state bin, supervised</span>
+    <span><span class="t g z">&lt;|z_*|&gt;</span> latent action, supervised</span>
+    <span><span class="t g vd">&lt;|verdict_*|&gt;</span> judge, supervised</span>
+    <span><span class="t g mk">&lt;|marker|&gt;</span> grammar marker in a target span</span>
+  </div>
+</div>
+<p class="figcap"><b>Figure 2: One real serialized episode (template E).</b> This 2-span record totals
+827 vocabulary tokens (+ instruction text), of which 250 are supervised targets — measured on the rendered
+record. Supervision rules, as implemented: <b>(i)</b> dv/sv observation blocks after t=0 are CE targets for
+<em>all</em> episodes — the world model trains on failures too; <b>motion weighting</b> keeps CE on every dv
+token that changed since the previous latent frame and on a random 30% of static tokens
+(<code class="mono">static_keep=0.3</code> <span class="src">e_serializer.py:30</span>, commit b20987a) —
+otherwise ~90% of the gradient goes to background persistence. <b>(ii)</b> z-spans are targets iff the
+episode succeeded (filtered behavior cloning); on failures they flip to context so the policy never imitates
+failure while the world model still learns from it <span class="src">e_serializer.py:79</span>.
+<b>(iii)</b> The <b>Q-verdict</b> — the episode&#8217;s <em>eventual</em> outcome token — sits directly after each
+z-span (p=0.25), training a fast evidence-free critic of the plan just emitted (commit 8303f8d);
+mid-episode <code class="mono">&lt;|verdict_ongoing|&gt;</code> judges are subsampled at p=0.25 after
+observations, and the terminal verdict is always present, upweighting decision-relevant endgame windows
+<span class="src">e_serializer.py:92-109</span>. At inference the same grammar runs as a persistent-KV
+state machine: observation appends cost one forward (~280 tokens) whose logits give surprise and verdict
+health for free <span class="src">docs/E_STREAM_SPEC.md</span>.</p>
+</div>
+
+<!-- ================= TABLE ================= -->
+<h2><span class="secno">3</span>Vocabulary contract</h2>
+<div class="tblwrap">
+<table>
+  <caption><b>Table 1: Every added token segment.</b> The backbone tokenizer is extended with 64,337
+  tokens <span class="src">data/qwen_vocab.py:61-68</span>; sizes are a frozen contract — any change is a
+  vocabulary migration. z slots are a reserved block: codebooks up to 64 codes are a data change, not a
+  vocabulary change <span class="src">data/z_contract.py:14-21</span>.</caption>
+  <thead><tr><th>Segment</th><th>Tokens</th><th style="text-align:right">Size</th><th>Meaning</th><th>Defined at</th></tr></thead>
+  <tbody>
+  <tr><td>DV video codes</td><td class="mono">&lt;|dv_0|&gt; … &lt;|dv_63999|&gt;</td><td class="num">64,000</td>
+      <td>Cosmos DV4&#215;8&#215;8 indices; FSQ (8,8,8,5,5,5)</td>
+      <td class="mono">qwen_vocab.py:24 · cosmos_dv.py:18 · fsq_calibration.py:28</td></tr>
+  <tr><td>Latent action codes</td><td class="mono">&lt;|z_0|&gt; … &lt;|z_63|&gt;</td><td class="num">64</td>
+      <td>reserved slots; 12 live in LAM v4.17a (FSQ [4,3])</td>
+      <td class="mono">qwen_vocab.py:25 · z_contract.py:35 · s2_lam_v4_17a_fsq12.yaml:25</td></tr>
+  <tr><td>State-value bins</td><td class="mono">&lt;|sv_0|&gt; … &lt;|sv_255|&gt;</td><td class="num">256</td>
+      <td>uniform bins on [&#8722;1,1], shared across dims &amp; embodiments</td>
+      <td class="mono">qwen_vocab.py:26 · normalize.py:55</td></tr>
+  <tr><td>Embodiment ids</td><td class="mono">&lt;|emb_so101|&gt; &lt;|emb_franka_libero|&gt; &lt;|emb_human_umi|&gt;</td><td class="num">3</td>
+      <td>identity token inside each state block (survives modality dropout)</td>
+      <td class="mono">qwen_vocab.py:41-43 · qwen_serializer.py:207</td></tr>
+  <tr><td>Video block markers</td><td class="mono">&lt;|bov|&gt; &lt;|eov|&gt;</td><td class="num">2</td>
+      <td>delimit a 256-token dv observation / future block</td><td class="mono">qwen_vocab.py:29</td></tr>
+  <tr><td>State block markers</td><td class="mono">&lt;|bostate|&gt; &lt;|eostate|&gt;</td><td class="num">2</td>
+      <td>delimit emb + D&#8347; state bins</td><td class="mono">qwen_vocab.py:30</td></tr>
+  <tr><td>z-span markers</td><td class="mono">&lt;|boz|&gt; &lt;|eoz|&gt;</td><td class="num">2</td>
+      <td>delimit an N=4 latent-action span; self-terminating grammar</td><td class="mono">qwen_vocab.py:31</td></tr>
+  <tr><td>Outcome conditioning</td><td class="mono">&lt;|outcome_success|&gt; &lt;|outcome_failure|&gt;</td><td class="num">2</td>
+      <td>template-P &#8220;try-your-best&#8221; conditioning; absent from W by construction (label-leakage fix)</td>
+      <td class="mono">qwen_vocab.py:32 · qwen_serializer.py:12-20 · TECH_REPORT.md:166</td></tr>
+  <tr><td>Verdicts</td><td class="mono">&lt;|verdict_ongoing|&gt; &lt;|verdict_success|&gt; &lt;|verdict_failure|&gt;</td><td class="num">3</td>
+      <td>in-grammar judge; read as 3-way renormalized logits</td>
+      <td class="mono">qwen_vocab.py:33 · estream_policy.py:33</td></tr>
+  <tr><td>Demo slot (reserved)</td><td class="mono">&lt;|demo|&gt; &lt;|/demo|&gt;</td><td class="num">2</td>
+      <td>reserved now for in-context demonstrations</td><td class="mono">qwen_vocab.py:34</td></tr>
+  <tr><td>Terminator</td><td class="mono">&lt;|eot|&gt;</td><td class="num">1</td>
+      <td>record / episode end</td><td class="mono">qwen_vocab.py:35</td></tr>
+  <tr><td><b>Total added</b></td><td></td><td class="num"><b>64,337</b></td>
+      <td>new embedding rows mean-init + noise; embed/lm_head train fully</td>
+      <td class="mono">qwen_vocab.py:61-68 · s4_cpt.py:148-152</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ================= LAM DETAIL ================= -->
+<h2><span class="secno">4</span>The Latent Action Model in detail</h2>
+<p><b>IDM (inverse dynamics).</b> Video-only by design: the encoder sees two consecutive Cosmos pre-quant
+latents (each 6&#215;16&#215;16, spanning 4 raw frames) and nothing else — no proprioception, no raw
+actions — so z stays embodiment-agnostic and human-video-compatible
+<span class="src">models/lam.py:1-13,174</span>. Two drop-in architectures share the signature: a strided
+conv net, and a transformer treating the 256 spatial positions as tokens with a CLS pool
+(d_model 128, 4 layers, 4 heads <span class="src">lam.py:208-231</span>). The
+<b>state-free rule</b> is explicit in code: &#8220;state NEVER enters IDM/FDM; it supervises z as a MASKED
+aux target (loss skipped where state doesn&#8217;t exist, i.e. human video)&#8221;
+<span class="src">lam.py:644-647</span>.</p>
+<p><b>Quantizer.</b> Production (v4.17a) uses Finite Scalar Quantization: project z&#8346;&#7523;&#8337; to 2
+dims, tanh-bound, round to a [4,3] grid — 12 implicit codes, no learned codebook, no EMA, no collapse
+machinery <span class="src">lam.py:99-163</span>. The earlier appendable VQ (EMA codebook with
+freeze-and-append) remains the default for v3 checkpoints <span class="src">lam.py:21-96</span>. Either
+way the LAM is treated as a <em>tokenizer</em>: frozen and versioned before backbone training; changing it
+is a version bump implying a corpus rebuild <span class="src">lam.py:35-38</span>.</p>
+<p><b>FDM (forward dynamics).</b> Reconstructs L&#8348;&#8330;&#8321; from (L&#8348;, z) as a residual —
+the training scaffold that forces z to carry the transition, and the gate probe for verification;
+its predicted latents decode to pixels through the empirically recovered Cosmos quantization
+(<code class="mono">EmpiricalFSQ</code>, exact-match validated at fit time)
+<span class="src">lam.py:193-205,234-256 · fsq_calibration.py:1-20</span>.</p>
+
+<div class="tblwrap">
+<table>
+  <caption><b>Table 2: LAM training losses, as named in code</b> — total assembled in
+  <code class="mono">LAM.forward</code> <span class="src">models/lam.py:672-788</span>; weights from the
+  production recipe <span class="src">configs/stages/s2_lam_v4_17a_fsq12.yaml</span>.</caption>
+  <thead><tr><th>Loss key</th><th>Definition</th><th>Weight (v4.17a)</th><th>Source</th></tr></thead>
+  <tbody>
+  <tr><td class="mono">fdm</td><td>MSE(FDM(L&#8348;, z&#8346;), L&#8348;&#8330;&#8321;) — decorrelated-noise augmentation available</td><td>1.0</td><td class="mono">lam.py:697-714</td></tr>
+  <tr><td class="mono">commit</td><td>MSE(z&#8346;&#7523;&#8337;, sg[z&#8346;]) — identically 0 under FSQ</td><td>&#946;=0.25</td><td class="mono">lam.py:57,143</td></tr>
+  <tr><td class="mono">action</td><td>aux action head: rectified-flow matching (v predicts a&#8722;&#949;) or weighted MSE</td><td>1.0 (+4&#215; on roll/pitch/yaw)</td><td class="mono">lam.py:428-452,734-744</td></tr>
+  <tr><td class="mono">adv</td><td>DANN: CE of embodiment classifier through gradient reversal on z&#8346;&#7523;&#8337;</td><td>0.1</td><td class="mono">lam.py:315-323,768-773</td></tr>
+  <tr><td class="mono">comp</td><td>ALAM local additivity: composition + reversal MSE on z&#8346;&#7523;&#8337;</td><td>0.1</td><td class="mono">lam.py:774-781</td></tr>
+  <tr><td class="mono">nce</td><td>cross-embodiment family-bank InfoNCE (&#964;=0.1, EMA centroids)</td><td>0 (off)</td><td class="mono">lam.py:782-786,790-817</td></tr>
+  <tr><td class="mono">coverage / ste_gap</td><td>VQ auxiliaries: dead-code coverage; straight-through gap penalty</td><td>opt-in</td><td class="mono">lam.py:717-733 · vq_losses.py</td></tr>
+  <tr><td class="mono">state_delta</td><td>masked MSE: z &#8594; measured joint deltas (clean wrist-rotation signal)</td><td>opt-in</td><td class="mono">lam.py:745-749</td></tr>
+  <tr><td class="mono">ee</td><td>masked MSE on the canonical EE target (per-arm mask; human video supervises both slots)</td><td>opt-in</td><td class="mono">lam.py:750-767</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p><b>Aux heads (train-time only).</b> Action grounding enters through per-embodiment heads whose gradients
+shape z but which are discarded at deployment — except the flow heads, which <em>are</em> the deployable
+decoder in v4+. The shared <b>EE-pose head</b> outputs a fixed (2 arms &#215; 4 substeps &#215; 10) tensor —
+9-D SE(3) [6-D rotation + 3-D translation] + 1-D aperture — where every quantity is <em>relative to the
+chunk start</em> (the replan anchor) and scale-normalized (&#916;midpoint/reach, &#916;aperture/max)
+<span class="src">lam.py:273-312 · ee_geometry.py:1-31</span>. Measured consequences of the delta form:
+absolute keypoint targets were 100% linearly separable by embodiment (z learned robot identity, consensus
+probe 0.989); chunk-anchored deltas drop separability to 59.5% and cancel constant calibration offsets
+(0.21 mm residual vs 11.4 mm) <span class="src">lam.py:285-291, experiments/20260727</span>. Absent arms
+are masked out of the loss, so a single-arm robot never teaches the head that the other arm is motionless
+<span class="src">lam.py:750-763</span>.</p>
+
+<p><b>Continuous decode.</b> <code class="mono">decode_actions</code> maps planned code indices through the
+frozen codebook and samples the per-embodiment flow head: inputs z(16) &#8853; state(D&#8347;) &#8853;
+visual cond(64) &#8853; previous action; 10 Euler steps; optional z-classifier-free guidance
+(v = v&#8320; + w&#183;(v_z &#8722; v&#8320;)); <code class="mono">init=&#8217;zero&#8217;</code> integrates
+from the noise mean for a deterministic &#8220;mean sample&#8221; that kills cross-chunk mode switching —
+the safe deployment default <span class="src">lam.py:454-481,819-831</span>. One z decodes to the
+embodiment&#8217;s native rate: 4 actions on franka (20 Hz), 6 on so101 (30 Hz)
+<span class="src">lam.py:293-295 · spec.py:147,177</span>.</p>
+
+<!-- ================= RUNTIME ================= -->
+<h2><span class="secno">5</span>Runtime: acting, judging, escalating</h2>
+<p>At inference the E-grammar becomes a state machine over a persistent KV cache: <b>observe</b> (Cosmos
+encode ~20 ms; append ~280 observation tokens in one obligatory forward, 30&#8211;70 ms) &#8594;
+<b>plan</b> (generate a z-span, ~35 ms/code) &#8594; <b>execute</b> the decoded chunk buffer open-loop.
+The obligatory forward&#8217;s logits are free telemetry: <em>surprise</em> (mean NLL of observed dv tokens
+= predicted-vs-observed disagreement) and the verdict readout. A speculative check forks the KV cache per
+chunk (~50 ms, discarded); surprise above threshold or a degrading judge triggers an event-driven replan —
+truncated spans are in-distribution by construction. Steady state: ~0.4 s of model time per 1.6 s of
+control <span class="src">docs/E_STREAM_SPEC.md</span>. The verdict probability is the calibration signal
+that gates escalation — the &#8220;I don&#8217;t know &#8594; show me&#8221; loop in which human takeovers
+land exactly on the model&#8217;s own state distribution, and all learning updates keep exact likelihoods:
+GRPO over categorical z/EE/verdict tokens on the backbone, PPO over a small Gaussian residual on the frozen
+head, or supervised head refresh — never policy gradients through the flow head
+<span class="src">docs/TECH_REPORT.md:147-152</span>.</p>
+
+<footer>
+  Apprentice architecture reference &middot; figures schematic, shapes and tokens format-exact &middot;
+  Figure 2 rendered from a genuine <span class="mono">serialize_episode_e</span> output
+</footer>
+
+</div>
+</body>
+</html>

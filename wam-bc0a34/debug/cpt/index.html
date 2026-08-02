@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>apprentice — CPT × LAM pipeline</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>apprentice <span class="amber">·</span> how CPT × LAM act together</h1>
+  <p class="sub">Live from the flywheel runs: the Qwen backbone speaks a grafted robot
+  vocabulary — it reads the scene, writes latent-action <b style="color:var(--c-z)">z tokens</b>,
+  imagines the future in <b style="color:var(--c-dv)">dv video tokens</b>, judges itself with
+  <b style="color:var(--c-verdict)">verdict tokens</b> — and the LAM decoder turns z into raw motor commands.</p>
+  <div class="pipe" id="pipe"></div>
+  <div class="controls">
+    <label class="lbl" for="round">round</label><select id="round"></select>
+    <label class="lbl" for="episode">episode</label><select id="episode"></select>
+    <button id="play">▶ replay token flow</button>
+    <span class="note" id="instr"></span>
+  </div>
+</header>
+
+<section class="stage"><div class="hd"><span class="n">P</span><span class="t">Action policy — tokens ⇄ decoder ⇄ robot</span>
+  <span class="d">one chunk = 1 z token = 4 raw actions = 4 sim steps · synced</span></div>
+  <div class="bd">
+    <div class="col"><div class="lbl">execution (synced)</div>
+      <video id="stepvid" muted playsinline></video>
+      <div class="stepbar">
+        <button id="st-reset" title="reset">⏮</button>
+        <button id="st-prev" title="previous chunk">◀</button>
+        <button id="st-next" title="next chunk">next ▶</button>
+        <button id="st-auto" title="autoplay">⏵ auto</button>
+        <span id="st-pos" class="note"></span>
+      </div>
+      <div><span id="outbadge" class="badge"></span></div>
+      <canvas id="ztrace" height="90"></canvas></div>
+    <div class="col wide"><div class="lbl">context tokens at this step (real)</div>
+      <div id="stepctx"></div>
+      <div class="lbl gap">generated → decoder</div>
+      <div id="stepdec" class="decoder"></div></div>
+    <div class="col"><div class="lbl">raw actions this chunk (LAM decoder output)</div>
+      <canvas id="stepacts" height="150"></canvas>
+      <div class="lbl gap">episode action trace</div>
+      <canvas id="acts" height="130"></canvas></div>
+  </div>
+</section>
+
+<section class="stage"><div class="hd"><span class="n">W</span><span class="t">Imagination &amp; verdict — the world model</span>
+  <span class="d">same backbone, second grammar: predicted future video + self-judgment</span></div>
+  <div class="bd">
+    <div class="col"><div class="lbl">dv block (256 tokens → one future frame)</div>
+      <div class="dvgrid" id="dvgrid"></div>
+      <div class="note">Real <span class="tok dv seen">&lt;|dv_i|&gt;</span> ids from this episode’s next
+      observed frame; the frozen Cosmos decoder renders tokens to pixels.</div></div>
+    <div class="col wide"><div class="lbl">imagination vs reality</div><div id="predslot"></div></div>
+    <div class="col"><div class="lbl">self-judgment</div><div id="vdtokens"></div>
+      <div id="vdnote" class="note"></div>
+      <div class="lbl gap">flywheel scoreboard (live)</div><div id="metrics"></div></div>
+  </div>
+</section>
+
+</div>
+<script src="./app.js"></script>
+</body>
+</html>
