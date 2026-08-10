@@ -1,0 +1,29 @@
+<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name="robots" content="noindex,nofollow"><title>journey_r1 — call 000000</title><style>
+:root{--bg:#F4F5F1;--card:#FBFBF9;--ink:#1A211E;--mut:#5C6963;--line:#D9DED8;
+--acc:#2E7D68;--warn:#9A6B15;--crit:#A34335}
+@media (prefers-color-scheme:dark){:root{--bg:#0F1513;--card:#141B18;
+--ink:#E6EBE7;--mut:#93A29B;--line:#242E29;--acc:#5CB89E;--warn:#D2A24C;--crit:#D07A6B}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);
+font:15px/1.5 system-ui,sans-serif;padding:1.5rem}
+a{color:var(--acc)}h1,h2{font-weight:600;margin:.2rem 0 .8rem}
+.mono{font-family:ui-monospace,Consolas,monospace}
+.card{background:var(--card);border:1px solid var(--line);margin:0 0 1rem;
+padding:.8rem 1rem}
+.card h2{font-size:1rem}.card h2 .seq{color:var(--mut);font-weight:400}
+.cols{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.col h3{font-size:.7rem;color:var(--mut);text-transform:uppercase;
+letter-spacing:.08em;margin:.2rem 0 .4rem}
+table{border-collapse:collapse;width:100%;font-size:.8rem}
+th,td{border:1px solid var(--line);padding:.25rem .5rem;text-align:left;
+font-variant-numeric:tabular-nums}th{color:var(--mut);font-size:.65rem;
+text-transform:uppercase;letter-spacing:.08em}
+img{max-width:100%;image-rendering:pixelated;border:1px solid var(--line)}
+figure{margin:.3rem 0}figcaption{font-size:.7rem;color:var(--mut)}
+.vals{font-size:.75rem;overflow-x:auto;white-space:nowrap;margin:.3rem 0;
+color:var(--ink)}.vals b{color:var(--mut);font-weight:400}
+.delta{color:var(--acc);font-weight:600}
+.flag{color:var(--crit);font-weight:600}
+.flags{margin:.3rem 0;font-size:.8rem}
+nav{margin-bottom:1.2rem;font-size:.8rem}nav a{margin-right:1rem}
+.meta{font-size:.75rem;color:var(--mut)}
+</style><nav><b>data journey</b> <a href='../index.html'>all calls</a></nav><h1>journey_r1 — call 000000</h1><div class="card"><h2><span class="seq mono">00</span> decode+resample 15-&gt;20fps</h2><div class='cols'><div class='col'><h3>in</h3></div><div class='col'><h3>out</h3><table><tr><th>key</th><th>shape</th><th>dtype</th><th>min</th><th>max</th><th>mean</th></tr><tr><td class='mono'>frames_native</td><td>64×128×128×3</td><td>uint8</td><td>0</td><td>255</td><td>—</td></tr></table></div></div></div><div class="card"><h2><span class="seq mono">01</span> resample map (holds frames)</h2><div class='cols'><div class='col'><h3>in</h3></div><div class='col'><h3>out</h3><table><tr><th>key</th><th>shape</th><th>dtype</th><th>min</th><th>max</th><th>mean</th></tr><tr><td class='mono'>resample_idx</td><td>16</td><td>int64</td><td>0</td><td>11</td><td>—</td></tr></table><div class="vals mono"><b>resample_idx</b> = [0, 0, 1, 2, 3, 3, 4, 5, 6, 6, 7, 8, 9, 9, 10, 11]</div></div></div></div><div class="card"><h2><span class="seq mono">02</span> cosmos encode (seamless)</h2><div class='cols'><div class='col'><h3>in</h3></div><div class='col'><h3>out</h3><table><tr><th>key</th><th>shape</th><th>dtype</th><th>min</th><th>max</th><th>mean</th></tr><tr><td class='mono'>latents</td><td>16×6×16×16</td><td>float32</td><td>-1</td><td>1</td><td>-0.08042</td></tr></table></div></div></div><div class="card"><h2><span class="seq mono">03</span> IDM -&gt; VQ (z vocabulary)</h2><div class='cols'><div class='col'><h3>in</h3></div><div class='col'><h3>out</h3><table><tr><th>key</th><th>shape</th><th>dtype</th><th>min</th><th>max</th><th>mean</th></tr><tr><td class='mono'>codes</td><td>15</td><td>int64</td><td>1</td><td>11</td><td>—</td></tr></table><div class="vals mono"><b>codes</b> = [11, 1, 1, 1, 1, 2, 10, 10, 10, 10, 7, 1, 11, 9, 7]</div></div></div></div>
