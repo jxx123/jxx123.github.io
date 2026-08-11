@@ -136,7 +136,7 @@
 
 <main id="deck">
 
-<!-- 01 · TITLE -->
+<!-- TITLE -->
 <section class="slide">
   <span class="wm serif" aria-hidden="true">ἀ</span>
   <p class="eyebrow">Apprentice · Pre-seed · 2026</p>
@@ -146,21 +146,226 @@
   <p style="font-family:ui-monospace,'SF Mono',Consolas,monospace;margin-top:2rem;font-size:.72rem;color:var(--muted)">[Founder] · Confidential · figures marked ~ are planning estimates</p>
 </section>
 
-<!-- 02 · THE HUMAN PROBLEM -->
+<!-- 01 · MENO'S PARADOX -->
 <section class="slide">
-  <p class="eyebrow">01 · The problem</p>
+  <span class="wm serif" aria-hidden="true">Μ</span>
+  <p class="eyebrow">01 · The oldest question about learning</p>
+  <h2 class="serif">“How will you search for a thing when you do not know what it is?”</h2>
+  <p class="lede">Plato, the <i>Meno</i>, 385 BC. The paradox: if you already know, you have no need to search; if you truly don’t know, you cannot recognize the answer when you stumble on it. Socrates doesn’t answer with an argument. He answers with a demonstration.</p>
+  <p class="punch">Every learning machine faces Meno’s paradox. Robotics just makes it expensive.</p>
+</section>
+
+<!-- 02 · SOCRATES AND THE BOY -->
+<section class="slide">
+  <span class="wm serif" aria-hidden="true">√</span>
+  <p class="eyebrow">02 · Socrates and the boy</p>
+  <h2 class="serif">He never tells the boy the answer. He asks — until the boy knows.</h2>
+  <p class="lede">Socrates takes an uneducated enslaved boy and, asking only questions, leads him to double the square. First <i>aporia</i> — the honest “I don’t know” that makes the next question land. Then, attempt by guided attempt, knowledge; Plato called it <i>anamnesis</i>. Swap the agora for a hazard zone and the dialogue is our system diagram.</p>
+  <div class="fig"><svg viewBox="0 0 840 310" role="img" aria-label="Two-column mapping: Socrates the questioner maps to the human teleoperator, the coding agent, and the cloud verifier; the boy maps to the Apprentice robot, which admits what it does not know and converts guided attempts into skill">
+    <text x="215" y="38" text-anchor="middle" class="big">Socrates — the questioner</text>
+    <rect x="65" y="56" width="300" height="58" fill="var(--chip)" stroke="var(--line)"/>
+    <text x="215" y="80" text-anchor="middle" class="lab2">HUMAN TELEOPERATOR</text>
+    <text x="215" y="98" text-anchor="middle" class="lab">TAKES OVER AND SHOWS — NEVER JUST TELLS</text>
+    <rect x="65" y="126" width="300" height="58" fill="var(--chip)" stroke="var(--line)"/>
+    <text x="215" y="150" text-anchor="middle" class="lab2">CODING AGENT</text>
+    <text x="215" y="168" text-anchor="middle" class="lab">WRITES THE SCRIPTED PROBE</text>
+    <rect x="65" y="196" width="300" height="58" fill="var(--chip)" stroke="var(--line)"/>
+    <text x="215" y="220" text-anchor="middle" class="lab2">VLM · CLOUD VERIFIER</text>
+    <text x="215" y="238" text-anchor="middle" class="lab">JUDGES, PROPOSES THE NEXT QUESTION</text>
+    <line x1="365" y1="85" x2="432" y2="85" stroke="var(--accent)" stroke-width="1.8"/>
+    <path d="M430,78 L440,85 L430,92 Z" fill="var(--accent)"/>
+    <line x1="365" y1="155" x2="432" y2="155" stroke="var(--accent)" stroke-width="1.8"/>
+    <path d="M430,148 L440,155 L430,162 Z" fill="var(--accent)"/>
+    <line x1="365" y1="225" x2="432" y2="225" stroke="var(--accent)" stroke-width="1.8"/>
+    <path d="M430,218 L440,225 L430,232 Z" fill="var(--accent)"/>
+    <text x="610" y="38" text-anchor="middle" class="big">the boy — Apprentice</text>
+    <rect x="445" y="56" width="330" height="198" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.5"/>
+    <text x="610" y="96" text-anchor="middle" class="lab2">THE ROBOT THAT DOESN’T KNOW YET</text>
+    <text x="610" y="118" text-anchor="middle" class="lab">ἀπορία — ADMITS IT: “I DON’T KNOW — SHOW ME”</text>
+    <line x1="485" y1="150" x2="735" y2="150" stroke="var(--line)"/>
+    <text x="610" y="182" text-anchor="middle" class="lab2">CONVERTS GUIDED ATTEMPTS INTO SKILL</text>
+    <text x="610" y="204" text-anchor="middle" class="lab">ἀνάμνησις — THE FLYWHEEL</text>
+    <text x="420" y="292" text-anchor="middle" class="ann">questions in, knowledge out — the loop is 2,400 years old</text>
+  </svg></div>
+  <p class="figcap">The company’s name lives on this slide: an apprentice is the boy who knows he’s learning.</p>
+</section>
+
+<!-- 03 · WHY IDK IS THE LOAD-BEARING SKILL -->
+<section class="slide">
+  <span class="wm serif" aria-hidden="true">?</span>
+  <p class="eyebrow">03 · Why “I don’t know” is the load-bearing skill</p>
+  <h2>Three loads rest on one honest sentence.</h2>
+  <div class="fig"><svg viewBox="0 0 840 310" role="img" aria-label="Three pillars — deployment necessity, operation cost, novel data discovery — carrying a deployed, learning fleet">
+    <rect x="30" y="24" width="780" height="52" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.5"/>
+    <text x="420" y="56" text-anchor="middle" class="big">a deployed, learning fleet</text>
+    <rect x="30" y="76" width="240" height="216" fill="var(--chip)" stroke="var(--line)"/>
+    <text x="150" y="106" text-anchor="middle" class="lab">DEPLOYMENT NECESSITY</text>
+    <text x="150" y="140" text-anchor="middle" class="big">it can ship</text>
+    <text x="150" y="172" text-anchor="middle" class="lab">A ROBOT SILENTLY WRONG ONCE</text>
+    <text x="150" y="188" text-anchor="middle" class="lab">IS UNDEPLOYABLE WHERE</text>
+    <text x="150" y="204" text-anchor="middle" class="lab">FAILURE IS AN INCIDENT</text>
+    <text x="150" y="240" text-anchor="middle" class="lab2">KNOWING-WHEN-UNSURE LETS</text>
+    <text x="150" y="258" text-anchor="middle" class="lab2">AN IMPERFECT ROBOT SHIP</text>
+    <rect x="300" y="76" width="240" height="216" fill="var(--chip)" stroke="var(--line)"/>
+    <text x="420" y="106" text-anchor="middle" class="lab">OPERATION COST</text>
+    <text x="420" y="140" text-anchor="middle" class="big">it can scale</text>
+    <text x="420" y="172" text-anchor="middle" class="lab">DOUBT ROUTES ONE HUMAN’S</text>
+    <text x="420" y="188" text-anchor="middle" class="lab">ATTENTION ACROSS N ROBOTS</text>
+    <text x="420" y="222" text-anchor="middle" class="lab2">THE OPERATOR RATIO — AND</text>
+    <text x="420" y="240" text-anchor="middle" class="lab2">THEREFORE GROSS MARGIN — IS</text>
+    <text x="420" y="258" text-anchor="middle" class="lab2">THE CALIBRATION QUALITY</text>
+    <rect x="570" y="76" width="240" height="216" fill="var(--chip)" stroke="var(--line)"/>
+    <text x="690" y="106" text-anchor="middle" class="lab">NOVEL DATA DISCOVERY</text>
+    <text x="690" y="140" text-anchor="middle" class="big">it can learn</text>
+    <text x="690" y="172" text-anchor="middle" class="lab">EVERY HONEST “I DON’T KNOW” IS</text>
+    <text x="690" y="188" text-anchor="middle" class="lab">A LABELED SAMPLE FROM EXACTLY</text>
+    <text x="690" y="204" text-anchor="middle" class="lab">WHERE THE MODEL IS WEAK</text>
+    <text x="690" y="240" text-anchor="middle" class="lab2">ESCALATIONS ARE THE DATA</text>
+    <text x="690" y="258" text-anchor="middle" class="lab2">ENGINE NO ONE CAN BUY</text>
+  </svg></div>
+  <p class="figcap">Take the pillar away and the rest falls: an always-guessing robot can’t ship into incident-priced sites, can’t share one operator across a fleet, and never finds out where it is weak.</p>
+  <p class="punch">Safety is not a dessert you serve on top of a finished model. It is the bottom line of a deployable robot — the ask-for-help is built in from day one, not bolted on at the end.</p>
+</section>
+
+<!-- 04 · SUCCESS RATE IS A LIE -->
+<section class="slide">
+  <span class="wm serif" aria-hidden="true">%</span>
+  <p class="eyebrow">04 · no more success rate without context</p>
+  <h2 class="serif">“90% success” is one bit of luck, measured where the robot practiced.</h2>
+  <p class="lede">A robot can ace the benchmark and still break when the lighting changes, the object moves, or the question is asked differently. Success rate cannot tell a robot that <b>knows how</b> from a robot that <b>got it right</b>. The Greeks had words for this: <i>doxa</i> — opinion that happens to be true — versus <i>epistēmē</i> — knowledge.</p>
+  <p class="punch">We stopped asking “did it succeed?” — the Epistēmē Index probes whether the model <b>really knows</b> the problem type, or merely got this instance right.</p>
+</section>
+
+<!-- 04b · PLATO'S TETHER -->
+<section class="slide">
+  <span class="wm serif" aria-hidden="true">Σ</span>
+  <p class="eyebrow">04 · part two — what knowledge actually is</p>
+  <h2 class="serif">“True opinions run away like the statues of Daedalus — until you tether them.”</h2>
+  <p class="lede">The <i>Meno</i>’s closing move: a lucky opinion and real knowledge behave identically — <b>once</b>. The difference is what survives being shaken. Knowledge is opinion <b>tethered by an account of the reason</b> (αἰτίας λογισμός): it stays put when the world moves.</p>
+  <p class="lede" style="margin-top:.8rem">So don’t score the robot’s successes. <b>Score the tethers.</b></p>
+</section>
+
+<!-- 04c · THE FIVE TETHERS -->
+<section class="slide">
+  <span class="wm serif" aria-hidden="true">识</span>
+  <p class="eyebrow">04 · part three — the Epistēmē Index</p>
+  <h2 class="serif">Five tethers. Each one a measurable ratio.</h2>
+  <div class="fig"><svg viewBox="0 0 840 320" role="img" aria-label="The five tethers of the Epistēmē Index">
+    <g>
+      <rect x="30" y="30" width="380" height="46" fill="var(--chip)" stroke="var(--line)"/>
+      <text x="50" y="59" class="big">Stability</text>
+      <text x="400" y="59" text-anchor="end" class="lab">SUCCEEDS WHEN LIGHTING / CAMERA / CLUTTER CHANGE</text>
+      <rect x="30" y="86" width="380" height="46" fill="var(--chip)" stroke="var(--line)"/>
+      <text x="50" y="115" class="big">Transfer</text>
+      <text x="400" y="115" text-anchor="end" class="lab">SOLVES THE TYPE, NOT THE MEMORIZED INSTANCE</text>
+      <rect x="30" y="142" width="380" height="46" fill="var(--chip)" stroke="var(--line)"/>
+      <text x="50" y="171" class="big">Foresight</text>
+      <text x="400" y="171" text-anchor="end" class="lab">PREDICTS WHAT ITS OWN ACTIONS WILL DO</text>
+      <rect x="30" y="198" width="380" height="46" fill="var(--chip)" stroke="var(--line)"/>
+      <text x="50" y="227" class="big">Humility</text>
+      <text x="400" y="227" text-anchor="end" class="lab">知之为知之 — KNOWS ITS OWN BOUNDARY, ASKS FOR HELP</text>
+      <rect x="30" y="254" width="380" height="46" fill="var(--chip)" stroke="var(--line)"/>
+      <text x="50" y="283" class="big">Recovery</text>
+      <text x="400" y="283" text-anchor="end" class="lab">FINDS THE PATH AGAIN AFTER A BUMP</text>
+      <rect x="450" y="86" width="360" height="158" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.5"/>
+      <text x="630" y="130" text-anchor="middle" class="big">EI = (S·T·F·H·R)^⅕</text>
+      <text x="630" y="162" text-anchor="middle" class="lab">GEOMETRIC MEAN — A ZERO ANYWHERE IS ZERO</text>
+      <text x="630" y="190" text-anchor="middle" class="lab">YOU CANNOT AVERAGE AWAY A MISSING TETHER</text>
+      <text x="630" y="218" text-anchor="middle" class="lab2">RISES EVERY FLYWHEEL ROUND — OR THE FLYWHEEL ISN'T LEARNING</text>
+    </g>
+  </svg></div>
+  <p class="lede">Practice becoming knowledge, as a number: 练习转化为知识和直觉 — measured.</p>
+</section>
+
+<!-- 04d · THE FIVE BROKEN ROBOTS -->
+<section class="slide">
+  <span class="wm serif" aria-hidden="true">五</span>
+  <p class="eyebrow">04 · part four — drop one tether, name the robot you get</p>
+  <h2 class="serif">Every missing tether is a robot you’ve already met.</h2>
+  <div class="fig"><svg viewBox="0 0 840 300" role="img" aria-label="The five failure archetypes">
+    <g>
+      <rect x="30" y="30" width="255" height="70" fill="var(--chip)" stroke="var(--line)"/>
+      <text x="157" y="58" text-anchor="middle" class="big">the Parrot</text>
+      <text x="157" y="84" text-anchor="middle" class="lab">NO STABILITY — BREAKS WHEN THE LIGHT CHANGES</text>
+      <rect x="300" y="30" width="255" height="70" fill="var(--chip)" stroke="var(--line)"/>
+      <text x="427" y="58" text-anchor="middle" class="big">the One-Trick Pony</text>
+      <text x="427" y="84" text-anchor="middle" class="lab">NO TRANSFER — MASTERS THE DEMO, FAILS ITS NEIGHBOR</text>
+      <rect x="570" y="30" width="240" height="70" fill="var(--chip)" stroke="var(--line)"/>
+      <text x="690" y="58" text-anchor="middle" class="big">the Sleepwalker</text>
+      <text x="690" y="84" text-anchor="middle" class="lab">NO FORESIGHT — ACTS WITHOUT IMAGINING</text>
+      <rect x="165" y="130" width="255" height="70" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.5"/>
+      <text x="292" y="158" text-anchor="middle" class="big">the Confident Fool</text>
+      <text x="292" y="184" text-anchor="middle" class="lab">NO HUMILITY — REPORTS SUCCESS WHILE FAILING</text>
+      <rect x="435" y="130" width="255" height="70" fill="var(--chip)" stroke="var(--line)"/>
+      <text x="562" y="158" text-anchor="middle" class="big">the Glass Dancer</text>
+      <text x="562" y="184" text-anchor="middle" class="lab">NO RECOVERY — FLAWLESS UNTIL THE FIRST BUMP</text>
+      <text x="420" y="245" text-anchor="middle" class="ann">the Confident Fool is the one that ends deployments — we measured one claiming success on 13 of 20 failures</text>
+      <text x="420" y="275" text-anchor="middle" class="lab2">THE FLEET SHIPS ONLY WHEN ALL FIVE TETHERS HOLD. THAT IS THE CERTIFICATE.</text>
+    </g>
+  </svg></div>
+</section>
+
+<!-- 05 · PHILOSOPHY BEAT — EAST & WEST -->
+<section class="slide">
+  <span class="wm serif" aria-hidden="true">知</span>
+  <p class="eyebrow">05 · Two traditions confirm</p>
+  <h2 class="serif">知之为知之，不知为不知，是知也。</h2>
+  <p class="lede" style="margin-top:.2rem">“To know what you know, and to know what you do not know — <b>that</b> is knowledge.” — Confucius, c. 500 BC</p>
+  <p class="lede" style="margin-top:.8rem">A century before Plato staged the <i>Meno</i>, the same principle was written down in the East. Two traditions with no contact reached the identical foundation: <b>intelligence begins with an accurate map of your own ignorance.</b></p>
+  <p class="punch">Two philosophies figured this out 2,400 years ago. We built it into a robot.</p>
+</section>
+
+<!-- 05b · MOZI — THE ENGINEER'S EPISTEMOLOGY -->
+<section class="slide">
+  <span class="wm serif" aria-hidden="true">取</span>
+  <p class="eyebrow">05 · part two — the engineers’ school</p>
+  <h2 class="serif">「非以其名也，以其取也。」</h2>
+  <p class="lede">Mozi, c. 400 BC: a blind man can define white and black perfectly — but cannot <b>pick them out</b>. So he does not know them: “not by the naming, but by the taking.” Language models know the world by naming. Robots must know it by taking.</p>
+  <div class="fig"><svg viewBox="0 0 840 400" role="img" aria-label="The industry robot data pyramid, with Mozi's classification revealing its missing apex">
+    <g>
+      <polygon points="420,44 512,110 328,110" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="7 5"/>
+      <text x="420" y="80" text-anchor="middle" class="big" fill="var(--accent)">親 lived</text>
+      <text x="420" y="100" text-anchor="middle" class="lab">THE ROBOT’S OWN EXPERIENCE — NOT IN THE PYRAMID</text>
+      <polygon points="328,118 512,118 566,178 274,178" fill="var(--chip)" stroke="var(--line)"/>
+      <text x="420" y="152" text-anchor="middle" class="lab2">ON-ROBOT TELEOP</text>
+      <polygon points="274,186 566,186 620,246 220,246" fill="var(--chip)" stroke="var(--line)"/>
+      <text x="420" y="220" text-anchor="middle" class="lab2">UMI · HANDHELD DEMOS</text>
+      <polygon points="220,254 620,254 674,314 166,314" fill="var(--chip)" stroke="var(--line)"/>
+      <text x="420" y="288" text-anchor="middle" class="lab2">SIMULATION · SYNTHETIC</text>
+      <polygon points="166,322 674,322 730,382 110,382" fill="var(--chip)" stroke="var(--line)"/>
+      <text x="420" y="356" text-anchor="middle" class="lab2">INTERNET HUMAN VIDEO</text>
+      <path d="M580,118 L580,178 M574,148 L610,148" stroke="var(--line)" fill="none"/>
+      <path d="M634,186 L634,246 M628,216 L610,216" stroke="none" fill="none"/>
+      <text x="620" y="140" class="big">聞</text>
+      <text x="620" y="162" class="lab">HEARD — OTHER</text>
+      <text x="620" y="178" class="lab">PEOPLE’S HANDS</text>
+      <text x="688" y="278" class="big">說</text>
+      <text x="688" y="300" class="lab">INFERRED</text>
+      <text x="744" y="348" class="big">聞</text>
+      <text x="744" y="370" class="lab">HEARD</text>
+      <text x="240" y="70" text-anchor="end" class="ann">Mozi’s highest tier —</text>
+      <text x="240" y="92" text-anchor="end" class="ann">the summit is missing.</text>
+    </g>
+  </svg></div>
+  <p class="lede" style="margin-top:.6rem">The famous pyramid <b>tops out at other people’s hands</b> — teleop and UMI are still 聞, knowledge received, not lived. Mozi ranked 親 — one’s own lived experience — above them all, 2,300 years ago. The industry’s pyramid doesn’t have that tier. <b>Our flywheel builds it.</b> And his third test of any claim — <b>用</b>, put it to use and observe — is our eval doctrine, written 300 BC.</p>
+</section>
+
+<!-- 06 · GO-TO-MARKET — THE HUMAN PROBLEM -->
+<section class="slide">
+  <p class="eyebrow">06 · Go-to-market</p>
   <h2>Dangerous work still belongs to people.</h2>
   <div class="tiles">
     <div class="tile"><div class="n">~90<span style="font-size:.5em">/yr</span></div><div class="d">U.S. workers killed in confined spaces alone (OSHA, 2011–2018 avg) — tanks, vessels, pits that someone still has to enter and check</div></div>
     <div class="tile"><div class="n">$1.3M+</div><div class="d">OSHA fines for a single confined-space fatality — before lawsuits, downtime, and insurance repricing</div></div>
     <div class="tile"><div class="n">Daily</div><div class="d">gauge readings, gas checks, valve rounds, sample runs — simple, repetitive tasks in places built to hurt people</div></div>
   </div>
+  <p class="lede" style="margin-top:1.2rem">Our positioning is not labor efficiency — it is <b>labor replacement on human-risk tasks</b>. Wherever remote teleoperation already exists, it exists because no one wants a person there. That is our beachhead: the teleop station is already built, already paid for, already the industry’s mental model — we make the robot earn autonomy inside it, one honest “I’ve got this” at a time.</p>
   <p class="punch">Why hasn’t automation fixed this? Because a robot that “usually works” is useless where one silent failure is an incident.</p>
 </section>
 
-<!-- 03 · WHY ROBOTS FAIL HERE -->
+<!-- 07 · WHY ROBOTS FAIL HERE -->
 <section class="slide">
-  <p class="eyebrow">02 · Why today’s robots can’t do it</p>
+  <p class="eyebrow">07 · Why today’s robots can’t do it</p>
   <h2>They don’t know when they’re wrong.</h2>
   <div class="fig"><svg viewBox="0 0 840 400" role="img" aria-label="Quadrant of confidence versus correctness; confidently wrong is the deployment killer">
     <line x1="420" y1="40" x2="420" y2="360" stroke="var(--line)"/>
@@ -181,33 +386,9 @@
   <p class="figcap">Every AI robot demo you’ve seen lives on the right side of this chart — and can’t tell you which square it’s in. Modern AI is a famously confident guesser: the industry calls the failures “hallucinations.” On a factory floor, a hallucination has a blast radius.</p>
 </section>
 
-<!-- 04 · OUR IDEA -->
+<!-- 08 · STORYBOARD -->
 <section class="slide">
-  <p class="eyebrow">03 · Our idea</p>
-  <h2>A robot with a working sense of doubt.</h2>
-  <div class="fig"><svg viewBox="0 0 840 240" role="img" aria-label="The loop: deploy with a human safety net; robot does what it is sure of and asks when not; every rescue is revenue and a lesson">
-    <rect x="40" y="60" width="200" height="60" fill="var(--accent-soft)" stroke="var(--accent)"/>
-    <text x="140" y="86" text-anchor="middle" class="lab2">DEPLOY ON DAY ONE</text>
-    <text x="140" y="104" text-anchor="middle" class="lab">WITH A REMOTE HUMAN SAFETY NET</text>
-    <rect x="320" y="60" width="200" height="60" fill="var(--accent-soft)" stroke="var(--accent)"/>
-    <text x="420" y="86" text-anchor="middle" class="lab2">SURE → DOES IT</text>
-    <text x="420" y="104" text-anchor="middle" class="lab">NOT SURE → STOPS &amp; ASKS</text>
-    <rect x="600" y="60" width="200" height="60" fill="var(--accent-soft)" stroke="var(--accent)"/>
-    <text x="700" y="86" text-anchor="middle" class="lab2">EVERY RESCUE =</text>
-    <text x="700" y="104" text-anchor="middle" class="lab">REVENUE + A LESSON IT KEEPS</text>
-    <line x1="240" y1="90" x2="314" y2="90" stroke="var(--accent)" stroke-width="1.8"/>
-    <line x1="520" y1="90" x2="594" y2="90" stroke="var(--accent)" stroke-width="1.8"/>
-    <path d="M700,120 C700,190 140,190 140,124" fill="none" stroke="var(--accent)" stroke-width="1.8"/>
-    <path d="M134,135 L140,121 L147,134 Z" fill="var(--accent)"/>
-    <text x="420" y="185" text-anchor="middle" class="ann">tasks that needed help this month run alone the next</text>
-  </svg></div>
-  <p class="figcap">The customer sees 100% task completion from day one — some done by the robot, the rest by a remote operator through the robot. The mix shifts every month. That shift is the entire business.</p>
-  <p class="punch">Safety is not a dessert you serve on top of a finished model. It is the bottom line of a deployable robot — the ask-for-help is built in from day one, not bolted on at the end.</p>
-</section>
-
-<!-- 05 · STORYBOARD -->
-<section class="slide">
-  <p class="eyebrow">04 · One task, four beats</p>
+  <p class="eyebrow">08 · One task, four beats</p>
   <h2>What “asking” looks like.</h2>
   <div class="board">
     <div class="panel">
@@ -262,9 +443,32 @@
   </div>
 </section>
 
-<!-- 06 · THE CURVE -->
+<!-- 09 · OUR IDEA -->
+<section class="slide">
+  <p class="eyebrow">09 · Our idea</p>
+  <h2>A robot with a working sense of doubt.</h2>
+  <div class="fig"><svg viewBox="0 0 840 240" role="img" aria-label="The loop: deploy with a human safety net; robot does what it is sure of and asks when not; every rescue is revenue and a lesson">
+    <rect x="40" y="60" width="200" height="60" fill="var(--accent-soft)" stroke="var(--accent)"/>
+    <text x="140" y="86" text-anchor="middle" class="lab2">DEPLOY ON DAY ONE</text>
+    <text x="140" y="104" text-anchor="middle" class="lab">WITH A REMOTE HUMAN SAFETY NET</text>
+    <rect x="320" y="60" width="200" height="60" fill="var(--accent-soft)" stroke="var(--accent)"/>
+    <text x="420" y="86" text-anchor="middle" class="lab2">SURE → DOES IT</text>
+    <text x="420" y="104" text-anchor="middle" class="lab">NOT SURE → STOPS &amp; ASKS</text>
+    <rect x="600" y="60" width="200" height="60" fill="var(--accent-soft)" stroke="var(--accent)"/>
+    <text x="700" y="86" text-anchor="middle" class="lab2">EVERY RESCUE =</text>
+    <text x="700" y="104" text-anchor="middle" class="lab">REVENUE + A LESSON IT KEEPS</text>
+    <line x1="240" y1="90" x2="314" y2="90" stroke="var(--accent)" stroke-width="1.8"/>
+    <line x1="520" y1="90" x2="594" y2="90" stroke="var(--accent)" stroke-width="1.8"/>
+    <path d="M700,120 C700,190 140,190 140,124" fill="none" stroke="var(--accent)" stroke-width="1.8"/>
+    <path d="M134,135 L140,121 L147,134 Z" fill="var(--accent)"/>
+    <text x="420" y="185" text-anchor="middle" class="ann">tasks that needed help this month run alone the next</text>
+  </svg></div>
+  <p class="figcap">The customer sees 100% task completion from day one — some done by the robot, the rest by a remote operator through the robot. The mix shifts every month. That shift is the entire business.</p>
+</section>
+
+<!-- 10 · THE CURVE -->
 <section class="slide" id="curve">
-  <p class="eyebrow">05 · The one chart that matters</p>
+  <p class="eyebrow">10 · The one chart that matters</p>
   <h2>The Apprentice Curve.</h2>
   <div class="fig">
     <svg viewBox="0 0 760 340" role="img" aria-label="Share of tasks needing human help declines over deployment time">
@@ -287,132 +491,9 @@
   <p class="figcap">Help needed falls as the fleet learns from its own rescues. This one line is our research score, our product promise to the customer, and our gross margin. They are not three things.</p>
 </section>
 
-<!-- 07 · PHILOSOPHY BEAT — EAST & WEST -->
+<!-- 11 · WHERE WE START -->
 <section class="slide">
-  <span class="wm serif" aria-hidden="true">知</span>
-  <p class="eyebrow">06 · An idea old enough to be true — twice</p>
-  <h2 class="serif">知之为知之，不知为不知，是知也。</h2>
-  <p class="lede" style="margin-top:.2rem">“To know what you know, and to know what you do not know — <b>that</b> is knowledge.” — Confucius, c. 500 BC</p>
-  <p class="lede" style="margin-top:.8rem"><span class="serif" style="font-style:italic">“How will you search for a thing when you do not know what it is?”</span> — Plato, the <i>Meno</i>, 385 BC. Both traditions, a century apart, reached the same principle: <b>intelligence begins with an accurate map of your own ignorance.</b></p>
-  <p class="punch">Two philosophies figured this out 2,400 years ago. We built it into a robot.</p>
-</section>
-
-<!-- 07b · MOZI — THE ENGINEER'S EPISTEMOLOGY -->
-<section class="slide">
-  <span class="wm serif" aria-hidden="true">取</span>
-  <p class="eyebrow">06 · part two — the engineers’ school</p>
-  <h2 class="serif">「非以其名也，以其取也。」</h2>
-  <p class="lede">Mozi, c. 400 BC: a blind man can define white and black perfectly — but cannot <b>pick them out</b>. So he does not know them: “not by the naming, but by the taking.” Language models know the world by naming. Robots must know it by taking.</p>
-  <div class="fig"><svg viewBox="0 0 840 400" role="img" aria-label="The industry robot data pyramid, with Mozi's classification revealing its missing apex">
-    <g>
-      <polygon points="420,44 512,110 328,110" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="7 5"/>
-      <text x="420" y="80" text-anchor="middle" class="big" fill="var(--accent)">親 lived</text>
-      <text x="420" y="100" text-anchor="middle" class="lab">THE ROBOT’S OWN EXPERIENCE — NOT IN THE PYRAMID</text>
-      <polygon points="328,118 512,118 566,178 274,178" fill="var(--chip)" stroke="var(--line)"/>
-      <text x="420" y="152" text-anchor="middle" class="lab2">ON-ROBOT TELEOP</text>
-      <polygon points="274,186 566,186 620,246 220,246" fill="var(--chip)" stroke="var(--line)"/>
-      <text x="420" y="220" text-anchor="middle" class="lab2">UMI · HANDHELD DEMOS</text>
-      <polygon points="220,254 620,254 674,314 166,314" fill="var(--chip)" stroke="var(--line)"/>
-      <text x="420" y="288" text-anchor="middle" class="lab2">SIMULATION · SYNTHETIC</text>
-      <polygon points="166,322 674,322 730,382 110,382" fill="var(--chip)" stroke="var(--line)"/>
-      <text x="420" y="356" text-anchor="middle" class="lab2">INTERNET HUMAN VIDEO</text>
-      <path d="M580,118 L580,178 M574,148 L610,148" stroke="var(--line)" fill="none"/>
-      <path d="M634,186 L634,246 M628,216 L610,216" stroke="none" fill="none"/>
-      <text x="620" y="140" class="big">聞</text>
-      <text x="620" y="162" class="lab">HEARD — OTHER</text>
-      <text x="620" y="178" class="lab">PEOPLE’S HANDS</text>
-      <text x="688" y="278" class="big">說</text>
-      <text x="688" y="300" class="lab">INFERRED</text>
-      <text x="744" y="348" class="big">聞</text>
-      <text x="744" y="370" class="lab">HEARD</text>
-      <text x="240" y="70" text-anchor="end" class="ann">Mozi’s highest tier —</text>
-      <text x="240" y="92" text-anchor="end" class="ann">the summit is missing.</text>
-    </g>
-  </svg></div>
-  <p class="lede" style="margin-top:.6rem">The famous pyramid <b>tops out at other people’s hands</b> — teleop and UMI are still 聞, knowledge received, not lived. Mozi ranked 親 — one’s own lived experience — above them all, 2,300 years ago. The industry’s pyramid doesn’t have that tier. <b>Our flywheel builds it.</b> And his third test of any claim — <b>用</b>, put it to use and observe — is our eval doctrine, written 300 BC.</p>
-</section>
-
-<!-- 07 · SUCCESS RATE IS A LIE -->
-<section class="slide">
-  <span class="wm serif" aria-hidden="true">%</span>
-  <p class="eyebrow">07 · the metric everyone uses is the wrong one</p>
-  <h2 class="serif">“90% success” is one bit of luck, measured where the robot practiced.</h2>
-  <p class="lede">A robot can ace the benchmark and still break when the lighting changes, the object moves, or the question is asked differently. Success rate cannot tell a robot that <b>knows how</b> from a robot that <b>got it right</b>. The Greeks had words for this: <i>doxa</i> — opinion that happens to be true — versus <i>epistēmē</i> — knowledge.</p>
-  <p class="punch">We stopped asking “did it succeed?” and started asking “does it know?”</p>
-</section>
-
-<!-- 07b · PLATO'S TETHER -->
-<section class="slide">
-  <span class="wm serif" aria-hidden="true">Σ</span>
-  <p class="eyebrow">07 · part two — what knowledge actually is</p>
-  <h2 class="serif">“True opinions run away like the statues of Daedalus — until you tether them.”</h2>
-  <p class="lede">Plato, the <i>Meno</i>: a lucky opinion and real knowledge behave identically — <b>once</b>. The difference is what survives being shaken. Knowledge is opinion <b>tethered by an account of the reason</b> (αἰτίας λογισμός): it stays put when the world moves.</p>
-  <p class="lede" style="margin-top:.8rem">So don’t score the robot’s successes. <b>Score the tethers.</b></p>
-</section>
-
-<!-- 07c · THE FIVE TETHERS -->
-<section class="slide">
-  <span class="wm serif" aria-hidden="true">识</span>
-  <p class="eyebrow">07 · part three — the Epistēmē Index</p>
-  <h2 class="serif">Five tethers. Each one a measurable ratio.</h2>
-  <div class="fig"><svg viewBox="0 0 840 320" role="img" aria-label="The five tethers of the Epistēmē Index">
-    <g>
-      <rect x="30" y="30" width="380" height="46" fill="var(--chip)" stroke="var(--line)"/>
-      <text x="50" y="59" class="big">Stability</text>
-      <text x="400" y="59" text-anchor="end" class="lab">SUCCEEDS WHEN LIGHTING / CAMERA / CLUTTER CHANGE</text>
-      <rect x="30" y="86" width="380" height="46" fill="var(--chip)" stroke="var(--line)"/>
-      <text x="50" y="115" class="big">Transfer</text>
-      <text x="400" y="115" text-anchor="end" class="lab">SOLVES THE TYPE, NOT THE MEMORIZED INSTANCE</text>
-      <rect x="30" y="142" width="380" height="46" fill="var(--chip)" stroke="var(--line)"/>
-      <text x="50" y="171" class="big">Foresight</text>
-      <text x="400" y="171" text-anchor="end" class="lab">PREDICTS WHAT ITS OWN ACTIONS WILL DO</text>
-      <rect x="30" y="198" width="380" height="46" fill="var(--chip)" stroke="var(--line)"/>
-      <text x="50" y="227" class="big">Humility</text>
-      <text x="400" y="227" text-anchor="end" class="lab">知之为知之 — KNOWS ITS OWN BOUNDARY, ASKS FOR HELP</text>
-      <rect x="30" y="254" width="380" height="46" fill="var(--chip)" stroke="var(--line)"/>
-      <text x="50" y="283" class="big">Recovery</text>
-      <text x="400" y="283" text-anchor="end" class="lab">FINDS THE PATH AGAIN AFTER A BUMP</text>
-      <rect x="450" y="86" width="360" height="158" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.5"/>
-      <text x="630" y="130" text-anchor="middle" class="big">EI = (S·T·F·H·R)^⅕</text>
-      <text x="630" y="162" text-anchor="middle" class="lab">GEOMETRIC MEAN — A ZERO ANYWHERE IS ZERO</text>
-      <text x="630" y="190" text-anchor="middle" class="lab">YOU CANNOT AVERAGE AWAY A MISSING TETHER</text>
-      <text x="630" y="218" text-anchor="middle" class="lab2">RISES EVERY FLYWHEEL ROUND — OR THE FLYWHEEL ISN'T LEARNING</text>
-    </g>
-  </svg></div>
-  <p class="lede">Practice becoming knowledge, as a number: 练习转化为知识和直觉 — measured.</p>
-</section>
-
-<!-- 07d · THE FIVE BROKEN ROBOTS -->
-<section class="slide">
-  <span class="wm serif" aria-hidden="true">五</span>
-  <p class="eyebrow">07 · part four — drop one tether, name the robot you get</p>
-  <h2 class="serif">Every missing tether is a robot you’ve already met.</h2>
-  <div class="fig"><svg viewBox="0 0 840 300" role="img" aria-label="The five failure archetypes">
-    <g>
-      <rect x="30" y="30" width="255" height="70" fill="var(--chip)" stroke="var(--line)"/>
-      <text x="157" y="58" text-anchor="middle" class="big">the Parrot</text>
-      <text x="157" y="84" text-anchor="middle" class="lab">NO STABILITY — BREAKS WHEN THE LIGHT CHANGES</text>
-      <rect x="300" y="30" width="255" height="70" fill="var(--chip)" stroke="var(--line)"/>
-      <text x="427" y="58" text-anchor="middle" class="big">the One-Trick Pony</text>
-      <text x="427" y="84" text-anchor="middle" class="lab">NO TRANSFER — MASTERS THE DEMO, FAILS ITS NEIGHBOR</text>
-      <rect x="570" y="30" width="240" height="70" fill="var(--chip)" stroke="var(--line)"/>
-      <text x="690" y="58" text-anchor="middle" class="big">the Sleepwalker</text>
-      <text x="690" y="84" text-anchor="middle" class="lab">NO FORESIGHT — ACTS WITHOUT IMAGINING</text>
-      <rect x="165" y="130" width="255" height="70" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.5"/>
-      <text x="292" y="158" text-anchor="middle" class="big">the Confident Fool</text>
-      <text x="292" y="184" text-anchor="middle" class="lab">NO HUMILITY — REPORTS SUCCESS WHILE FAILING</text>
-      <rect x="435" y="130" width="255" height="70" fill="var(--chip)" stroke="var(--line)"/>
-      <text x="562" y="158" text-anchor="middle" class="big">the Glass Dancer</text>
-      <text x="562" y="184" text-anchor="middle" class="lab">NO RECOVERY — FLAWLESS UNTIL THE FIRST BUMP</text>
-      <text x="420" y="245" text-anchor="middle" class="ann">the Confident Fool is the one that ends deployments — we measured one claiming success on 13 of 20 failures</text>
-      <text x="420" y="275" text-anchor="middle" class="lab2">THE FLEET SHIPS ONLY WHEN ALL FIVE TETHERS HOLD. THAT IS THE CERTIFICATE.</text>
-    </g>
-  </svg></div>
-</section>
-
-<!-- 08 · WHERE WE START -->
-<section class="slide">
-  <p class="eyebrow">07 · Where we start</p>
+  <p class="eyebrow">11 · Where we start</p>
   <h2>Places where people shouldn’t be.</h2>
   <div class="fig"><svg viewBox="0 0 840 400" role="img" aria-label="Task selection quadrant: high danger to humans, low cost of robot error">
     <line x1="420" y1="40" x2="420" y2="360" stroke="var(--line)"/>
@@ -432,9 +513,9 @@
   <p class="figcap">These industries already run remote operations and already pay for robotic hazard-zone data — Gecko Robotics sells wall-crawling inspection in this exact world: $34.5M revenue (2023), $1.25B valuation. The buyers exist. What nobody sells them yet is a robot that <i>handles</i> things — and knows its limits.</p>
 </section>
 
-<!-- 09 · MARKET -->
+<!-- 12 · MARKET -->
 <section class="slide" id="market">
-  <p class="eyebrow">08 · Market</p>
+  <p class="eyebrow">12 · Market</p>
   <h2>Boring market. Serious money.</h2>
   <div class="tiles">
     <div class="tile"><div class="n">$26B</div><div class="d">global industrial inspection services today — the tasks in our first quadrant, done mostly by people (GMI, 2025)</div></div>
@@ -444,9 +525,9 @@
   <p class="punch">We don’t need a robot revolution. We need a small share of work that’s already budgeted, already regulated, and already unpopular with the humans doing it.</p>
 </section>
 
-<!-- 10 · UNIT ECONOMICS -->
+<!-- 13 · UNIT ECONOMICS -->
 <section class="slide">
-  <p class="eyebrow">09 · How the money works</p>
+  <p class="eyebrow">13 · How the money works</p>
   <h2>Priced per task. Margin follows the curve.</h2>
   <div class="fig"><svg viewBox="0 0 760 320" role="img" aria-label="Price per task flat; cost per task falls as fewer tasks need a human; gap is margin">
     <line x1="70" y1="280" x2="710" y2="280" stroke="var(--muted)" stroke-width="1.2"/>
@@ -468,9 +549,9 @@
   </table></div>
 </section>
 
-<!-- 11 · WHY NOW -->
+<!-- 14 · WHY NOW -->
 <section class="slide">
-  <p class="eyebrow">10 · Why now</p>
+  <p class="eyebrow">14 · Why now</p>
   <h2>Three curves just crossed.</h2>
   <div class="cards">
     <div class="card"><span class="k">Robot brains — free-falling cost</span><p>Open AI models for robots improve every quarter on other people’s billions. We build the judgment layer on top; every release makes our floor higher.</p></div>
@@ -480,9 +561,9 @@
   <p class="punch">$18.8B has gone into robotics this year. Almost none of it into robots knowing when they’re wrong — the one thing every deployment needs.</p>
 </section>
 
-<!-- 12 · COMPETITION -->
+<!-- 15 · COMPETITION -->
 <section class="slide">
-  <p class="eyebrow">11 · The field</p>
+  <p class="eyebrow">15 · The field</p>
   <h2>Everyone else is betting on confidence.<br>We’re betting on doubt.</h2>
   <div class="fig"><svg viewBox="0 0 840 400" role="img" aria-label="Competitive map: learns on the job versus knows its limits; Apprentice occupies the empty corner">
     <line x1="420" y1="40" x2="420" y2="360" stroke="var(--line)"/>
@@ -503,9 +584,9 @@
   <p class="figcap">The humanoid wave is not our enemy — it’s our future customer base: every one of those robots will eventually need a limits-aware layer to get deployed somewhere real. We meet them there.</p>
 </section>
 
-<!-- 13 · MOAT -->
+<!-- 16 · MOAT -->
 <section class="slide">
-  <p class="eyebrow">12 · What compounds</p>
+  <p class="eyebrow">16 · What compounds</p>
   <h2>Our robots’ mistakes are our private textbook.</h2>
   <div class="cards">
     <div class="card"><span class="k">Data nobody can buy</span><p>Every rescue records exactly what our robot got wrong, where, and what the fix was. That dataset exists nowhere else and regrows daily.</p></div>
@@ -515,9 +596,9 @@
   </div>
 </section>
 
-<!-- 14 · TEAM -->
+<!-- 17 · TEAM -->
 <section class="slide">
-  <p class="eyebrow">13 · Why this founder</p>
+  <p class="eyebrow">17 · Why this founder</p>
   <h2>I’ve spent a career on machines that<br>must know when they’re wrong.</h2>
   <div class="fig"><svg viewBox="0 0 840 190" role="img" aria-label="Founder timeline">
     <line x1="60" y1="95" x2="780" y2="95" stroke="var(--line)" stroke-width="2"/>
@@ -538,9 +619,9 @@
   <p class="figcap">A confidently-wrong insulin controller kills a patient. A confidently-wrong robot kills the company. Same discipline, third act. (Technical depth: Appendix A1–A11.)</p>
 </section>
 
-<!-- 15 · ASK -->
+<!-- 18 · ASK -->
 <section class="slide">
-  <p class="eyebrow">14 · The ask</p>
+  <p class="eyebrow">18 · The ask</p>
   <h2>[$ TBD] · 18 months · two proof points.</h2>
   <p class="lede"><b>Proof 1 — the safety gate:</b> our robot’s self-doubt is measurably trustworthy (it knows when it will fail, audited statistically). <b>Proof 2 — a paid pilot:</b> one real site, one task family, revenue from week one, help-rate falling monthly.</p>
   <div class="tablewrap"><table>
@@ -882,5 +963,5 @@
 </article>
 
 <footer>
-  Apprentice — pre-seed pitch deck, July 2026. Confidential working draft; ask figures and contact are placeholders. Sources for market/comp figures: OSHA/BLS confined-space data; GMI industrial inspection services 2025; CNBC (Gecko, June 2025); TechCrunch/GeekWire (Covariant–Amazon, 2024); 2026 robotics funding press. 14 visual slides; appendix A0–A11 carries diligence depth. Print-friendly.
+  Apprentice — pre-seed pitch deck, July 2026. Confidential working draft; ask figures and contact are placeholders. Sources for market/comp figures: OSHA/BLS confined-space data; GMI industrial inspection services 2025; CNBC (Gecko, June 2025); TechCrunch/GeekWire (Covariant–Amazon, 2024); 2026 robotics funding press. 18 visual slides; appendix A0–A11 carries diligence depth. Print-friendly.
 </footer>
