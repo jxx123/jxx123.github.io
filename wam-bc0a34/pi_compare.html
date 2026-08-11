@@ -118,7 +118,7 @@ th { color:var(--muted); } td b { font-weight:650; }
 <tr><td><b>New embodiment cost</b></td><td>Finetune the full model on new-robot teleop</td><td>Retrain the small decoder + register a spec; backbone/vocabulary untouched (contract-versioned)</td></tr>
 <tr><td><b>Knows when it's wrong</b></td><td>No verdict/IDK mechanism — a confidence story must be bolted on</td><td>Verdict + progress heads are first-class outputs; ask-for-help from day one; Humility is a shipping gate (Theory 10)</td></tr>
 <tr><td><b>World model</b></td><td>None (policy only)</td><td>FDM imagination — planning, data proposal, and the Foresight tether</td></tr>
-<tr><td><b>RL story</b></td><td>BC; RL is separate follow-up work, likelihoods awkward through the flow expert</td><td>Designed-in: exact likelihoods on discrete z/verdict tokens (GRPO), residual PPO at the decoder</td></tr>
+<tr><td><b>RL story</b></td><td>BC today; chain-likelihood RL on diffusion is now proven feasible (SDE-GRPO, VideoRLVR 2605.15458) at real per-update cost — denoise-chain MDP, early-step tricks</td><td>Designed-in and cheap: one categorical softmax per decision (GRPO on z/verdict tokens), residual PPO at the decoder — an economics edge, not an exclusivity claim</td></tr>
 <tr><td><b>Hierarchy / S2</b></td><td>Verbal subtask decomposition inside the same forward pass</td><td>S2 deliberation traces + cloud Socrates verifier, distilled to S1 on schedule</td></tr>
 <tr><td><b>Proven scale</b></td><td><b>SOTA LIBERO, deployed in unseen homes; 10k+ robot-hours</b></td><td>Pre-milestone: LIBERO 0% at the current checkpoint, underfit diagnosed, lever A in flight — the honest current score</td></tr>
 </table>
