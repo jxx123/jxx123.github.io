@@ -146,85 +146,142 @@
   <p style="font-family:ui-monospace,'SF Mono',Consolas,monospace;margin-top:2rem;font-size:.72rem;color:var(--muted)">[Founder] · Confidential · figures marked ~ are planning estimates</p>
 </section>
 
-<!-- 01 · MENO'S PARADOX -->
+<!-- 01 · MOZI — THREE SOURCES, THREE SCALINGS -->
 <section class="slide">
-  <span class="wm serif" aria-hidden="true">Μ</span>
-  <p class="eyebrow">01 · The oldest question about learning</p>
-  <h2 class="serif">“How will you search for a thing when you do not know what it is?”</h2>
-  <p class="lede">Plato, the <i>Meno</i>, 385 BC. The paradox: if you already know, you have no need to search; if you truly don’t know, you cannot recognize the answer when you stumble on it. Socrates doesn’t answer with an argument. He answers with a demonstration.</p>
-  <p class="punch">Every learning machine faces Meno’s paradox. Robotics just makes it expensive.</p>
+  <span class="wm serif" aria-hidden="true">取</span>
+  <p class="eyebrow">01 · Mozi: three sources, three scalings</p>
+  <h2 class="serif">聞 · 說 · 親 — three sources of knowledge, three scaling epochs of robot learning.</h2>
+  <p class="lede">Mozi, c. 400 BC — the engineers among the classical schools — ranked how anything can be known: <b>聞 heard</b> from others, <b>說 inferred</b> by reasoning, <b>親 lived</b> in your own person. And he judged knowing “not by the naming, but by the taking” (非以其名，以其取). Robot learning is climbing exactly his ladder — one scaling epoch per source.</p>
+  <div class="fig"><svg viewBox="0 0 840 150" role="img" aria-label="Mozi's three sources of knowledge as three scaling epochs: heard is today's converging human-video pretraining; inferred is the near-future battleground of world-model imagination; lived is deployment experience">
+    <g>
+      <rect x="20" y="20" width="253" height="86" fill="var(--chip)" stroke="var(--line)"/>
+      <text x="146" y="50" text-anchor="middle" class="big">聞 heard</text>
+      <text x="146" y="74" text-anchor="middle" class="lab">TODAY — PRETRAIN ON HUMAN VIDEO</text>
+      <text x="146" y="92" text-anchor="middle" class="lab">MILLION-HOUR TIER · CONVERGING · RENTABLE</text>
+      <rect x="293" y="20" width="253" height="86" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/>
+      <text x="419" y="50" text-anchor="middle" class="big">說 inferred</text>
+      <text x="419" y="74" text-anchor="middle" class="lab">NEXT — THE BATTLEGROUND: WORLD-MODEL</text>
+      <text x="419" y="92" text-anchor="middle" class="lab">IMAGINATION · MULTIMODAL THINKING</text>
+      <rect x="566" y="20" width="254" height="86" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.5"/>
+      <text x="693" y="50" text-anchor="middle" class="big">親 lived</text>
+      <text x="693" y="74" text-anchor="middle" class="lab">THEN — DEPLOYMENT EXPERIENCE:</text>
+      <text x="693" y="92" text-anchor="middle" class="lab">THE FLEET’S OWN ROLLOUTS, UNBUYABLE</text>
+      <text x="420" y="134" text-anchor="middle" class="ann">three sources, three epochs: hear at scale → infer in imagination → live on-policy</text>
+    </g>
+  </svg></div>
+  <p class="figcap">The 聞 tier is commoditizing in real time: Dyna-2 just published the scaling law for human-video pretraining. The recipe is public, the compute is rentable — anyone can buy this tier, so no one will win on it.</p>
+  <p class="punch">Pretraining from human video is converging. The new scaling battleground is 說 and 親 — imagination, and lived experience.</p>
 </section>
 
-<!-- 02 · SOCRATES AND THE BOY -->
+<!-- 01b · THE INDUSTRY PYRAMID, GRADED BY MOZI -->
 <section class="slide">
-  <span class="wm serif" aria-hidden="true">√</span>
-  <p class="eyebrow">02 · Socrates and the boy</p>
-  <h2 class="serif">He never tells the boy the answer. He asks — until the boy knows.</h2>
-  <p class="lede">Socrates takes an uneducated enslaved boy and, asking only questions, leads him to double the square. First <i>aporia</i> — the honest “I don’t know” that makes the next question land. Then, attempt by guided attempt, knowledge; Plato called it <i>anamnesis</i>. Swap the agora for a hazard zone and the dialogue is our system diagram.</p>
-  <div class="fig"><svg viewBox="0 0 840 310" role="img" aria-label="Two-column mapping: Socrates the questioner maps to the human teleoperator, the coding agent, and the cloud verifier; the boy maps to the Apprentice robot, which admits what it does not know and converts guided attempts into skill">
-    <text x="215" y="38" text-anchor="middle" class="big">Socrates — the questioner</text>
-    <rect x="65" y="56" width="300" height="58" fill="var(--chip)" stroke="var(--line)"/>
-    <text x="215" y="80" text-anchor="middle" class="lab2">HUMAN TELEOPERATOR</text>
-    <text x="215" y="98" text-anchor="middle" class="lab">TAKES OVER AND SHOWS — NEVER JUST TELLS</text>
-    <rect x="65" y="126" width="300" height="58" fill="var(--chip)" stroke="var(--line)"/>
-    <text x="215" y="150" text-anchor="middle" class="lab2">CODING AGENT</text>
-    <text x="215" y="168" text-anchor="middle" class="lab">WRITES THE SCRIPTED PROBE</text>
-    <rect x="65" y="196" width="300" height="58" fill="var(--chip)" stroke="var(--line)"/>
-    <text x="215" y="220" text-anchor="middle" class="lab2">VLM · CLOUD VERIFIER</text>
-    <text x="215" y="238" text-anchor="middle" class="lab">JUDGES, PROPOSES THE NEXT QUESTION</text>
-    <line x1="365" y1="85" x2="432" y2="85" stroke="var(--accent)" stroke-width="1.8"/>
-    <path d="M430,78 L440,85 L430,92 Z" fill="var(--accent)"/>
-    <line x1="365" y1="155" x2="432" y2="155" stroke="var(--accent)" stroke-width="1.8"/>
-    <path d="M430,148 L440,155 L430,162 Z" fill="var(--accent)"/>
-    <line x1="365" y1="225" x2="432" y2="225" stroke="var(--accent)" stroke-width="1.8"/>
-    <path d="M430,218 L440,225 L430,232 Z" fill="var(--accent)"/>
-    <text x="610" y="38" text-anchor="middle" class="big">the boy — Apprentice</text>
-    <rect x="445" y="56" width="330" height="198" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.5"/>
-    <text x="610" y="96" text-anchor="middle" class="lab2">THE ROBOT THAT DOESN’T KNOW YET</text>
-    <text x="610" y="118" text-anchor="middle" class="lab">ἀπορία — ADMITS IT: “I DON’T KNOW — SHOW ME”</text>
-    <line x1="485" y1="150" x2="735" y2="150" stroke="var(--line)"/>
-    <text x="610" y="182" text-anchor="middle" class="lab2">CONVERTS GUIDED ATTEMPTS INTO SKILL</text>
-    <text x="610" y="204" text-anchor="middle" class="lab">ἀνάμνησις — THE FLYWHEEL</text>
-    <text x="420" y="292" text-anchor="middle" class="ann">questions in, knowledge out — the loop is 2,400 years old</text>
+  <span class="wm serif" aria-hidden="true">親</span>
+  <p class="eyebrow">01 · part two — the industry’s pyramid, graded by Mozi</p>
+  <h2 class="serif">The famous data pyramid tops out at other people’s hands.</h2>
+  <div class="fig"><svg viewBox="0 0 840 400" role="img" aria-label="The industry robot data pyramid, with Mozi's classification revealing its missing apex">
+    <g>
+      <polygon points="420,44 512,110 328,110" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="7 5"/>
+      <text x="420" y="80" text-anchor="middle" class="big" fill="var(--accent)">親 lived</text>
+      <text x="420" y="100" text-anchor="middle" class="lab">THE ROBOT’S OWN EXPERIENCE — NOT IN THE PYRAMID</text>
+      <polygon points="328,118 512,118 566,178 274,178" fill="var(--chip)" stroke="var(--line)"/>
+      <text x="420" y="152" text-anchor="middle" class="lab2">ON-ROBOT TELEOP</text>
+      <polygon points="274,186 566,186 620,246 220,246" fill="var(--chip)" stroke="var(--line)"/>
+      <text x="420" y="220" text-anchor="middle" class="lab2">UMI · HANDHELD DEMOS</text>
+      <polygon points="220,254 620,254 674,314 166,314" fill="var(--chip)" stroke="var(--line)"/>
+      <text x="420" y="288" text-anchor="middle" class="lab2">SIMULATION · SYNTHETIC</text>
+      <polygon points="166,322 674,322 730,382 110,382" fill="var(--chip)" stroke="var(--line)"/>
+      <text x="420" y="356" text-anchor="middle" class="lab2">INTERNET HUMAN VIDEO</text>
+      <path d="M580,118 L580,178 M574,148 L610,148" stroke="var(--line)" fill="none"/>
+      <path d="M634,186 L634,246 M628,216 L610,216" stroke="none" fill="none"/>
+      <text x="620" y="140" class="big">聞</text>
+      <text x="620" y="162" class="lab">HEARD — OTHER</text>
+      <text x="620" y="178" class="lab">PEOPLE’S HANDS</text>
+      <text x="688" y="278" class="big">說</text>
+      <text x="688" y="300" class="lab">INFERRED</text>
+      <text x="744" y="348" class="big">聞</text>
+      <text x="744" y="370" class="lab">HEARD</text>
+      <text x="240" y="70" text-anchor="end" class="ann">Mozi’s highest tier —</text>
+      <text x="240" y="92" text-anchor="end" class="ann">the summit is missing.</text>
+    </g>
   </svg></div>
-  <p class="figcap">The company’s name lives on this slide: an apprentice is the boy who knows he’s learning.</p>
+  <p class="lede" style="margin-top:.6rem">Teleop and UMI crown the industry’s pyramid — and they are still 聞: knowledge received, not lived. Mozi ranked 親 — one’s own lived experience — above them all, 2,300 years ago. The pyramid doesn’t have that tier. <b>Our flywheel builds it.</b></p>
+  <p class="figcap">And his third test of any claim — 用, put it to use and observe what follows — is our eval doctrine, written 300 BC.</p>
 </section>
 
-<!-- 03 · WHY IDK IS THE LOAD-BEARING SKILL -->
+<!-- 02 · SCALING 說 — IMAGINATION AS A TRAINING AXIS -->
 <section class="slide">
-  <span class="wm serif" aria-hidden="true">?</span>
-  <p class="eyebrow">03 · Why “I don’t know” is the load-bearing skill</p>
-  <h2>Three loads rest on one honest sentence.</h2>
-  <div class="fig"><svg viewBox="0 0 840 310" role="img" aria-label="Three pillars — deployment necessity, operation cost, novel data discovery — carrying a deployed, learning fleet">
-    <rect x="30" y="24" width="780" height="52" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.5"/>
-    <text x="420" y="56" text-anchor="middle" class="big">a deployed, learning fleet</text>
-    <rect x="30" y="76" width="240" height="216" fill="var(--chip)" stroke="var(--line)"/>
-    <text x="150" y="106" text-anchor="middle" class="lab">DEPLOYMENT NECESSITY</text>
-    <text x="150" y="140" text-anchor="middle" class="big">it can ship</text>
-    <text x="150" y="172" text-anchor="middle" class="lab">A ROBOT SILENTLY WRONG ONCE</text>
-    <text x="150" y="188" text-anchor="middle" class="lab">IS UNDEPLOYABLE WHERE</text>
-    <text x="150" y="204" text-anchor="middle" class="lab">FAILURE IS AN INCIDENT</text>
-    <text x="150" y="240" text-anchor="middle" class="lab2">KNOWING-WHEN-UNSURE LETS</text>
-    <text x="150" y="258" text-anchor="middle" class="lab2">AN IMPERFECT ROBOT SHIP</text>
-    <rect x="300" y="76" width="240" height="216" fill="var(--chip)" stroke="var(--line)"/>
-    <text x="420" y="106" text-anchor="middle" class="lab">OPERATION COST</text>
-    <text x="420" y="140" text-anchor="middle" class="big">it can scale</text>
-    <text x="420" y="172" text-anchor="middle" class="lab">DOUBT ROUTES ONE HUMAN’S</text>
-    <text x="420" y="188" text-anchor="middle" class="lab">ATTENTION ACROSS N ROBOTS</text>
-    <text x="420" y="222" text-anchor="middle" class="lab2">THE OPERATOR RATIO — AND</text>
-    <text x="420" y="240" text-anchor="middle" class="lab2">THEREFORE GROSS MARGIN — IS</text>
-    <text x="420" y="258" text-anchor="middle" class="lab2">THE CALIBRATION QUALITY</text>
-    <rect x="570" y="76" width="240" height="216" fill="var(--chip)" stroke="var(--line)"/>
-    <text x="690" y="106" text-anchor="middle" class="lab">NOVEL DATA DISCOVERY</text>
-    <text x="690" y="140" text-anchor="middle" class="big">it can learn</text>
-    <text x="690" y="172" text-anchor="middle" class="lab">EVERY HONEST “I DON’T KNOW” IS</text>
-    <text x="690" y="188" text-anchor="middle" class="lab">A LABELED SAMPLE FROM EXACTLY</text>
-    <text x="690" y="204" text-anchor="middle" class="lab">WHERE THE MODEL IS WEAK</text>
-    <text x="690" y="240" text-anchor="middle" class="lab2">ESCALATIONS ARE THE DATA</text>
-    <text x="690" y="258" text-anchor="middle" class="lab2">ENGINE NO ONE CAN BUY</text>
+  <span class="wm serif" aria-hidden="true">說</span>
+  <p class="eyebrow">02 · Scaling 說 — imagination as a training axis</p>
+  <h2>Solve the task in imagination first.</h2>
+  <p class="lede">Scaling 說 takes two capabilities. <b>Outcome prediction</b> — roll the world model forward and judge the result before touching anything. And <b>agentic orchestration</b> — composing skills the model already has into solutions for tasks it has never practiced. Hence our architecture: one backbone, pretrained once over video, latent actions, and language, in which planning, imagining, and judging are sentences in <b>one grammar</b> — not three bolted-on modules.</p>
+  <div class="fig"><svg viewBox="0 0 840 250" role="img" aria-label="The think loop: propose candidate latent actions, imagine futures in the world model, predict the outcome of each, commit the winner or think again; a task solved by thinking is distilled to a direct action span">
+    <text x="420" y="24" text-anchor="middle" class="ann">one backbone, one grammar — the same latent action tokens plan, imagine, and judge</text>
+    <rect x="30" y="44" width="180" height="64" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/>
+    <text x="120" y="70" text-anchor="middle" class="lab2">PROPOSE</text>
+    <text x="120" y="90" text-anchor="middle" class="lab">K CANDIDATE LATENT ACTIONS z</text>
+    <line x1="210" y1="76" x2="235" y2="76" stroke="var(--accent)" stroke-width="1.8"/>
+    <rect x="240" y="44" width="180" height="64" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/>
+    <text x="330" y="70" text-anchor="middle" class="lab2">IMAGINE</text>
+    <text x="330" y="90" text-anchor="middle" class="lab">ROLL THE WORLD MODEL FORWARD</text>
+    <line x1="420" y1="76" x2="445" y2="76" stroke="var(--accent)" stroke-width="1.8"/>
+    <rect x="450" y="44" width="180" height="64" fill="var(--bg2)" stroke="var(--accent-strong)" stroke-width="2"/>
+    <text x="540" y="70" text-anchor="middle" class="lab2">PREDICT OUTCOME</text>
+    <text x="540" y="90" text-anchor="middle" class="lab">VERDICT + PROGRESS, EVERY FUTURE</text>
+    <line x1="630" y1="76" x2="655" y2="76" stroke="var(--accent)" stroke-width="1.8"/>
+    <rect x="660" y="44" width="150" height="64" fill="none" stroke="var(--ink)" stroke-width="1.5"/>
+    <text x="735" y="70" text-anchor="middle" class="lab2">COMMIT</text>
+    <text x="735" y="90" text-anchor="middle" class="lab">EXECUTE THE WINNER</text>
+    <path d="M540,108 C540,165 120,165 120,112" fill="none" stroke="var(--accent)" stroke-width="1.8"/>
+    <path d="M114,123 L120,109 L127,122 Z" fill="var(--accent)"/>
+    <text x="330" y="152" text-anchor="middle" class="ann">no future good enough → think again</text>
+    <line x1="735" y1="108" x2="735" y2="188" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="4 4"/>
+    <rect x="560" y="192" width="250" height="46" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <text x="685" y="211" text-anchor="middle" class="lab2">SOLVED → DISTILL TO A DIRECT SPAN</text>
+    <text x="685" y="229" text-anchor="middle" class="lab">RUNTIME SKIPS THE THINKING (S2 → S1)</text>
   </svg></div>
-  <p class="figcap">Take the pillar away and the rest falls: an always-guessing robot can’t ship into incident-priced sites, can’t share one operator across a fleet, and never finds out where it is weak.</p>
-  <p class="punch">Safety is not a dessert you serve on top of a finished model. It is the bottom line of a deployable robot — the ask-for-help is built in from day one, not bolted on at the end.</p>
+  <p class="punch">Once a task is solved by thinking, we distill it to a direct action span and skip the thinking at runtime. Reasoning becomes reflex — training is caching.</p>
+</section>
+
+<!-- 03 · SCALING 親 — EXPERIENCE AS A TRAINING AXIS -->
+<section class="slide">
+  <span class="wm serif" aria-hidden="true">問</span>
+  <p class="eyebrow">03 · Scaling 親 — experience as a training axis</p>
+  <h2>Lived experience scales only if the robot can tell it’s out of its depth.</h2>
+  <p class="lede">Outcome prediction again — turned inward, as <b>ask-for-help</b>. When the robot rolls the future forward and doesn’t like — or can’t trust — what it sees, it stops and asks. And <b>Socrates answers</b>: a remote human, a coding agent, a cloud verifier — supplying ground truth, guidance, or reward. (Why we call it Socrates: the final slide.)</p>
+  <div class="fig"><svg viewBox="0 0 840 195" role="img" aria-label="The lived-experience loop: deploy with a safety net, doubt when the predicted outcome is bad or uncertain, ask a precise question, Socrates answers with ground truth, guidance, or reward, the robot learns, and the loop repeats">
+    <rect x="20" y="30" width="140" height="80" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/>
+    <text x="90" y="56" text-anchor="middle" class="lab2">DEPLOY</text>
+    <text x="90" y="76" text-anchor="middle" class="lab">DAY ONE — WITH</text>
+    <text x="90" y="92" text-anchor="middle" class="lab">THE SAFETY NET ON</text>
+    <line x1="160" y1="70" x2="176" y2="70" stroke="var(--accent)" stroke-width="1.8"/>
+    <rect x="180" y="30" width="150" height="80" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/>
+    <text x="255" y="56" text-anchor="middle" class="lab2">DOUBT</text>
+    <text x="255" y="76" text-anchor="middle" class="lab">PREDICTED OUTCOME</text>
+    <text x="255" y="92" text-anchor="middle" class="lab">BAD — OR UNCERTAIN</text>
+    <line x1="330" y1="70" x2="346" y2="70" stroke="var(--accent)" stroke-width="1.8"/>
+    <rect x="350" y="30" width="130" height="80" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/>
+    <text x="415" y="56" text-anchor="middle" class="lab2">ASK</text>
+    <text x="415" y="76" text-anchor="middle" class="lab">STOPS · ASKS A</text>
+    <text x="415" y="92" text-anchor="middle" class="lab">PRECISE QUESTION</text>
+    <line x1="480" y1="70" x2="496" y2="70" stroke="var(--accent)" stroke-width="1.8"/>
+    <rect x="500" y="30" width="170" height="80" fill="var(--bg2)" stroke="var(--accent-strong)" stroke-width="2"/>
+    <text x="585" y="56" text-anchor="middle" class="lab2">SOCRATES ANSWERS</text>
+    <text x="585" y="76" text-anchor="middle" class="lab">HUMAN · AGENT · VERIFIER</text>
+    <text x="585" y="92" text-anchor="middle" class="lab">TRUTH · GUIDANCE · REWARD</text>
+    <line x1="670" y1="70" x2="686" y2="70" stroke="var(--accent)" stroke-width="1.8"/>
+    <rect x="690" y="30" width="130" height="80" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/>
+    <text x="755" y="56" text-anchor="middle" class="lab2">LEARN</text>
+    <text x="755" y="76" text-anchor="middle" class="lab">THE RESCUE IS</text>
+    <text x="755" y="92" text-anchor="middle" class="lab">TRAINING DATA</text>
+    <path d="M755,110 C755,182 90,182 90,116" fill="none" stroke="var(--accent)" stroke-width="1.8"/>
+    <path d="M84,127 L90,113 L97,126 Z" fill="var(--accent)"/>
+    <text x="420" y="152" text-anchor="middle" class="ann">repeat — every loop moves a task from asked to autonomous</text>
+  </svg></div>
+  <div class="cards">
+    <div class="card"><span class="k">Deployable from day one</span><p>The ask-for-help loop is the safety net: the robot does what it’s sure of and escalates the rest — built in from the start, not bolted on at the end.</p></div>
+    <div class="card"><span class="k">The data engine no one can rent</span><p>Scaling 親 IS probing what the model does not know and collecting exactly that data. Every escalation is a labeled sample from precisely where the model is weak.</p></div>
+  </div>
+  <p class="punch">Deployment with doubt isn’t how we ship the model — it is how we train it. And that data engine cannot be rented.</p>
 </section>
 
 <!-- 04 · SUCCESS RATE IS A LIE -->
@@ -313,59 +370,6 @@
   <p class="lede" style="margin-top:.2rem">“To know what you know, and to know what you do not know — <b>that</b> is knowledge.” — Confucius, c. 500 BC</p>
   <p class="lede" style="margin-top:.8rem">A century before Plato staged the <i>Meno</i>, the same principle was written down in the East. Two traditions with no contact reached the identical foundation: <b>intelligence begins with an accurate map of your own ignorance.</b></p>
   <p class="punch">Two philosophies figured this out 2,400 years ago. We built it into a robot.</p>
-</section>
-
-<!-- 05b · MOZI — THE ENGINEER'S EPISTEMOLOGY -->
-<section class="slide">
-  <span class="wm serif" aria-hidden="true">取</span>
-  <p class="eyebrow">05 · part two — the engineers’ school</p>
-  <h2 class="serif">「非以其名也，以其取也。」</h2>
-  <p class="lede">Mozi, c. 400 BC: a blind man can define white and black perfectly — but cannot <b>pick them out</b>. So he does not know them: “not by the naming, but by the taking.” Language models know the world by naming. Robots must know it by taking.</p>
-  <div class="fig"><svg viewBox="0 0 840 400" role="img" aria-label="The industry robot data pyramid, with Mozi's classification revealing its missing apex">
-    <g>
-      <polygon points="420,44 512,110 328,110" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="7 5"/>
-      <text x="420" y="80" text-anchor="middle" class="big" fill="var(--accent)">親 lived</text>
-      <text x="420" y="100" text-anchor="middle" class="lab">THE ROBOT’S OWN EXPERIENCE — NOT IN THE PYRAMID</text>
-      <polygon points="328,118 512,118 566,178 274,178" fill="var(--chip)" stroke="var(--line)"/>
-      <text x="420" y="152" text-anchor="middle" class="lab2">ON-ROBOT TELEOP</text>
-      <polygon points="274,186 566,186 620,246 220,246" fill="var(--chip)" stroke="var(--line)"/>
-      <text x="420" y="220" text-anchor="middle" class="lab2">UMI · HANDHELD DEMOS</text>
-      <polygon points="220,254 620,254 674,314 166,314" fill="var(--chip)" stroke="var(--line)"/>
-      <text x="420" y="288" text-anchor="middle" class="lab2">SIMULATION · SYNTHETIC</text>
-      <polygon points="166,322 674,322 730,382 110,382" fill="var(--chip)" stroke="var(--line)"/>
-      <text x="420" y="356" text-anchor="middle" class="lab2">INTERNET HUMAN VIDEO</text>
-      <path d="M580,118 L580,178 M574,148 L610,148" stroke="var(--line)" fill="none"/>
-      <path d="M634,186 L634,246 M628,216 L610,216" stroke="none" fill="none"/>
-      <text x="620" y="140" class="big">聞</text>
-      <text x="620" y="162" class="lab">HEARD — OTHER</text>
-      <text x="620" y="178" class="lab">PEOPLE’S HANDS</text>
-      <text x="688" y="278" class="big">說</text>
-      <text x="688" y="300" class="lab">INFERRED</text>
-      <text x="744" y="348" class="big">聞</text>
-      <text x="744" y="370" class="lab">HEARD</text>
-      <text x="240" y="70" text-anchor="end" class="ann">Mozi’s highest tier —</text>
-      <text x="240" y="92" text-anchor="end" class="ann">the summit is missing.</text>
-    </g>
-  </svg></div>
-  <p class="lede" style="margin-top:.6rem">The famous pyramid <b>tops out at other people’s hands</b> — teleop and UMI are still 聞, knowledge received, not lived. Mozi ranked 親 — one’s own lived experience — above them all, 2,300 years ago. The industry’s pyramid doesn’t have that tier. <b>Our flywheel builds it.</b></p>
-  <div class="fig"><svg viewBox="0 0 840 150" role="img" aria-label="Mozi's three sources mapped to the Apprentice training strategy">
-    <g>
-      <rect x="20" y="20" width="253" height="86" fill="var(--chip)" stroke="var(--line)"/>
-      <text x="146" y="50" text-anchor="middle" class="big">聞 heard</text>
-      <text x="146" y="74" text-anchor="middle" class="lab">PRETRAIN ON HUMAN VIDEOS</text>
-      <text x="146" y="92" text-anchor="middle" class="lab">THE MILLION-HOUR TIER — RENTABLE</text>
-      <rect x="293" y="20" width="253" height="86" fill="var(--chip)" stroke="var(--line)"/>
-      <text x="419" y="50" text-anchor="middle" class="big">說 inferred</text>
-      <text x="419" y="74" text-anchor="middle" class="lab">IMAGINE IN THE WORLD MODEL —</text>
-      <text x="419" y="92" text-anchor="middle" class="lab">RL IN IMAGINATION, VERIFIER-GUARDED</text>
-      <rect x="566" y="20" width="254" height="86" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.5"/>
-      <text x="693" y="50" text-anchor="middle" class="big">親 lived</text>
-      <text x="693" y="74" text-anchor="middle" class="lab">REAL ON-POLICY EXPERIENCE —</text>
-      <text x="693" y="92" text-anchor="middle" class="lab">THE FLEET’S OWN ROLLOUTS, UNBUYABLE</text>
-      <text x="420" y="134" text-anchor="middle" class="ann">the training strategy, in Mozi’s words: hear at scale, infer in imagination, live on-policy</text>
-    </g>
-  </svg></div>
-  <p class="lede" style="margin-top:.4rem">And his third test of any claim — <b>用</b>, put it to use and observe — is our eval doctrine, written 300 BC.</p>
 </section>
 
 <!-- 06 · GO-TO-MARKET — THE HUMAN PROBLEM -->
@@ -650,6 +654,42 @@
     <tr><td>First pilot cell</td><td>Commissioning at a customer site</td><td class="num">TBD</td></tr>
   </table></div>
   <p style="font-family:ui-monospace,'SF Mono',Consolas,monospace;font-size:.72rem;color:var(--muted)">Contact: [email] · Full technical program &amp; costs: Appendix A8</p>
+</section>
+
+<!-- 19 · EPILOGUE — PLATO ANSWERED MENO -->
+<section class="slide">
+  <span class="wm serif" aria-hidden="true">Μ</span>
+  <p class="eyebrow">19 · Epilogue — why “Apprentice”</p>
+  <h2 class="serif">Plato answered Meno 2,400 years ago.</h2>
+  <p class="lede">Meno’s paradox, 385 BC: “How will you search for a thing when you do not know what it is?” If you already know, you need not search; if you truly don’t know, you can’t recognize the answer. Every learning machine faces it. Plato’s resolution is our system diagram. <b>The soul has memory</b> — pretraining: the model arrives knowing more than it can use. <b>Teaching is soliciting the knowns</b> — Socrates never tells the boy the answer; he questions, takes over, guides, until the boy knows. <b>And the prize is knowledge, not doxa</b> — opinion tethered by an account of the reason. Our tether is the Epistēmē Index.</p>
+  <div class="fig"><svg viewBox="0 0 840 310" role="img" aria-label="Two-column mapping: Socrates the questioner maps to the human teleoperator, the coding agent, and the cloud verifier; the boy maps to the Apprentice robot, which admits what it does not know and converts guided attempts into skill">
+    <text x="215" y="38" text-anchor="middle" class="big">Socrates — the questioner</text>
+    <rect x="65" y="56" width="300" height="58" fill="var(--chip)" stroke="var(--line)"/>
+    <text x="215" y="80" text-anchor="middle" class="lab2">HUMAN TELEOPERATOR</text>
+    <text x="215" y="98" text-anchor="middle" class="lab">TAKES OVER AND SHOWS — NEVER JUST TELLS</text>
+    <rect x="65" y="126" width="300" height="58" fill="var(--chip)" stroke="var(--line)"/>
+    <text x="215" y="150" text-anchor="middle" class="lab2">CODING AGENT</text>
+    <text x="215" y="168" text-anchor="middle" class="lab">WRITES THE SCRIPTED PROBE</text>
+    <rect x="65" y="196" width="300" height="58" fill="var(--chip)" stroke="var(--line)"/>
+    <text x="215" y="220" text-anchor="middle" class="lab2">VLM · CLOUD VERIFIER</text>
+    <text x="215" y="238" text-anchor="middle" class="lab">JUDGES, PROPOSES THE NEXT QUESTION</text>
+    <line x1="365" y1="85" x2="432" y2="85" stroke="var(--accent)" stroke-width="1.8"/>
+    <path d="M430,78 L440,85 L430,92 Z" fill="var(--accent)"/>
+    <line x1="365" y1="155" x2="432" y2="155" stroke="var(--accent)" stroke-width="1.8"/>
+    <path d="M430,148 L440,155 L430,162 Z" fill="var(--accent)"/>
+    <line x1="365" y1="225" x2="432" y2="225" stroke="var(--accent)" stroke-width="1.8"/>
+    <path d="M430,218 L440,225 L430,232 Z" fill="var(--accent)"/>
+    <text x="610" y="38" text-anchor="middle" class="big">the boy — Apprentice</text>
+    <rect x="445" y="56" width="330" height="198" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.5"/>
+    <text x="610" y="96" text-anchor="middle" class="lab2">THE ROBOT THAT DOESN’T KNOW YET</text>
+    <text x="610" y="118" text-anchor="middle" class="lab">ἀπορία — ADMITS IT: “I DON’T KNOW — SHOW ME”</text>
+    <line x1="485" y1="150" x2="735" y2="150" stroke="var(--line)"/>
+    <text x="610" y="182" text-anchor="middle" class="lab2">CONVERTS GUIDED ATTEMPTS INTO SKILL</text>
+    <text x="610" y="204" text-anchor="middle" class="lab">ἀνάμνησις — THE FLYWHEEL</text>
+    <text x="420" y="292" text-anchor="middle" class="ann">questions in, knowledge out — the loop is 2,400 years old</text>
+  </svg></div>
+  <p class="figcap">The company’s name lives on this slide: an apprentice is the boy who knows he’s learning.</p>
+  <p class="punch">Plato said the soul remembers, the teacher only asks the right questions, and opinion becomes knowledge when tethered. We built that. It’s called Apprentice.</p>
 </section>
 
 </main>
@@ -981,5 +1021,5 @@
 </article>
 
 <footer>
-  Apprentice — pre-seed pitch deck, July 2026. Confidential working draft; ask figures and contact are placeholders. Sources for market/comp figures: OSHA/BLS confined-space data; GMI industrial inspection services 2025; CNBC (Gecko, June 2025); TechCrunch/GeekWire (Covariant–Amazon, 2024); 2026 robotics funding press. 18 visual slides; appendix A0–A11 carries diligence depth. Print-friendly.
+  Apprentice — pre-seed pitch deck, July 2026. Confidential working draft; ask figures and contact are placeholders. Sources for market/comp figures: OSHA/BLS confined-space data; GMI industrial inspection services 2025; CNBC (Gecko, June 2025); TechCrunch/GeekWire (Covariant–Amazon, 2024); 2026 robotics funding press. 19 visual slides; appendix A0–A11 carries diligence depth. Print-friendly.
 </footer>
