@@ -7,7 +7,48 @@ I am a Research Engineer in the Google DeepMind working on Gemini Robotics model
 
 ---
 
+## Writing
+
+<div class="featured">
+  <div class="featured-eyebrow">Latest essay &middot; 15 min read</div>
+  <div class="featured-title"><a href="/blog/menos-paradox-true-opinion/">Meno&rsquo;s Paradox &mdash; Your Robot&rsquo;s Success Rate Is Just a &ldquo;True&rdquo; OPINION</a></div>
+  <div class="featured-desc">Plato separated true opinion from knowledge 2,400 years ago. A success rate measures the first and cannot see the second. On the <i>Meno</i>, a dishwasher basket that lost its forks, and five tethers for evaluating robot policies.</div>
+  <div class="featured-cta">Read the essay <span class="arrow">&rarr;</span></div>
+</div>
+
+<div class="all-writing"><a href="/blog/">All writing &rarr;</a></div>
+
+---
+
 ## Selected Work at Google
+
+### Gemini Robotics On-Device 2 — Fast Adaptation to Unseen Embodiments
+
+<div class="entry-meta">
+  <span class="badge badge-new">New</span>
+  <a href="https://deepmind.google/models/model-cards/gemini-robotics-on-device-2/" target="_blank">Model card</a>
+  &middot;
+  <a href="https://x.com/GoogleDeepMind/status/2082844165570798071?s=20" target="_blank">Announcement</a>
+</div>
+
+Fast adaptation of Gemini Robotics On-Device 2 to embodiments the model has never seen. GRODv2 reaches useful success rates on new platforms — SO101 and Dexmate — from a couple of hours of task data, where GRODv1 stays near the floor. Adaptation curves in [my thread](https://x.com/xjygr08/status/2083020146319167851?s=20){:target="_blank"}.
+
+<div class="video-wrapper">
+  <video controls preload="metadata" playsinline poster="">
+    <source src="https://storage.googleapis.com/gdm-deepmind-com-prod-public/media/MVCfTE-4h3AwDVPZ/gdm_robotics_six-grid_270726.webm#t=0.1" type="video/webm">
+  </video>
+</div>
+
+### CLIFT — Turning Gemini Robotics On-Device into Humanoid Specialists
+
+<div class="entry-meta">
+  <span class="badge">CoRL 2026</span>
+  <a href="https://www.alphaxiv.org/abs/2607.29172" target="_blank">Paper</a>
+</div>
+
+Non-invasive closed-loop iterative fine-tuning: adapting a closed-weight robot foundation model into a humanoid specialist through a managed fine-tuning API, with no access to weights, gradients, or training internals.
+
+<div class="entry-authors">Yuxin Chen, Hari Srikanth, Nathan Jew, Menglin Wu, Pengcheng Wang, Junli Ren, Masayoshi Tomizuka, Peng Xu, <b>Jinyu Xie</b>, Thomas Tian</div>
 
 ### Few-Shot Adaptation Finetuning — Gemini Robotics
 

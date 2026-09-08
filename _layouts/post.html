@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title }} &middot; {{ site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <meta property="og:title" content="{{ page.title }}">
+  <meta property="og:description" content="{{ page.description | default: site.description }}">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <link rel="icon" href="{{ '/assets/img/favicons/favicon.ico' | relative_url }}">
+  <link rel="apple-touch-icon" href="{{ '/assets/img/favicons/apple-touch-icon.png' | relative_url }}">
+  {% seo %}
+  <style>
+    :root {
+      --text-primary: #1a1a1a;
+      --text-secondary: #555;
+      --text-muted: #888;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --accent-soft: #dbeafe;
+      --bg: #ffffff;
+      --bg-subtle: #f8f9fa;
+      --border: #e5e7eb;
+      --warn: #b45309;
+      --warn-soft: #fef3c7;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      color: var(--text-primary);
+      background: var(--bg);
+      line-height: 1.75;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--accent-hover); text-decoration: underline; }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* --- Post header --- */
+    .back-link {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      display: inline-block;
+      margin-bottom: 32px;
+    }
+    .back-link:hover { color: var(--accent); text-decoration: none; }
+
+    .post-header { margin-bottom: 36px; }
+
+    .post-header h1 {
+      font-size: 2.1rem;
+      font-weight: 700;
+      line-height: 1.22;
+      letter-spacing: -0.025em;
+      margin-bottom: 12px;
+      text-wrap: balance;
+    }
+
+    .post-meta {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 12px;
+      align-items: center;
+    }
+
+    .post-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-top: 14px;
+    }
+
+    /* --- Content typography --- */
+    .content h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-top: 48px;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border);
+      letter-spacing: -0.01em;
+      scroll-margin-top: 20px;
+    }
+
+    .content h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-top: 28px;
+      margin-bottom: 6px;
+    }
+
+    .content p { margin-bottom: 16px; line-height: 1.8; }
+
+    .content ul, .content ol { margin-bottom: 16px; padding-left: 1.4em; }
+    .content li { margin-bottom: 8px; line-height: 1.75; }
+    .content li p { margin-bottom: 6px; }
+
+    .content hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+    .content img { max-width: 100%; border-radius: 8px; margin: 12px 0; border: 1px solid var(--border); }
+
+    .content code {
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      font-size: 0.88em;
+      background: var(--bg-subtle);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .content blockquote {
+      border-left: 3px solid var(--accent);
+      margin: 20px 0;
+      padding: 10px 18px;
+      color: var(--text-secondary);
+      background: var(--bg-subtle);
+      border-radius: 0 6px 6px 0;
+    }
+    .content blockquote p:last-child { margin-bottom: 0; }
+
+    /* --- Tables --- */
+    .content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 22px 0;
+      font-size: 0.93rem;
+      display: block;
+      overflow-x: auto;
+    }
+    .content thead th {
+      text-align: left;
+      font-weight: 600;
+      padding: 10px 12px;
+      border-bottom: 2px solid var(--border);
+      background: var(--bg-subtle);
+      white-space: nowrap;
+    }
+    .content tbody td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.6;
+    }
+    .content tbody tr:last-child td { border-bottom: none; }
+
+    /* --- Figures: break out wider than the prose column --- */
+    .figure {
+      margin: 36px 0;
+      width: 100%;
+    }
+    .figure svg { display: block; width: 100%; height: auto; }
+    .figure figcaption {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      text-align: center;
+      margin-top: 12px;
+      padding: 0 8px;
+    }
+    .figure figcaption b { color: var(--text-secondary); font-weight: 600; }
+
+    @media (min-width: 1000px) {
+      .figure { width: 920px; margin-left: -134px; }
+    }
+
+    /* --- Pull quote: the loud one --- */
+    .pull-quote {
+      margin: 40px 0;
+      padding: 28px 30px;
+      background: var(--bg-subtle);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 10px 10px 0;
+      font-size: 1.32rem;
+      font-weight: 700;
+      line-height: 1.45;
+      letter-spacing: -0.015em;
+      color: var(--text-primary);
+    }
+
+    /* --- Chinese quotation card --- */
+    .zh-quote {
+      margin: 28px 0;
+      padding: 20px 24px;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 10px 10px 0;
+      background: var(--bg);
+    }
+    .zh-quote .zh {
+      font-size: 1.28rem;
+      line-height: 1.6;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      margin-bottom: 6px;
+    }
+    .zh-quote .py {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+    .zh-quote .en {
+      font-size: 0.97rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    .zh-quote .src {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 10px;
+    }
+
+    /* --- Footer --- */
+    .footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 56px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .footer a { color: var(--text-muted); }
+
+    /* --- Responsive --- */
+    @media (max-width: 600px) {
+      .container { padding: 28px 18px 60px; }
+      .post-header h1 { font-size: 1.55rem; }
+      .post-subtitle { font-size: 1rem; }
+      .pull-quote { font-size: 1.1rem; padding: 20px 20px; }
+      .zh-quote { padding: 16px 18px; }
+      .zh-quote .zh { font-size: 1.1rem; }
+      .content h2 { font-size: 1.15rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <a class="back-link" href="{{ '/blog/' | relative_url }}">&larr; All writing</a>
+
+    <div class="post-header">
+      <h1>{{ page.title }}</h1>
+      <div class="post-meta">
+        <span>{{ page.date | date: "%B %-d, %Y" }}</span>
+        {% if page.reading_time %}<span>&middot;</span><span>{{ page.reading_time }}</span>{% endif %}
+        <span>&middot;</span><span>{{ page.authors | default: "Jinyu Xie" }}</span>
+      </div>
+      {% if page.subtitle %}<div class="post-subtitle">{{ page.subtitle }}</div>{% endif %}
+    </div>
+
+    <div class="content">
+      {{ content }}
+    </div>
+
+    <div class="footer">
+      <a href="{{ '/' | relative_url }}">Jinyu Xie</a> &middot; &copy; 2026
+    </div>
+
+  </div>
+</body>
+</html>

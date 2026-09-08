@@ -102,6 +102,97 @@
     .contact-links a:hover { color: var(--accent); text-decoration: none; }
     .contact-links svg { width: 15px; height: 15px; flex-shrink: 0; }
 
+    /* --- Site nav (tab bar under the header) --- */
+    .site-nav {
+      display: flex;
+      gap: 4px;
+      margin: 4px 0 30px;
+      border-bottom: 1px solid var(--border);
+    }
+    .site-nav a {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      padding: 9px 14px;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .site-nav a:hover { color: var(--accent); text-decoration: none; }
+    .site-nav a.is-active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    /* --- Featured post card --- */
+    .featured {
+      position: relative;
+      padding: 22px 24px;
+      margin: 4px 0 8px;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 12px 12px 0;
+      background: linear-gradient(90deg, rgba(37,99,235,0.05), rgba(37,99,235,0.01));
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+    .featured:hover {
+      border-color: var(--accent);
+      border-left-color: var(--accent);
+      box-shadow: 0 3px 18px rgba(37, 99, 235, 0.10);
+      transform: translateY(-1px);
+    }
+    .featured-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .featured-title a {
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+    .featured-title a::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 0 12px 12px 0;
+    }
+    .featured:hover .featured-title a { color: var(--accent); text-decoration: none; }
+    .featured-title {
+      font-size: 1.22rem;
+      font-weight: 700;
+      line-height: 1.32;
+      color: var(--text-primary);
+      letter-spacing: -0.015em;
+      margin-bottom: 8px;
+    }
+    .featured-desc {
+      font-size: 0.93rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-bottom: 12px;
+    }
+    .featured-cta {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .featured-cta .arrow { transition: transform 0.2s; }
+    .featured:hover .featured-cta .arrow { transform: translateX(3px); }
+
+    .all-writing {
+      font-size: 0.9rem;
+      margin-top: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .site-nav a { padding: 8px 11px; font-size: 0.9rem; }
+      .featured { padding: 18px 18px; }
+      .featured-title { font-size: 1.08rem; }
+    }
+
     /* --- Content typography --- */
     .content h2 {
       font-size: 1.25rem;
@@ -177,6 +268,7 @@
       background: #000;
       margin: 10px 0;
     }
+    .video-wrapper video,
     .video-wrapper iframe {
       position: absolute;
       top: 0; left: 0;
@@ -196,6 +288,31 @@
       grid-column: 1 / -1;
       max-width: 50%;
     }
+
+    /* --- Paper / release entry meta --- */
+    .entry-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 10px;
+      align-items: center;
+      margin: 6px 0 10px;
+      font-size: 0.88rem;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 12px;
+      background: var(--accent-soft, #dbeafe);
+      color: var(--accent);
+      border: 1px solid rgba(37,99,235,0.25);
+    }
+    .badge-new { background: #fef3c7; color: #b45309; border-color: rgba(180,83,9,0.28); }
+    .entry-authors { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+    .entry-authors b { color: var(--text-secondary); font-weight: 700; }
 
     /* --- Tool cards --- */
     .tool-card {
@@ -291,6 +408,12 @@
         </div>
       </div>
     </div>
+
+    <!-- Nav -->
+    <nav class="site-nav">
+      <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} class="is-active"{% endif %}>About</a>
+      <a href="{{ '/blog/' | relative_url }}"{% if page.url contains '/blog' %} class="is-active"{% endif %}>Writing</a>
+    </nav>
 
     <!-- Main content from Markdown -->
     <div class="content">

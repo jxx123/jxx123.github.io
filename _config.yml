@@ -3,6 +3,9 @@ description: Jinyu Xie - Senior Research Engineer at Google DeepMind Robotics
 url: "https://jxx123.github.io"
 baseurl: ""
 
+# Permalinks
+permalink: /blog/:title/
+
 # Build
 markdown: kramdown
 kramdown:
