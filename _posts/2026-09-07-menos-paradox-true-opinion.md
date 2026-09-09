@@ -762,7 +762,7 @@ The robot that knows what it doesn't know can ask for precisely the experience t
 
 And that is the curious robot I wanted at the top, arrived at from an unexpected direction. Curiosity is not a drive you add to a policy; it is what a calibrated policy *does* once it can feel its own edge. It is also how you grow a small circle: every question is one deliberate step outward, chosen rather than stumbled into. All of it is downstream of that one measurement.
 
-## 闻、说、亲 — and the two axes we aren't scaling
+## 闻 heard, 说 inferred, 亲 lived — and the two we aren't scaling
 
 Calibration tells a policy where its knowledge stops. It says nothing about how the knowledge got there — and for the slave boy, that is the more interesting question. He had never studied geometry. So where did his answers come from at all, the wrong ones included? Something in him was already equipped to have opinions about area before anybody asked him one.
 
@@ -770,7 +770,7 @@ Plato's answer is that nothing came from anywhere. The knowledge was always in t
 
 The Mohists in China, working the same centuries, asked precisely that — not where knowledge ultimately originates, but by which *route* a given piece of it arrived, and whether the route decides if it stays put. Two traditions on the same seam, and the Mohist answer maps onto our training stack with a precision I find hard to dismiss as coincidence.
 
-The 《墨经》 classifies knowledge by **where it came from**: 闻 *wén*, what you were told; 说 *shuō*, what you worked out by inference; 亲 *qīn*, what you came to know by direct personal contact with the thing.
+The 《墨经》 classifies knowledge by **where it came from**: 闻 *wén*, what you were told; 说 *shuō*, what you worked out by inference — the thinking axis; 亲 *qīn*, what you came to know by direct personal contact with the thing.
 
 One caveat, because the line is a spectrum rather than a wall. You could fairly argue that a teleop log, or a recording from a UMI-style handheld gripper rig — a robot end-effector on a stick — is *experience* rather than somebody else's testimony: the trajectory is in the robot's own action space, and the forces are the ones its body would have felt. First-person in every sensorimotor sense.
 
