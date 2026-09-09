@@ -10,10 +10,10 @@ I am a Research Engineer in the Google DeepMind working on Gemini Robotics model
 ## Writing
 
 <div class="featured">
-  <div class="featured-eyebrow">Latest essay &middot; 15 min read</div>
+  <div class="featured-eyebrow">Latest essay &middot; two parts</div>
   <div class="featured-title"><a href="/blog/menos-paradox-true-opinion/">Meno&rsquo;s Paradox &mdash; Your Robot&rsquo;s Success Rate Is Just a &ldquo;True&rdquo; OPINION</a></div>
-  <div class="featured-desc">Plato separated true opinion from knowledge 2,400 years ago. A success rate measures the first and cannot see the second. On the <i>Meno</i>, a dishwasher basket that lost its forks, and five tethers for evaluating robot policies.</div>
-  <div class="featured-cta">Read the essay <span class="arrow">&rarr;</span></div>
+  <div class="featured-desc">Plato separated true opinion from knowledge 2,400 years ago. A success rate measures the first and cannot see the second. On the <i>Meno</i>, a dishwasher basket that lost its forks, and five tethers for evaluating robot policies. Part two, <a href="/blog/three-sources-of-knowledge/">Three Sources of Knowledge</a>, takes up the training half.</div>
+  <div class="featured-cta">Read part one <span class="arrow">&rarr;</span></div>
 </div>
 
 <div class="all-writing"><a href="/blog/">All writing &rarr;</a></div>
