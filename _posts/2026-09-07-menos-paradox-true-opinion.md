@@ -828,6 +828,8 @@ Which is precisely why nothing caught the basket. Whatever System 2 was involved
 
 And the split is not a principled architecture. It is a budget. Robots close their control loop at tens of hertz, and you cannot run a large reasoning model inside that window — so the thinking gets moved somewhere it can take its time, which means off the loop and upstream. The blocker on 说 was never a shortage of ideas about deliberation. It is **compute per action**.
 
+<div class="pull-quote">Nobody has seriously scaled the compute axis in robotics action models.</div>
+
 There are two ways out of that, and the first is oddly under-explored: **let the thinking run in parallel with the acting.** Not a preamble that finishes before the arm moves, and not a monolith that has to complete inside one control step — a slower deliberative process running concurrently, at its own rate, watching the same stream the controller sees, with standing authority to interrupt. The policy keeps acting at fifty hertz. The thinking lands when it lands, and when it disagrees, it preempts.
 
 That is roughly what a person does carrying an awkward load: the hands keep going while something slower notices the thing is tipping and takes over. And it quietly changes the requirement. Deliberation no longer has to beat the control period — only the time it takes for a failure to become unrecoverable. For a basket sliding off one finger that is a few hundred milliseconds, which is an enormously easier target than twenty.
