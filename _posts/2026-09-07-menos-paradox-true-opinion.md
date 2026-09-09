@@ -975,11 +975,11 @@ Two traditions, four centuries and six thousand miles apart, converging on the s
 
 ## How you would actually build one
 
-Everything above is a diagnosis. The build starts where the dialogue does — with the boy.
+Everything above is a diagnosis, and it leaves one question open. If 闻 buys a prior and nothing more, what supplies the rest? The build starts where the dialogue does — with the boy, who arrived holding a prior and something else besides.
 
 ### First: what does the boy actually have?
 
-He gets from confident error to something worth calling knowledge in ten minutes, with no corpus and no gradient step. Can we buy that by scaling 闻? Two things get him there, and they scale very differently.
+He gets from confident error to something worth calling knowledge in ten minutes, with no corpus and no gradient step. Two things get him there, and they scale very differently.
 
 **The first is latent structure** — his lived sense of edges, area and halves, which Socrates addresses rather than installs. That is recollection, and **it does scale with 闻**: it is precisely what pretraining buys. Pile it on; the boy's prior is on sale.
 
