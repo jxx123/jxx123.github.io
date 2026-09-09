@@ -48,7 +48,11 @@ Fast adaptation of Gemini Robotics On-Device 2 to embodiments the model has neve
   <a href="https://www.alphaxiv.org/abs/2607.29172" target="_blank">Paper</a>
 </div>
 
-Non-invasive closed-loop iterative fine-tuning: adapting a closed-weight robot foundation model into a humanoid specialist through a managed fine-tuning API, with no access to weights, gradients, or training internals.
+Non-invasive closed-loop iterative fine-tuning: adapting a closed-weight robot foundation model into a humanoid specialist through a managed fine-tuning API, with no access to weights, gradients, or training internals. Across box packing, cup insertion and bimanual plate handover, the same procedure lifts Gemini Robotics On-Device considerably further than it lifts &pi;<sub>0.5</sub> — the loop compounds on the stronger prior rather than closing the gap to it.
+
+Why I like it, from [my thread](https://x.com/xjygr08/status/2084432234514383090?s=20){:target="_blank"}:
+
+> This is the type of RL I love. No Dagger, no policy gradient, no reward collapse. A well-calibrated VLM critic to label the rollout data, a careful conditioning in the text prompt and a SFT API will do the trick.
 
 <div class="entry-authors">Yuxin Chen, Hari Srikanth, Nathan Jew, Menglin Wu, Pengcheng Wang, Junli Ren, Masayoshi Tomizuka, Peng Xu, <b>Jinyu Xie</b>, Thomas Tian</div>
 
