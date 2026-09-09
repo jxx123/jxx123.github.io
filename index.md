@@ -31,7 +31,9 @@ I am a Research Engineer in the Google DeepMind working on Gemini Robotics model
   <a href="https://x.com/GoogleDeepMind/status/2082844165570798071?s=20" target="_blank">Announcement</a>
 </div>
 
-Fast adaptation of Gemini Robotics On-Device 2 to embodiments the model has never seen. GRODv2 reaches useful success rates on new platforms — SO101 and Dexmate — from a couple of hours of task data, where GRODv1 stays near the floor. Adaptation curves in [my thread](https://x.com/xjygr08/status/2083020146319167851?s=20){:target="_blank"}.
+Fast adaptation of Gemini Robotics On-Device 2 to embodiments the model has never seen. With roughly two hours of task data per embodiment, GRODv2 reaches 53.3% on SO101 and 75.6% on Dexmate, against 6.7% and 33.3% for GRODv1 — and on SO101 the v1 curve is flat, so the gain is adaptation speed rather than a better starting point. More in [my thread](https://x.com/xjygr08/status/2083020146319167851?s=20){:target="_blank"}.
+
+![GRODv2 vs GRODv1 fast-adaptation success rate on SO101 and Dexmate](/assets/img/about/grod2_fast_adaptation.png)
 
 <div class="video-wrapper">
   <video controls preload="metadata" playsinline poster="">
