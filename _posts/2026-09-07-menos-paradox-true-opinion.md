@@ -772,7 +772,9 @@ The Mohists in China, working the same centuries, asked precisely that — not w
 
 The 《墨经》 classifies knowledge by **where it came from**: 闻 *wén*, what you were told; 说 *shuō*, what you worked out by inference; 亲 *qīn*, what you came to know by direct personal contact with the thing.
 
-One caveat: the line is a spectrum, not a wall. A teleop log, or a recording from a UMI-style handheld gripper rig — a robot end-effector on a stick — carries the actual end-effector trajectory, which is nearly first-hand. What makes it 闻 anyway is not sensor fidelity but that the robot did not choose it, did not act it, and cannot ask it a follow-up question. **亲 is defined by agency, not by resolution.**
+One caveat, because the line is a spectrum rather than a wall. You could fairly argue that a teleop log, or a recording from a UMI-style handheld gripper rig — a robot end-effector on a stick — is *experience* rather than somebody else's testimony: the trajectory is in the robot's own action space, and the forces are the ones its body would have felt. First-person in every sensorimotor sense.
+
+What makes it 闻 anyway is not sensor fidelity. It is that the robot did not choose it, did not act it, and cannot ask it a follow-up. **亲 is defined by agency, not by resolution.** And the difference bites: a policy that chooses its own actions finds out where *its own* errors lie, while a demonstration only ever shows the path an expert already selected. That is why behaviour cloning compounds error, and most of why DAgger exists. In a demonstration the human is doing the exploring on the robot's behalf — and whether that transfers depends entirely on how well a person can guess what a policy doesn't know.
 
 | 闻 *wén* — testimony | 说 *shuō* — inference | 亲 *qīn* — direct experience |
 |---|---|---|
