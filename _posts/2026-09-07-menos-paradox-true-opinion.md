@@ -3,7 +3,7 @@ layout: post
 title: "Meno’s Paradox — Your Robot’s Success Rate Is Just a “True” OPINION"
 description: "Plato separated true opinion from knowledge 2,400 years ago. A success rate measures the first and cannot see the second — on the Meno, the slave boy, the statues of Daedalus, and five tethers for robot evaluation. Part one of two."
 authors: "Jinyu Xie and Claude"
-reading_time: "10 min read"
+reading_time: "13 min read"
 date: 2026-09-07
 ---
 
@@ -299,9 +299,9 @@ For robots this matters more than it sounds, because our data problem is the inv
 
 You cannot filter your way out of a small circle. You have to grow it — and since every point costs a rig, an operator and an hour, the only question that matters is *which* point to add next. That is exactly what curiosity answers. Not a nicety, then: curiosity is the policy for spending a data budget when the data doesn't exist yet.
 
-So the model I was designing that week was the smallest honest version of it — not a curious robot, just one that could *ask*, instead of carrying serenely on while the forks hit the floor. Working through it with Claude, somewhere in a thread about scoring a policy's confidence, it said: *by the way, have you heard of Meno's paradox? What you're describing is close to the problem Plato poses there.*
+So the model I started sketching after that rollout was the smallest honest version of it — not a curious robot, just one that could *ask*, instead of carrying serenely on while the forks hit the floor. Working through it with Claude, somewhere in a thread about scoring a policy's confidence, it said: *by the way, have you heard of Meno's paradox? What you're describing is close to the problem Plato poses there.*
 
-I had not. I was immediately curious to know more — and what followed was, honestly, a eureka moment.
+I had not — and what followed changed how I was thinking about the problem.
 
 ## The other paradox
 
@@ -434,7 +434,7 @@ He calls over one of Meno's household slaves — a boy who has had no mathematic
   <text x="315" y="228" text-anchor="middle" font-size="12.5" fill="#b45309" font-weight="600" font-family="-apple-system, sans-serif">&#10007; four times over, not twice</text>
 
   <!-- ============ PANEL 3 : side 3, area 9 ============ -->
-  <text x="525" y="26" text-anchor="middle" font-size="11" font-weight="700" fill="#888" letter-spacing="1.2" font-family="-apple-system, sans-serif">3 &#183; NUMBED</text>
+  <text x="525" y="26" text-anchor="middle" font-size="11" font-weight="700" fill="#888" letter-spacing="1.2" font-family="-apple-system, sans-serif">3 &#183; STUCK</text>
   <rect x="488" y="77" width="75" height="75" fill="none" stroke="#b45309" stroke-width="2"/>
   <rect x="488" y="77" width="50" height="50" fill="#dbeafe" stroke="#2563eb" stroke-width="1.6"/>
   <text x="513" y="108" text-anchor="middle" font-size="13" font-weight="700" fill="#2563eb" font-family="-apple-system, sans-serif">4</text>
@@ -478,12 +478,14 @@ The boy answers instantly and wrongly: *double the side.* Socrates draws it, and
 Socrates makes Meno admit that the boy is *better off* in this state than he was five minutes earlier:
 
 > He did not know before... but he thought he knew, and answered confidently as if he knew, and did not think himself at a loss. Now he does think himself at a loss, and as he does not know, neither does he think he knows... We have made him ready to find out.
+>
+> — *Meno*, 84a&ndash;c
 
-Read that again as an engineer. Nothing was added to the boy — no new fact, no demonstration, no gradient step. What changed is that his confidence came into agreement with his competence, and Socrates' claim is that *this alone* made him teachable. Socrates' own image for what he does is a torpedo fish, numbing whatever it touches. The numbing isn't a step on the way to learning; it is the precondition for it.
+Read that again as an engineer. Nothing was added to the boy — no new fact, no demonstration, no gradient step. What changed is that his confidence came into agreement with his competence, and Socrates' claim is that *this alone* made him teachable. The image is Meno's: a page earlier, at 80a, he accuses Socrates of being a torpedo fish that numbs whatever it touches — and Socrates takes the name and keeps it. The numbing isn't a step on the way to learning; it is the precondition for it.
 
-Which is the design document I had been fumbling toward all week. "Knows it does not know" and "therefore asks" are not two features. They are one, and the ancient version is better specified than mine was.
+Which is the design document I had been fumbling toward. "Knows it does not know" and "therefore asks" are not two features. They are one, and the ancient version is better specified than mine was.
 
-Only after the boy is genuinely stuck does Socrates draw the diagonal — and the boy sees it himself.
+Only after the boy is genuinely stuck does Socrates draw the diagonal — and the boy sees it himself. Socrates' own explanation is metaphysical: the boy learned nothing, he *recollected* something his soul already knew. You don't have to buy the metaphysics to keep the mechanism.
 
 ## True opinion, and the statues that run away
 
@@ -494,6 +496,8 @@ Socrates asks what makes knowledge better than merely-correct belief. A man who 
 Right up until it isn't. Because true opinions, Socrates says, will not stay:
 
 > True opinions are a fine thing and do all sorts of good so long as they stay in their place, but they will not stay long. They run away from a man's mind; so they are not worth much until you tether them by an account of the reason why.
+>
+> — *Meno*, 97d&ndash;98a
 
 The image is the statues of Daedalus, which legend held were carved so lifelike they would walk off if you didn't tie them down. An untethered true opinion is a statue on a plinth: perfectly correct, perfectly convincing, gone tomorrow. What converts it into knowledge — *epistēmē* — is *aitias logismos*, an account of the reason why. You know why it is true, so it stays put when circumstances move.
 
@@ -559,9 +563,17 @@ The image is the statues of Daedalus, which legend held were carved so lifelike 
 
 ## Five tethers
 
-Socrates' remedy is to tether the opinion — to tie it down with an account of the reason why. A policy cannot recite an account, so its version has to be operational: a list of things you change that *should not matter*. A policy holding real knowledge is indifferent to all of them. Each one you leave unmeasured is a rope you never tied.
+Socrates' remedy is to tether the opinion. A policy cannot recite an account, so its version has to be operational: a list of things you change that *should not matter*. A policy holding real knowledge is indifferent to all of them. Each one you leave unmeasured is a rope you never tied.
 
-I'd propose five, and they are cheap to state. **Stability**: change what should not matter perceptually — the lighting, the distractors, the camera pose, this mug for that mug — and see whether the policy even notices. **Transfer**: change the instance but not the type, a drawer it has never opened, and see whether it solved the problem or memorised the episode. **Recovery**: disturb it mid-episode — slip the grasp, shove the target, move the goal — and see whether it re-plans or carries on regardless. **Foresight**: make it say what its next action will do *before* it does it, and score the prediction rather than the outcome. **Humility**: score whether its confidence tracks its competence, which is the only one that asks the policy about itself rather than about the world.
+I'd propose five, and they are cheap to state.
+
+- **Stability** — change what should not matter perceptually: the lighting, the distractors, the camera pose, this mug for that mug. Does the policy even notice?
+- **Transfer** — change the instance but not the type: a drawer it has never opened. Did it solve the problem, or memorize the episode?
+- **Recovery** — disturb it mid-episode: slip the grasp, shove the target, move the goal. Does it re-plan, or carry on regardless?
+- **Foresight** — make it say what its next action will do *before* it does it, and score the prediction rather than the outcome.
+- **Humility** — score whether its confidence tracks its competence. The only one that asks the policy about itself rather than about the world.
+
+Fig 7 names the failure each untied rope leaves behind: the Parrot, dazzling until someone moves a lamp; the One-Trick Pony, which solved the episode and not the type; the Glass Dancer, flawless until first contact with disorder; the Sleepwalker, acting without imagining consequences; and, when the last rope goes, the Confident Fool.
 
 <figure class="figure">
 <svg viewBox="0 0 900 410" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A statue held down by five labelled tethers">
@@ -616,7 +628,7 @@ I'd propose five, and they are cheap to state. **Stability**: change what should
 <figcaption><b>Fig 7 &middot; Five tethers.</b> Report them as a vector, never a scalar. If you must have one number, take the <i>geometric</i> mean &#8212; so that a single untied rope cannot be averaged away by four good ones.</figcaption>
 </figure>
 
-Four of these are about robustness. The fifth is different in kind, and it is the boy at 84a: **Humility** is the tether that makes the other four improvable, because it is the only one that tells the robot something about itself.
+Four of these are about robustness. The fifth is different in kind, and it is the boy at 84a: **Humility** is the tether that makes the other four improvable.
 
 ## A success rate is a count of true opinions
 
@@ -687,7 +699,7 @@ Every robot in every demo video is a statue on a plinth: beautifully lifelike, g
 <figcaption><b>Fig 8 &middot; The same number, two different objects.</b> Policy B is not a worse version of Policy A. It is a different kind of thing, and the headline metric is structurally incapable of telling them apart.</figcaption>
 </figure>
 
-Policy B has a name in this piece: it is the dishwasher failure from the opening, caught in the act. High success rate on its task, steady on the scenes it was scored on — and, as the rest of this section shows, no Foresight, no Recovery, no Humility. The basket was hooked on one finger, with the load never centred over the contact.
+Policy B has a name: it is **the Confident Fool**, and it is the dishwasher failure from the opening, caught in the act. High success rate on its task, steady on the scenes it was scored on.
 
 We scored that episode a failure, for the record. Someone was watching, and forks on the floor are hard to miss.
 
@@ -701,7 +713,7 @@ One rollout, three missing tethers. **Foresight**: it could not predict that a o
 
 That last rope — Humility, the one the basket rollout never moved — is also the one that unties the paradox. Go back to Fig 4, the fork with no third door.
 
-Socrates escaped it by insisting the answer was already in the boy. I'd escape it with **calibration**, and this is the genuinely useful idea in the whole essay.
+Socrates escaped it by insisting the answer was already in the boy. I'd escape it with **calibration**.
 
 The right-hand horn says you cannot search for what you do not know, because you cannot recognize it. True — *but you do not have to recognize the answer in order to recognize the question.* A policy cannot know the correct action in a novel state; that horn holds. What a calibrated policy *can* know is that **this state is one where its own confidence is low**. Not knowledge of the answer. Knowledge of the boundary.
 
@@ -758,11 +770,11 @@ And a boundary is enough, because it converts an impossible search into a reques
 <figcaption><b>Fig 9 &middot; The paradox, inverted into an interface.</b> This is the same move Socrates makes on the boy at 84a: the numbing comes first, and it is what makes the next demonstration land.</figcaption>
 </figure>
 
-The robot that knows what it doesn't know can ask for precisely the experience that converts its next true opinion into knowledge. Inquiry bootstraps. It just needed the boundary, not the answer.
+The robot that knows what it doesn't know can ask for precisely the experience that converts its next true opinion into knowledge. Inquiry bootstraps.
 
 And that is the curious robot I wanted at the top, arrived at from an unexpected direction. Curiosity is not a drive you add to a policy; it is what a calibrated policy *does* once it can feel its own edge. It is also how you grow a small circle: every question is one deliberate step outward, chosen rather than stumbled into. All of it is downstream of that one measurement.
 
-Twenty-four centuries and six thousand miles from the *Meno*, Confucius put the same thing as a definition rather than a virtue:
+A century before the *Meno*, and five thousand miles east of it, Confucius had already put the same thing as a definition rather than a virtue:
 
 <div class="zh-quote">
   <div class="zh">知之为知之，不知为不知，是知也。</div>
@@ -773,19 +785,21 @@ Twenty-four centuries and six thousand miles from the *Meno*, Confucius put the 
 
 That is not a proverb about modesty but a definition — the Humility tether stated 2,500 years early, with the *is* in "that is knowledge" doing structural work. A model whose confidence tracks its competence knows something a more accurate but uncalibrated model does not.
 
-Two traditions, four centuries and six thousand miles apart, converging on the same test: **a correct answer is not evidence of knowledge. Surviving a changed world is.**
+Two traditions, a century and five thousand miles apart, converging on the same test: **a correct answer is not evidence of knowledge. Surviving a changed world is.**
 
 ## What to do on Monday
 
-Three moves follow from all this, and all three are about measurement — which is why they belong in this post. Two more follow from it that are about what you *train* on, and those need the next one.
+Three moves follow from all this, and none of them needs a new model.
 
-**1. Stop shipping scalars.** Report the vector. A model card that says 85% without saying *held fixed: lighting, object set, initial pose, and the twelve scenes we also trained on* is a press release, not a result. This one is free this quarter, from the eval artifacts already on disk.
+**1. Stop shipping a success rate without its context.** Report the vector. A model card that says 85% without saying *held fixed: lighting, object set, initial pose, and the twelve scenes we also trained on* is a press release, not a result. Everything you need is in the eval artifacts already on disk.
 
-**2. Train Humility as an output, not a threshold.** Most uncertainty work is a post-hoc gate on whatever confidence signal falls out — a knob, not a capability. Make abstention something the policy is *trained to emit*, score its calibration, and charge a real penalty for wrong-and-certain — the failure that put three forks on the floor and moved its confidence by not one hair.
+**2. Make confidence a first-class output.** Not a threshold bolted on at deployment, and not whatever signal happens to fall out of the logits — an output the model emits on every step, next to the action, trained and benchmarked as seriously as the action is. Score its calibration alongside its success rate, and make *confidently wrong* cost far more than *uncertain and right*. This is the same problem large language models have with hallucination, and it has the same cause: a model that has never been penalized for confident nonsense will produce confident nonsense, because nothing in the objective ever made its confidence mean anything.
 
-**3. Certify on the edges, not the average.** We don't license pilots on their pass rate over rehearsed routes, but on crosswinds, engine-out, and the judgment to declare a missed approach. Knowing when to go around *is* the licence. Whatever regime governs robots near people, it will not be a success rate.
+**3. Certify on knowing when to stop, not on the average.** Don't gate deployment on a success rate. Gate it on whether the robot recognizes the states it cannot handle and says so. We don't license pilots on their pass rate over rehearsed routes; we license them on crosswinds, engine-out, and the judgment to declare a missed approach. Knowing when to go around *is* the licence.
 
-None of these requires a new model. The first is free this quarter; the second is a training objective you already know how to write; the third is a decision about what you agree to be judged on.
+The obvious objection: nobody wants to buy a robot that stops every five minutes to ask for help. That isn't a worker, it's a burden. Quite right — which is why the thing to certify is *calibration*, not caution. A robot that asks constantly is as badly calibrated as one that never asks; in both cases its confidence tracks nothing. What belongs on the certificate is the trade-off: how much of the job it completes unaided, and what fraction of its failures it flags before they happen rather than after. A robot that does 95% alone and raises a hand on the 5% that would have broken something is worth more than one that does 99% and buries the rest in an average.
+
+The first move is free this quarter. The second is a training objective you already know how to write. The third is a decision about what you agree to be judged on.
 
 I went looking for a way to make a robot ask for help and found the problem named, diagnosed and half-solved twenty-four centuries before anyone had a robot to ask it about. The paradox is real: you cannot search for what you do not know. The escape is smaller than it sounds. You never needed the answer — only to know, honestly and in calibrated units, where your knowing stops.
 
@@ -793,6 +807,6 @@ Everything else is a statue.
 
 ---
 
-*Part two, [**Three sources of knowledge — and the two axes we aren't scaling**](/blog/three-sources-of-knowledge/), takes up the training half: where a policy's content actually comes from, why 说 (thinking) and 亲 (experience) are barely scaled at all, and the two moves left over from this post.*
+*Part two, [**Three sources of knowledge — and the two axes we aren't scaling**](/blog/three-sources-of-knowledge/), takes up the training half: where a policy's content actually comes from, why 说 (thinking) and 亲 (experience) are barely scaled at all, and two further moves, on the training side rather than on measurement.*
 
 Written by Jinyu Xie and Claude. The *Meno* came up in one of our design conversations; the argument was worked out across a good many more. Passages from the *Meno* are Plato, trans. W.K.C. Guthrie and G.M.A. Grube, lightly adapted.
