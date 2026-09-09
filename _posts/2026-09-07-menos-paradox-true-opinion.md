@@ -764,9 +764,11 @@ And that is the curious robot I wanted at the top, arrived at from an unexpected
 
 ## 闻、说、亲 — and the two axes we aren't scaling
 
-Calibration tells a policy where its knowledge stops. It says nothing about where that knowledge came *from* — and the source turns out to matter just as much.
+Calibration tells a policy where its knowledge stops. It says nothing about how the knowledge got there — and for the slave boy, that is the more interesting question. He had never studied geometry. So where did his answers come from at all, the wrong ones included? Something in him was already equipped to have opinions about area before anybody asked him one.
 
-Plato did ask this question, and he answered it: the content was always in there. We will come back to that answer shortly, because it is unusable and illuminating for exactly the same reason. The Mohists in China, working in the same centuries, asked a more tractable version of it — not where knowledge ultimately originates, but by which *route* a given piece of it arrived, and whether the route decides if it stays put. Two traditions on the same seam, and the Mohist answer maps onto our training stack with a precision I find hard to dismiss as coincidence.
+Plato's answer is that nothing came from anywhere. The knowledge was always in the boy; Socrates only drew it out. Learning is extraction, not insertion — and it is a beautiful answer that is no use to us whatever, because it helps itself to the soul. Nobody hands us a prior that is already there and merely needs reminding. **We have to build the soul first.** Which turns the question into an engineering one: what do we build it out of?
+
+The Mohists in China, working the same centuries, asked precisely that — not where knowledge ultimately originates, but by which *route* a given piece of it arrived, and whether the route decides if it stays put. Two traditions on the same seam, and the Mohist answer maps onto our training stack with a precision I find hard to dismiss as coincidence.
 
 The 《墨经》 classifies knowledge by **where it came from**: 闻 *wén*, what you were told; 说 *shuō*, what you worked out by inference; 亲 *qīn*, what you came to know by direct personal contact with the thing.
 
@@ -834,9 +836,9 @@ And notice what falls out if you get it. The sane way to spend a variable comput
 
 ### Recollection, in three traditions
 
-闻 raises an older question. If a policy's content is all testimony — every bit of it put there by somebody else — where does that content actually live, and what does *learning* mean when nothing new goes in?
+We left Plato's answer hanging, so pick it back up: if a policy's content is all testimony, put there by somebody else, where does it actually live — and what does *learning* mean when nothing new goes in?
 
-Plato had an answer, and it is wild. The soul is immortal; it has already learned everything there is; birth makes it forget. Nothing is ever taught — what we call learning is *anamnēsis*, recollection, and Socrates asks questions rather than lectures because questioning is the technology of reminding.
+Plato's version is wild. The soul is immortal; it has already learned everything there is; birth makes it forget. Nothing is ever taught — what we call learning is *anamnēsis*, recollection, and Socrates asks questions rather than lectures because questioning is the technology of reminding.
 
 I don't believe a word of the metaphysics. But three traditions are now describing the same object from different sides, and the shape they agree on is the point.
 
