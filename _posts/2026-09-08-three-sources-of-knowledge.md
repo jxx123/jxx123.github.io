@@ -3,11 +3,13 @@ layout: post
 title: "Three Sources of Knowledge — and the Two Axes We Aren't Scaling"
 description: "闻 heard, 说 inferred, 亲 lived. The Mohists classified knowledge by where it came from, and the taxonomy maps onto a robot training stack — one axis scaled hard, two barely started. Part two of two."
 authors: "Jinyu Xie and Claude"
-reading_time: "12 min read"
+reading_time: "13 min read"
 date: 2026-09-08
 ---
 
-*This is part two. [Part one](/blog/menos-paradox-true-opinion/) argued that a robot's success rate measures* true opinion *rather than knowledge, and proposed five tethers — Stability, Transfer, Recovery, Foresight, Humility — for telling the difference. It closed with three things to do about measurement. This post is the other half: what you actually feed a policy so the tethers have something to hold.*
+*This is part two. [Part one](/blog/menos-paradox-true-opinion/) opened on a robot that carried a cutlery basket out of a dishwasher on a single finger, let the forks slide onto the floor halfway across the room, and finished its learned trajectory without registering that anything had happened. By way of Plato's* Meno*, it argued that a success rate measures* true opinion *— correct today, gone the moment anything you didn't name in the demo changes — rather than knowledge, which stays put because it comes with an account of why it is true. It proposed five tethers — Stability, Transfer, Recovery, Foresight, Humility — for telling the two apart, and answered Meno's paradox (you cannot search for what you don't know, because you wouldn't recognize it if you found it) with **calibration**: a policy can't know the right action in a novel state, but it can know that this state is one where its own confidence is low, and ask.*
+
+*Its model case is Socrates' untaught slave boy, asked to double the area of a square drawn in the dirt. He answers confidently and wrongly — double the side — sees that the square he drew is four times the original, tries again, fails again, and admits he doesn't know. Only then is he shown the square built on the diagonal, and he can count for himself that it's right. Part one closed with three moves on measurement. This post is the other half: what you actually feed a policy so the tethers have something to hold.*
 
 ## Where a policy's content comes from
 
@@ -21,9 +23,9 @@ The Mohists in China, working the same centuries, asked precisely that — not w
 
 The 《墨经》 classifies knowledge by **where it came from**: 闻 *wén*, what you were told; 说 *shuō*, what you worked out by inference — the thinking axis; 亲 *qīn*, what you came to know by direct personal contact with the thing.
 
-One caveat, because the line is a spectrum rather than a wall. You could fairly argue that a teleop log, or a recording from a UMI-style handheld gripper rig — a robot end-effector on a stick — is *experience* rather than somebody else's testimony: the trajectory is in the robot's own action space, and the forces are the ones its body would have felt. First-person in every sensorimotor sense.
+One caveat, because the line looks blurrier than it is. You could fairly argue that a teleop log, or a recording from a UMI-style handheld gripper rig — a robot end-effector on a stick — is *experience* rather than somebody else's testimony: the trajectory is in the robot's own action space, and the forces are the ones its body would have felt. First-person in every sensorimotor sense.
 
-What makes it 闻 anyway is not sensor fidelity. It is that the robot did not choose it, did not act it, and cannot ask it a follow-up. **亲 is defined by agency, not by resolution.** And the difference bites: a policy that chooses its own actions finds out where *its own* errors lie, while a demonstration only ever shows the path an expert already selected. That is why behaviour cloning compounds error, and most of why DAgger exists. In a demonstration the human is doing the exploring on the robot's behalf — and whether that transfers depends entirely on how well a person can guess what a policy doesn't know.
+What makes it 闻 anyway is not sensor fidelity. It is that the robot did not choose it, did not act it, and cannot ask it a follow-up. **亲 is defined by agency, not by resolution.** And the difference bites: a policy that chooses its own actions finds out where *its own* errors lie, while a demonstration only ever shows the path an expert already selected. That is why behaviour cloning compounds error, and most of why DAgger — which repeatedly sends the expert back to label the states the policy itself wandered into — exists. In a demonstration the human is doing the exploring on the robot's behalf — and whether that transfers depends entirely on how well a person can guess what a policy doesn't know.
 
 | 闻 *wén* — testimony | 说 *shuō* — inference | 亲 *qīn* — direct experience |
 |---|---|---|
@@ -69,9 +71,11 @@ What makes it 闻 anyway is not sensor fidelity. It is that the robot did not ch
 <figcaption><b>Fig 1 &middot; Three sources, one axis scaled.</b> 闻 is not bounded by how much teleop anyone can afford &#8212; glasses, gripper rigs and video are 闻 too. 说 and 亲 are bounded by nothing but our willingness to build them.</figcaption>
 </figure>
 
-Read that as a roadmap and the conclusion is uncomfortable. We have spent the decade scaling 闻 — more data, more demos, more logs — and 闻 is *precisely the source that produces true opinion.* It is testimony: the road to Larissa described by someone else. It will get you there, and it will not stay. The other two axes are barely scaled at all, and they are exactly the tethers that were missing — 说 (thinking) is Foresight, 亲 (experience) is Recovery. Scaling data alone cannot produce *epistēmē*, because *epistēmē* is not made of testimony.
+Read that as a roadmap and the conclusion is uncomfortable. We have spent the decade scaling 闻 — more data, more demos, more logs — and 闻 is *precisely the source that produces true opinion.* It is testimony: the road to Larissa described accurately by someone who has never walked it. It will get you there, and it will not stay. The other two axes are barely scaled at all, and they are where two of the three tethers that rollout was missing actually live — 说 (thinking) is Foresight, 亲 (experience) is Recovery. The third it lacked, Humility, turns out to decide where you spend the other two; that comes below. Scaling data alone cannot produce *epistēmē* — knowledge that stays put because it comes with an account of why it is true — because *epistēmē* is not made of testimony.
 
-It is worth being concrete about how little 说 is really scaled, because the field looks busier on this axis than it is. A VLA maps observation to action. There is no deliberation anywhere in that loop: the model that acts does not reason about what its action is about to do. The standard fix has been to bolt a System 2 on top — a separate reasoning model that plans, hands a subgoal down to a System 1 policy, and then gets out of the way. **Two standalone models, with the thinking sitting upstream of the acting rather than inside it.** Even world-action models, which at least carry a predictive component, mostly spend it generating a plan rather than checking one mid-execution.
+### Why 说 is barely scaled
+
+It is worth being concrete about how little 说 is really scaled, because the field looks busier on this axis than it is. A vision-language-action model — a VLA, the standard robot policy architecture — maps observation to action. There is no deliberation anywhere in that loop: the model that acts does not reason about what its action is about to do. The standard fix has been to bolt a System 2 on top — a separate reasoning model that plans, hands a subgoal down to a System 1 policy, and then gets out of the way. **Two standalone models, with the thinking sitting upstream of the acting rather than inside it.** Even world models, which at least carry a predictive component, mostly spend it generating a plan rather than checking one mid-execution.
 
 Which is precisely why nothing caught the basket. Whatever System 2 was involved had finished thinking before the load ever shifted, and System 1 does not think. Nobody is scaling 说 *in the loop*; we are scaling a preamble.
 
@@ -79,17 +83,17 @@ And the split is not a principled architecture. It is a budget. Robots close the
 
 <div class="pull-quote">Nobody has seriously scaled the compute axis in robotics action models.</div>
 
-There are two ways out of that, and the first is oddly under-explored: **let the thinking run in parallel with the acting.** Not a preamble that finishes before the arm moves, and not a monolith that has to complete inside one control step — a slower deliberative process running concurrently, at its own rate, watching the same stream the controller sees, with standing authority to interrupt. The policy keeps acting at 50 Hz. The thinking lands when it lands, and when it disagrees, it preempts.
+There are two ways out of that, and the first is oddly under-explored: **let the thinking run in parallel with the acting.** Not a preamble that finishes before the arm moves, and not a monolith that has to complete inside one control step — a slower deliberative process running concurrently, at its own rate, watching the same stream the controller sees. The policy keeps acting at 50 Hz. The thinking lands when it lands, and when it disagrees, it preempts.
 
-That is roughly what a person does carrying an awkward load: the hands keep going while something slower notices the thing is tipping and takes over. And it quietly changes the requirement. Deliberation no longer has to beat the control period — only the time it takes for a failure to become unrecoverable. For a basket sliding off one finger that is a few hundred milliseconds, which is an enormously easier target than twenty.
+That is roughly what a person does carrying an awkward load: the hands keep going while something slower notices the thing is tipping and takes over. And it quietly changes the requirement. Deliberation no longer has to beat the control period — only the time it takes for a failure to become unrecoverable. For a basket sliding off one finger that is a few hundred milliseconds, which is an enormously easier target than the 20 ms a 50 Hz control step allows.
 
-The second way out is to make the model itself cheaper, and it is strange how few people are digging there. Enormous effort goes into scaling parameters and data; almost none goes into **the compute efficiency of a robotics foundation model** — making it cheap enough per step that deliberation fits inside the control budget. And robotics is where that work would pay off first: a robot carries its compute with it, on a battery, against a hard control deadline. There is no larger cluster to phone. Distillation, sparsity and routing, adaptive depth, caching across timesteps, chunking that amortises one forward pass over many actions — unglamorous work, and it is most of what stands between us and a single model that thinks *and* acts at practical latency.
+The second way out is to make the model itself cheaper. Enormous effort goes into scaling parameters and data; almost none goes into **the compute efficiency of a robotics foundation model** — making it cheap enough per step that deliberation fits inside the control budget. And robotics is where that work would pay off first: a robot carries its compute with it, on a battery, against a hard control deadline. There is no larger cluster to phone. Distillation, sparsity and routing, adaptive depth, caching across timesteps, chunking that amortizes one forward pass over many actions — unglamorous work, and it is most of what stands between us and a single model that thinks *and* acts at practical latency.
 
 And notice what falls out if you get it. The sane way to spend a variable compute budget is to think longer exactly where you are least sure — which means adaptive compute and the Humility tether are the same signal, read twice. A calibrated policy doesn't only know when to ask a human. It knows when to think.
 
 ### Recollection, in three traditions
 
-We left Plato's answer hanging, so pick it back up: if a policy's content is all testimony, put there by somebody else, where does it actually live — and what does *learning* mean when nothing new goes in?
+We set Plato's answer aside as unbuildable. It's worth picking back up, because the shape of it is right even where the metaphysics isn't: if a policy's content is all testimony, put there by somebody else, where does it actually live — and what does *learning* mean when nothing new goes in?
 
 Plato's version is wild. The soul is immortal; it has already learned everything there is; birth makes it forget. Nothing is ever taught — what we call learning is *anamnēsis*, recollection, and Socrates asks questions rather than lectures because questioning is the technology of reminding.
 
@@ -135,18 +139,18 @@ I don't believe a word of the metaphysics. But three traditions are now describi
 
   <text x="450" y="284" text-anchor="middle" font-size="12.5" fill="#b45309" font-family="-apple-system, sans-serif">&#9888; Plato's soul is true by construction. A checkpoint is only as true as what it ate.</text>
 </svg>
-<figcaption><b>Fig 2 &middot; Anamnesis as a pretraining story.</b> The correspondence is uncomfortably good &#8212; which is exactly why the disanalogy at the bottom matters.</figcaption>
+<figcaption><b>Fig 2 &middot; Anamnesis as a pretraining story.</b> Two columns here; the prose supplies the third, 闻 — the same object arrived at from a different direction. The correspondence is uncomfortably good &#8212; which is exactly why the disanalogy at the bottom matters.</figcaption>
 </figure>
 
-Anyone who has watched a hundred-shot finetune "teach" a model a skill it visibly already had recognises this: we are not writing the capability in, we are addressing something already in the weights — the way Socrates addresses geometry already in the boy.
+Anyone who has watched a hundred-shot finetune "teach" a model a skill it visibly already had recognizes this: we are not writing the capability in, we are addressing something already in the weights — the way Socrates addresses geometry already in the boy.
 
 Where the pictures come apart matters more. Plato's soul is *true by construction* — it saw the Forms, so whatever you recollect is knowledge. A checkpoint ate the internet and a pile of teleop logs, so recollection returns whatever was statistically dominant, which may be right and may be a fluent, beautifully-formed mistake. And unlike Plato's helpless newborn, it is already strikingly capable — which is precisely what makes its errors hard to see. A newborn's ignorance is legible across the room; a checkpoint's speaks in the same confident voice as its competence.
 
-So the three line up: Plato's soul, Mozi's 闻, and a pretrained checkpoint are the same kind of object — a vast inheritance you did not earn, addressable by good questions, and true only as far as its source was. Which settles what a right answer is worth. Eliciting one is not evidence of knowledge. It is evidence of a true opinion, and we already know what those do.
+So the three line up: Plato's soul, the Mohists' 闻, and a pretrained checkpoint are the same kind of object — a vast inheritance you did not earn, addressable by good questions, and true only as far as its source was. Which settles what a right answer is worth. Eliciting one is not evidence of knowledge. It is evidence of a true opinion, and we already know what those do.
 
 ### But how big can 闻 get?
 
-Teleoperation is not the only way to collect 闻. A human wearing camera glasses while cooking dinner is producing it. So is someone holding one of those gripper rigs while they load a dishwasher, which hands you an end-effector trajectory with no robot in the room. So is every instructional video ever uploaded. There is three or four orders of magnitude more of this than there will ever be teleop, none of it costs robot time, and it scales the way corpora actually scale: by harvesting what already exists instead of manufacturing it. So scale it. This is the cheapest large win available.
+Teleoperation is not the only way to collect 闻. A human wearing camera glasses while cooking dinner is producing it. So is someone holding one of those gripper rigs while they load a dishwasher, which hands you an end-effector trajectory with no robot in the room. So is every instructional video ever uploaded. There is three or four orders of magnitude more of this than there will ever be teleop, none of it costs robot time, and it scales the way corpora actually scale: by harvesting what already exists instead of manufacturing it.
 
 <figure class="figure">
 <svg viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A map of sources of 闻: the abundant sources sit furthest from the robot's own action space, and none of them contain failure and recovery">
@@ -207,14 +211,14 @@ And then **label it properly**, the step that actually gets skipped. Footage of 
 
 > There is no bad data. There is only badly labelled data.
 
-Scale 闻 as hard as you can get away with. Just don't mistake a bigger circle for a tethered one. A million hours of things going right is a million true opinions.
+Scale 闻 as hard as you can get away with. Just don't mistake a bigger circle — more of the world your data has touched — for a tethered one. A million hours of things going right is a million true opinions.
 
 
 ## What the boy has that a policy does not
 
-He gets from confident error to something worth calling knowledge in ten minutes, with no corpus and no gradient step. Two things get him there, and they scale very differently.
+Ten minutes in the dirt with Socrates takes the boy from a confident wrong answer to something worth calling knowledge — no corpus, no gradient step, nothing added from outside. Two things get him there, and they scale very differently.
 
-**The first is latent structure** — his lived sense of edges, area and halves, which Socrates addresses rather than installs. That is recollection, and **it does scale with 闻**: it is precisely what pretraining buys. Pile it on; the boy's prior is on sale.
+**The first is latent structure** — his lived sense of edges, area and halves, which Socrates addresses rather than installs. That is recollection, and its machine analogue **does scale with 闻**: a prior over how the world is shaped is precisely what pretraining buys. Pile it on; the boy's prior is on sale.
 
 **The second is a verifier.** His decisive move is not recall. Socrates draws the four-by-four square and the boy *sees that his own answer failed* — he can count it. In his own domain he has a cheap, unambiguous, human-free check.
 
@@ -226,9 +230,9 @@ And manipulation is luckier than it looks, because the check already ran. **The 
 
 Which is the whole build in one line. **说 (thinking) supplies the prediction; Humility notices the contradiction; 亲 (experience) buys the correction.** That is the *elenchus* — refutation by question, until the claim collapses — and the boy's state arrives domain by domain, as fast as you can construct the check, not off a scaling curve.
 
-## The two moves left over
+## Two more moves, on the training side
 
-Part one listed three measurement moves. These are the two that are about training, and they are the harder pair.
+Part one's three moves were all about measurement. These two are about what you feed the policy, and they are the harder pair.
 
 **1. Scale 说 alongside the action, not upstream of it.** Not a bigger System 2 handing plans down to an unchanged System 1, but deliberation running concurrently with the controller and free to interrupt it: *where is this load going — and is it still going there?* A world model consulted once at plan time is a research artifact; one that gates the next action is a tether. Adaptive depth is how you afford it.
 
@@ -298,7 +302,9 @@ Part one listed three measurement moves. These are the two that are about traini
 
 Put a calibrated policy together with a robot that chooses its own 亲, and it starts *aiming its own data collection*. Its uncertainty is a map of its own boundary, and that map is the shopping list: **stop paying for a thousand more demonstrations of the drawer it already opens; buy the one demonstration of the drawer it doesn't.**
 
-The honest counter-argument: while the circle is small, blind collection works fine — nearly any hour lands somewhere useful, and that is how the field got this far. But its yield falls as the circle grows while its cost stays flat; directed collection has the opposite curve. The waste is already visible: operators still recording the drawer the policy opens nine times in ten. Curiosity is not what makes your first ten thousand hours work; it is what makes the next hundred thousand worth buying.
+The honest counter-argument: while the circle is small, blind collection works fine — nearly any hour lands somewhere useful, and that is how the field got this far. But its yield falls as the circle grows while its cost stays flat; directed collection has the opposite curve. Curiosity is not what makes your first ten thousand hours work; it is what makes the next hundred thousand worth buying.
+
+Which is the oldest claim here, and the one a robot makes literal. Fifteen centuries after the Mohists sorted knowledge by its route, Wang Yangming denied the route mattered at all unless it ended in action:
 
 <div class="zh-quote">
   <div class="zh">知行合一</div>
@@ -307,11 +313,9 @@ The honest counter-argument: while the circle is small, blind collection works f
   <div class="src">Wang Yangming (王阳明), 1472&#8211;1529</div>
 </div>
 
-Wang was arguing with scholars who could recite the classics and could not act on them, and refused to grant they knew anything. Not *incomplete* knowledge. Not knowledge. The only evidence of knowing is what you do in a situation **nobody rehearsed you for** — word for word, the specification for a robot in someone's kitchen.
+Wang was arguing with scholars who could recite the classics and could not act on them, and refused to grant they knew anything. Not *incomplete* knowledge. Not knowledge. The only evidence of knowing is what you do in a situation **nobody rehearsed you for** — word for word, the specification for a robot in someone's kitchen. That is 亲 stated as a criterion rather than as a data source.
 
-Physical AGI will not arrive as a checkpoint that finally scores high enough; the number measures the wrong category of thing. It will arrive as a machine that can tell you where its knowledge stops, ask for precisely what it is missing, and act differently tomorrow because of what you showed it today. **Build the boundary first; the competence compounds behind it.**
-
-I went looking for a way to make a robot ask for help and found the problem named, diagnosed and half-solved twenty-four centuries before anyone had a robot to ask it about. The paradox is real: you cannot search for what you do not know. The escape is smaller than it sounds. You never needed the answer.
+I went looking for a way to make a robot ask for help and found the problem named, diagnosed and half-solved twenty-four centuries before anyone had a robot to ask it about. Meno's paradox is real: you cannot search for what you do not know. But the escape is smaller than it sounds — you never needed the answer, only the boundary, and then the 说 to predict past it and the 亲 to buy what lies on the other side.
 
 Physical AGI will not arrive as a checkpoint that finally scores high enough; the number measures the wrong category of thing. It will arrive as a machine that can tell you where its knowledge stops, ask for precisely what it is missing, and act differently tomorrow because of what you showed it today. **Build the boundary first; the competence compounds behind it.**
 
