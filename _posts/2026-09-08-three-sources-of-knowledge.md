@@ -150,6 +150,135 @@ So the three line up: Plato's soul, the Mohists' 闻, and a pretrained checkpoin
 
 ### But how big can 闻 get?
 
+Before pushing on that, be clear about the shape of the problem, because it is the inverse of everyone else's. Language models were handed an enormous circle: essentially everything people wrote down already exists, so building a corpus is *subtractive* — filter, dedupe, keep the good part. Robotics was handed a tiny one, and the craft has to be *additive*.
+
+<figure class="figure">
+<svg viewBox="0 0 900 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Language models filter down from an enormous corpus; robotics must expand outward from a tiny one">
+  <defs>
+    <marker id="cr-in" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="9" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#888"/></marker>
+    <marker id="cr-out" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="9" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b45309"/></marker>
+  </defs>
+
+  <text x="225" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="#1a1a1a" letter-spacing="1.1" font-family="-apple-system, sans-serif">LANGUAGE MODELS</text>
+  <text x="675" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="#1a1a1a" letter-spacing="1.1" font-family="-apple-system, sans-serif">ROBOTS</text>
+
+  <!-- LEFT: an enormous circle you filter down -->
+  <circle cx="225" cy="160" r="105" fill="#f8f9fa" stroke="#e5e7eb" stroke-width="1.8"/>
+  <circle cx="145.1" cy="184.7" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="295.6" cy="123.6" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="140.3" cy="155.8" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="257.5" cy="234.7" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="161.1" cy="92.1" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="284.4" cy="199.9" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="304.1" cy="210.6" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="205.3" cy="106.8" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="324.1" cy="148.9" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="176.2" cy="89.2" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="255.2" cy="206.0" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="168.0" cy="149.7" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="250.1" cy="223.6" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="302.9" cy="174.9" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="136.4" cy="194.7" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="138.6" cy="149.6" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="137.0" cy="160.1" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="157.2" cy="178.6" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="325.8" cy="158.5" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="273.2" cy="84.2" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="198.0" cy="222.1" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="210.8" cy="216.8" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="232.8" cy="84.0" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="268.2" cy="97.8" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="317.0" cy="135.2" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="291.7" cy="160.2" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="292.3" cy="117.5" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="300.7" cy="150.6" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="302.7" cy="198.4" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="237.4" cy="91.3" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="287.4" cy="198.0" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="314.5" cy="139.4" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="275.6" cy="206.3" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="271.6" cy="194.3" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="243.9" cy="97.9" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="151.8" cy="131.4" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="258.1" cy="244.6" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="284.3" cy="223.9" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="282.5" cy="211.7" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="241.2" cy="228.0" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="317.1" cy="143.0" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="192.7" cy="251.2" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="243.6" cy="233.8" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="278.1" cy="90.9" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="306.3" cy="219.3" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="240.9" cy="227.4" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="235.4" cy="87.9" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="208.1" cy="216.3" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="296.4" cy="205.4" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="228.7" cy="245.3" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="170.4" cy="216.9" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="302.6" cy="139.6" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="139.3" cy="116.6" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="251.0" cy="218.0" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="304.0" cy="108.7" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="225.2" cy="225.6" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="218.4" cy="61.4" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="257.7" cy="253.7" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="288.1" cy="102.3" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="171.6" cy="188.7" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="321.7" cy="184.0" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="231.5" cy="249.5" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="220.9" cy="254.3" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="166.6" cy="119.5" r="1.9" fill="#888" opacity="0.5"/>
+  <line x1="304.7" y1="206.0" x2="275.2" y2="189.0" stroke="#888" stroke-width="1.8" marker-end="url(#cr-in)"/>
+  <line x1="209.0" y1="250.6" x2="214.9" y2="217.1" stroke="#888" stroke-width="1.8" marker-end="url(#cr-in)"/>
+  <line x1="134.4" y1="176.0" x2="167.9" y2="170.1" stroke="#888" stroke-width="1.8" marker-end="url(#cr-in)"/>
+  <line x1="179.0" y1="80.3" x2="196.0" y2="109.8" stroke="#888" stroke-width="1.8" marker-end="url(#cr-in)"/>
+  <line x1="284.1" y1="89.5" x2="262.3" y2="115.6" stroke="#888" stroke-width="1.8" marker-end="url(#cr-in)"/>
+  <circle cx="225" cy="160" r="48" fill="#dbeafe" stroke="#2563eb" stroke-width="2.2"/>
+  <circle cx="240.4" cy="190.4" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="243.0" cy="168.3" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="190.5" cy="146.5" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="208.6" cy="145.7" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="241.4" cy="150.7" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="246.3" cy="162.2" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="214.2" cy="163.8" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="236.1" cy="182.1" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="211.0" cy="153.2" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="200.5" cy="188.8" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="257.4" cy="156.0" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <text x="225" y="288" text-anchor="middle" font-size="12.5" fill="#555" font-family="-apple-system, sans-serif">the data already exists</text>
+  <text x="225" y="308" text-anchor="middle" font-size="12.5" font-weight="700" fill="#555" font-family="-apple-system, sans-serif">the work is filtering <tspan fill="#1a1a1a">down</tspan></text>
+
+  <line x1="450" y1="44" x2="450" y2="286" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- RIGHT: a tiny circle you have to grow -->
+  <circle cx="675" cy="160" r="105" fill="none" stroke="#b45309" stroke-width="1.6" stroke-dasharray="6 6" opacity="0.55"/>
+  <rect x="588" y="60" width="174" height="17" rx="3" fill="#ffffff"/>
+  <text x="675" y="72" text-anchor="middle" font-size="11" fill="#b45309" opacity="0.9" font-family="-apple-system, sans-serif">everything it will actually meet</text>
+  <line x1="723.5" y1="188.0" x2="754.7" y2="206.0" stroke="#b45309" stroke-width="1.8" marker-end="url(#cr-out)"/>
+  <line x1="665.3" y1="215.1" x2="659.0" y2="250.6" stroke="#b45309" stroke-width="1.8" marker-end="url(#cr-out)"/>
+  <line x1="619.9" y1="169.7" x2="584.4" y2="176.0" stroke="#b45309" stroke-width="1.8" marker-end="url(#cr-out)"/>
+  <line x1="647.0" y1="111.5" x2="629.0" y2="80.3" stroke="#b45309" stroke-width="1.8" marker-end="url(#cr-out)"/>
+  <line x1="711.0" y1="117.1" x2="734.1" y2="89.5" stroke="#b45309" stroke-width="1.8" marker-end="url(#cr-out)"/>
+  <circle cx="675" cy="160" r="44" fill="#dbeafe" stroke="#2563eb" stroke-width="2.2"/>
+  <circle cx="665.5" cy="135.5" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="680.5" cy="166.7" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="707.3" cy="163.6" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="664.9" cy="128.2" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="702.1" cy="163.6" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="646.0" cy="163.3" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="660.7" cy="190.9" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="697.7" cy="171.6" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="672.4" cy="127.8" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <rect x="602" y="220" width="146" height="17" rx="3" fill="#ffffff"/>
+  <text x="675" y="232" text-anchor="middle" font-size="11" fill="#2563eb" font-family="-apple-system, sans-serif">what anyone has collected</text>
+  <text x="675" y="288" text-anchor="middle" font-size="12.5" fill="#555" font-family="-apple-system, sans-serif">most of the data does not exist yet</text>
+  <text x="675" y="308" text-anchor="middle" font-size="12.5" font-weight="700" fill="#b45309" font-family="-apple-system, sans-serif">the work is expanding <tspan fill="#1a1a1a">out</tspan></text>
+</svg>
+<figcaption><b>Fig 3 &middot; Two opposite data problems.</b> Filtering is a search over data you already hold. Expanding is a search over data that does not exist yet &#8212; and something has to choose where to look next.</figcaption>
+</figure>
+
+You cannot filter your way out of a small circle. You have to grow it — and the first question is what growing it costs.
+
 Teleoperation is not the only way to collect 闻. A human wearing camera glasses while cooking dinner is producing it. So is someone holding one of those gripper rigs while they load a dishwasher, which hands you an end-effector trajectory with no robot in the room. So is every instructional video ever uploaded. There is three or four orders of magnitude more of this than there will ever be teleop, none of it costs robot time, and it scales the way corpora actually scale: by harvesting what already exists instead of manufacturing it.
 
 <figure class="figure">
@@ -196,7 +325,7 @@ Teleoperation is not the only way to collect 闻. A human wearing camera glasses
   <circle cx="766" cy="163" r="7" fill="#2563eb"/>
   <text x="781" y="167" font-size="10.5" fill="#555" font-family="-apple-system, sans-serif">yes &#8212; none of it</text>
 </svg>
-<figcaption><b>Fig 3 &middot; Where 闻 actually comes from.</b> The abundant sources are the ones furthest from the robot&#8217;s own actions &#8212; and every marker on this chart is hollow, because people do not record themselves failing and recovering.</figcaption>
+<figcaption><b>Fig 4 &middot; Where 闻 actually comes from.</b> The abundant sources are the ones furthest from the robot&#8217;s own actions &#8212; and every marker on this chart is hollow, because people do not record themselves failing and recovering.</figcaption>
 </figure>
 
 But the axis does not change character when you make it bigger. Two structural facts hold across all of it.
@@ -211,7 +340,7 @@ And then **label it properly**, the step that actually gets skipped. Footage of 
 
 > There is no bad data. There is only badly labelled data.
 
-Scale 闻 as hard as you can get away with. Just don't mistake a bigger circle — more of the world your data has touched — for a tethered one. A million hours of things going right is a million true opinions.
+Scale 闻 as hard as you can get away with. Just don't mistake a bigger circle for a tethered one. A million hours of things going right is a million true opinions.
 
 
 ## What the boy has that a policy does not
@@ -297,7 +426,7 @@ Part one's three moves were all about measurement. These two are about what you 
   <text x="450" y="366" text-anchor="middle" font-size="12.5" fill="#555" font-family="-apple-system, sans-serif">The other four tell you the policy is sound. This one tells you what to buy next &#8212;</text>
   <text x="450" y="384" text-anchor="middle" font-size="12.5" fill="#555" font-family="-apple-system, sans-serif">which is what turns an evaluation framework into a training paradigm.</text>
 </svg>
-<figcaption><b>Fig 4 &middot; The loop.</b> 闻 gets you a prior once. 说 and 亲 are what compound &#8212; and the robot&#8217;s own calibrated ignorance is what decides where the expensive axis gets spent.</figcaption>
+<figcaption><b>Fig 5 &middot; The loop.</b> 闻 gets you a prior once. 说 and 亲 are what compound &#8212; and the robot&#8217;s own calibrated ignorance is what decides where the expensive axis gets spent.</figcaption>
 </figure>
 
 Put a calibrated policy together with a robot that chooses its own 亲, and it starts *aiming its own data collection*. Its uncertainty is a map of its own boundary, and that map is the shopping list: **stop paying for a thousand more demonstrations of the drawer it already opens; buy the one demonstration of the drawer it doesn't.**

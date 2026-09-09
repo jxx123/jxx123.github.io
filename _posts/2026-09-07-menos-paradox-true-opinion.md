@@ -3,7 +3,7 @@ layout: post
 title: "Meno’s Paradox — Your Robot’s Success Rate Is Just a “True” OPINION"
 description: "Plato separated true opinion from knowledge 2,400 years ago. A success rate measures the first and cannot see the second — on the Meno, the slave boy, the statues of Daedalus, and five tethers for robot evaluation. Part one of two."
 authors: "Jinyu Xie and Claude"
-reading_time: "13 min read"
+reading_time: "11 min read"
 date: 2026-09-07
 ---
 
@@ -160,152 +160,21 @@ A robot I watched recently lifted a cutlery basket out of a dishwasher on a sing
 
 The robot finished the motion exactly as planned — set the lighter basket down, opened the finger, retracted. No pause, no re-grasp, because nothing inside it had registered that anything happened. The failure isn't that the policy was wrong. It's that it was wrong and **had no idea**.
 
-Here is the part that nags. The success rate on this task is *high* — surprisingly high, high enough that on the numbers you would call the skill solved and put it in a demo reel without hesitating. Then you watch one rollout like this one and the number stops meaning what you thought it meant. Nothing in that sequence looked like a policy that knows how to carry a basket. It looked like a policy that has a motion which usually works — and *usually* is doing an enormous amount of quiet work inside an average taken over rollouts where nothing shifted.
+Here is the part that nags. The success rate on this task is *high* — high enough to call the skill solved and put it in a demo reel. Then you watch one rollout like this and the number stops meaning what you thought. Nothing in that sequence looked like a policy that knows how to carry a basket. It looked like a policy with a motion that usually works, and *usually* is doing a lot of quiet work inside an average over rollouts where nothing shifted.
 
-So the question this whole piece is about, asked once here and answered for the rest of it: **are we measuring the wrong thing?**
+So, the question this whole piece is about: **are we measuring the wrong thing?**
 
-I have wanted to build curiosity into a robot for as long as I have been building robots, and that rollout is exactly why. Not because the basket tipped — baskets tip, and no policy is going to be perfect. Because nowhere in the entire sequence was there a moment where the robot *wondered*.
+I have wanted to build curiosity into a robot for as long as I have been building robots, and that rollout is why. Not because the basket tipped — baskets tip. Because nowhere in the sequence was there a moment where the robot *wondered*. By curiosity I don't mean exploration noise; a random-number generator perturbs actions perfectly and has never wondered about anything. The first real sign of curiosity is that a thing **asks a question** — and to ask one you must first have located something you don't know.
 
-So: a **curious** robot. An engineering target, not a personality note.
+For robots this matters more than it sounds, because our data problem is the inverse of everyone else's — a small circle of data you have to grow, not a large one you filter down — and curiosity is what chooses where to grow it next. Part two is about that.
 
-Curiosity is easy to caricature as exploration noise: perturb the action, see what happens, keep whatever pays. That's not curiosity, that's thrashing — a random-number generator does it perfectly and has never wondered about anything. The first real sign of curiosity in anything is not that it pokes at the world. It's that it **asks a question**. And a question is a demanding object: to ask one you must have located something you don't know, and cared enough about the gap to point at it.
-
-For robots this matters more than it sounds, because our data problem is the inverse of everyone else's. Language models were handed an enormous circle: essentially everything people wrote down already exists, so building a corpus is *subtractive* — filter, dedupe, keep the good part. Robotics was handed a tiny one, and the craft has to be *additive*.
-
-<figure class="figure">
-<svg viewBox="0 0 900 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Language models filter down from an enormous corpus; robotics must expand outward from a tiny one">
-  <defs>
-    <marker id="cr-in" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="9" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#888"/></marker>
-    <marker id="cr-out" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="9" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b45309"/></marker>
-  </defs>
-
-  <text x="225" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="#1a1a1a" letter-spacing="1.1" font-family="-apple-system, sans-serif">LANGUAGE MODELS</text>
-  <text x="675" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="#1a1a1a" letter-spacing="1.1" font-family="-apple-system, sans-serif">ROBOTS</text>
-
-  <!-- LEFT: an enormous circle you filter down -->
-  <circle cx="225" cy="160" r="105" fill="#f8f9fa" stroke="#e5e7eb" stroke-width="1.8"/>
-  <circle cx="145.1" cy="184.7" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="295.6" cy="123.6" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="140.3" cy="155.8" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="257.5" cy="234.7" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="161.1" cy="92.1" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="284.4" cy="199.9" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="304.1" cy="210.6" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="205.3" cy="106.8" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="324.1" cy="148.9" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="176.2" cy="89.2" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="255.2" cy="206.0" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="168.0" cy="149.7" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="250.1" cy="223.6" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="302.9" cy="174.9" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="136.4" cy="194.7" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="138.6" cy="149.6" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="137.0" cy="160.1" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="157.2" cy="178.6" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="325.8" cy="158.5" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="273.2" cy="84.2" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="198.0" cy="222.1" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="210.8" cy="216.8" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="232.8" cy="84.0" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="268.2" cy="97.8" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="317.0" cy="135.2" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="291.7" cy="160.2" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="292.3" cy="117.5" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="300.7" cy="150.6" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="302.7" cy="198.4" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="237.4" cy="91.3" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="287.4" cy="198.0" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="314.5" cy="139.4" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="275.6" cy="206.3" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="271.6" cy="194.3" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="243.9" cy="97.9" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="151.8" cy="131.4" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="258.1" cy="244.6" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="284.3" cy="223.9" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="282.5" cy="211.7" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="241.2" cy="228.0" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="317.1" cy="143.0" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="192.7" cy="251.2" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="243.6" cy="233.8" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="278.1" cy="90.9" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="306.3" cy="219.3" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="240.9" cy="227.4" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="235.4" cy="87.9" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="208.1" cy="216.3" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="296.4" cy="205.4" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="228.7" cy="245.3" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="170.4" cy="216.9" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="302.6" cy="139.6" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="139.3" cy="116.6" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="251.0" cy="218.0" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="304.0" cy="108.7" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="225.2" cy="225.6" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="218.4" cy="61.4" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="257.7" cy="253.7" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="288.1" cy="102.3" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="171.6" cy="188.7" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="321.7" cy="184.0" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="231.5" cy="249.5" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="220.9" cy="254.3" r="1.9" fill="#888" opacity="0.5"/>
-  <circle cx="166.6" cy="119.5" r="1.9" fill="#888" opacity="0.5"/>
-  <line x1="304.7" y1="206.0" x2="275.2" y2="189.0" stroke="#888" stroke-width="1.8" marker-end="url(#cr-in)"/>
-  <line x1="209.0" y1="250.6" x2="214.9" y2="217.1" stroke="#888" stroke-width="1.8" marker-end="url(#cr-in)"/>
-  <line x1="134.4" y1="176.0" x2="167.9" y2="170.1" stroke="#888" stroke-width="1.8" marker-end="url(#cr-in)"/>
-  <line x1="179.0" y1="80.3" x2="196.0" y2="109.8" stroke="#888" stroke-width="1.8" marker-end="url(#cr-in)"/>
-  <line x1="284.1" y1="89.5" x2="262.3" y2="115.6" stroke="#888" stroke-width="1.8" marker-end="url(#cr-in)"/>
-  <circle cx="225" cy="160" r="48" fill="#dbeafe" stroke="#2563eb" stroke-width="2.2"/>
-  <circle cx="240.4" cy="190.4" r="1.9" fill="#2563eb" opacity="0.85"/>
-  <circle cx="243.0" cy="168.3" r="1.9" fill="#2563eb" opacity="0.85"/>
-  <circle cx="190.5" cy="146.5" r="1.9" fill="#2563eb" opacity="0.85"/>
-  <circle cx="208.6" cy="145.7" r="1.9" fill="#2563eb" opacity="0.85"/>
-  <circle cx="241.4" cy="150.7" r="1.9" fill="#2563eb" opacity="0.85"/>
-  <circle cx="246.3" cy="162.2" r="1.9" fill="#2563eb" opacity="0.85"/>
-  <circle cx="214.2" cy="163.8" r="1.9" fill="#2563eb" opacity="0.85"/>
-  <circle cx="236.1" cy="182.1" r="1.9" fill="#2563eb" opacity="0.85"/>
-  <circle cx="211.0" cy="153.2" r="1.9" fill="#2563eb" opacity="0.85"/>
-  <circle cx="200.5" cy="188.8" r="1.9" fill="#2563eb" opacity="0.85"/>
-  <circle cx="257.4" cy="156.0" r="1.9" fill="#2563eb" opacity="0.85"/>
-  <text x="225" y="288" text-anchor="middle" font-size="12.5" fill="#555" font-family="-apple-system, sans-serif">the data already exists</text>
-  <text x="225" y="308" text-anchor="middle" font-size="12.5" font-weight="700" fill="#555" font-family="-apple-system, sans-serif">the work is filtering <tspan fill="#1a1a1a">down</tspan></text>
-
-  <line x1="450" y1="44" x2="450" y2="286" stroke="#e5e7eb" stroke-width="1"/>
-
-  <!-- RIGHT: a tiny circle you have to grow -->
-  <circle cx="675" cy="160" r="105" fill="none" stroke="#b45309" stroke-width="1.6" stroke-dasharray="6 6" opacity="0.55"/>
-  <rect x="588" y="60" width="174" height="17" rx="3" fill="#ffffff"/>
-  <text x="675" y="72" text-anchor="middle" font-size="11" fill="#b45309" opacity="0.9" font-family="-apple-system, sans-serif">everything it will actually meet</text>
-  <line x1="723.5" y1="188.0" x2="754.7" y2="206.0" stroke="#b45309" stroke-width="1.8" marker-end="url(#cr-out)"/>
-  <line x1="665.3" y1="215.1" x2="659.0" y2="250.6" stroke="#b45309" stroke-width="1.8" marker-end="url(#cr-out)"/>
-  <line x1="619.9" y1="169.7" x2="584.4" y2="176.0" stroke="#b45309" stroke-width="1.8" marker-end="url(#cr-out)"/>
-  <line x1="647.0" y1="111.5" x2="629.0" y2="80.3" stroke="#b45309" stroke-width="1.8" marker-end="url(#cr-out)"/>
-  <line x1="711.0" y1="117.1" x2="734.1" y2="89.5" stroke="#b45309" stroke-width="1.8" marker-end="url(#cr-out)"/>
-  <circle cx="675" cy="160" r="44" fill="#dbeafe" stroke="#2563eb" stroke-width="2.2"/>
-  <circle cx="665.5" cy="135.5" r="1.9" fill="#2563eb" opacity="0.85"/>
-  <circle cx="680.5" cy="166.7" r="1.9" fill="#2563eb" opacity="0.85"/>
-  <circle cx="707.3" cy="163.6" r="1.9" fill="#2563eb" opacity="0.85"/>
-  <circle cx="664.9" cy="128.2" r="1.9" fill="#2563eb" opacity="0.85"/>
-  <circle cx="702.1" cy="163.6" r="1.9" fill="#2563eb" opacity="0.85"/>
-  <circle cx="646.0" cy="163.3" r="1.9" fill="#2563eb" opacity="0.85"/>
-  <circle cx="660.7" cy="190.9" r="1.9" fill="#2563eb" opacity="0.85"/>
-  <circle cx="697.7" cy="171.6" r="1.9" fill="#2563eb" opacity="0.85"/>
-  <circle cx="672.4" cy="127.8" r="1.9" fill="#2563eb" opacity="0.85"/>
-  <rect x="602" y="220" width="146" height="17" rx="3" fill="#ffffff"/>
-  <text x="675" y="232" text-anchor="middle" font-size="11" fill="#2563eb" font-family="-apple-system, sans-serif">what anyone has collected</text>
-  <text x="675" y="288" text-anchor="middle" font-size="12.5" fill="#555" font-family="-apple-system, sans-serif">most of the data does not exist yet</text>
-  <text x="675" y="308" text-anchor="middle" font-size="12.5" font-weight="700" fill="#b45309" font-family="-apple-system, sans-serif">the work is expanding <tspan fill="#1a1a1a">out</tspan></text>
-</svg>
-<figcaption><b>Fig 2 &middot; Two opposite data problems.</b> Filtering is a search over data you already hold. Expanding is a search over data that does not exist yet &#8212; and something has to choose where to look next.</figcaption>
-</figure>
-
-You cannot filter your way out of a small circle. You have to grow it — and since every point costs a rig, an operator and an hour, the only question that matters is *which* point to add next. That is exactly what curiosity answers. Not a nicety, then: curiosity is the policy for spending a data budget when the data doesn't exist yet.
-
-So the model I started sketching after that rollout was the smallest honest version of it — not a curious robot, just one that could *ask*, instead of carrying serenely on while the forks hit the floor. Working through it with Claude, somewhere in a thread about scoring a policy's confidence, it said: *by the way, have you heard of Meno's paradox? What you're describing is close to the problem Plato poses there.*
+So the model I started sketching after that rollout was the smallest honest version of that curious robot: not curiosity itself, just a policy that could *ask* instead of carrying serenely on while the forks hit the floor. Working through it with Claude, it said: *by the way, have you heard of Meno's paradox? What you're describing is close to the problem Plato poses there.*
 
 I had not — and what followed changed how I was thinking about the problem.
 
 ## The other paradox
 
-Every roboticist knows Moravec's paradox. The ranking of difficulty for machines is close to the *inverse* of the ranking for humans: symbolic reasoning took comparatively little to automate, while sensorimotor competence — gravel, a wet sock, a door handle you've never touched — consumed decades. Moravec's explanation was evolutionary. Perception and movement have been under optimization pressure for hundreds of millions of years and are enormously deep; abstract reasoning is a thin recent veneer that impresses us only because it feels effortful to *us*.
+Every roboticist knows Moravec's paradox: the difficulty ranking for machines is close to the *inverse* of the ranking for humans. Symbolic reasoning took little to automate; sensorimotor competence — gravel, a wet sock, a door handle you've never touched — consumed decades, because perception and movement have had hundreds of millions of years of optimization and abstract reasoning is a thin recent veneer.
 
 <figure class="figure">
 <svg viewBox="0 0 900 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Moravec's paradox: tasks easy for humans are hard for machines and vice versa">
@@ -342,7 +211,7 @@ Every roboticist knows Moravec's paradox. The ranking of difficulty for machines
 
   <text x="450" y="312" text-anchor="middle" font-size="13" fill="#555" font-family="-apple-system, sans-serif">the ranking inverts &#8212; and the inversion is the whole paradox</text>
 </svg>
-<figcaption><b>Fig 3 &middot; Moravec's paradox.</b> The one every roboticist has heard a hundred times. It tells you which problems are hard. It says nothing about whether your robot knows it is failing at one.</figcaption>
+<figcaption><b>Fig 2 &middot; Moravec's paradox.</b> The one every roboticist has heard a hundred times. It tells you which problems are hard. It says nothing about whether your robot knows it is failing at one.</figcaption>
 </figure>
 
 Moravec's paradox ranks tasks by difficulty. Meno's asks something else entirely — whether inquiry is possible at all. It is 2,300 years older, and I had never heard of it.
@@ -397,7 +266,7 @@ It looks like sophistry. Sharpened into two horns it becomes genuinely hard:
   <rect x="300" y="292" width="300" height="40" rx="8" fill="#fef3c7" stroke="#b45309" stroke-width="1.5"/>
   <text x="450" y="318" text-anchor="middle" font-size="14" font-weight="700" fill="#b45309" font-family="-apple-system, sans-serif">&#8756; inquiry is impossible</text>
 </svg>
-<figcaption><b>Fig 4 &middot; Meno's paradox.</b> Two horns, no third door. Hold onto this diagram &#8212; we reopen it later, and the thing that reopens it is a metric.</figcaption>
+<figcaption><b>Fig 3 &middot; Meno's paradox.</b> Two horns, no third door. Hold onto this diagram &#8212; we reopen it later, and the thing that reopens it is a metric.</figcaption>
 </figure>
 
 That right-hand horn is the exploration problem, stated exactly. A policy in a state it has never seen cannot know the state is one it has never seen; it has no representation of *unfamiliar*. It cannot search for the demonstration it is missing, because "the demonstration I am missing" is not a thing it can point at. It cannot ask for help, because asking requires knowing you need it. That — not compute, not data, not architecture — is why the design was hard.
@@ -470,10 +339,10 @@ He calls over one of Meno's household slaves — a boy who has had no mathematic
 
   <text x="450" y="284" text-anchor="middle" font-size="13" fill="#555" font-family="-apple-system, sans-serif">Socrates never states the answer. He asks questions, and lets the boy walk into his own error.</text>
 </svg>
-<figcaption><b>Fig 5 &middot; The slave boy, <i>Meno</i> 82b&#8211;85b.</b> Panel 4: the square built on the diagonal is cut by the original grid into four half-quadrants, each half of a 2&times;2 square &#8212; 4 &times; 2 = 8. The reader sees it rather than takes it on faith. That is the point of the whole exercise.</figcaption>
+<figcaption><b>Fig 4 &middot; The slave boy, <i>Meno</i> 82b&#8211;85b.</b> Panel 4: the square built on the diagonal is cut by the original grid into four half-quadrants, each half of a 2&times;2 square &#8212; 4 &times; 2 = 8. The reader sees it rather than takes it on faith. That is the point of the whole exercise.</figcaption>
 </figure>
 
-The boy answers instantly and wrongly: *double the side.* Socrates draws it, and the boy sees his four-by-four square is not twice the original but four times it. Fine — the boy tries three. That gives nine, which is closer, and still wrong. And now something happens that Socrates flags explicitly as the turning point (84a–c): the boy stops guessing. He says he does not know.
+The boy answers instantly and wrongly — *double the side* — and is shown that this gives four times the area, not twice. He tries three: nine, still wrong. And now the moment Socrates flags as the turning point (84a–c): the boy stops guessing and says he does not know.
 
 Socrates makes Meno admit that the boy is *better off* in this state than he was five minutes earlier:
 
@@ -481,9 +350,7 @@ Socrates makes Meno admit that the boy is *better off* in this state than he was
 >
 > — *Meno*, 84a&ndash;c
 
-Read that again as an engineer. Nothing was added to the boy — no new fact, no demonstration, no gradient step. What changed is that his confidence came into agreement with his competence, and Socrates' claim is that *this alone* made him teachable. The image is Meno's: a page earlier, at 80a, he accuses Socrates of being a torpedo fish that numbs whatever it touches — and Socrates takes the name and keeps it. The numbing isn't a step on the way to learning; it is the precondition for it.
-
-Which is the design document I had been fumbling toward. "Knows it does not know" and "therefore asks" are not two features. They are one, and the ancient version is better specified than mine was.
+Read that again as an engineer. Nothing was added to the boy — no new fact, no demonstration, no gradient step. His confidence came into agreement with his competence, and Socrates' claim is that *this alone* made him teachable. (The image is Meno's: at 80a he accuses Socrates of being a torpedo fish that numbs whatever it touches, and Socrates keeps the name.) The numbing isn't a step on the way to learning; it is the precondition for it — and that is the design document I had been fumbling toward. "Knows it does not know" and "therefore asks" are not two features. They are one.
 
 Only after the boy is genuinely stuck does Socrates draw the diagonal — and the boy sees it himself. Socrates' own explanation is metaphysical: the boy learned nothing, he *recollected* something his soul already knew. You don't have to buy the metaphysics to keep the mechanism.
 
@@ -558,7 +425,7 @@ The image is the statues of Daedalus, which legend held were carved so lifelike 
   <text x="675" y="284" text-anchor="middle" font-size="13" fill="#555" font-family="-apple-system, sans-serif">Bound by an account of the reason why</text>
   <text x="675" y="302" text-anchor="middle" font-size="13" fill="#555" font-family="-apple-system, sans-serif">&#8212; aitias logismos. It stays.</text>
 </svg>
-<figcaption><b>Fig 6 &middot; The statues of Daedalus, <i>Meno</i> 97d&#8211;98a.</b> Both statues are correct. Only one of them is still there tomorrow.</figcaption>
+<figcaption><b>Fig 5 &middot; The statues of Daedalus, <i>Meno</i> 97d&#8211;98a.</b> Both statues are correct. Only one of them is still there tomorrow.</figcaption>
 </figure>
 
 ## Five tethers
@@ -573,7 +440,7 @@ I'd propose five, and they are cheap to state.
 - **Foresight** — make it say what its next action will do *before* it does it, and score the prediction rather than the outcome.
 - **Humility** — score whether its confidence tracks its competence. The only one that asks the policy about itself rather than about the world.
 
-Fig 7 names the failure each untied rope leaves behind: the Parrot, dazzling until someone moves a lamp; the One-Trick Pony, which solved the episode and not the type; the Glass Dancer, flawless until first contact with disorder; the Sleepwalker, acting without imagining consequences; and, when the last rope goes, the Confident Fool.
+Fig 6 names the failure each untied rope leaves behind: the Parrot, dazzling until someone moves a lamp; the One-Trick Pony, which solved the episode and not the type; the Glass Dancer, flawless until first contact with disorder; the Sleepwalker, acting without imagining consequences; and, when the last rope goes, the Confident Fool.
 
 <figure class="figure">
 <svg viewBox="0 0 900 410" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A statue held down by five labelled tethers">
@@ -625,7 +492,7 @@ Fig 7 names the failure each untied rope leaves behind: the Parrot, dazzling unt
   <text x="450" y="380" text-anchor="middle" font-size="11.5" fill="#555" font-family="-apple-system, sans-serif">is its confidence calibrated to its competence?</text>
   <text x="450" y="398" text-anchor="middle" font-size="11.5" fill="#b45309" font-family="-apple-system, sans-serif">without it: <tspan font-weight="600">the Confident Fool</tspan> &#8212; and this is the load-bearing rope</text>
 </svg>
-<figcaption><b>Fig 7 &middot; Five tethers.</b> Report them as a vector, never a scalar. If you must have one number, take the <i>geometric</i> mean &#8212; so that a single untied rope cannot be averaged away by four good ones.</figcaption>
+<figcaption><b>Fig 6 &middot; Five tethers.</b> Report them as a vector, never a scalar. If you must have one number, take the <i>geometric</i> mean &#8212; so that a single untied rope cannot be averaged away by four good ones.</figcaption>
 </figure>
 
 Four of these are about robustness. The fifth is different in kind, and it is the boy at 84a: **Humility** is the tether that makes the other four improvable.
@@ -696,26 +563,24 @@ Every robot in every demo video is a statue on a plinth: beautifully lifelike, g
   <text x="650" y="398" text-anchor="middle" font-size="12" fill="#555" font-family="-apple-system, sans-serif">85% on the rehearsed set,</text>
   <text x="650" y="414" text-anchor="middle" font-size="12" fill="#555" font-family="-apple-system, sans-serif">and nowhere else on Earth</text>
 </svg>
-<figcaption><b>Fig 8 &middot; The same number, two different objects.</b> Policy B is not a worse version of Policy A. It is a different kind of thing, and the headline metric is structurally incapable of telling them apart.</figcaption>
+<figcaption><b>Fig 7 &middot; The same number, two different objects.</b> Policy B is not a worse version of Policy A. It is a different kind of thing, and the headline metric is structurally incapable of telling them apart.</figcaption>
 </figure>
 
 Policy B has a name: it is **the Confident Fool**, and it is the dishwasher failure from the opening, caught in the act. High success rate on its task, steady on the scenes it was scored on.
 
-We scored that episode a failure, for the record. Someone was watching, and forks on the floor are hard to miss.
+We scored that episode a failure — someone was watching, and forks on the floor are hard to miss. But notice how little comfort that gives. **We caught it by luck.** No initial condition reproduces it, no seed replays it, no flag in the harness says *the load shifted mid-trajectory*. A failure you cannot reproduce cannot be measured — no rate, no A/B, nothing to certify against. The aggregate here isn't a weak instrument. It is blind, and stays blind however many episodes you run, because nothing in the protocol ever *asks* for the disturbance.
 
-But notice how little comfort that should give. **We caught it by luck.** There was no initial condition we could set to make it happen again, no seed to replay, no flag in the harness that says *the load shifted mid-trajectory*. And a failure you cannot reproduce cannot be measured at all — you cannot put a rate on it, A/B a fix against it, or certify anything with respect to it. The aggregate here isn't a weak instrument. It is blind, and it stays blind however many episodes you run, because nothing in the protocol ever *asks* for the disturbance.
+Now put it next to the slave boy. He also produced a confident wrong answer — and at the moment it failed, *something in him changed state.* He stopped. He said **I do not know.** The robot's answer failed in precisely the same way and **nothing in it changed state at all.** It could not stop, because stopping requires noticing, and noticing was not among the things we trained.
 
-Now put it next to the slave boy. He also produced a confident wrong answer — and at the moment it failed, *something in him changed state.* He stopped. He said **I do not know.** Socrates thought that moment was the whole ball game, and I have come to agree, having now watched the alternative at close range: the robot's answer failed in precisely the same way and **nothing in it changed state at all.** It could not stop, because stopping requires noticing, and noticing was not among the things we trained.
-
-One rollout, three missing tethers. **Foresight**: it could not predict that a one-finger grasp on an off-centre load would swing. **Recovery**: once the load shifted, it had no behaviour for re-grasping or re-planning — there was no branch to take. **Humility**: the failure moved its confidence by not one hair. And it is missing them in the most expensive way available: silently, in a mode no aggregate over clean rollouts can see.
+One rollout, three missing tethers: no **Foresight** to predict that an off-centre load on one finger would swing, no **Recovery** once it did, and no **Humility** — the failure moved its confidence by not one hair. Missing in the most expensive way available: silently, where no aggregate over clean rollouts can see.
 
 ## Meno's paradox, answered by a metric
 
-That last rope — Humility, the one the basket rollout never moved — is also the one that unties the paradox. Go back to Fig 4, the fork with no third door.
+That last rope — Humility, the one the basket rollout never moved — is also the one that unties the paradox. Go back to Fig 3, the fork with no third door.
 
 Socrates escaped it by insisting the answer was already in the boy. I'd escape it with **calibration**.
 
-The right-hand horn says you cannot search for what you do not know, because you cannot recognize it. True — *but you do not have to recognize the answer in order to recognize the question.* A policy cannot know the correct action in a novel state; that horn holds. What a calibrated policy *can* know is that **this state is one where its own confidence is low**. Not knowledge of the answer. Knowledge of the boundary.
+The right-hand horn says you cannot search for what you do not know, because you cannot recognize it. True — *but you do not have to recognize the answer to recognize the question.* A policy cannot know the correct action in a novel state. What a calibrated policy *can* know is that **this is a state where its own confidence is low**. Not the answer. The boundary.
 
 And a boundary is enough, because it converts an impossible search into a request:
 
@@ -767,12 +632,12 @@ And a boundary is enough, because it converts an impossible search into a reques
 
   <text x="450" y="278" text-anchor="middle" font-size="13" fill="#555" font-family="-apple-system, sans-serif">You cannot search for the answer. You can point at the question &#8212; and that is enough.</text>
 </svg>
-<figcaption><b>Fig 9 &middot; The paradox, inverted into an interface.</b> This is the same move Socrates makes on the boy at 84a: the numbing comes first, and it is what makes the next demonstration land.</figcaption>
+<figcaption><b>Fig 8 &middot; The paradox, inverted into an interface.</b> This is the same move Socrates makes on the boy at 84a: the numbing comes first, and it is what makes the next demonstration land.</figcaption>
 </figure>
 
 The robot that knows what it doesn't know can ask for precisely the experience that converts its next true opinion into knowledge. Inquiry bootstraps.
 
-And that is the curious robot I wanted at the top, arrived at from an unexpected direction. Curiosity is not a drive you add to a policy; it is what a calibrated policy *does* once it can feel its own edge. It is also how you grow a small circle: every question is one deliberate step outward, chosen rather than stumbled into. All of it is downstream of that one measurement.
+And that is the curious robot I wanted at the top, arrived at from an unexpected direction. Curiosity is not a drive you add to a policy; it is what a calibrated policy *does* once it can feel its own edge. All of it is downstream of that one measurement.
 
 A century before the *Meno*, and five thousand miles east of it, Confucius had already put the same thing as a definition rather than a virtue:
 
@@ -783,25 +648,21 @@ A century before the *Meno*, and five thousand miles east of it, Confucius had a
   <div class="src">Confucius, <i>Analects</i> 2.17</div>
 </div>
 
-That is not a proverb about modesty but a definition — the Humility tether stated 2,500 years early, with the *is* in "that is knowledge" doing structural work. A model whose confidence tracks its competence knows something a more accurate but uncalibrated model does not.
-
-Two traditions, a century and five thousand miles apart, converging on the same test: **a correct answer is not evidence of knowledge. Surviving a changed world is.**
+That is a definition, not a proverb about modesty — the Humility tether stated 2,500 years early. Two traditions, a century and five thousand miles apart, converging on the same test: **a correct answer is not evidence of knowledge. Surviving a changed world is.**
 
 ## What to do on Monday
 
 Three moves follow from all this, and none of them needs a new model.
 
-**1. Stop shipping a success rate without its context.** Report the vector. A model card that says 85% without saying *held fixed: lighting, object set, initial pose, and the twelve scenes we also trained on* is a press release, not a result. Everything you need is in the eval artifacts already on disk.
+**1. Stop shipping a success rate without its context.** Report the vector. A model card that says 85% without saying *held fixed: lighting, object set, initial pose, and the twelve scenes we also trained on* is a press release, not a result.
 
 **2. Make confidence a first-class output.** Not a threshold bolted on at deployment, and not whatever signal happens to fall out of the logits — an output the model emits on every step, next to the action, trained and benchmarked as seriously as the action is. Score its calibration alongside its success rate, and make *confidently wrong* cost far more than *uncertain and right*. This is the same problem large language models have with hallucination, and it has the same cause: a model that has never been penalized for confident nonsense will produce confident nonsense, because nothing in the objective ever made its confidence mean anything.
 
 **3. Certify on knowing when to stop, not on the average.** Don't gate deployment on a success rate. Gate it on whether the robot recognizes the states it cannot handle and says so. We don't license pilots on their pass rate over rehearsed routes; we license them on crosswinds, engine-out, and the judgment to declare a missed approach. Knowing when to go around *is* the licence.
 
-The obvious objection: nobody wants to buy a robot that stops every five minutes to ask for help. That isn't a worker, it's a burden. Quite right — which is why the thing to certify is *calibration*, not caution. A robot that asks constantly is as badly calibrated as one that never asks; in both cases its confidence tracks nothing. What belongs on the certificate is the trade-off: how much of the job it completes unaided, and what fraction of its failures it flags before they happen rather than after. A robot that does 95% alone and raises a hand on the 5% that would have broken something is worth more than one that does 99% and buries the rest in an average.
+The obvious objection: nobody wants a robot that stops every five minutes to ask for help. Quite right — which is why the thing to certify is *calibration*, not caution. A robot that asks constantly is as badly calibrated as one that never asks; in both cases its confidence tracks nothing. What belongs on the certificate is the trade-off: how much of the job it does unaided, and what fraction of its failures it flags before they happen. A robot that does 95% alone and raises a hand on the 5% that would have broken something is worth more than one that does 99% and buries the rest in an average.
 
-The first move is free this quarter. The second is a training objective you already know how to write. The third is a decision about what you agree to be judged on.
-
-I went looking for a way to make a robot ask for help and found the problem named, diagnosed and half-solved twenty-four centuries before anyone had a robot to ask it about. The paradox is real: you cannot search for what you do not know. The escape is smaller than it sounds. You never needed the answer — only to know, honestly and in calibrated units, where your knowing stops.
+I went looking for a way to make a robot ask for help and found the problem named, diagnosed and half-solved twenty-four centuries before anyone had a robot to ask it about. The paradox is real: you cannot search for what you do not know. The escape is smaller than it sounds. You never needed the answer — only to know, in calibrated units, where your knowing stops.
 
 Everything else is a statue.
 
