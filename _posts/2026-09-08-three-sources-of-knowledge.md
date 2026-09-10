@@ -3,7 +3,7 @@ layout: post
 title: "Three Sources of Knowledge — and the Two Axes We Aren't Scaling"
 description: "闻 heard, 说 inferred, 亲 lived. The Mohists classified knowledge by where it came from, and the taxonomy maps onto a robot training stack — one axis scaled hard, two barely started. Part two of two."
 authors: "Jinyu Xie and Claude"
-reading_time: "13 min read"
+reading_time: "16 min read"
 date: 2026-09-08
 ---
 
@@ -75,21 +75,39 @@ Read that as a roadmap and the conclusion is uncomfortable. We have spent the de
 
 ### Why 说 is barely scaled
 
-It is worth being concrete about how little 说 is really scaled, because the field looks busier on this axis than it is. A vision-language-action model — a VLA, the standard robot policy architecture — maps observation to action. There is no deliberation anywhere in that loop: the model that acts does not reason about what its action is about to do. The standard fix has been to bolt a System 2 on top — a separate reasoning model that plans, hands a subgoal down to a System 1 policy, and then gets out of the way. **Two standalone models, with the thinking sitting upstream of the acting rather than inside it.** Even world models, which at least carry a predictive component, mostly spend it generating a plan rather than checking one mid-execution.
+It is worth being concrete about how little 说 is really scaled, because the field looks busier on this axis than it is. A vision-language-action model — a VLA, the standard robot policy architecture — maps observation to action. There is no deliberation anywhere in that loop: the model that acts does not reason about what its action is about to do. The standard fix has been to bolt a System 2 on top — a separate reasoning model that plans, hands a subgoal down to a System 1 policy, and then gets out of the way. **Two standalone models, with the thinking sitting upstream of the acting rather than inside it.**
 
 Which is precisely why nothing caught the basket. Whatever System 2 was involved had finished thinking before the load ever shifted, and System 1 does not think. Nobody is scaling 说 *in the loop*; we are scaling a preamble.
 
-And the split is not a principled architecture. It is a budget. Robots close their control loop at tens of Hz, and you cannot run a large reasoning model inside that window — so the thinking gets moved somewhere it can take its time, which means off the loop and upstream. The blocker on 说 was never a shortage of ideas about deliberation. It is **compute per action**.
+### What the action head is actually doing
+
+Look inside the System 1 and the problem gets sharper. The action head in nearly every current VLA is a diffusion or flow-matching expert: it starts from noise and denoises it, over a handful of steps, into a chunk of actions. That is a generator, not a thinker. It has no representation of a consequence, no place to hold a counterfactual, and nothing in it ever asks whether the chunk it is producing is a good idea. Even the models that do reason, like [π<sub>0.5</sub>](https://www.pi.website/download/pi05.pdf){:target="_blank"}, reason *before* acting: a text subtask is predicted first, then the flow expert takes over and does not think again until the next subtask. The deliberation is a preamble to the generator, not part of it.
+
+So the thinking we know how to do and the acting we know how to do are different shapes. **Autoregressive thinking is mature** — chain-of-thought is the whole story of the last three years of language models — but it is token-bound: memory scales linearly with the number of thoughts, it is serial, and it is far too slow for a control loop. Bolt it onto a VLA and you get embodied chain-of-thought, which works and which nobody can run at 50 Hz. **Diffusion is the right shape for actions but does not know how to think.** Reasoning inside a diffusion model exists on paper — [Diffusion-of-Thought](https://arxiv.org/abs/2402.07754){:target="_blank"} and its successors — but the [survey literature](https://arxiv.org/abs/2508.10875){:target="_blank"} is candid that diffusion language models are still early, small, and need extra training to reason at all. The mature thinker is the wrong shape; the right-shaped generator can't think. That gap is where 说 has been stuck.
+
+### The compute axis for robots is depth, not tokens
+
+Language models found their compute axis by spending it in tokens: think longer, emit more, answer better. A robot cannot spend tokens at control rate. If there is a compute axis for robots, it has to be spent somewhere other than text, and the work that is starting to appear all points the same way — **into latent space, and into depth.**
+
+Three results make the shape visible. [LaRA-VLA](https://arxiv.org/abs/2602.01166){:target="_blank"} (ICML 2026) trains a VLA on explicit chain-of-thought and then, by curriculum, internalizes the reasoning into continuous hidden states until no text is generated at inference — and reports the same accuracy at up to 90% lower latency. [Recurrent-Depth VLA](https://arxiv.org/abs/2602.07845){:target="_blank"} goes further: a weight-tied action head that can be run for any number of iterations at constant memory, so the *amount* of thinking is a dial you turn at inference. Tasks that fail outright at one iteration exceed 90% success at four; easy tasks saturate immediately; and it runs up to 80× faster than the chain-of-thought VLAs it replaces. Outside robotics the same idea has been running for a year — Sapient's [Hierarchical Reasoning Model](https://arxiv.org/abs/2506.21734){:target="_blank"} solves reasoning tasks in a single forward pass of nested recurrent modules, entirely in latent space, at 27M parameters — and it is now reaching agents, where [adaptive latent reasoning](https://arxiv.org/abs/2606.02871){:target="_blank"} cuts reasoning tokens by up to 85% on tool-use tasks by thinking in hidden state and escalating to text only when it has to.
+
+That last word — *escalating* — is the part that matters most for us, and it has already shown up in a robot. [τ<sub>0</sub>-VLA](https://www.alphaxiv.org/abs/2608.16885){:target="_blank"} (August 2026) puts a confidence router in front of its planner: when the high-level policy is sure, it executes; when it is not, it spends compute — a generative world model imagines what the camera would see after each candidate subtask, a value model scores the imagined outcomes, a beam search runs over them, and only then does the robot commit. Long-horizon success goes from 27.5% to 45%; on unfamiliar arrangements, from 50% to 74%. The low-level policy underneath is still flow-matching. The thinking didn't replace the generator. It was put *around* it, and switched on by uncertainty.
+
+That is the narrative for scaling compute in robots, and it is not the language-model one. **Not more tokens — more depth, in latent space, spent where the policy is least sure.** Every piece of it now exists somewhere. Nobody has put them together and scaled it.
+
+### The budget that made the split
+
+And the System 1 / System 2 split was never a principled architecture. It is a budget. Robots close their control loop at tens of Hz, and you cannot run a large reasoning model inside that window — so the thinking got moved somewhere it could take its time, which means off the loop and upstream. The blocker on 说 was never a shortage of ideas about deliberation. It is **compute per action**.
 
 <div class="pull-quote">Nobody has seriously scaled the compute axis in robotics action models.</div>
 
-There are two ways out of that, and the first is oddly under-explored: **let the thinking run in parallel with the acting.** Not a preamble that finishes before the arm moves, and not a monolith that has to complete inside one control step — a slower deliberative process running concurrently, at its own rate, watching the same stream the controller sees. The policy keeps acting at 50 Hz. The thinking lands when it lands, and when it disagrees, it preempts.
+There are two ways out, and the first is oddly under-explored: **let the thinking run in parallel with the acting.** Not a preamble that finishes before the arm moves, and not a monolith that has to complete inside one control step — a slower deliberative process running concurrently, at its own rate, watching the same stream the controller sees. The policy keeps acting at 50 Hz. The thinking lands when it lands, and when it disagrees, it preempts.
 
 That is roughly what a person does carrying an awkward load: the hands keep going while something slower notices the thing is tipping and takes over. And it quietly changes the requirement. Deliberation no longer has to beat the control period — only the time it takes for a failure to become unrecoverable. For a basket sliding off one finger that is a few hundred milliseconds, which is an enormously easier target than the 20 ms a 50 Hz control step allows.
 
 The second way out is to make the model itself cheaper. Enormous effort goes into scaling parameters and data; almost none goes into **the compute efficiency of a robotics foundation model** — making it cheap enough per step that deliberation fits inside the control budget. And robotics is where that work would pay off first: a robot carries its compute with it, on a battery, against a hard control deadline. There is no larger cluster to phone. Distillation, sparsity and routing, adaptive depth, caching across timesteps, chunking that amortizes one forward pass over many actions — unglamorous work, and it is most of what stands between us and a single model that thinks *and* acts at practical latency.
 
-And notice what falls out if you get it. The sane way to spend a variable compute budget is to think longer exactly where you are least sure — which means adaptive compute and the Humility tether are the same signal, read twice. A calibrated policy doesn't only know when to ask a human. It knows when to think.
+And notice what falls out if you get it. The sane way to spend a variable compute budget is to think longer exactly where you are least sure — which means adaptive compute and the Humility tether are the same signal, read twice. τ<sub>0</sub>'s confidence router is that signal, shipped. A calibrated policy doesn't only know when to ask a human. It knows when to think.
 
 ### Recollection, in three traditions
 
@@ -363,7 +381,7 @@ Which is the whole build in one line. **说 (thinking) supplies the prediction; 
 
 Part one's three moves were all about measurement. These two are about what you feed the policy, and they are the harder pair.
 
-**1. Scale 说 alongside the action, not upstream of it.** Not a bigger System 2 handing plans down to an unchanged System 1, but deliberation running concurrently with the controller and free to interrupt it: *where is this load going — and is it still going there?* A world model consulted once at plan time is a research artifact; one that gates the next action is a tether. Adaptive depth is how you afford it.
+**1. Scale 说 in depth, not in tokens.** Not a bigger System 2 handing plans down to an unchanged System 1, and not chain-of-thought bolted onto a policy that cannot run it at control rate — reasoning in latent space, with depth as an inference-time dial, running alongside the controller and free to interrupt it: *where is this load going — and is it still going there?* A world model consulted once at plan time is a research artifact; one that gates the next action is a tether. Recurrent-depth heads and confidence-gated search both exist now. Put them in one model and turn the dial up where the policy is unsure.
 
 **2. Scale 亲, and let the robot choose it.** The move nobody is making. Glasses and gripper sticks grow the circle cheaply, but every hour of that is still 闻. 亲 cannot be harvested; it has to be lived, in this body, including the parts that go wrong. So the question is not *how do we get more 亲* but *which 亲 is worth buying?* A calibrated robot answers that.
 
