@@ -191,6 +191,38 @@
       color: var(--text-primary);
     }
 
+    /* --- The index: one loud block --- */
+    .index-block {
+      margin: 36px 0;
+      padding: 28px 30px 26px;
+      border: 2px solid var(--accent);
+      border-radius: 12px;
+      background: var(--accent-soft);
+      text-align: center;
+    }
+    .index-eyebrow {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 6px;
+    }
+    .index-name {
+      font-size: 1.7rem; font-weight: 800; letter-spacing: -0.02em;
+      line-height: 1.2; margin-bottom: 16px; color: var(--text-primary);
+    }
+    .index-formula {
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      font-size: 1.02rem; line-height: 1.7; margin-bottom: 16px; color: var(--text-primary);
+    }
+    .index-formula .root { font-size: 1.55rem; vertical-align: -3px; margin-right: 2px; }
+    .index-formula .radicand {
+      display: inline-block; border-top: 2px solid currentColor; padding: 3px 6px 0;
+    }
+    .index-rule { font-size: 1.08rem; font-weight: 700; color: var(--warn); }
+    @media (max-width: 600px) {
+      .index-block { padding: 20px 16px 18px; }
+      .index-name { font-size: 1.35rem; }
+      .index-formula { font-size: 0.86rem; }
+    }
+
     /* --- Chinese quotation card --- */
     .zh-quote {
       margin: 28px 0;

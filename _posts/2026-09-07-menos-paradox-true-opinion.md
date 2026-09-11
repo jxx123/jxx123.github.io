@@ -492,10 +492,21 @@ Fig 6 names the failure each untied rope leaves behind: the Parrot, dazzling unt
   <text x="450" y="380" text-anchor="middle" font-size="11.5" fill="#555" font-family="-apple-system, sans-serif">is its confidence calibrated to its competence?</text>
   <text x="450" y="398" text-anchor="middle" font-size="11.5" fill="#b45309" font-family="-apple-system, sans-serif">without it: <tspan font-weight="600">the Confident Fool</tspan> &#8212; and this is the load-bearing rope</text>
 </svg>
-<figcaption><b>Fig 6 &middot; Five tethers.</b> Report them as a vector, never a scalar. If you must have one number, take the <i>geometric</i> mean &#8212; so that a single untied rope cannot be averaged away by four good ones.</figcaption>
+<figcaption><b>Fig 6 &middot; Five tethers.</b> Report them as a vector, never a scalar. If you must have one number, take the geometric mean &#8212; the index just below.</figcaption>
 </figure>
 
 Four of these are about robustness. The fifth is different in kind, and it is the boy at 84a: **Humility** is the tether that makes the other four improvable.
+
+If you must have one number — and you will be asked for one — here it is.
+
+<div class="index-block">
+  <div class="index-eyebrow">A proposal</div>
+  <div class="index-name">The Epist&#275;m&#275; Index</div>
+  <div class="index-formula"><span class="root">&#8309;&radic;</span><span class="radicand">Stability &times; Transfer &times; Recovery &times; Foresight &times; Humility</span></div>
+  <div class="index-rule">A zero on any rope is a zero on the index.</div>
+</div>
+
+Each tether is a ratio in [0, 1] — success under the change divided by success without it, or calibration expressed the same way — and the index is their geometric mean. The geometric mean is a deliberate cruelty. An arithmetic mean lets four good ropes hide one that was never tied; the geometric mean does not, because anything multiplied by zero is zero. That isn't knowledge being discounted. It is *doxa* being exposed, and no amount of averaging should be allowed to paper over it. Report the five as a vector whenever you can; when you can't, report this, and never a success rate alone.
 
 ## A success rate is a count of true opinions
 
