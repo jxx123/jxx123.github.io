@@ -73,6 +73,196 @@ What makes it 闻 anyway is not sensor fidelity. It is that the robot did not ch
 
 Read that as a roadmap and the conclusion is uncomfortable. We have spent the decade scaling 闻 — more data, more demos, more logs — and 闻 is *precisely the source that produces true opinion.* It is testimony: the road to Larissa described accurately by someone who has never walked it. It will get you there, and it will not stay. The other two axes are barely scaled at all, and they are where two of the three tethers that rollout was missing actually live — 说 (thinking) is Foresight, 亲 (experience) is Recovery. The third it lacked, Humility, turns out to decide where you spend the other two; that comes below. Scaling data alone cannot produce *epistēmē* — knowledge that stays put because it comes with an account of why it is true — because *epistēmē* is not made of testimony.
 
+<figure class="figure">
+<svg viewBox="0 0 900 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three panels: pretraining scatters points; thinking connects them into a reachable region; experience adds new points at the boundary">
+  <defs><marker id="sp-ar" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L7,4 L0,8 Z" fill="#b45309"/></marker></defs>
+  <line x1="302" y1="40" x2="302" y2="296" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="597" y1="40" x2="597" y2="296" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="155" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="#1a1a1a" letter-spacing="1" font-family="-apple-system, sans-serif">闻 &middot; PRETRAINING</text>
+  <circle cx="147.8" cy="164.1" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="177.2" cy="180.5" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="197.0" cy="184.5" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="144.7" cy="171.6" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="200.3" cy="188.7" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="165.1" cy="177.1" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="212.3" cy="216.2" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="161.9" cy="203.9" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="82.7" cy="142.2" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="87.9" cy="211.8" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="164.3" cy="163.0" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="154.5" cy="173.7" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="149.6" cy="182.9" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="162.7" cy="158.4" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="137.7" cy="155.9" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="114.8" cy="204.5" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="170.5" cy="176.8" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="156.4" cy="175.9" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="146.5" cy="187.6" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="115.3" cy="153.5" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="165.7" cy="142.6" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="151.3" cy="163.2" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="152.7" cy="171.7" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="199.7" cy="137.1" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="160.1" cy="171.5" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="184.1" cy="192.9" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <text x="155" y="312" text-anchor="middle" font-size="12" fill="#555" font-family="-apple-system, sans-serif">points, wherever someone recorded one</text>
+  <text x="450" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="#1a1a1a" letter-spacing="1" font-family="-apple-system, sans-serif">+ 说 &middot; THINKING</text>
+  <polygon points="377.7,142.2 494.7,137.1 507.3,216.2 382.9,211.8" fill="#2563eb" fill-opacity="0.13"/>
+  <line x1="460.7" y1="142.6" x2="494.7" y2="137.1" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="495.3" y1="188.7" x2="507.3" y2="216.2" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="446.3" y1="163.2" x2="447.7" y2="171.7" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="432.7" y1="155.9" x2="410.3" y2="153.5" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="460.1" y1="177.1" x2="465.5" y2="176.8" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="439.7" y1="171.6" x2="447.7" y2="171.7" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="451.4" y1="175.9" x2="441.5" y2="187.6" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="442.8" y1="164.1" x2="432.7" y2="155.9" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="451.4" y1="175.9" x2="455.1" y2="171.5" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="449.5" y1="173.7" x2="451.4" y2="175.9" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="459.3" y1="163.0" x2="455.1" y2="171.5" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="457.7" y1="158.4" x2="494.7" y2="137.1" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="457.7" y1="158.4" x2="460.7" y2="142.6" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="444.6" y1="182.9" x2="441.5" y2="187.6" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="432.7" y1="155.9" x2="446.3" y2="163.2" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="492.0" y1="184.5" x2="495.3" y2="188.7" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="377.7" y1="142.2" x2="432.7" y2="155.9" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="460.1" y1="177.1" x2="455.1" y2="171.5" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="472.2" y1="180.5" x2="460.1" y2="177.1" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="442.8" y1="164.1" x2="410.3" y2="153.5" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="449.5" y1="173.7" x2="447.7" y2="171.7" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="459.3" y1="163.0" x2="460.7" y2="142.6" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="456.9" y1="203.9" x2="444.6" y2="182.9" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="492.0" y1="184.5" x2="479.1" y2="192.9" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="456.9" y1="203.9" x2="441.5" y2="187.6" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="444.6" y1="182.9" x2="451.4" y2="175.9" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="472.2" y1="180.5" x2="479.1" y2="192.9" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="442.8" y1="164.1" x2="439.7" y2="171.6" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="495.3" y1="188.7" x2="479.1" y2="192.9" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="382.9" y1="211.8" x2="409.8" y2="204.5" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="459.3" y1="163.0" x2="457.7" y2="158.4" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="377.7" y1="142.2" x2="410.3" y2="153.5" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="451.4" y1="175.9" x2="447.7" y2="171.7" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="382.9" y1="211.8" x2="441.5" y2="187.6" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="492.0" y1="184.5" x2="507.3" y2="216.2" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="442.8" y1="164.1" x2="446.3" y2="163.2" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="472.2" y1="180.5" x2="465.5" y2="176.8" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="449.5" y1="173.7" x2="455.1" y2="171.5" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="457.7" y1="158.4" x2="446.3" y2="163.2" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="409.8" y1="204.5" x2="441.5" y2="187.6" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <circle cx="442.8" cy="164.1" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="472.2" cy="180.5" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="492.0" cy="184.5" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="439.7" cy="171.6" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="495.3" cy="188.7" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="460.1" cy="177.1" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="507.3" cy="216.2" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="456.9" cy="203.9" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="377.7" cy="142.2" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="382.9" cy="211.8" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="459.3" cy="163.0" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="449.5" cy="173.7" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="444.6" cy="182.9" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="457.7" cy="158.4" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="432.7" cy="155.9" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="409.8" cy="204.5" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="465.5" cy="176.8" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="451.4" cy="175.9" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="441.5" cy="187.6" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="410.3" cy="153.5" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="460.7" cy="142.6" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="446.3" cy="163.2" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="447.7" cy="171.7" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="494.7" cy="137.1" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="455.1" cy="171.5" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="479.1" cy="192.9" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <text x="450" y="312" text-anchor="middle" font-size="12" fill="#555" font-family="-apple-system, sans-serif">inference draws the lines; the inside becomes reachable</text>
+  <text x="745" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="#1a1a1a" letter-spacing="1" font-family="-apple-system, sans-serif">+ 亲 &middot; EXPERIENCE</text>
+  <polygon points="641.6,230.6 643.6,125.7 817.5,113.0 818.7,114.4 830.5,240.1" fill="#b45309" fill-opacity="0.07" stroke="#b45309" stroke-width="1.4" stroke-dasharray="5 4" opacity="0.8"/>
+  <polygon points="672.7,142.2 789.7,137.1 802.3,216.2 677.9,211.8" fill="#2563eb" fill-opacity="0.13"/>
+  <line x1="755.7" y1="142.6" x2="789.7" y2="137.1" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="790.3" y1="188.7" x2="802.3" y2="216.2" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="741.3" y1="163.2" x2="742.7" y2="171.7" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="727.7" y1="155.9" x2="705.3" y2="153.5" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="755.1" y1="177.1" x2="760.5" y2="176.8" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="734.7" y1="171.6" x2="742.7" y2="171.7" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="746.4" y1="175.9" x2="736.5" y2="187.6" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="737.8" y1="164.1" x2="727.7" y2="155.9" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="746.4" y1="175.9" x2="750.1" y2="171.5" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="744.5" y1="173.7" x2="746.4" y2="175.9" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="754.3" y1="163.0" x2="750.1" y2="171.5" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="752.7" y1="158.4" x2="789.7" y2="137.1" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="752.7" y1="158.4" x2="755.7" y2="142.6" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="739.6" y1="182.9" x2="736.5" y2="187.6" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="727.7" y1="155.9" x2="741.3" y2="163.2" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="787.0" y1="184.5" x2="790.3" y2="188.7" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="672.7" y1="142.2" x2="727.7" y2="155.9" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="755.1" y1="177.1" x2="750.1" y2="171.5" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="767.2" y1="180.5" x2="755.1" y2="177.1" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="737.8" y1="164.1" x2="705.3" y2="153.5" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="744.5" y1="173.7" x2="742.7" y2="171.7" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="754.3" y1="163.0" x2="755.7" y2="142.6" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="751.9" y1="203.9" x2="739.6" y2="182.9" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="787.0" y1="184.5" x2="774.1" y2="192.9" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="751.9" y1="203.9" x2="736.5" y2="187.6" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="739.6" y1="182.9" x2="746.4" y2="175.9" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="767.2" y1="180.5" x2="774.1" y2="192.9" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="737.8" y1="164.1" x2="734.7" y2="171.6" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="790.3" y1="188.7" x2="774.1" y2="192.9" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="677.9" y1="211.8" x2="704.8" y2="204.5" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="754.3" y1="163.0" x2="752.7" y2="158.4" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="672.7" y1="142.2" x2="705.3" y2="153.5" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="746.4" y1="175.9" x2="742.7" y2="171.7" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="677.9" y1="211.8" x2="736.5" y2="187.6" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="787.0" y1="184.5" x2="802.3" y2="216.2" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="737.8" y1="164.1" x2="741.3" y2="163.2" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="767.2" y1="180.5" x2="760.5" y2="176.8" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="744.5" y1="173.7" x2="750.1" y2="171.5" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="752.7" y1="158.4" x2="741.3" y2="163.2" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <line x1="704.8" y1="204.5" x2="736.5" y2="187.6" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+  <circle cx="737.8" cy="164.1" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="767.2" cy="180.5" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="787.0" cy="184.5" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="734.7" cy="171.6" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="790.3" cy="188.7" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="755.1" cy="177.1" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="802.3" cy="216.2" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="751.9" cy="203.9" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="672.7" cy="142.2" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="677.9" cy="211.8" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="754.3" cy="163.0" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="744.5" cy="173.7" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="739.6" cy="182.9" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="752.7" cy="158.4" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="727.7" cy="155.9" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="704.8" cy="204.5" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="760.5" cy="176.8" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="746.4" cy="175.9" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="736.5" cy="187.6" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="705.3" cy="153.5" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="755.7" cy="142.6" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="741.3" cy="163.2" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="742.7" cy="171.7" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="789.7" cy="137.1" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="750.1" cy="171.5" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <circle cx="774.1" cy="192.9" r="3.2" fill="#2563eb" opacity="0.85"/>
+  <line x1="802.3" y1="216.2" x2="830.5" y2="240.1" stroke="#b45309" stroke-width="1.6" marker-end="url(#sp-ar)"/>
+  <circle cx="830.5" cy="240.1" r="4" fill="#b45309"/>
+  <line x1="802.3" y1="216.2" x2="827.9" y2="237.4" stroke="#b45309" stroke-width="1.6" marker-end="url(#sp-ar)"/>
+  <circle cx="827.9" cy="237.4" r="4" fill="#b45309"/>
+  <line x1="677.9" y1="211.8" x2="641.6" y2="230.6" stroke="#b45309" stroke-width="1.6" marker-end="url(#sp-ar)"/>
+  <circle cx="641.6" cy="230.6" r="4" fill="#b45309"/>
+  <line x1="677.9" y1="211.8" x2="648.8" y2="229.6" stroke="#b45309" stroke-width="1.6" marker-end="url(#sp-ar)"/>
+  <circle cx="648.8" cy="229.6" r="4" fill="#b45309"/>
+  <line x1="672.7" y1="142.2" x2="643.6" y2="125.7" stroke="#b45309" stroke-width="1.6" marker-end="url(#sp-ar)"/>
+  <circle cx="643.6" cy="125.7" r="4" fill="#b45309"/>
+  <line x1="789.7" y1="137.1" x2="818.7" y2="114.4" stroke="#b45309" stroke-width="1.6" marker-end="url(#sp-ar)"/>
+  <circle cx="818.7" cy="114.4" r="4" fill="#b45309"/>
+  <line x1="789.7" y1="137.1" x2="817.5" y2="113.0" stroke="#b45309" stroke-width="1.6" marker-end="url(#sp-ar)"/>
+  <circle cx="817.5" cy="113.0" r="4" fill="#b45309"/>
+  <text x="745" y="312" text-anchor="middle" font-size="12" fill="#555" font-family="-apple-system, sans-serif">new points where there were none &#8212; at the edge</text>
+</svg>
+<figcaption><b>Fig 2 &middot; What each axis does to the data.</b> 闻 gives you the points. 说 gives you the lines between them. 亲 gives you the points that weren&#8217;t there &#8212; and Humility chooses which ones to buy.</figcaption>
+</figure>
+
 ### Why 说 is barely scaled
 
 It is worth being concrete about how little 说 is really scaled, because the field looks busier on this axis than it is. A vision-language-action model — a VLA, the standard robot policy architecture — maps observation to action. There is no deliberation anywhere in that loop: the model that acts does not reason about what its action is about to do. The standard fix has been to bolt a System 2 on top — a separate reasoning model that plans, hands a subgoal down to a System 1 policy, and then gets out of the way. **Two standalone models, with the thinking sitting upstream of the acting rather than inside it.**
@@ -157,7 +347,7 @@ I don't believe a word of the metaphysics. But three traditions are now describi
 
   <text x="450" y="284" text-anchor="middle" font-size="12.5" fill="#b45309" font-family="-apple-system, sans-serif">&#9888; Plato's soul is true by construction. A checkpoint is only as true as what it ate.</text>
 </svg>
-<figcaption><b>Fig 2 &middot; Anamnesis as a pretraining story.</b> Two columns here; the prose supplies the third, 闻 — the same object arrived at from a different direction. The correspondence is uncomfortably good &#8212; which is exactly why the disanalogy at the bottom matters.</figcaption>
+<figcaption><b>Fig 3 &middot; Anamnesis as a pretraining story.</b> Two columns here; the prose supplies the third, 闻 — the same object arrived at from a different direction. The correspondence is uncomfortably good &#8212; which is exactly why the disanalogy at the bottom matters.</figcaption>
 </figure>
 
 Anyone who has watched a hundred-shot finetune "teach" a model a skill it visibly already had recognizes this: we are not writing the capability in, we are addressing something already in the weights — the way Socrates addresses geometry already in the boy.
@@ -292,7 +482,7 @@ Before pushing on that, be clear about the shape of the problem, because it is t
   <text x="675" y="288" text-anchor="middle" font-size="12.5" fill="#555" font-family="-apple-system, sans-serif">most of the data does not exist yet</text>
   <text x="675" y="308" text-anchor="middle" font-size="12.5" font-weight="700" fill="#b45309" font-family="-apple-system, sans-serif">the work is expanding <tspan fill="#1a1a1a">out</tspan></text>
 </svg>
-<figcaption><b>Fig 3 &middot; Two opposite data problems.</b> Filtering is a search over data you already hold. Expanding is a search over data that does not exist yet &#8212; and something has to choose where to look next.</figcaption>
+<figcaption><b>Fig 4 &middot; Two opposite data problems.</b> Filtering is a search over data you already hold. Expanding is a search over data that does not exist yet &#8212; and something has to choose where to look next.</figcaption>
 </figure>
 
 You cannot filter your way out of a small circle. You have to grow it — and the first question is what growing it costs.
@@ -343,7 +533,7 @@ Teleoperation is not the only way to collect 闻. A human wearing camera glasses
   <circle cx="766" cy="163" r="7" fill="#2563eb"/>
   <text x="781" y="167" font-size="10.5" fill="#555" font-family="-apple-system, sans-serif">yes &#8212; none of it</text>
 </svg>
-<figcaption><b>Fig 4 &middot; Where 闻 actually comes from.</b> The abundant sources are the ones furthest from the robot&#8217;s own actions &#8212; and every marker on this chart is hollow, because people do not record themselves failing and recovering.</figcaption>
+<figcaption><b>Fig 5 &middot; Where 闻 actually comes from.</b> The abundant sources are the ones furthest from the robot&#8217;s own actions &#8212; and every marker on this chart is hollow, because people do not record themselves failing and recovering.</figcaption>
 </figure>
 
 But the axis does not change character when you make it bigger. Two structural facts hold across all of it.
@@ -444,7 +634,7 @@ Part one's three moves were all about measurement. These two are about what you 
   <text x="450" y="366" text-anchor="middle" font-size="12.5" fill="#555" font-family="-apple-system, sans-serif">The other four tell you the policy is sound. This one tells you what to buy next &#8212;</text>
   <text x="450" y="384" text-anchor="middle" font-size="12.5" fill="#555" font-family="-apple-system, sans-serif">which is what turns an evaluation framework into a training paradigm.</text>
 </svg>
-<figcaption><b>Fig 5 &middot; The loop.</b> 闻 gets you a prior once. 说 and 亲 are what compound &#8212; and the robot&#8217;s own calibrated ignorance is what decides where the expensive axis gets spent.</figcaption>
+<figcaption><b>Fig 6 &middot; The loop.</b> 闻 gets you a prior once. 说 and 亲 are what compound &#8212; and the robot&#8217;s own calibrated ignorance is what decides where the expensive axis gets spent.</figcaption>
 </figure>
 
 Put a calibrated policy together with a robot that chooses its own 亲, and it starts *aiming its own data collection*. Its uncertainty is a map of its own boundary, and that map is the shopping list: **stop paying for a thousand more demonstrations of the drawer it already opens; buy the one demonstration of the drawer it doesn't.**
