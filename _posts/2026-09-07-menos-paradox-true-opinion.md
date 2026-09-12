@@ -671,8 +671,6 @@ Three moves follow from all this, and none of them needs a new model.
 
 **3. Certify on knowing when to stop, not on the average.** Don't gate deployment on a success rate. Gate it on whether the robot recognizes the states it cannot handle and says so. We don't license pilots on their pass rate over rehearsed routes; we license them on crosswinds, engine-out, and the judgment to declare a missed approach. Knowing when to go around *is* the licence.
 
-The obvious objection: nobody wants a robot that stops every five minutes to ask for help. Quite right — which is why the thing to certify is *calibration*, not caution. A robot that asks constantly is as badly calibrated as one that never asks; in both cases its confidence tracks nothing. What belongs on the certificate is the trade-off: how much of the job it does unaided, and what fraction of its failures it flags before they happen. A robot that does 95% alone and raises a hand on the 5% that would have broken something is worth more than one that does 99% and buries the rest in an average.
-
 I went looking for a way to make a robot ask for help and found the problem named, diagnosed and half-solved twenty-four centuries before anyone had a robot to ask it about. The paradox is real: you cannot search for what you do not know. The escape is smaller than it sounds. You never needed the answer — only to know, in calibrated units, where your knowing stops.
 
 Everything else is a statue.
