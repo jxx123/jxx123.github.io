@@ -166,7 +166,134 @@ So, the question this whole piece is about: **are we measuring the wrong thing?*
 
 I have wanted to build curiosity into a robot for as long as I have been building robots, and that rollout is why. Not because the basket tipped — baskets tip. Because nowhere in the sequence was there a moment where the robot *wondered*. By curiosity I don't mean exploration noise; a random-number generator perturbs actions perfectly and has never wondered about anything. The first real sign of curiosity is that a thing **asks a question** — and to ask one you must first have located something you don't know.
 
-For robots this matters more than it sounds, because our data problem is the inverse of everyone else's — a small circle of data you have to grow, not a large one you filter down — and curiosity is what chooses where to grow it next. Part two is about that.
+For robots this matters more than it sounds, because our data problem is the inverse of everyone else's. Language models were handed an enormous circle: essentially everything people wrote down already exists, so building a corpus is *subtractive* — filter, dedupe, keep the good part. Robotics was handed a tiny one, and the craft has to be *additive*.
+
+<figure class="figure">
+<svg viewBox="0 0 900 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Language models filter down from an enormous corpus; robotics must expand outward from a tiny one">
+  <defs>
+    <marker id="cr-in" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="9" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#888"/></marker>
+    <marker id="cr-out" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="9" refX="9" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#b45309"/></marker>
+  </defs>
+
+  <text x="225" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="#1a1a1a" letter-spacing="1.1" font-family="-apple-system, sans-serif">LANGUAGE MODELS</text>
+  <text x="675" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="#1a1a1a" letter-spacing="1.1" font-family="-apple-system, sans-serif">ROBOTS</text>
+
+  <!-- LEFT: an enormous circle you filter down -->
+  <circle cx="225" cy="160" r="105" fill="#f8f9fa" stroke="#e5e7eb" stroke-width="1.8"/>
+  <circle cx="145.1" cy="184.7" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="295.6" cy="123.6" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="140.3" cy="155.8" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="257.5" cy="234.7" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="161.1" cy="92.1" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="284.4" cy="199.9" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="304.1" cy="210.6" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="205.3" cy="106.8" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="324.1" cy="148.9" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="176.2" cy="89.2" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="255.2" cy="206.0" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="168.0" cy="149.7" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="250.1" cy="223.6" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="302.9" cy="174.9" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="136.4" cy="194.7" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="138.6" cy="149.6" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="137.0" cy="160.1" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="157.2" cy="178.6" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="325.8" cy="158.5" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="273.2" cy="84.2" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="198.0" cy="222.1" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="210.8" cy="216.8" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="232.8" cy="84.0" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="268.2" cy="97.8" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="317.0" cy="135.2" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="291.7" cy="160.2" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="292.3" cy="117.5" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="300.7" cy="150.6" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="302.7" cy="198.4" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="237.4" cy="91.3" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="287.4" cy="198.0" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="314.5" cy="139.4" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="275.6" cy="206.3" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="271.6" cy="194.3" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="243.9" cy="97.9" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="151.8" cy="131.4" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="258.1" cy="244.6" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="284.3" cy="223.9" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="282.5" cy="211.7" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="241.2" cy="228.0" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="317.1" cy="143.0" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="192.7" cy="251.2" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="243.6" cy="233.8" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="278.1" cy="90.9" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="306.3" cy="219.3" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="240.9" cy="227.4" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="235.4" cy="87.9" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="208.1" cy="216.3" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="296.4" cy="205.4" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="228.7" cy="245.3" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="170.4" cy="216.9" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="302.6" cy="139.6" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="139.3" cy="116.6" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="251.0" cy="218.0" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="304.0" cy="108.7" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="225.2" cy="225.6" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="218.4" cy="61.4" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="257.7" cy="253.7" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="288.1" cy="102.3" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="171.6" cy="188.7" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="321.7" cy="184.0" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="231.5" cy="249.5" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="220.9" cy="254.3" r="1.9" fill="#888" opacity="0.5"/>
+  <circle cx="166.6" cy="119.5" r="1.9" fill="#888" opacity="0.5"/>
+  <line x1="304.7" y1="206.0" x2="275.2" y2="189.0" stroke="#888" stroke-width="1.8" marker-end="url(#cr-in)"/>
+  <line x1="209.0" y1="250.6" x2="214.9" y2="217.1" stroke="#888" stroke-width="1.8" marker-end="url(#cr-in)"/>
+  <line x1="134.4" y1="176.0" x2="167.9" y2="170.1" stroke="#888" stroke-width="1.8" marker-end="url(#cr-in)"/>
+  <line x1="179.0" y1="80.3" x2="196.0" y2="109.8" stroke="#888" stroke-width="1.8" marker-end="url(#cr-in)"/>
+  <line x1="284.1" y1="89.5" x2="262.3" y2="115.6" stroke="#888" stroke-width="1.8" marker-end="url(#cr-in)"/>
+  <circle cx="225" cy="160" r="48" fill="#dbeafe" stroke="#2563eb" stroke-width="2.2"/>
+  <circle cx="240.4" cy="190.4" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="243.0" cy="168.3" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="190.5" cy="146.5" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="208.6" cy="145.7" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="241.4" cy="150.7" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="246.3" cy="162.2" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="214.2" cy="163.8" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="236.1" cy="182.1" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="211.0" cy="153.2" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="200.5" cy="188.8" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="257.4" cy="156.0" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <text x="225" y="288" text-anchor="middle" font-size="12.5" fill="#555" font-family="-apple-system, sans-serif">the data already exists</text>
+  <text x="225" y="308" text-anchor="middle" font-size="12.5" font-weight="700" fill="#555" font-family="-apple-system, sans-serif">the work is filtering <tspan fill="#1a1a1a">down</tspan></text>
+
+  <line x1="450" y1="44" x2="450" y2="286" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- RIGHT: a tiny circle you have to grow -->
+  <circle cx="675" cy="160" r="105" fill="none" stroke="#b45309" stroke-width="1.6" stroke-dasharray="6 6" opacity="0.55"/>
+  <rect x="588" y="60" width="174" height="17" rx="3" fill="#ffffff"/>
+  <text x="675" y="72" text-anchor="middle" font-size="11" fill="#b45309" opacity="0.9" font-family="-apple-system, sans-serif">everything it will actually meet</text>
+  <line x1="723.5" y1="188.0" x2="754.7" y2="206.0" stroke="#b45309" stroke-width="1.8" marker-end="url(#cr-out)"/>
+  <line x1="665.3" y1="215.1" x2="659.0" y2="250.6" stroke="#b45309" stroke-width="1.8" marker-end="url(#cr-out)"/>
+  <line x1="619.9" y1="169.7" x2="584.4" y2="176.0" stroke="#b45309" stroke-width="1.8" marker-end="url(#cr-out)"/>
+  <line x1="647.0" y1="111.5" x2="629.0" y2="80.3" stroke="#b45309" stroke-width="1.8" marker-end="url(#cr-out)"/>
+  <line x1="711.0" y1="117.1" x2="734.1" y2="89.5" stroke="#b45309" stroke-width="1.8" marker-end="url(#cr-out)"/>
+  <circle cx="675" cy="160" r="44" fill="#dbeafe" stroke="#2563eb" stroke-width="2.2"/>
+  <circle cx="665.5" cy="135.5" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="680.5" cy="166.7" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="707.3" cy="163.6" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="664.9" cy="128.2" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="702.1" cy="163.6" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="646.0" cy="163.3" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="660.7" cy="190.9" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="697.7" cy="171.6" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <circle cx="672.4" cy="127.8" r="1.9" fill="#2563eb" opacity="0.85"/>
+  <rect x="602" y="220" width="146" height="17" rx="3" fill="#ffffff"/>
+  <text x="675" y="232" text-anchor="middle" font-size="11" fill="#2563eb" font-family="-apple-system, sans-serif">what anyone has collected</text>
+  <text x="675" y="288" text-anchor="middle" font-size="12.5" fill="#555" font-family="-apple-system, sans-serif">most of the data does not exist yet</text>
+  <text x="675" y="308" text-anchor="middle" font-size="12.5" font-weight="700" fill="#b45309" font-family="-apple-system, sans-serif">the work is expanding <tspan fill="#1a1a1a">out</tspan></text>
+</svg>
+<figcaption><b>Fig 2 &middot; Two opposite data problems.</b> Filtering is a search over data you already hold. Expanding is a search over data that does not exist yet &#8212; and something has to choose where to look next.</figcaption>
+</figure>
+
+You cannot filter your way out of a small circle. You have to grow it — and since every point costs a rig, an operator and an hour, the only question that matters is *which* point to add next. That is exactly what curiosity answers. Not a nicety, then: curiosity is the policy for spending a data budget when the data doesn't exist yet.
 
 So the model I started sketching after that rollout was the smallest honest version of that curious robot: not curiosity itself, just a policy that could *ask* instead of carrying serenely on while the forks hit the floor. Working through it with Claude, it said: *by the way, have you heard of Meno's paradox? What you're describing is close to the problem Plato poses there.*
 
@@ -211,7 +338,7 @@ Every roboticist knows Moravec's paradox: the difficulty ranking for machines is
 
   <text x="450" y="312" text-anchor="middle" font-size="13" fill="#555" font-family="-apple-system, sans-serif">the ranking inverts &#8212; and the inversion is the whole paradox</text>
 </svg>
-<figcaption><b>Fig 2 &middot; Moravec's paradox.</b> The one every roboticist has heard a hundred times. It tells you which problems are hard. It says nothing about whether your robot knows it is failing at one.</figcaption>
+<figcaption><b>Fig 3 &middot; Moravec's paradox.</b> The one every roboticist has heard a hundred times. It tells you which problems are hard. It says nothing about whether your robot knows it is failing at one.</figcaption>
 </figure>
 
 Moravec's paradox ranks tasks by difficulty. Meno's asks something else entirely — whether inquiry is possible at all. It is 2,300 years older, and I had never heard of it.
@@ -266,7 +393,7 @@ It looks like sophistry. Sharpened into two horns it becomes genuinely hard:
   <rect x="300" y="292" width="300" height="40" rx="8" fill="#fef3c7" stroke="#b45309" stroke-width="1.5"/>
   <text x="450" y="318" text-anchor="middle" font-size="14" font-weight="700" fill="#b45309" font-family="-apple-system, sans-serif">&#8756; inquiry is impossible</text>
 </svg>
-<figcaption><b>Fig 3 &middot; Meno's paradox.</b> Two horns, no third door. Hold onto this diagram &#8212; we reopen it later, and the thing that reopens it is a metric.</figcaption>
+<figcaption><b>Fig 4 &middot; Meno's paradox.</b> Two horns, no third door. Hold onto this diagram &#8212; we reopen it later, and the thing that reopens it is a metric.</figcaption>
 </figure>
 
 That right-hand horn is the exploration problem, stated exactly. A policy in a state it has never seen cannot know the state is one it has never seen; it has no representation of *unfamiliar*. It cannot search for the demonstration it is missing, because "the demonstration I am missing" is not a thing it can point at. It cannot ask for help, because asking requires knowing you need it. That — not compute, not data, not architecture — is why the design was hard.
@@ -339,7 +466,7 @@ He calls over one of Meno's household slaves — a boy who has had no mathematic
 
   <text x="450" y="284" text-anchor="middle" font-size="13" fill="#555" font-family="-apple-system, sans-serif">Socrates never states the answer. He asks questions, and lets the boy walk into his own error.</text>
 </svg>
-<figcaption><b>Fig 4 &middot; The slave boy, <i>Meno</i> 82b&#8211;85b.</b> Panel 4: the square built on the diagonal is cut by the original grid into four half-quadrants, each half of a 2&times;2 square &#8212; 4 &times; 2 = 8. The reader sees it rather than takes it on faith. That is the point of the whole exercise.</figcaption>
+<figcaption><b>Fig 5 &middot; The slave boy, <i>Meno</i> 82b&#8211;85b.</b> Panel 4: the square built on the diagonal is cut by the original grid into four half-quadrants, each half of a 2&times;2 square &#8212; 4 &times; 2 = 8. The reader sees it rather than takes it on faith. That is the point of the whole exercise.</figcaption>
 </figure>
 
 The boy answers instantly and wrongly — *double the side* — and is shown that this gives four times the area, not twice. He tries three: nine, still wrong. And now the moment Socrates flags as the turning point (84a–c): the boy stops guessing and says he does not know.
@@ -425,7 +552,7 @@ The image is the statues of Daedalus, which legend held were carved so lifelike 
   <text x="675" y="284" text-anchor="middle" font-size="13" fill="#555" font-family="-apple-system, sans-serif">Bound by an account of the reason why</text>
   <text x="675" y="302" text-anchor="middle" font-size="13" fill="#555" font-family="-apple-system, sans-serif">&#8212; aitias logismos. It stays.</text>
 </svg>
-<figcaption><b>Fig 5 &middot; The statues of Daedalus, <i>Meno</i> 97d&#8211;98a.</b> Both statues are correct. Only one of them is still there tomorrow.</figcaption>
+<figcaption><b>Fig 6 &middot; The statues of Daedalus, <i>Meno</i> 97d&#8211;98a.</b> Both statues are correct. Only one of them is still there tomorrow.</figcaption>
 </figure>
 
 ## Five tethers
@@ -440,7 +567,7 @@ I'd propose five, and they are cheap to state.
 - **Foresight** — make it say what its next action will do *before* it does it, and score the prediction rather than the outcome.
 - **Humility** — score whether its confidence tracks its competence. The only one that asks the policy about itself rather than about the world.
 
-Fig 6 names the failure each untied rope leaves behind: the Parrot, dazzling until someone moves a lamp; the One-Trick Pony, which solved the episode and not the type; the Glass Dancer, flawless until first contact with disorder; the Sleepwalker, acting without imagining consequences; and, when the last rope goes, the Confident Fool.
+Fig 7 names the failure each untied rope leaves behind: the Parrot, dazzling until someone moves a lamp; the One-Trick Pony, which solved the episode and not the type; the Glass Dancer, flawless until first contact with disorder; the Sleepwalker, acting without imagining consequences; and, when the last rope goes, the Confident Fool.
 
 <figure class="figure">
 <svg viewBox="0 0 900 410" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A statue held down by five labelled tethers">
@@ -492,7 +619,7 @@ Fig 6 names the failure each untied rope leaves behind: the Parrot, dazzling unt
   <text x="450" y="380" text-anchor="middle" font-size="11.5" fill="#555" font-family="-apple-system, sans-serif">is its confidence calibrated to its competence?</text>
   <text x="450" y="398" text-anchor="middle" font-size="11.5" fill="#b45309" font-family="-apple-system, sans-serif">without it: <tspan font-weight="600">the Confident Fool</tspan> &#8212; and this is the load-bearing rope</text>
 </svg>
-<figcaption><b>Fig 6 &middot; Five tethers.</b> Report them as a vector, never a scalar. If you must have one number, take the geometric mean &#8212; the index just below.</figcaption>
+<figcaption><b>Fig 7 &middot; Five tethers.</b> Report them as a vector, never a scalar. If you must have one number, take the geometric mean &#8212; the index just below.</figcaption>
 </figure>
 
 Four of these are about robustness. The fifth is different in kind, and it is the boy at 84a: **Humility** is the tether that makes the other four improvable.
@@ -574,7 +701,7 @@ Every robot in every demo video is a statue on a plinth: beautifully lifelike, g
   <text x="650" y="398" text-anchor="middle" font-size="12" fill="#555" font-family="-apple-system, sans-serif">85% on the rehearsed set,</text>
   <text x="650" y="414" text-anchor="middle" font-size="12" fill="#555" font-family="-apple-system, sans-serif">and nowhere else on Earth</text>
 </svg>
-<figcaption><b>Fig 7 &middot; The same number, two different objects.</b> Policy B is not a worse version of Policy A. It is a different kind of thing, and the headline metric is structurally incapable of telling them apart.</figcaption>
+<figcaption><b>Fig 8 &middot; The same number, two different objects.</b> Policy B is not a worse version of Policy A. It is a different kind of thing, and the headline metric is structurally incapable of telling them apart.</figcaption>
 </figure>
 
 Policy B has a name: it is **the Confident Fool**, and it is the dishwasher failure from the opening, caught in the act. High success rate on its task, steady on the scenes it was scored on.
@@ -587,7 +714,7 @@ One rollout, three missing tethers: no **Foresight** to predict that an off-cent
 
 ## Meno's paradox, answered by a metric
 
-That last rope — Humility, the one the basket rollout never moved — is also the one that unties the paradox. Go back to Fig 3, the fork with no third door.
+That last rope — Humility, the one the basket rollout never moved — is also the one that unties the paradox. Go back to Fig 4, the fork with no third door.
 
 Socrates escaped it by insisting the answer was already in the boy. I'd escape it with **calibration**.
 
@@ -643,7 +770,7 @@ And a boundary is enough, because it converts an impossible search into a reques
 
   <text x="450" y="278" text-anchor="middle" font-size="13" fill="#555" font-family="-apple-system, sans-serif">You cannot search for the answer. You can point at the question &#8212; and that is enough.</text>
 </svg>
-<figcaption><b>Fig 8 &middot; The paradox, inverted into an interface.</b> This is the same move Socrates makes on the boy at 84a: the numbing comes first, and it is what makes the next demonstration land.</figcaption>
+<figcaption><b>Fig 9 &middot; The paradox, inverted into an interface.</b> This is the same move Socrates makes on the boy at 84a: the numbing comes first, and it is what makes the next demonstration land.</figcaption>
 </figure>
 
 The robot that knows what it doesn't know can ask for precisely the experience that converts its next true opinion into knowledge. Inquiry bootstraps.
