@@ -473,7 +473,7 @@ The boy answers instantly and wrongly — *double the side* — and is shown tha
 
 Socrates makes Meno admit that the boy is *better off* in this state than he was five minutes earlier:
 
-> He did not know before... but he thought he knew, and answered confidently as if he knew, and did not think himself at a loss. Now he does think himself at a loss, and as he does not know, neither does he think he knows... We have made him ready to find out.
+> He did not know before... but he thought he knew, and answered confidently as if he knew, and did not think himself at a loss. Now he does think himself at a loss, and as he does not know, neither does he think he knows... Now he will be glad to search.
 >
 > — *Meno*, 84a&ndash;c
 
