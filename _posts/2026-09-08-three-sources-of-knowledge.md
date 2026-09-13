@@ -19,6 +19,15 @@ Plato's answer is that nothing came from anywhere. The knowledge was always in t
 
 The Mohists in China, working the same centuries, asked precisely that — not where knowledge ultimately originates, but by which *route* a given piece of it arrived, and whether the route decides if it stays put. Two traditions on the same seam, and the Mohist answer maps onto our training stack with a precision I find hard to dismiss as coincidence.
 
+<figure class="portrait">
+  <img src="/assets/img/blog/mozi.jpg" alt="Traditional portrait of Mozi" loading="lazy">
+  <figcaption>Mozi (墨子), c. 470–391 BCE. Portrait via Wikimedia Commons, CC0.</figcaption>
+</figure>
+
+A word on who the Mohists were, because it bears on how seriously to take their taxonomy. Mozi (墨子, c. 470–391 BCE) was arguably the earliest roboticist on record, and by any measure the greatest engineer of his age in China. He was a carpenter by trade, sought out by rulers as an expert on fortification.[^mozi-carpenter] The *Han Feizi* records that he spent three years building a wooden bird that flew for a day.[^mozi-bird] The *Mozi* itself tells how he walked ten days to the state of Chu, sat down across from the master craftsman Lu Ban, and beat Lu Ban's cloud-ladder siege engine nine times running in a tabletop simulation — his belt for a city wall, sticks for weapons — after which the attack on Song was called off.[^mozi-gongshu] His followers became the pre-eminent siege-defence engineers of the Warring States, and the Canon they left behind is the earliest Chinese text on optics, including the first description of the camera obscura, alongside mechanics, geometry and logic.[^mozi-canon]
+
+Nor was this a marginal sect. In the 百家争鸣 — the Hundred Schools contending across the Spring and Autumn and Warring States centuries, roughly 771 to 221 BCE — Mohism stood as one of the four main schools and as Confucianism's chief rival; Mencius complained that the words of Yang Zhu and Mozi "fill the world."[^mozi-mencius] It collapsed only after the Qin unification, when the siege warfare it had mastered ceased to exist.[^mozi-decline] So when the Mohists sort knowledge by its source, that is the sorting of people who built things that had to work.
+
 ## 闻 heard, 说 inferred, 亲 lived
 
 The 《墨经》 classifies knowledge by **where it came from**: 闻 *wén*, what you were told; 说 *shuō*, what you worked out by inference — the thinking axis; 亲 *qīn*, what you came to know by direct personal contact with the thing.
@@ -526,6 +535,13 @@ Wang was arguing with scholars who could recite the classics and could not act o
 I went looking for a way to make a robot ask for help and found the problem named, diagnosed and half-solved twenty-four centuries before anyone had a robot to ask it about. Meno's paradox is real: you cannot search for what you do not know. But the escape is smaller than it sounds — you never needed the answer, only the boundary, and then the 说 to predict past it and the 亲 to buy what lies on the other side.
 
 Physical AGI will not arrive as a checkpoint that finally scores high enough; the number measures the wrong category of thing. It will arrive as a machine that can tell you where its knowledge stops, ask for precisely what it is missing, and act differently tomorrow because of what you showed it today. **Build the boundary first; the competence compounds behind it.**
+
+[^mozi-carpenter]: Mozi was a carpenter "extremely skilled in creating devices" and was "sought out by various rulers as an expert on fortification"; his followers were "mostly technicians and craftspeople." See [Mozi](https://en.wikipedia.org/wiki/Mozi){:target="_blank"}, Wikipedia.
+[^mozi-bird]: *Han Feizi*, 外儲說左上: 「墨子為木鳶，三年而成，蜚一日而敗。」 — Mozi made a wooden kite; it took three years to complete and flew for one day before it broke. Later texts credit Lu Ban with a bamboo version that stayed up three days.
+[^mozi-gongshu]: *Mozi*, chapter 公輸 ("Gongshu"). Mozi "engaged in nine simulated war games with Gongshu Ban" and "overturned each one of his stratagems." See [Mozi](https://en.wikipedia.org/wiki/Mozi){:target="_blank"}, Wikipedia.
+[^mozi-canon]: The Later Mohist writings (墨經, the *Mohist Canon*, c. 300 BCE) cover "logic, epistemology, optics, geometry, and ethics"; Mozi "is the first to describe the physical principle behind the camera, also known as the camera obscura." China named its 2016 quantum-communication satellite *Micius* (墨子号) after him.
+[^mozi-mencius]: *Mengzi* 3B:9 (滕文公下): 「楊朱、墨翟之言盈天下。天下之言，不歸楊，則歸墨。」 Legge: "The words of Yang Zhu and Mo Di fill the kingdom. If you listen to people's discourses throughout it, you will find that they have adopted the views either of Yang or of Mo."
+[^mozi-decline]: Mohism "was one of the four main philosophic schools from around 770–221 BC" and "a major rival to Confucianism"; after the Qin unification it "gradually collapsed into irrelevance" as siege warfare disappeared and its doctrines were absorbed by rival schools. See [Mohism](https://en.wikipedia.org/wiki/Mohism){:target="_blank"}, Wikipedia.
 
 ---
 

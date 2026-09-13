@@ -225,6 +225,22 @@
       .index-eq { font-size: 0.8rem; column-gap: 8px; }
     }
 
+    /* --- Small portrait figure (does not break out) --- */
+    .portrait {
+      float: right; width: 220px; margin: 6px 0 14px 24px;
+    }
+    .portrait img { width: 100%; border-radius: 10px; border: 1px solid var(--border); display: block; margin: 0; }
+    .portrait figcaption { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; margin-top: 8px; text-align: center; }
+    @media (max-width: 600px) { .portrait { float: none; width: 200px; margin: 8px auto 18px; } }
+
+    /* --- Footnotes --- */
+    .footnotes { margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--border); font-size: 0.86rem; color: var(--text-secondary); }
+    .footnotes ol { padding-left: 1.3em; }
+    .footnotes li { margin-bottom: 8px; line-height: 1.6; }
+    .footnotes li p { margin-bottom: 4px; }
+    sup a[href^="#fn:"], a.footnote { font-size: 0.75em; text-decoration: none; padding: 0 1px; }
+    .reversefootnote { text-decoration: none; margin-left: 4px; }
+
     /* --- Chinese quotation card --- */
     .zh-quote {
       margin: 28px 0;
