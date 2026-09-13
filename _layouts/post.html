@@ -233,6 +233,14 @@
     .portrait figcaption { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; margin-top: 8px; text-align: center; }
     @media (max-width: 600px) { .portrait { float: none; width: 200px; margin: 8px auto 18px; } }
 
+    /* --- Small-type aside (footnote-style digression) --- */
+    .aside-note { display: flow-root; margin: 22px 0 32px; padding: 16px 20px 14px; font-size: 0.86rem; line-height: 1.65; color: var(--text-secondary); background: var(--bg-subtle); border-left: 3px solid var(--border); border-radius: 0 8px 8px 0; }
+    .aside-note p { margin-bottom: 10px; }
+    .aside-note p:last-child { margin-bottom: 0; }
+    .aside-note .portrait { width: 150px; margin: 2px 0 6px 18px; }
+    .aside-note .portrait figcaption { font-size: 0.72rem; }
+    @media (max-width: 600px) { .aside-note { padding: 14px 16px 12px; } .aside-note .portrait { float: none; width: 150px; margin: 2px auto 12px; } }
+
     /* --- Footnotes --- */
     .footnotes { margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--border); font-size: 0.86rem; color: var(--text-secondary); }
     .footnotes ol { padding-left: 1.3em; }
