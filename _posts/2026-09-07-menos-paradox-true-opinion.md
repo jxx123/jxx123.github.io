@@ -483,7 +483,7 @@ Only after the boy is genuinely stuck does Socrates draw the diagonal — and th
 
 ## True opinion, and the statues that run away
 
-The dialogue's other gift, at 97a–98a, is the most useful thing I have read about model evaluation.
+Notice what the boy has at the end of the demonstration, because Socrates is careful about it. He can now see that the square on the diagonal is the answer — but Socrates does not say he *knows* it. He says (85c–d) the boy has true opinions that have been stirred up in him "as in a dream," and that only if he is asked the same questions again, many times and in many ways, will they become knowledge. One correct answer, freshly arrived at, is not yet knowledge. What separates the two is the dialogue's other gift, at 97a–98a, and it is the most useful thing I have read about model evaluation.
 
 Socrates asks what makes knowledge better than merely-correct belief. A man who knows the road to Larissa will guide you there; a man who has never been but happens to hold a *true opinion* about the road will guide you there just as well. For the trip, they are indistinguishable. A true opinion — *orthē doxa* — is as good a guide as knowledge.
 
@@ -629,7 +629,10 @@ If you must have one number — and you will be asked for one — here it is.
 <div class="index-block">
   <div class="index-eyebrow">A proposal</div>
   <div class="index-name">The Epist&#275;m&#275; Index</div>
-  <div class="index-formula"><span class="root">&#8309;&radic;</span><span class="radicand">Stability &times; Transfer &times; Recovery &times; Foresight &times; Humility</span></div>
+  <div class="index-eq">
+    <div class="eq-line"><span class="eq-lhs">Epist&#275;m&#275; Index</span><span class="eq-op">=</span><span class="eq-rhs">the geometric mean of the five tethers</span></div>
+    <div class="eq-line"><span class="eq-lhs"></span><span class="eq-op">=</span><span class="eq-rhs">( Stability &times; Transfer &times; Recovery &times; Foresight &times; Humility )<sup>1/5</sup></span></div>
+  </div>
   <div class="index-rule">A zero on any rope is a zero on the index.</div>
 </div>
 
