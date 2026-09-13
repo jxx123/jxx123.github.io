@@ -5,6 +5,7 @@ description: "闻 heard, 说 inferred, 亲 lived. The Mohists classified knowled
 authors: "Jinyu Xie and Claude"
 reading_time: "16 min read"
 date: 2026-09-08
+published: false
 ---
 
 *This is part two. [Part one](/blog/menos-paradox-true-opinion/) opened on a robot that carried a cutlery basket out of a dishwasher on a single finger, let the forks slide onto the floor halfway across the room, and finished its learned trajectory without registering that anything had happened. By way of Plato's* Meno*, it argued that a success rate measures* true opinion *— correct today, gone the moment anything you didn't name in the demo changes — rather than knowledge, which stays put because it comes with an account of why it is true. It proposed five tethers — Stability, Transfer, Recovery, Foresight, Humility — for telling the two apart, and answered Meno's paradox (you cannot search for what you don't know, because you wouldn't recognize it if you found it) with **calibration**: a policy can't know the right action in a novel state, but it can know that this state is one where its own confidence is low, and ask.*

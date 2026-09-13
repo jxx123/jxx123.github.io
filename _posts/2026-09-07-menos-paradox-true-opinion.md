@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Meno’s Paradox — Your Robot’s Success Rate Is Just a “True” OPINION"
-description: "Plato separated true opinion from knowledge 2,400 years ago. A success rate measures the first and cannot see the second — on the Meno, the slave boy, the statues of Daedalus, and five tethers for robot evaluation. Part one of two."
+description: "Plato separated true opinion from knowledge 2,400 years ago. A success rate measures the first and cannot see the second — on the Meno, the slave boy, the statues of Daedalus, and five tethers for robot evaluation. Part one of two; part two coming soon."
 authors: "Jinyu Xie and Claude"
 reading_time: "11 min read"
 date: 2026-09-07
@@ -805,8 +805,13 @@ I went looking for a way to make a robot ask for help and found the problem name
 
 Everything else is a statue.
 
----
+<div class="next-up">
+  <div class="next-up-eyebrow">Next &middot; part two</div>
+  <div class="next-up-title">Three Sources of Knowledge</div>
+  <div class="next-up-desc">This post asked how to <i>measure</i> what a robot knows. The next one asks how to <i>build</i> it &mdash; where the boy&rsquo;s prior comes from. Plato&rsquo;s answer was the soul. Confucius&rsquo;s rivals, the Mohists, answered with three routes: &#38395; heard, &#35828; inferred, &#20146; lived &mdash; and only one of the three is being scaled.</div>
+  <div class="next-up-cta">Coming soon</div>
+</div>
 
-*Part two, [**Three sources of knowledge — and the two axes we aren't scaling**](/blog/three-sources-of-knowledge/), takes up the training half: where a policy's content actually comes from, why 说 (thinking) and 亲 (experience) are barely scaled at all, and two further moves, on the training side rather than on measurement.*
+---
 
 Written by Jinyu Xie and Claude. The *Meno* came up in one of our design conversations; the argument was worked out across a good many more. Passages from the *Meno* are Plato, trans. W.K.C. Guthrie and G.M.A. Grube, lightly adapted.
