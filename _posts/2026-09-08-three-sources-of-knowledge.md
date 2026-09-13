@@ -32,15 +32,15 @@ Nor was this a marginal sect. In the 百家争鸣 — the Hundred Schools conten
 
 The 《墨经》 classifies knowledge by **where it came from**: 闻 *wén*, what you were told; 说 *shuō*, what you worked out by inference — the thinking axis; 亲 *qīn*, what you came to know by direct personal contact with the thing.
 
-One caveat, because the line looks blurrier than it is. You could fairly argue that a teleop log, or a recording from a UMI-style handheld gripper rig — a robot end-effector on a stick — is *experience* rather than somebody else's testimony: the trajectory is in the robot's own action space, and the forces are the ones its body would have felt. First-person in every sensorimotor sense.
-
-What makes it 闻 anyway is not sensor fidelity. It is that the robot did not choose it, did not act it, and cannot ask it a follow-up. **亲 is defined by agency, not by resolution.** And the difference bites: a policy that chooses its own actions finds out where *its own* errors lie, while a demonstration only ever shows the path an expert already selected. That is why behaviour cloning compounds error, and most of why DAgger — which repeatedly sends the expert back to label the states the policy itself wandered into — exists. In a demonstration the human is doing the exploring on the robot's behalf — and whether that transfers depends entirely on how well a person can guess what a policy doesn't know.
-
 | 闻 *wén* — testimony | 说 *shuō* — inference | 亲 *qīn* — direct experience |
 |---|---|---|
 | What someone else recorded | What you derive from what you hold | What you learn by touching it yourself |
 | **The pretraining corpus.** Demos, captions, teleop logs — mostly other people's hands. | **Thinking.** Search, planning, world-model rollouts. Foresight lives here. | **Experience.** Acting, failing, recovering, in the actual world. Recovery lives here. |
-| The axis we have poured a decade into | Barely scaled | Barely scaled |
+| Where most of the recent effort has gone | Barely scaled | Barely scaled |
+
+One caveat, because the line looks blurrier than it is. You could fairly argue that a teleop log, or a recording from a UMI-style handheld gripper rig — a robot end-effector on a stick — is *experience* rather than somebody else's testimony: the trajectory is in the robot's own action space, and the forces are the ones its body would have felt. First-person in every sensorimotor sense.
+
+What makes it 闻 anyway is not sensor fidelity. It is that the robot did not choose it, did not act it, and cannot ask it a follow-up. **亲 is defined by agency, not by resolution.** And the difference bites: a policy that chooses its own actions finds out where *its own* errors lie, while a demonstration only ever shows the path an expert already selected. That is why behaviour cloning compounds error, and most of why DAgger — which repeatedly sends the expert back to label the states the policy itself wandered into — exists. In a demonstration the human is doing the exploring on the robot's behalf — and whether that transfers depends entirely on how well a person can guess what a policy doesn't know.
 
 <figure class="figure">
 <svg viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three axes of scaling: testimony long, inference and direct experience are stubs">
@@ -60,7 +60,7 @@ What makes it 闻 anyway is not sensor fidelity. It is that the robot did not ch
   <line x1="290" y1="230" x2="800" y2="230" stroke="#2563eb" stroke-width="3.5" marker-end="url(#ar-ax)"/>
   <text x="545" y="220" text-anchor="middle" font-size="19" font-weight="700" fill="#2563eb" font-family="-apple-system, sans-serif">&#38395; <tspan font-size="14">w&#233;n</tspan></text>
   <text x="545" y="252" text-anchor="middle" font-size="13" fill="#555" font-family="-apple-system, sans-serif">testimony &#8212; pretraining corpus</text>
-  <text x="545" y="272" text-anchor="middle" font-size="12" font-weight="600" fill="#2563eb" font-family="-apple-system, sans-serif">a decade of scaling</text>
+  <text x="545" y="272" text-anchor="middle" font-size="12" font-weight="600" fill="#2563eb" font-family="-apple-system, sans-serif">where the effort has gone</text>
 
   <!-- 说 axis: up, short -->
   <line x1="290" y1="230" x2="290" y2="130" stroke="#b45309" stroke-width="3.5" marker-end="url(#ar-ax2)"/>
@@ -80,7 +80,7 @@ What makes it 闻 anyway is not sensor fidelity. It is that the robot did not ch
 <figcaption><b>Fig 1 &middot; Three sources, one axis scaled.</b> 闻 is not bounded by how much teleop anyone can afford &#8212; glasses, gripper rigs and video are 闻 too. 说 and 亲 are bounded by nothing but our willingness to build them.</figcaption>
 </figure>
 
-Read that as a roadmap and the conclusion is uncomfortable. We have spent the decade scaling 闻 — more data, more demos, more logs — and 闻 is *precisely the source that produces true opinion.* It is testimony: the road to Larissa described accurately by someone who has never walked it. It will get you there, and it will not stay. The other two axes are barely scaled at all, and they are where two of the three tethers that rollout was missing actually live — 说 (thinking) is Foresight, 亲 (experience) is Recovery. The third it lacked, Humility, turns out to decide where you spend the other two; that comes below. Scaling data alone cannot produce *epistēmē* — knowledge that stays put because it comes with an account of why it is true — because *epistēmē* is not made of testimony.
+Read that as a roadmap and the conclusion is uncomfortable. Most of the effort of the last few years has gone into scaling 闻 — more data, more demos, more logs — and 闻 is *precisely the source that produces true opinion.* It is testimony: the road to Larissa described accurately by someone who has never walked it. It will get you there, and it will not stay. The other two axes are barely scaled at all, and they are where two of the three tethers that rollout was missing actually live — 说 (thinking) is Foresight, 亲 (experience) is Recovery. The third it lacked, Humility, turns out to decide where you spend the other two; that comes below. Scaling data alone cannot produce *epistēmē* — knowledge that stays put because it comes with an account of why it is true — because *epistēmē* is not made of testimony.
 
 <figure class="figure">
 <svg viewBox="0 0 900 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three panels: pretraining scatters points; thinking connects them into a reachable region; experience adds new points at the boundary">
